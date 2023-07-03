@@ -7,7 +7,7 @@ header {
     display: block;
     height: 120px;
     background-color: #fff;
-    box-shadow: 10px 10px 20px #000;
+    box-shadow: 5px 5px 15px #000;
 }
 body {
     background-color: #ecfcfc;
@@ -21,15 +21,10 @@ main {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     border: 2px solid #810505;
-    box-shadow: 10px 10px 20px #000;
+    box-shadow: 5px 5px 15px #000;
     transition: transform 0.2s;
     transition-timing-function: ease-in-out;
 }
-/*
-main:hover {
-    transform: translate(0px, 1px);
-}
-*/
 
 #page-title-link {
     display: inline-block;
