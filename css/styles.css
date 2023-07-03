@@ -1,6 +1,8 @@
 header {
+    position: relative;
     margin: auto;
     width: 50%;
+    height: 130px;
     border: 2px solid #810505;
     text-align: center;
     display: block;
@@ -59,4 +61,102 @@ footer {
     position: absolute;
     left: 0;
     bottom: 0;
+}
+
+.header-python {
+    width: 40px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    animation-name: python;
+    animation-duration: 3071ms;
+    animation-delay: 100ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+@keyframes python {
+    from {left: 10px; top: 10px;}
+    to {left: 50px; top: 80px;}
+}
+.header-html {
+    width: 40px;
+    position: absolute;
+    left: 90px;
+    top: 80px;
+    animation-name: html;
+    animation-duration: 3464ms;
+    animation-delay: 150ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+@keyframes html {
+    from {left: 90px; top: 80px;}
+    to {left: 140px; top: 10px;}
+}
+.header-django {
+    width: 40px;
+    position: absolute;
+    left: 180px;
+    top: 10px;
+    animation-name: django;
+    animation-duration: 3907ms;
+    animation-delay: 200ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+@keyframes django {
+    from {left: 180px; top: 10px;}
+    to {left: 240px; top: 80px;}
+}
+
+.header-css {
+    width: 40px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    animation-name: css;
+    animation-duration: 3071ms;
+    animation-delay: 100ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+@keyframes css {
+    from {right: 10px; top: 10px;}
+    to {right: 50px; top: 80px;}
+}
+.header-java {
+    width: 40px;
+    position: absolute;
+    right: 90px;
+    top: 80px;
+    animation-name: java;
+    animation-duration: 3464ms;
+    animation-delay: 150ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+@keyframes java {
+    from {right: 90px; top: 80px;}
+    to {right: 140px; top: 10px;}
+}
+.header-javascript {
+    width: 40px;
+    position: absolute;
+    right: 180px;
+    top: 10px;
+    animation-name: javascript;
+    animation-duration: 3907ms;
+    animation-delay: 200ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+@keyframes javascript {
+    from {right: 180px; top: 10px;}
+    to {right: 240px; top: 80px;}
 }
