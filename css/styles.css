@@ -51,3 +51,7 @@ footer {
 .icon {
     vertical-align: middle;
 }
+#host {
+    position: absolute;
+    left: 30px;
+}
