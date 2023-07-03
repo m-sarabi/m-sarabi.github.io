@@ -58,6 +58,6 @@ footer {
 
 #host {
     position: absolute;
-    left: 1px;
-    bottom: 1px;
+    left: 0;
+    bottom: 0;
 }
