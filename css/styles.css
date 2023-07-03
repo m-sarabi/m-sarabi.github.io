@@ -68,15 +68,13 @@ footer {
     position: absolute;
     left: 10px;
     top: 10px;
-    /*
     animation-name: python;
     animation-duration: 3071ms;
     animation-delay: 100ms;
     animation-direction: alternate;
     animation-iteration-count: infinite;
-    animation-timing-function: ease;*/
+    animation-timing-function: ease;
 }
-/*
 @keyframes python {
     from {left: 10px; top: 10px;}
     to {left: 50px; top: 80px;}
@@ -161,4 +159,4 @@ footer {
 @keyframes javascript {
     from {right: 180px; top: 10px;}
     to {right: 240px; top: 80px;}
-}*/
+}
