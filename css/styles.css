@@ -98,8 +98,3 @@ a:active {
 a:focus {
     color: #150;
 }
-
-ul {
-    list-style-type: circle;
-    list-style-image: url("/assets/zen.png");
-}
