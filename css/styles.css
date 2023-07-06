@@ -9,11 +9,28 @@ header {
 
 }
 
+article {
+    width: 80%;
+    padding: 5px 20px 20px 20px;
+    backdrop-filter: brightness(105%);
+    margin: auto auto 20px;
+    box-shadow: 0 0 20px 0 #777777, 0 0 4px 0 #000000 inset, 0 0 4px 0 #000000;
+    transition: box-shadow 0.3s;
+}
+
+article:hover {
+    box-shadow: 0 0 20px 0 #000000, 0 0 4px 0 #000000 inset, 0 0 4px 0 #000000;
+}
+
 body {
     font-size: 0;
     margin: 0;
     background-color: #ffffff;
-    background-image: linear-gradient(#1FCFF8FF 0%, #C1F3FFFF 20%, #ffffff 100%);
+    background-image: linear-gradient(#1FCFF8FF 0%, #C1F3FFFF 20%, #e0f9ff 100%);
+}
+
+h1 {
+    font-family: "Courier New", "Droid Sans Mono", "Cascadia Code", Consolas, serif;
 }
 
 .hr-header {
@@ -34,7 +51,8 @@ body {
 
 main {
     padding: 20px;
-    font-size: 16px;
+    font-size: 20px;
+    font-family: Tahoma, sans-serif;
 }
 
 #page-title-link {
@@ -50,9 +68,11 @@ main {
 
 h2 {
     margin: 0;
+    font-size: 30px;
     color: #af0a0a;
     display: inline-block;
     width: auto;
+    font-variant: small-caps;
 }
 
 h2 a:first-of-type {
@@ -78,7 +98,8 @@ h2 a:first-of-type::after {
 }
 
 footer {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     display: block;
     text-align: center;
     bottom: 0;
@@ -95,6 +116,7 @@ footer {
 a:active {
     color: #f00;
 }
+
 a:focus {
     color: #150;
 }
