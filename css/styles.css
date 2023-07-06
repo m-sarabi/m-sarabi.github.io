@@ -51,6 +51,30 @@ main {
 h2 {
     margin: 0;
     color: #af0a0a;
+    display: inline-block;
+    width: auto;
+}
+
+h2 a:first-of-type {
+    background-color: inherit;
+    font-size: 14px;
+    opacity: 0;
+    color: #444444;
+    text-decoration: none;
+    transition: opacity 0.3s, color 0.2s;
+    transition-timing-function: ease-in;
+}
+
+h2:hover a:first-of-type {
+    opacity: 1;
+}
+
+h2 a:first-of-type:hover {
+    color: #dd5500;
+}
+
+h2 a:first-of-type::after {
+    content: " " attr(href);
 }
 
 footer {
