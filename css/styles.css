@@ -77,15 +77,16 @@ h2 {
 
 h2 a:first-of-type {
     background-color: inherit;
-    font-size: 14px;
+    font-size: 0;
     opacity: 0;
     color: #444444;
     text-decoration: none;
-    transition: opacity 0.3s, color 0.2s;
+    transition: opacity 0.3s, color 0.2s, font-size 0s;
     transition-timing-function: ease-in;
 }
 
 h2:hover a:first-of-type {
+    font-size: 14px;
     opacity: 1;
 }
 
