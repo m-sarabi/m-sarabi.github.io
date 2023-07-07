@@ -10,10 +10,11 @@ header {
 }
 
 article {
-    width: 80%;
+    max-width: 80%;
+    min-width: 300px;
     padding: 5px 20px 20px 20px;
     backdrop-filter: brightness(105%);
-    margin: auto auto 20px;
+    margin: 30px auto 20px auto;
     box-shadow: 0 0 20px 0 #777777, 0 0 4px 0 #000000 inset, 0 0 4px 0 #000000;
     transition: box-shadow 0.3s;
 }
@@ -50,7 +51,6 @@ h1 {
 }
 
 main {
-    padding: 20px;
     font-size: 20px;
     font-family: Tahoma, sans-serif;
 }
