@@ -80,10 +80,11 @@ section {
 
 a:has(img) {
     display: block;
-    width: 150px;
+    width: 70%;
     margin: 20px auto;
 }
 
 a > img {
-    width: 150px
+    width: 100%;
+    border: 2px #000 solid;
 }
