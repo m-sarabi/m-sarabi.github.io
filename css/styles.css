@@ -16,11 +16,13 @@ article {
     backdrop-filter: brightness(105%);
     margin: 30px auto 20px auto;
     box-shadow: 0 0 20px 0 #777777, 0 0 4px 0 #000000 inset, 0 0 4px 0 #000000;
-    transition: box-shadow 0.3s;
+    transform: translate(0, 0);
+    transition: box-shadow 0.3s, transform 0.3s;
 }
 
 article:hover {
     box-shadow: 0 0 20px 0 #000000, 0 0 4px 0 #000000 inset, 0 0 4px 0 #000000;
+    transform: translate(0, 5px);
 }
 
 body {
