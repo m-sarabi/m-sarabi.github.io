@@ -32,6 +32,7 @@ body {
 
 h1 a {
     padding: 10px;
+    background-color: #fff3;
     box-shadow: 0 0 4px #000;
     font-family: "Courier New", "Droid Sans Mono", "Cascadia Code", Consolas, serif;
     transform: perspective(400px) rotate3d(0, -1, 0, 30deg);
