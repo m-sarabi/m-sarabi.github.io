@@ -32,6 +32,23 @@ body {
     background-image: linear-gradient(#1FCFF8FF 0%, #C1F3FFFF 20%, #e0f9ff 100%);
 }
 
+body::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(#1FF81F 0%, #C1F3C1 20%, #e0f9e0 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1.5s;
+}
+
+body:has(h1 a:hover)::before {
+    opacity: 1;
+}
+
 h1 a {
     overflow: hidden;
     padding: 10px;
