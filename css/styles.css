@@ -70,7 +70,9 @@ h1 a {
     font-family: "Courier New", "Droid Sans Mono", "Cascadia Code", Consolas, serif;
     transform: perspective(400px) rotate3d(0, -1, 0, 30deg);
     transition: transform 1.5s, text-shadow 1.5s cubic-bezier(0.3, 1, 0.7, 0), box-shadow 1.5s;
-    text-shadow: 2px 1px 0 #055,
+    text-shadow: 1px 1px 0 #fff,
+    -1px -1px 0 #fff,
+    2px 1px 0 #055,
     4px 2px 0 #077,
     6px 3px 0 #099,
     8px 4px 0 #0bb,
@@ -81,7 +83,9 @@ h1 a {
 
 h1:hover a {
     transform: perspective(400px) rotate3d(0, 1, 0, 390deg);
-    text-shadow: -2px 1px 0 #050,
+    text-shadow: 1px 1px 0 #fff,
+    -1px -1px 0 #fff,
+    -2px 1px 0 #050,
     -4px 2px 0 #070,
     -6px 3px 0 #090,
     -8px 4px 0 #0b0,
