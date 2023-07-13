@@ -50,10 +50,15 @@ body {
     transition: --body-c1 1.5s, --body-c2 1.5s, --body-c3 1.5s;
 }
 
-body:has(h1 a:hover) {
+body:has(h1:hover) {
     --body-c1: #1FF81F;
     --body-c2: #C1FFC1;
     --body-c3: #E0FFE0;
+}
+
+h1 {
+    display: inline-block;
+    margin: 20px;
 }
 
 h1 a {
@@ -74,7 +79,7 @@ h1 a {
     14px 6px 0 #2ff;
 }
 
-h1 a:hover {
+h1:hover a {
     transform: perspective(400px) rotate3d(0, 1, 0, 390deg);
     text-shadow: -2px 1px 0 #050,
     -4px 2px 0 #070,
@@ -98,6 +103,17 @@ h1 a:hover {
     inherits: false;
 }
 
+#page-title-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    font-size: 40px;
+}
+
+#page-title {
+    padding: 0;
+}
+
 .hr-header {
     margin: 5px;
     border-width: 0;
@@ -108,7 +124,7 @@ h1 a:hover {
     transition: --hr-h-c1 1.5s, --hr-h-c2 1.5s;
 }
 
-body:has(h1 a:hover) .hr-header {
+body:has(h1:hover) .hr-header {
     --hr-h-c1: #C1FFC1;
     --hr-h-c2: #1FF81F;
 }
@@ -147,7 +163,7 @@ body:has(h1 a:hover) .hr-header {
     transition: --hr-f-c1 1.5s, --hr-f-c2 1.5s;
 }
 
-body:has(h1 a:hover) .hr-footer {
+body:has(h1:hover) .hr-footer {
     --hr-f-c1: #9EFF9e;
     --hr-f-c2: #FFFFFF;
 }
@@ -155,17 +171,6 @@ body:has(h1 a:hover) .hr-footer {
 main {
     font-size: 20px;
     font-family: Tahoma, sans-serif;
-}
-
-#page-title-link {
-    display: inline-block;
-    text-decoration: none;
-    color: #000;
-    font-size: 40px;
-}
-
-#page-title {
-    padding: 20px;
 }
 
 h2 {
