@@ -29,10 +29,14 @@
 
         animation-timing-function: cubic-bezier(.25, .5, .5, 1);
     }
-    50% {
+    45% {
         top: calc((var(--h) - var(--h) * var(--scale)) / -2 - 50px);
-        transform: scale(calc(var(--scale)), calc(var(--scale) * 1.2));
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 1.2)) translate(0, -50px);
         animation-timing-function: cubic-bezier(.5, 0, .75, .5);
+    }
+    90% {
+        top: calc((var(--h) - var(--h) * var(--scale)) / -2);
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.9)) translate(0, 30px);
     }
     100% {
         top: calc((var(--h) - var(--h) * var(--scale)) / -2);
