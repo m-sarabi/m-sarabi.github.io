@@ -19,28 +19,36 @@
 }
 
 .narangi-container:hover .narangi {
-    animation: bounce 2s;
+    animation: bounce 2.5s;
     animation-iteration-count: infinite;
 }
 
 @keyframes bounce {
     0% {
-        top: calc((var(--h) - var(--h) * var(--scale)) / -2);
-
+        transform: translate(0, 0) scale(calc(var(--scale)), calc(var(--scale)));
         animation-timing-function: cubic-bezier(.25, .5, .5, 1);
     }
     45% {
-        top: calc((var(--h) - var(--h) * var(--scale)) / -2 - 50px);
-        transform: scale(calc(var(--scale)), calc(var(--scale) * 1.2)) translate(0, -50px);
+        transform: translate(0, -70px) scale(calc(var(--scale)), calc(var(--scale) * 1.1));
         animation-timing-function: cubic-bezier(.5, 0, .75, .5);
     }
-    90% {
-        top: calc((var(--h) - var(--h) * var(--scale)) / -2);
-        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.9)) translate(0, 30px);
+    85% {
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.95)) translate(0, 10px);
+        animation-timing-function: ease;
     }
+    90% {
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.85)) translate(0, 30px);
+        animation-timing-function: ease;
+    }
+
+    95% {
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.95)) translate(0, 10px);
+        animation-timing-function: ease;
+    }
+
     100% {
-        top: calc((var(--h) - var(--h) * var(--scale)) / -2);
-        animation-timing-function: linear;
+        transform: translate(0, 0) scale(calc(var(--scale)), calc(var(--scale)));
+        animation-timing-function: ease;
     }
 }
 
