@@ -29,10 +29,6 @@ nav a:hover, nav a:focus {
     margin: 0 2px;
 }
 
-nav a:focus {
-    outline: 1px dashed #0008;
-}
-
 article {
     max-width: 80%;
     min-width: 300px;
