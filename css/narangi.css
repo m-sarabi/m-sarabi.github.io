@@ -1,7 +1,7 @@
 .narangi-container {
     --w: 300px;
     --h: 350px;
-    --scale: 0.4;
+    --scale: 1;
     position: absolute;
     height: calc(var(--h) * var(--scale) * 1.1);
     width: calc(var(--w) * var(--scale) * 1.1);
@@ -29,20 +29,20 @@
         animation-timing-function: cubic-bezier(.25, .5, .5, 1);
     }
     45% {
-        transform: translate(0, -70px) scale(calc(var(--scale)), calc(var(--scale) * 1.1));
+        transform: translate(0, calc(175px * var(--scale) * -1)) scale(calc(var(--scale)), calc(var(--scale) * 1.1));
         animation-timing-function: cubic-bezier(.5, 0, .75, .5);
     }
     85% {
-        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.95)) translate(0, 10px);
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.95)) translate(0, calc(25px * var(--scale)));
         animation-timing-function: ease;
     }
     90% {
-        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.85)) translate(0, 30px);
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.85)) translate(0, calc(75px * var(--scale)));
         animation-timing-function: ease;
     }
 
     95% {
-        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.95)) translate(0, 10px);
+        transform: scale(calc(var(--scale)), calc(var(--scale) * 0.95)) translate(0, calc(25px * var(--scale)));
         animation-timing-function: ease;
     }
 
