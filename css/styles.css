@@ -6,7 +6,31 @@ header {
     padding: 20px;
     margin: 0;
     text-align: center;
+}
 
+nav {
+    font-size: 20px;
+}
+
+nav a {
+    display: inline-block;
+    line-height: 40px;
+    background-color: #fff8;
+    border-radius: 100px 100px 100px 100px;
+    color: black;
+    text-decoration: none;
+    padding: 0 10px;
+    transition: 0.5s;
+}
+
+nav a:hover, nav a:focus {
+    border-radius: 100px 50px 100px 50px;
+    background-color: #fffc;
+    margin: 0 2px;
+}
+
+nav a:focus {
+    outline: 1px dashed #0008;
 }
 
 article {
@@ -225,12 +249,12 @@ footer {
     text-align: left;
 }
 
-a:active {
-    color: #f00;
+main a:focus {
+    color: #150;
 }
 
-a:focus {
-    color: #150;
+main a:active {
+    color: #f00;
 }
 
 article:first-of-type p:first-of-type:first-letter {
