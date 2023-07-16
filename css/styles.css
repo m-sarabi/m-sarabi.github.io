@@ -89,7 +89,7 @@ nav {
     animation-name: shake;
     animation-iteration-count: infinite;
     animation-duration: 1s;
-    animation-delay: 2s;
+    animation-delay: 1s;
 }
 
 @keyframes shake {
@@ -98,7 +98,7 @@ nav {
         animation-timing-function: ease-out;
     }
     25% {
-        transform: rotate3d(0, 0, 1, 5deg) perspective(100px);
+        transform: rotate3d(0, 0, 1, 2deg) perspective(100px);
         animation-timing-function: ease-in;
     }
     50% {
@@ -106,7 +106,7 @@ nav {
         animation-timing-function: ease-out;
     }
     75% {
-        transform: rotate3d(0, 0, 1, -5deg) perspective(100px);
+        transform: rotate3d(0, 0, 1, -2deg) perspective(100px);
         animation-timing-function: ease-in;
     }
     100% {
