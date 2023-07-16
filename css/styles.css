@@ -121,7 +121,6 @@ nav {
 
 article {
     position: relative;
-    z-index: -1;
     max-width: 80%;
     min-width: 300px;
     padding: 5px 20px 20px 20px;
