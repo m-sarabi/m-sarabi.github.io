@@ -23,9 +23,20 @@ nav a {
     transition: 0.5s;
 }
 
+nav a.active {
+    background-color: #28FF3288;
+    box-shadow: 0 0 5px #0F5E1388 inset;
+}
+
 nav a:hover, nav a:focus {
     border-radius: 100px 50px 100px 50px;
     background-color: #fffc;
+    margin: 0 2px;
+}
+
+nav a.active:hover, nav a.active:focus {
+    border-radius: 100px 50px 100px 50px;
+    background-color: #28FF32aa;
     margin: 0 2px;
 }
 
