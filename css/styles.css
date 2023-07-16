@@ -48,7 +48,7 @@ nav {
     display: inline-block;
     text-align: center;
     opacity: 0;
-    transform: rotate3d(1, 0, 0, -120deg) perspective(10px);
+    transform: rotate3d(1, 0, 0, -90deg) perspective(10px);
     transform-origin: 50% 0;
     transition: opacity 1.5s, transform 1.5s, clip-path 1s;
 }
