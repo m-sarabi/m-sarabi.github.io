@@ -16,7 +16,7 @@ nav {
     box-shadow: 0 0 5px #061a4d;
     backdrop-filter: brightness(110%);
     user-select: none;
-    margin-bottom: 10px;
+    margin: 5px auto 10px;
 }
 
 .nav-container {
