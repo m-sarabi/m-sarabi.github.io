@@ -15,68 +15,97 @@ nav {
     border-radius: 20px;
     box-shadow: 0 0 5px #061a4d;
     backdrop-filter: brightness(110%);
+    user-select: none;
+    margin-bottom: 10px;
 }
 
-nav a {
-    display: inline-flex;
-    margin: auto;
+.nav-container {
+    display: inline-block;
     position: relative;
-    width: 40px;
-    height: 30px;
-    align-items: center;
-    justify-content: center;
+    width: 75px;
+    height: 50px;
     background-color: #fff8;
     box-shadow: 0 0 5px #5558 inset;
     border-radius: 100px 100px 100px 100px;
     color: black;
+    text-align: center;
     text-decoration: none;
-    padding: 10px;
     transition: 0.5s;
 }
 
-nav a span {
+.nav-container span {
+    pointer-events: none;
     position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -30px;
+    padding: 20px 30px 10px;
+    clip-path: polygon(0 100%, 100% 100%, 100% 30%, 97% 24%, 90% 20%, 60% 20%, 50% 0, 40% 20%, 10% 20%, 3% 24%, 0 30%);
+    border-radius: 10px;
+    background: linear-gradient(#fff 0%, #fff0 100%);
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
     opacity: 0;
     transition: opacity 1s 0.2s, transform 1.5s;
 }
 
-nav a img {
-    width: 24px;
-    height: 24px;
+.nav-container span:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    left: 75px;
+    top: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+
+.nav-container a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 50px;
+    border-radius: inherit;
+}
+
+.nav-container img {
+    width: 28px;
+    height: 28px;
     transition: 0.5s;
 }
 
-nav a.active {
+.nav-container.active {
     background-color: #28FF3288;
     box-shadow: 0 0 5px #0F5E1388 inset;
 }
 
-nav a:hover, nav a:focus {
+.nav-container:has(a:hover), .nav-container:focus {
     border-radius: 100px 50px 100px 50px;
     background-color: #fffc;
 }
 
-nav a:hover img, nav a:focus img {
-    filter: blur(1px);
+.nav-container:hover img, .nav-container:focus img {
+    filter: blur(1px) grayscale(100%);
 }
 
-nav a:hover span, nav a:focus span {
+.nav-container a:hover + span {
     opacity: 1;
     transform: translate(0, 50px);
 }
 
-nav a:not(:hover) span {
-    opacity: 0;
-    transform: translate(0, 0);
-    transition: opacity 0.5s, transform 1s;
-}
-
-nav a.active:hover, nav a.active:focus {
+.nav-container.active:has(a:hover), .nav-container.active:focus {
     border-radius: 100px 50px 100px 50px;
-    background-color: #28FF32aa;
+    background-color: #28FF32AA;
 }
 
 article {
+    position: relative;
+    z-index: -1;
     max-width: 80%;
     min-width: 300px;
     padding: 5px 20px 20px 20px;
