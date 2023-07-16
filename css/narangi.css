@@ -5,6 +5,7 @@
     position: absolute;
     height: calc(var(--h) * var(--scale) * 1.1);
     width: calc(var(--w) * var(--scale) * 1.1);
+    z-index: 1;
 }
 
 .narangi {
