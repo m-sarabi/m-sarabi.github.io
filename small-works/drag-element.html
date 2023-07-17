@@ -1,0 +1,85 @@
+<style>
+    span {
+        display: block;
+        position: relative;
+        right: 0;
+        z-index: 2;
+        pointer-events: none;
+    }
+</style>
+
+<span id="top">top</span>
+<span id="right">right</span>
+<span id="bottom">bottom</span>
+<span id="left">left</span>
+
+<script>
+    var mousePosition;
+    var offset = [0, 0];
+    var div;
+    var isDown = false;
+
+    box = document.createElement("div");
+    box.style.position = "absolute";
+    box.style.left = "0px";
+    box.style.top = "0px";
+    box.style.width = "50px";
+    box.style.height = "50px";
+    box.style.background = "red";
+    box.style.color = "blue";
+
+    document.body.appendChild(box);
+
+    width = box.clientWidth;
+    height = box.clientHeight;
+
+    let right = (window.innerWidth - parseInt(box.style.left.replace('px', '')) - width);
+    let bottom = (window.innerHeight - parseInt(box.style.top.replace('px', '')) - height);
+
+    document.getElementById('top').innerHTML = 'top: ' + box.style.top.replace('px', '');
+    document.getElementById('right').innerHTML = 'right: ' + right;
+    document.getElementById('bottom').innerHTML = 'bottom: ' + bottom;
+    document.getElementById('left').innerHTML = 'left: ' + box.style.left.replace('px', '');
+
+    box.addEventListener('mousedown', function (e) {
+        isDown = true;
+        offset = [
+            box.offsetLeft - e.clientX,
+            box.offsetTop - e.clientY
+        ];
+    }, true);
+
+    document.addEventListener('mouseup', function () {
+        isDown = false;
+    }, true);
+
+    document.addEventListener('mousemove', function (event) {
+        event.preventDefault();
+        if (isDown) {
+            mousePosition = {
+                x: event.clientX,
+                y: event.clientY
+            };
+
+            box.style.left = (mousePosition.x + offset[0]) + 'px';
+            box.style.top = (mousePosition.y + offset[1]) + 'px';
+
+            box.style.left = Math.max(0, Math.min(parseInt(box.style.left), window.innerWidth - width)) + 'px'
+            box.style.top = Math.max(0, Math.min(parseInt(box.style.top), window.innerHeight - height)) + 'px'
+
+            right = (window.innerWidth - parseInt(box.style.left.slice(0, -2)) - width);
+            bottom = (window.innerHeight - parseInt(box.style.top.slice(0, -2)) - height);
+
+            document.getElementById('top').innerHTML = 'top: ' + box.style.top;
+            document.getElementById('right').innerHTML = 'right: ' + right;
+            document.getElementById('bottom').innerHTML = 'bottom: ' + bottom;
+            document.getElementById('left').innerHTML = 'left: ' + box.style.left;
+
+            box.style.borderRadius = Math.round((parseInt(box.style.top.replace('px', '')) +
+                parseInt(box.style.left.replace('px', ''))) /
+                (document.documentElement.clientWidth + document.documentElement.clientHeight - width - height) *
+                50) + '%'
+        }
+    }, true);
+
+</script>
