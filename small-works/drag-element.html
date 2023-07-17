@@ -6,6 +6,7 @@
         z-index: 2;
         pointer-events: none;
     }
+
     button {
         position: absolute;
         bottom: 0;
@@ -98,7 +99,7 @@
                 x: event.clientX,
                 y: event.clientY
             };
-            moveBox(mousePosition)
+            moveBox(mousePosition);
         }
     }, true);
 
@@ -115,7 +116,6 @@
     }, true);
 
     document.addEventListener('touchmove', function (event) {
-        event.preventDefault();
         if (isDown) {
             mousePosition = {
                 x: event.touches[0].clientX,
@@ -125,7 +125,15 @@
         }
     }, true);
 
+    window.addEventListener('resize', function () {
+        mousePosition = {x: box.offsetLeft, y: box.offsetTop};
+        offset = [0, 0];
+        moveBox(mousePosition);
+        console.log(mousePosition)
+    });
+
     let elem = document.documentElement;
+
     function enterFullscreen() {
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
