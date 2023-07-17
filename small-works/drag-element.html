@@ -14,10 +14,10 @@
 <span id="left">left</span>
 
 <script>
-    var mousePosition;
-    var offset = [0, 0];
-    var div;
-    var isDown = false;
+    let mousePosition;
+    let offset = [0, 0];
+    let div;
+    let isDown = false;
 
     box = document.createElement("div");
     box.style.position = "absolute";
@@ -27,6 +27,8 @@
     box.style.height = "50px";
     box.style.background = "red";
     box.style.color = "blue";
+    box.style.cursor = 'move';
+    box.style.touchAction = 'none';
 
     document.body.appendChild(box);
 
@@ -40,6 +42,27 @@
     document.getElementById('right').innerHTML = 'right: ' + right;
     document.getElementById('bottom').innerHTML = 'bottom: ' + bottom;
     document.getElementById('left').innerHTML = 'left: ' + box.style.left.replace('px', '');
+
+    function moveBox(position) {
+        box.style.left = (position.x + offset[0]) + 'px';
+        box.style.top = (position.y + offset[1]) + 'px';
+
+        box.style.left = Math.max(0, Math.min(parseInt(box.style.left), window.innerWidth - width)) + 'px'
+        box.style.top = Math.max(0, Math.min(parseInt(box.style.top), window.innerHeight - height)) + 'px'
+
+        right = (window.innerWidth - parseInt(box.style.left.slice(0, -2)) - width);
+        bottom = (window.innerHeight - parseInt(box.style.top.slice(0, -2)) - height);
+
+        document.getElementById('top').innerHTML = 'top: ' + box.style.top;
+        document.getElementById('right').innerHTML = 'right: ' + right;
+        document.getElementById('bottom').innerHTML = 'bottom: ' + bottom;
+        document.getElementById('left').innerHTML = 'left: ' + box.style.left;
+
+        box.style.borderRadius = Math.round((parseInt(box.style.top.replace('px', '')) +
+                parseInt(box.style.left.replace('px', ''))) /
+            (document.documentElement.clientWidth + document.documentElement.clientHeight - width - height) *
+            50) + '%'
+    }
 
     box.addEventListener('mousedown', function (e) {
         isDown = true;
@@ -60,25 +83,30 @@
                 x: event.clientX,
                 y: event.clientY
             };
+            moveBox(mousePosition)
+        }
+    }, true);
 
-            box.style.left = (mousePosition.x + offset[0]) + 'px';
-            box.style.top = (mousePosition.y + offset[1]) + 'px';
+    box.addEventListener('touchstart', function (e) {
+        isDown = true;
+        offset = [
+            box.offsetLeft - e.touches[0].clientX,
+            box.offsetTop - e.touches[1].clientY
+        ];
+    }, true);
 
-            box.style.left = Math.max(0, Math.min(parseInt(box.style.left), window.innerWidth - width)) + 'px'
-            box.style.top = Math.max(0, Math.min(parseInt(box.style.top), window.innerHeight - height)) + 'px'
+    document.addEventListener('touchend', function () {
+        isDown = false;
+    }, true);
 
-            right = (window.innerWidth - parseInt(box.style.left.slice(0, -2)) - width);
-            bottom = (window.innerHeight - parseInt(box.style.top.slice(0, -2)) - height);
-
-            document.getElementById('top').innerHTML = 'top: ' + box.style.top;
-            document.getElementById('right').innerHTML = 'right: ' + right;
-            document.getElementById('bottom').innerHTML = 'bottom: ' + bottom;
-            document.getElementById('left').innerHTML = 'left: ' + box.style.left;
-
-            box.style.borderRadius = Math.round((parseInt(box.style.top.replace('px', '')) +
-                parseInt(box.style.left.replace('px', ''))) /
-                (document.documentElement.clientWidth + document.documentElement.clientHeight - width - height) *
-                50) + '%'
+    document.addEventListener('touchmove', function (event) {
+        event.preventDefault();
+        if (isDown) {
+            mousePosition = {
+                x: event.touches[0].clientX,
+                y: event.touches[0].clientY
+            };
+            moveBox(mousePosition)
         }
     }, true);
 
