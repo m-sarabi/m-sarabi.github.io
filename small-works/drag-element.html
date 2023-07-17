@@ -7,12 +7,21 @@
         pointer-events: none;
     }
 </style>
-
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
 <span id="top">top</span>
 <span id="right">right</span>
 <span id="bottom">bottom</span>
 <span id="left">left</span>
-
+</body>
+</html>
 <script>
     let mousePosition;
     let offset = [0, 0];
@@ -91,7 +100,7 @@
         isDown = true;
         offset = [
             box.offsetLeft - e.touches[0].clientX,
-            box.offsetTop - e.touches[1].clientY
+            box.offsetTop - e.touches[0].clientY
         ];
     }, true);
 
