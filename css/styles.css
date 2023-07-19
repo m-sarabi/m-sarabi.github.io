@@ -348,3 +348,7 @@ article:first-of-type p:first-of-type:first-letter {
     font-size: 50px;
     font-family: "Old English Text MT", Tahoma, sans-serif;
 }
+
+aside {
+    font-size: 15px;
+}
