@@ -21,3 +21,7 @@ async function updateQuote() {
 
 // Attach an event listener to the `button`
 button.addEventListener("click", updateQuote);
+
+window.onload = function () {
+    updateQuote();
+};
