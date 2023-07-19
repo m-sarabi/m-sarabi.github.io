@@ -1,6 +1,7 @@
 // DOM elements
 const button = document.getElementById("quote-btn");
 const quote = document.getElementById("quote-txt");
+const cite = document.getElementById('author')
 
 // const cite = document.querySelector("blockquote cite");
 
@@ -11,7 +12,7 @@ async function updateQuote() {
     if (response.ok) {
         // Update DOM elements
         quote.textContent = data.content;
-        // cite.textContent = data.author;
+        cite.textContent = '- ' + data.author + ' -';
     } else {
         quote.textContent = "An error occured";
         console.log(data);

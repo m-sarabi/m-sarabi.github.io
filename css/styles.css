@@ -119,6 +119,11 @@ nav {
     background-color: #28FF32AA;
 }
 
+main {
+    font-size: 20px;
+    font-family: Tahoma, sans-serif;
+}
+
 article {
     position: relative;
     max-width: 80%;
@@ -283,11 +288,6 @@ body:has(h1:hover) .hr-footer {
     --hr-f-c2: #FFFFFF;
 }
 
-main {
-    font-size: 20px;
-    font-family: Tahoma, sans-serif;
-}
-
 h2 {
     margin: 0;
     font-size: 30px;
@@ -350,5 +350,51 @@ article:first-of-type p:first-of-type:first-letter {
 }
 
 aside {
+    border: 1px solid #061a4d;
+    padding: 0 0 20px 0;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 50%;
+    margin: 10px auto 20px;
     font-size: 15px;
+    border-radius: 20px;
+    background: radial-gradient(ellipse, #fff 0%, #a1d1f5 150%);
+}
+
+aside:hover {
+    background: radial-gradient(ellipse, #fff 0%, #76d0f5 150%);
+}
+
+blockquote {
+    font-size: 20px;
+    font-family: Harrington, sans-serif;
+    font-weight: bold;
+    padding: 0;
+}
+
+cite {
+    color: #555;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#quote-btn {
+    height: 30px;
+    width: 120px;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: none;
+    background: #00bbbb;
+    outline: none;
+    tab-index: -1;
+}
+
+#quote-btn:hover {
+    background: #00abbb;
+    box-shadow: 0 0 2px 0 #030d26;
+}
+
+#quote-btn:active, #quote-btn:focus {
+    box-shadow: 0 0 5px 2px #030d26;
 }
