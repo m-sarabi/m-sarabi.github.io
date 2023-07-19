@@ -355,7 +355,8 @@ aside {
     display: flex;
     position: relative;
     flex-direction: column;
-    width: 50%;
+    width: 80%;
+    min-width: 400px;
     margin: 10px auto 20px;
     font-size: 15px;
     border-radius: 20px;
