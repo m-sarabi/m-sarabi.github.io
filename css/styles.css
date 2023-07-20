@@ -372,7 +372,7 @@ aside:hover {
 
 aside * {
     opacity: 0.7;
-    /*transition: 0.7s;*/
+    transition: 0.7s;
 }
 
 aside:hover * {
