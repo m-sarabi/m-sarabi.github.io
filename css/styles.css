@@ -372,7 +372,7 @@ aside:hover {
 
 aside * {
     opacity: 0.7;
-    transition: 0.7s;
+    /*transition: 0.7s;*/
 }
 
 aside:hover * {
@@ -380,16 +380,36 @@ aside:hover * {
 }
 
 blockquote {
-    font-size: 20px;
-    font-family: Harrington, sans-serif;
-    font-weight: bold;
     padding: 0;
 }
 
+blockquote > p {
+    font-family: Harrington, sans-serif;
+    font-weight: bold;
+    font-size: 0;
+}
+
+.quote-txt {
+    transition: 1s;
+}
+
+.quote-txt-active {
+    font-size: 20px;
+}
+
 cite {
+    font-size: 0;
     color: #555;
     font-family: Arial, sans-serif;
+}
+
+.author {
+    transition: 1s;
+}
+
+.author-active {
     font-size: 14px;
+    transition: 1s;
 }
 
 #quote-btn {
