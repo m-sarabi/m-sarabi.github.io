@@ -141,35 +141,10 @@ article:hover {
     transform: translate(0, 5px);
 }
 
-@property --body-c1 {
-    syntax: '<color>';
-    initial-value: #1FCFF8;
-    inherits: false;
-}
-@property --body-c2 {
-    syntax: '<color>';
-    initial-value: #C1F3FF;
-    inherits: false;
-}
-@property --body-c3 {
-    syntax: '<color>';
-    initial-value: #E0F9FF;
-    inherits: false;
-}
-
 body {
     font-size: 0;
     margin: 0;
-    background-color: #ffffff;
-    /*background-image: linear-gradient(#1FCFF8 0%, #C1F3FF 20%, #e0f9ff 100%);*/
-    background-image: linear-gradient(var(--body-c1) 0%, var(--body-c2) 20%, var(--body-c3) 100%);
-    transition: --body-c1 1.5s, --body-c2 1.5s, --body-c3 1.5s;
-}
-
-body:has(h1:hover) {
-    --body-c1: #1FF81F;
-    --body-c2: #C1FFC1;
-    --body-c3: #E0FFE0;
+    background: linear-gradient(#1FCFF8 0%, #C1F3FF 20%, #E0F9FF 100%);
 }
 
 h1 {
@@ -183,8 +158,8 @@ h1 a {
     background-color: #fff3;
     box-shadow: 0 0 4px #000,
     6px 2px 8px #000c;
-    font-family: "Courier New", "Droid Sans Mono", "Cascadia Code", Consolas, serif;
-    transform: perspective(400px) rotate3d(0, -1, 0, 30deg);
+    font-family: VT323, "Courier New", "Droid Sans Mono", "Cascadia Code", Consolas, serif;
+    transform: perspective(400px) rotate3d(0, -1, 0, 15deg);
     transition: transform 1.5s, text-shadow 1.5s cubic-bezier(0.3, 1, 0.7, 0), box-shadow 1.5s;
     text-shadow: 1px 1px 0 #fff,
     -1px -1px 0 #fff,
@@ -192,42 +167,27 @@ h1 a {
     4px 2px 0 #077,
     6px 3px 0 #099,
     8px 4px 0 #0bb,
-    10px 5px 0 #0dd,
-    12px 6px 0 #0ff,
-    14px 6px 0 #2ff;
+    10px 5px 0 #0dd;
 }
 
 h1:hover a {
-    transform: perspective(400px) rotate3d(0, 1, 0, 390deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, 375deg);
     text-shadow: 1px 1px 0 #fff,
     -1px -1px 0 #fff,
-    -2px 1px 0 #050,
-    -4px 2px 0 #070,
-    -6px 3px 0 #090,
-    -8px 4px 0 #0b0,
-    -10px 5px 0 #0d0,
-    -12px 6px 0 #0f0,
-    -14px 6px 0 #2f2;
+    -2px 1px 0 #055,
+    -4px 2px 0 #077,
+    -6px 3px 0 #099,
+    -8px 4px 0 #0bb,
+    -10px 5px 0 #0dd;
     box-shadow: 0 0 4px #000,
     -6px 2px 8px #000c;
-}
-
-@property --hr-h-c1 {
-    syntax: '<color>';
-    initial-value: #C1F3FF;
-    inherits: false;
-}
-@property --hr-h-c2 {
-    syntax: '<color>';
-    initial-value: #1FCFF8;
-    inherits: false;
 }
 
 #page-title-link {
     display: inline-block;
     text-decoration: none;
     color: #000;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 #page-title {
@@ -237,16 +197,9 @@ h1:hover a {
 .hr-header {
     margin: 5px;
     border-width: 0;
-    /*background: linear-gradient(to right, #C1F3FF, #1FCFF8, #C1F3FF);*/
-    background: linear-gradient(to right, var(--hr-h-c1), var(--hr-h-c2), var(--hr-h-c1));
+    background: linear-gradient(to right, #C1F3FF, #1FCFF8, #C1F3FF);
     height: 10px;
     border-radius: 10px;
-    transition: --hr-h-c1 1.5s, --hr-h-c2 1.5s;
-}
-
-body:has(h1:hover) .hr-header {
-    --hr-h-c1: #C1FFC1;
-    --hr-h-c2: #1FF81F;
 }
 
 .hr-header::before {
@@ -262,22 +215,10 @@ body:has(h1:hover) .hr-header {
     transition: opacity 1.5s;
 }
 
-@property --hr-f-c1 {
-    syntax: '<color>';
-    initial-value: #9EE9FF;
-    inherits: false;
-}
-@property --hr-f-c2 {
-    syntax: '<color>';
-    initial-value: #FFFFFF;
-    inherits: false;
-}
-
 .hr-footer {
     margin: 5px;
     border-width: 0;
-    /*background: linear-gradient(to right, #9EE9FF, #FFFFFF, #9EE9FF);*/
-    background: linear-gradient(to right, var(--hr-f-c1), var(--hr-f-c2), var(--hr-f-c1));
+    background: linear-gradient(to right, #9EE9FF, #FFFFFF, #9EE9FF);
     height: 10px;
     border-radius: 10px;
     transition: --hr-f-c1 1.5s, --hr-f-c2 1.5s;
@@ -384,7 +325,7 @@ blockquote {
 }
 
 blockquote > p {
-    font-family: Harrington, sans-serif;
+    font-family: Caveat, sans-serif;
     font-weight: bold;
     font-size: 0;
 }
@@ -394,13 +335,13 @@ blockquote > p {
 }
 
 .quote-txt-active {
-    font-size: 20px;
+    font-size: 30px;
 }
 
 cite {
     font-size: 0;
     color: #555;
-    font-family: Arial, sans-serif;
+    font-family: "Varela Round", sans-serif;
 }
 
 .author {
