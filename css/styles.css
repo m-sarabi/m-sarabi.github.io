@@ -128,6 +128,7 @@ article {
     position: relative;
     max-width: 80%;
     min-width: 300px;
+    box-sizing: border-box;
     padding: 5px 20px 20px 20px;
     backdrop-filter: brightness(105%);
     margin: 30px auto 20px auto;
@@ -293,6 +294,7 @@ article:first-of-type p:first-of-type:first-letter {
 aside {
     border: 1px solid #061a4d;
     padding: 0 0 20px 0;
+    box-sizing: border-box;
     display: flex;
     position: relative;
     flex-direction: column;
