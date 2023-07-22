@@ -16,6 +16,10 @@
     transform-style: preserve-3d;
 }
 
+.cube:hover {
+    cursor: pointer;
+}
+
 .cube > div {
     position: absolute;
     top: 100px;
