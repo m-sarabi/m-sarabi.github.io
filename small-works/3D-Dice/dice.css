@@ -11,7 +11,7 @@
     /*perspective-origin: 200px 200px;*/
     position: relative;
     transition: 2s;
-    transform: rotateX(0deg) rotateY(0deg);
+    /*transform: rotateX(0deg) rotateY(0deg);*/
     transform-origin: 200px 200px;
     transform-style: preserve-3d;
 }
@@ -25,7 +25,6 @@
     background-color: #aef;
     box-shadow: 0 0 100px 1px #444499 inset, 0 0 10px 1px #444499 inset;
     border: 1px solid #222255;
-    /*backface-visibility: hidden;*/
 }
 
 .side1 {
