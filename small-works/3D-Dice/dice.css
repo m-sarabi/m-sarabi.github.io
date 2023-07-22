@@ -11,7 +11,7 @@
     /*perspective-origin: 200px 200px;*/
     position: relative;
     transition: 2s;
-    /*transform: rotateX(0deg) rotateY(0deg);*/
+    transform: rotateX(0deg) rotateY(0deg);
     transform-origin: 200px 200px;
     transform-style: preserve-3d;
 }
