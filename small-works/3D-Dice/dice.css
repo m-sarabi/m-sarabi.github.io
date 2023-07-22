@@ -4,14 +4,14 @@
     height: 400px;
     margin: 20px auto 0;
     border: 4px solid black; /* for test */
-    perspective: 500px;
-    perspective-origin: 200px 200px;
+    perspective: 1000px;
 }
 
 .cube {
+    /*perspective-origin: 200px 200px;*/
     position: relative;
-    transition: 10s;
-    transform: rotateX(-30deg) rotateY(30deg);
+    transition: 2s;
+    transform: rotateX(0deg) rotateY(0deg);
     transform-origin: 200px 200px;
     transform-style: preserve-3d;
 }
