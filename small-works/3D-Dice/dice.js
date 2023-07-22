@@ -7,7 +7,7 @@ cube.style.transform = `rotateX(${xDegree}deg) rotateY(${yDegree}deg)`;  // init
 
 // setting transition duration
 const transitionDuration = 5000;
-cube.style.transition = transitionDuration / 1000 + 's'
+cube.style.transition = transitionDuration / 1000 + 's ease-in-out';
 
 let lastClicked = Date.now() - transitionDuration;
 
