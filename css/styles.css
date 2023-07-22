@@ -262,6 +262,15 @@ h2 a:first-of-type::after {
     content: " " attr(href);
 }
 
+h3 {
+    font-size: 22px;
+}
+
+h3 > a {
+    text-decoration: none;
+    color: #421606;
+}
+
 footer {
     font-size: 18px;
     font-weight: bold;
@@ -284,11 +293,6 @@ main a:focus {
 
 main a:active {
     color: #f00;
-}
-
-article:first-of-type p:first-of-type:first-letter {
-    font-size: 50px;
-    font-family: "Old English Text MT", Tahoma, sans-serif;
 }
 
 aside {
