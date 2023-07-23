@@ -71,8 +71,8 @@
     radial-gradient(circle at 150px 50px, #000 10%, #0000 0%),
     radial-gradient(circle at 50px 50px, #000 10%, #0000 0%),
     radial-gradient(circle at 150px 150px, #000 10%, #0000 0%),
-    radial-gradient(circle at 150px 100px, #000 calc(35%/3), #0000 0%),
-    radial-gradient(circle at 50px 100px, #000 calc(35%/3), #0000 0%);
+    radial-gradient(circle at 150px 100px, #000 calc(35% / 3), #0000 0%),
+    radial-gradient(circle at 50px 100px, #000 calc(35% / 3), #0000 0%);
 }
 
 .result-container {
@@ -84,6 +84,7 @@
     height: 150px;
     border-radius: 50%;
     box-shadow: 0 0 10px #1d5cb9, 0 0 40px #1d5cb9 inset;
+    transform: scale(0);
     user-select: none;
 }
 

@@ -5,7 +5,7 @@ let container = document.getElementsByClassName('cube-container')[0];
 let xDegree = -30;
 let yDegree = 30;
 let zDegree = 0;
-let resArr = [0, 0, 0, 0, 0, 0];
+let firstDraw = true;
 cube.style.transform = `rotateX(${xDegree}deg) rotateY(${yDegree}deg) rotateZ(${zDegree}deg)`;  // initial transform values
 
 // setting transition duration
@@ -25,9 +25,7 @@ cube.addEventListener('click', function () {
     if (Date.now() - lastClicked > transitionDuration) {
         let result;
         [xDegree, yDegree, zDegree, result] = randomRotation();
-        resArr[result - 1] += 1;
         cube.style.transform = `rotateX(${xDegree}deg) rotateY(${yDegree}deg) rotateZ(${zDegree}deg)`;
-        console.log(resArr);
         lastClicked = Date.now();
         let resultElement = document.getElementsByClassName('result')[0];
         resultElement.style.transform = 'scale(0)';
@@ -36,6 +34,12 @@ cube.addEventListener('click', function () {
 
 
         function showResult() {
+            if (firstDraw) {
+                let resultContainer = document.getElementsByClassName('result-container')[0];
+                resultContainer.style.transition = (transitionDuration / 5) + 'ms';
+                resultContainer.style.transform = 'scale(1)';
+                firstDraw = false;
+            }
             resultElement.innerHTML = result.toString();
             resultElement.style.transform = 'scale(1)';
             resultElement.style.transition = (transitionDuration / 5) + 'ms';
@@ -75,7 +79,6 @@ function keyPressed(key) {
             cube.style.transform = `rotateX(${xDegree}deg) rotateY(${yDegree}deg) rotateZ(${zDegree}deg)`;
             break;
     }
-    console.log(xDegree, yDegree, zDegree);
 }
 
 // keypress events
