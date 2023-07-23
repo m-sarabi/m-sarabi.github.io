@@ -32,7 +32,6 @@ cube.addEventListener('click', function () {
         resultElement.style.transition = (transitionDuration * 4 / 5) + 'ms';
         resultElement.style.opacity = '0';
 
-
         function showResult() {
             if (firstDraw) {
                 let resultContainer = document.getElementsByClassName('result-container')[0];
@@ -280,8 +279,14 @@ function randomRotation() {
             break;
 
     }
-    xDeg += (Math.floor(Math.random() * 12) + 6) * 360;
-    yDeg += (Math.floor(Math.random() * 12) + 6) * 360;
-    zDeg += (Math.floor(Math.random() * 12) + 6) * 360;
+    do {
+        xDeg += Math.floor(Math.random() * 6) * 360;
+    } while (xDeg - xDegree < 360);
+    do {
+        yDeg += Math.floor(Math.random() * 6) * 360;
+    } while (xDeg - xDegree < 360);
+    do {
+        zDeg += Math.floor(Math.random() * 6) * 360;
+    } while (xDeg - xDegree < 360);
     return [xDeg, yDeg, zDeg, randomDice];
 }
