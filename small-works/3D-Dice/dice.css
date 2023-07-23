@@ -74,3 +74,21 @@
     radial-gradient(circle at 150px 100px, #000 calc(35%/3), #0000 0%),
     radial-gradient(circle at 50px 100px, #000 calc(35%/3), #0000 0%);
 }
+
+.result-container {
+    position: relative;
+    margin: 10px auto 0;
+    text-align: center;
+    line-height: 150px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #1d5cb9, 0 0 40px #1d5cb9 inset;
+    user-select: none;
+}
+
+.result {
+    display: inline-block;
+    font-size: 80px;
+    transform: scale(1);
+}

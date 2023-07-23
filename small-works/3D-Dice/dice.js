@@ -24,6 +24,20 @@ cube.addEventListener('click', function () {
         [xDegree, yDegree] = randomRotation();
         cube.style.transform = `rotateX(${xDegree}deg) rotateY(${yDegree}deg)`;
         lastClicked = Date.now();
+        let resultElement = document.getElementsByClassName('result')[0];
+        resultElement.style.transform = 'scale(0)';
+        resultElement.style.transition = '4s';
+        resultElement.style.opacity = '0';
+
+
+        function showResult() {
+            resultElement.innerHTML = findResult().toString();
+            resultElement.style.transform = 'scale(1)';
+            resultElement.style.transition = '1s';
+            resultElement.style.opacity = '1';
+        }
+
+        setTimeout(showResult, transitionDuration * 0.8);
     }
 });
 
@@ -99,4 +113,23 @@ function randomRotation() {
         yRot = (Math.floor(Math.random() * 48) + 12) * 90;
     } while (Math.abs(yRot - yDegree) <= 180);
     return [xRot, yRot];
+}
+
+// finding the result based on rotation degrees
+function findResult() {
+    if (xDegree % 360 === 90) {
+        return 3;
+    } else if (xDegree % 360 === 270) {
+        return 4;
+    } else if ((xDegree + yDegree) % 360 === 0) {
+        return 1;
+    } else if ((xDegree + yDegree) % 360 === 90) {
+        return 5;
+    } else if ((xDegree + yDegree) % 360 === 180) {
+        return 6;
+    } else if ((xDegree + yDegree) % 360 === 270) {
+        return 2;
+    } else {
+        return 0;
+    }
 }
