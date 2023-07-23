@@ -9,7 +9,7 @@ let firstDraw = true;
 cube.style.transform = `rotateX(${xDegree}deg) rotateY(${yDegree}deg) rotateZ(${zDegree}deg)`;  // initial transform values
 
 // setting transition duration
-const transitionDuration = 5000;
+const transitionDuration = 4000;
 const transitionDurationOnKey = 500;
 cube.style.transition = transitionDuration + 'ms ease-in-out';
 
@@ -29,7 +29,7 @@ cube.addEventListener('click', function () {
         lastClicked = Date.now();
         let resultElement = document.getElementsByClassName('result')[0];
         resultElement.style.transform = 'scale(0)';
-        resultElement.style.transition = (transitionDuration * 4 / 5) + 'ms';
+        resultElement.style.transition = (transitionDuration) + 'ms';
         resultElement.style.opacity = '0';
 
         function showResult() {
@@ -281,12 +281,12 @@ function randomRotation() {
     }
     do {
         xDeg += Math.floor(Math.random() * 6) * 360;
-    } while (xDeg - xDegree < 360);
+    } while (Math.abs(xDeg - xDegree) < 720);
     do {
         yDeg += Math.floor(Math.random() * 6) * 360;
-    } while (xDeg - xDegree < 360);
+    } while (Math.abs(yDeg - xDegree) < 720);
     do {
-        zDeg += Math.floor(Math.random() * 6) * 360;
-    } while (xDeg - xDegree < 360);
+        zDeg += Math.floor(Math.random() * 2) * 360;
+    } while (Math.abs(zDeg - xDegree) < 0);
     return [xDeg, yDeg, zDeg, randomDice];
 }
