@@ -26,14 +26,14 @@ cube.addEventListener('click', function () {
         lastClicked = Date.now();
         let resultElement = document.getElementsByClassName('result')[0];
         resultElement.style.transform = 'scale(0)';
-        resultElement.style.transition = '4s';
+        resultElement.style.transition = (transitionDuration * 4 / 5000) + 's';
         resultElement.style.opacity = '0';
 
 
         function showResult() {
             resultElement.innerHTML = findResult().toString();
             resultElement.style.transform = 'scale(1)';
-            resultElement.style.transition = '1s';
+            resultElement.style.transition = (transitionDuration / 5000) + 's';
             resultElement.style.opacity = '1';
         }
 
