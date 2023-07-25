@@ -20,8 +20,17 @@ const random = {
         return arr.sort(function () {
             return 0.5 - Math.random();
         });
+    },
+
+    range: function (start, end) {
+        let arr = [];
+        for (let i = start; i <= end; i++) {
+            arr.push(i);
+        }
+        arr = random.shuffleArray(arr);
+        return arr;
     }
-}
+};
 
 let randomImages = random.randomSample(imgNames, imgCount * 2);
 let leftSide = document.querySelector('#left-list');
