@@ -6,28 +6,27 @@ body {
 }
 
 #container {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
     max-width: 1000px;
-    max-height: 100%;
-    margin: 0 auto 0;
+    text-align: left;
+    margin: 0 auto;
     border: 1px solid;
 }
 
 .side-container {
-    height: fit-content;
+    display: inline-block;
+    /*height: fit-content;*/
     position: relative;
-    padding: 2%;
     width: 40%;
     background: conic-gradient(#fff 0%, #fde 10%, #fff 20%, #fde 30%, #fff 40%, #fde 50%,
     #fff 60%, #fde 70%, #fff 80%, #fde 90%, #fff 100%);
     box-shadow: 0 0 10px #f00 inset;
 }
 
-#left-list {
-}
-
 #right-list {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 #finish {
