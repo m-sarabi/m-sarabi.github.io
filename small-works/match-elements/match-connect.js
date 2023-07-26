@@ -55,6 +55,7 @@ if (window.innerWidth > window.innerHeight) {
     sizeH = sizeW * 2 / 3;
 }
 let imgSize = sizeH / 4;
+const imageBoxes = [];
 
 // populating each side
 sideDivs.forEach(function (sideDiv, sideIndex) {
@@ -70,6 +71,14 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
         outsideContainer.style.position = 'relative';
         outsideContainer.style.border = '1px solid';
         outsideContainer.style.margin = '10px auto';
+
+        // tracking the containers
+        imageBoxes.push({
+            element: outsideContainer,
+            side: sideIndex,
+            insideImages: randomCount[sideIndex][imgIndex],
+            done: false,
+        });
 
         // inside container of each image group
         const insideContainer = document.createElement('div');
@@ -129,4 +138,67 @@ function addImages(image, parent) {
     imageElement.style.width = Math.floor((Math.random() / 4 + 0.75) * imgSize) + 'px';
     imageElement.setAttribute('src', '/assets/random-images/' + image + '.webp');
     parent.appendChild(imageElement);
+}
+
+let elementClicked, clickState = false, doneCount = 0;
+
+for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
+    imageBoxes[elementIndex].element.addEventListener('click', function () {
+        if (imageBoxes[elementIndex].done) {
+        } else if (!clickState) {
+            imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
+            clickState = true;
+            elementClicked = imageBoxes[elementIndex];
+        } else if (imageBoxes[elementIndex].side === elementClicked.side) {
+            if (imageBoxes[elementIndex].insideImages === elementClicked.insideImages) {
+                imageBoxes[elementIndex].element.style.backgroundColor = 'transparent';
+                clickState = false;
+            } else {
+                elementClicked.element.style.backgroundColor = 'transparent';
+                imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
+                clickState = true;
+                elementClicked = imageBoxes[elementIndex];
+            }
+        } else {
+            if (imageBoxes[elementIndex].insideImages === elementClicked.insideImages) {
+                imageBoxes[elementIndex].done = true;
+                elementClicked.done = true;
+                clickState = false;
+                imageBoxes[elementIndex].element.style.backgroundColor = '#8f88';
+                elementClicked.element.style.backgroundColor = '#8f88';
+                doneCount += 1;
+                if (doneCount === imgCount) {
+                    document.getElementById('container').style.transition = '2s';
+                    document.getElementById('container').style.opacity = '0.5';
+                    const congrats = document.createElement('div');
+                    congrats.innerHTML = 'Congrats';
+                    congrats.style.position = 'fixed';
+                    congrats.style.fontSize = '100px';
+                    congrats.style.color = '#000';
+                    congrats.style.padding = '10px 30px';
+                    congrats.innerHTML = 'Congrats';
+                    congrats.style.left = '50%';
+                    congrats.style.top = '50%';
+                    congrats.style.transform = 'translate(-50%, -50%)';
+                    congrats.style.textAlign = 'center';
+                    congrats.style.opacity = '0';
+                    congrats.style.transition = '2s';
+                    congrats.style.borderRadius = '50%';
+                    document.body.appendChild(congrats);
+                    setTimeout(function () {
+                        congrats.style.opacity = '1';
+                        congrats.style.background = 'radial-gradient(ellipse, #f5ac 0%, #5f50 66%)';
+                    }, 500);
+                    setTimeout(function () {
+                        congrats.style.transform = 'translate(-50%, -50%) rotate(360deg)';
+                    }, 2000);
+                }
+            } else {
+                elementClicked.element.style.backgroundColor = 'transparent';
+                imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
+                clickState = true;
+                elementClicked = imageBoxes[elementIndex];
+            }
+        }
+    });
 }
