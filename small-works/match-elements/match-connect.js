@@ -77,6 +77,7 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
         insideContainer.style.top = '50%';
         insideContainer.style.width = 'inherit';
         insideContainer.style.transform = 'translate(0, -50%)';
+        insideContainer.style.userSelect = 'none';
         // adding images to each group
         for (let i = 0; i < randomCount[sideIndex][imgIndex]; i++) {
             addImages(randomImageSide[sideIndex][imgIndex], insideContainer);
