@@ -3,7 +3,7 @@ let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'f
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
 // number of image groups on each side
-let imgCount = 6;
+let imgCount = 8;
 
 // a few useful randomizing tools
 const random = {
@@ -48,7 +48,8 @@ sideDivs[1] = document.querySelector('#right-list');
 
 // a random number for each image group
 let randomCount = [random.range(1, imgCount), random.range(1, imgCount)];
-let size = Math.floor(sideDivs[0].clientWidth * 0.6);
+let size = Math.floor(sideDivs[0].clientWidth * 0.75);
+let imgSize = size / 6;
 
 // populating each side
 sideDivs.forEach(function (sideDiv, sideIndex) {
@@ -56,8 +57,10 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
     randomCount[sideIndex].forEach(function (imgGroup, imgIndex) {
         // outside container of each image group
         const outsideContainer = document.createElement('div');
+        outsideContainer.setAttribute('class', 'outside-container');
+        outsideContainer.style.transition = '0.5s'
         outsideContainer.style.width = size + 'px';
-        outsideContainer.style.height = size + 'px';
+        outsideContainer.style.height = size/2 + 'px';
         outsideContainer.style.textAlign = 'center';
         outsideContainer.style.position = 'relative';
         outsideContainer.style.border = '1px solid';
@@ -79,6 +82,20 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
     });
 });
 
+window.addEventListener('resize', function () {
+    size = Math.floor(sideDivs[0].clientWidth * 0.75);
+    imgSize = size / 6;
+    const outsideElements = document.querySelectorAll('.outside-container');
+    outsideElements.forEach(function (element) {
+        element.style.width = size + 'px';
+        element.style.height = size/2 + 'px';
+    });
+    const imageElements = document.querySelectorAll('.images');
+    imageElements.forEach(function (element){
+        element.style.width = Math.floor((Math.random() / 2 + 0.5) * imgSize) + 'px';
+    })
+});
+
 /**
  * adding an image to a parent container
  * @param image {string}     name of the image file, should have .webp format
@@ -86,13 +103,15 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
  */
 function addImages(image, parent) {
     let imageElement = document.createElement('img');
+    imageElement.setAttribute('class', 'images')
+    imageElement.style.transition = '0.5s'
     imageElement.style.backgroundColor = '#fffa';
     imageElement.style.borderRadius = '10%';
     imageElement.style.padding = '2%';
     imageElement.style.margin = '1%';
     imageElement.style.boxShadow = '0 0 10px #0007 inset';
     imageElement.setAttribute('draggable', 'false');
-    imageElement.style.width = Math.floor((Math.random() / 2 + 0.5) * 64) + 'px';
+    imageElement.style.width = Math.floor((Math.random() / 2 + 0.5) * imgSize) + 'px';
     imageElement.setAttribute('src', '/assets/random-images/' + image + '.webp');
     parent.appendChild(imageElement);
 }

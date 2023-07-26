@@ -1,8 +1,6 @@
 body {
-    padding: 10px 5%;
     margin: 0;
     position: relative;
-    text-align: center;
 }
 
 #container {
@@ -14,12 +12,6 @@ body {
     display: flow-root;
 }
 
-#container::after {
-    content: '';
-    clear: both;
-    display: table;
-}
-
 .side-container {
     display: inline-block;
     margin: 0 auto;
@@ -28,6 +20,7 @@ body {
     background: conic-gradient(#fff 0%, #fde 10%, #fff 20%, #fde 30%, #fff 40%, #fde 50%,
     #fff 60%, #fde 70%, #fff 80%, #fde 90%, #fff 100%);
     box-shadow: 0 0 10px #f00 inset;
+    transition: 1s;
 }
 
 #left-list {
@@ -38,8 +31,17 @@ body {
     float: right;
 }
 
+div:has(button) {
+    text-align: center;
+}
 #finish {
     margin-top: 20px;
     width: 100px;
     height: 60px;
+}
+
+@media only screen and (max-aspect-ratio: 1/1) {
+    .side-container {
+        width: 45%;
+    }
 }
