@@ -184,6 +184,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     congrats.style.opacity = '0';
                     congrats.style.transition = '2s';
                     congrats.style.borderRadius = '50%';
+                    congrats.style.userSelect = 'none';
                     document.body.appendChild(congrats);
                     setTimeout(function () {
                         congrats.style.opacity = '1';
