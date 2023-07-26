@@ -48,6 +48,7 @@ sideDivs[1] = document.querySelector('#right-list');
 
 // a random number for each image group
 let randomCount = [random.range(1, imgCount), random.range(1, imgCount)];
+let size = Math.floor(sideDivs[0].clientWidth * 0.6);
 
 // populating each side
 sideDivs.forEach(function (sideDiv, sideIndex) {
@@ -55,14 +56,12 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
     randomCount[sideIndex].forEach(function (imgGroup, imgIndex) {
         // outside container of each image group
         const outsideContainer = document.createElement('div');
-        let size = Math.floor(sideDiv.clientWidth * 0.6);
         outsideContainer.style.width = size + 'px';
         outsideContainer.style.height = size + 'px';
         outsideContainer.style.textAlign = 'center';
         outsideContainer.style.position = 'relative';
         outsideContainer.style.border = '1px solid';
         outsideContainer.style.margin = '10px auto';
-        console.log(typeof outsideContainer);
 
         // inside container of each image group
         const insideContainer = document.createElement('div');

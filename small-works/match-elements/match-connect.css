@@ -11,11 +11,18 @@ body {
     text-align: left;
     margin: 0 auto;
     border: 1px solid;
+    display: flow-root;
+}
+
+#container::after {
+    content: '';
+    clear: both;
+    display: table;
 }
 
 .side-container {
     display: inline-block;
-    /*height: fit-content;*/
+    margin: 0 auto;
     position: relative;
     width: 40%;
     background: conic-gradient(#fff 0%, #fde 10%, #fff 20%, #fde 30%, #fff 40%, #fde 50%,
@@ -23,10 +30,12 @@ body {
     box-shadow: 0 0 10px #f00 inset;
 }
 
+#left-list {
+    float: left;
+}
+
 #right-list {
-    position: absolute;
-    right: 0;
-    top: 0;
+    float: right;
 }
 
 #finish {
