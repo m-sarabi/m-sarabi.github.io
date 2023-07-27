@@ -4,11 +4,11 @@ let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'f
 
 // number of image groups on each side
 let imgCount, imgCountBefore;
-imgCountBefore = window.prompt('Enter a number between 2 and 8.');
-imgCount = parseInt(imgCountBefore);
+imgCountBefore = window.prompt('Enter a number between 2 and 8. Default: 8');
+imgCount = imgCountBefore === '' ? 8 : parseInt(imgCountBefore);
 while (isNaN(imgCount) || imgCount > 8 || imgCount < 2) {
-    imgCountBefore = window.prompt('You entered ' + imgCountBefore + '. Enter a number between 2 and 8.');
-    imgCount = parseInt(imgCountBefore);
+    imgCountBefore = window.prompt('You entered ' + imgCountBefore + '. Enter a number between 2 and 8. Default: 8');
+    imgCount = imgCountBefore === '' ? 8 : parseInt(imgCountBefore);
 }
 
 
