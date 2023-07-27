@@ -3,7 +3,7 @@ let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'f
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
 // number of image groups on each side
-let imgCount = 8;
+let imgCount = 3;
 
 // a few useful randomizing tools
 const random = {
@@ -98,6 +98,7 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
 });
 
 let windowWidth = window.innerWidth;
+let congrats;
 window.addEventListener('resize', function () {
     if (windowWidth !== window.innerWidth) {
         windowWidth = window.innerWidth;
@@ -118,6 +119,7 @@ window.addEventListener('resize', function () {
             element.style.width = Math.floor((Math.random() / 4 + 0.75) * imgSize) + 'px';
         });
     }
+    congrats.style.fontSize = (document.getElementById('container').clientWidth / 6) + 'px';
 });
 
 /**
@@ -170,10 +172,10 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 if (doneCount === imgCount) {
                     document.getElementById('container').style.transition = '2s';
                     document.getElementById('container').style.opacity = '0.5';
-                    const congrats = document.createElement('div');
+                    congrats = document.createElement('div');
                     congrats.innerHTML = 'Congrats';
                     congrats.style.position = 'fixed';
-                    congrats.style.fontSize = '100px';
+                    congrats.style.fontSize = (document.getElementById('container').clientWidth / 6) + 'px';
                     congrats.style.color = '#000';
                     congrats.style.padding = '10px 30px';
                     congrats.innerHTML = 'Congrats';
