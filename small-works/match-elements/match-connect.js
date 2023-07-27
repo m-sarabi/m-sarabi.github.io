@@ -185,7 +185,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 imageBoxes[elementIndex].element.style.backgroundColor = '#8f88';
                 elementClicked.element.style.backgroundColor = '#8f88';
                 doneCount += 1;
-                if (doneCount === imgCount) {
+                if (doneCount === imgCount) {  // when game is finished
                     document.getElementById('container').style.transition = '2s';
                     document.getElementById('container').style.opacity = '0.5';
                     congrats = document.createElement('div');
@@ -219,10 +219,11 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                         congrats.style.transform = 'translate(-50%, -50%) rotate(360deg)';
                     }, 2000);
                 }
-            } else {
+            } else {  // when made a mistake
                 elementClicked.element.style.backgroundColor = '#f888';
                 imageBoxes[elementIndex].element.style.backgroundColor = '#f888';
                 clickState = false;
+                navigator.vibrate(500);
                 wait = Date.now() + 505;
                 setTimeout(function () {
                     elementClicked.element.style.backgroundColor = 'transparent';
