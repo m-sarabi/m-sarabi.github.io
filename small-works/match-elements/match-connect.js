@@ -3,7 +3,14 @@ let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'f
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
 // number of image groups on each side
-let imgCount = 8;
+let imgCount, imgCountBefore;
+imgCountBefore = window.prompt('Enter a number between 2 and 8.');
+imgCount = parseInt(imgCountBefore);
+while (isNaN(imgCount) || imgCount > 8 || imgCount < 2) {
+    imgCountBefore = window.prompt('You entered ' + imgCountBefore + '. Enter a number between 2 and 8.');
+    imgCount = parseInt(imgCountBefore);
+}
+
 
 // a few useful randomizing tools
 const random = {
