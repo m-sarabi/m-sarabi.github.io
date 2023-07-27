@@ -144,19 +144,23 @@ function addImages(image, parent) {
     parent.appendChild(imageElement);
 }
 
-let elementClicked, clickState = false, doneCount = 0, score;
+let elementClicked, clickState = false, doneCount = 0, score, wait = Date.now();
 
+// click events and progress track for every image container
 for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
     imageBoxes[elementIndex].element.addEventListener('click', function () {
+        // setting the first score value
         if (!score) {
             score = Date.now();
         }
-        if (imageBoxes[elementIndex].done) {
-        } else if (!clickState) {
+
+        // click conditions
+        if (imageBoxes[elementIndex].done || Date.now() < wait) {  // if the clicked element is completed, do nothing
+        } else if (!clickState) {  // when it is the first element to click
             imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
             clickState = true;
             elementClicked = imageBoxes[elementIndex];
-        } else if (imageBoxes[elementIndex].side === elementClicked.side) {
+        } else if (imageBoxes[elementIndex].side === elementClicked.side) {  // when clicked on another element on the same side
             if (imageBoxes[elementIndex].insideImages === elementClicked.insideImages) {
                 imageBoxes[elementIndex].element.style.backgroundColor = 'transparent';
                 clickState = false;
@@ -166,7 +170,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 clickState = true;
                 elementClicked = imageBoxes[elementIndex];
             }
-        } else {
+        } else {  // when clicked on an element on the other side
             if (imageBoxes[elementIndex].insideImages === elementClicked.insideImages) {
                 imageBoxes[elementIndex].done = true;
                 elementClicked.done = true;
@@ -209,10 +213,15 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     }, 2000);
                 }
             } else {
-                elementClicked.element.style.backgroundColor = 'transparent';
-                imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
-                clickState = true;
-                elementClicked = imageBoxes[elementIndex];
+                elementClicked.element.style.backgroundColor = '#f888';
+                imageBoxes[elementIndex].element.style.backgroundColor = '#f888';
+                clickState = false;
+                wait = Date.now() + 505;
+                setTimeout(function () {
+                    elementClicked.element.style.backgroundColor = 'transparent';
+                    imageBoxes[elementIndex].element.style.backgroundColor = 'transparent';
+                    elementClicked = imageBoxes[elementIndex];
+                }, 500);
             }
         }
     });
