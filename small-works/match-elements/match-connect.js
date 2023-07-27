@@ -198,7 +198,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     congrats.style.userSelect = 'none';
 
                     const scoreSpan = document.createElement('span');
-                    scoreSpan.innerHTML = 'Your score: ' + Math.floor((Date.now() - score) / 100);
+                    scoreSpan.innerHTML = 'Your time: ' + Math.round((Date.now() - score) / 100) / 10 + 's';
                     scoreSpan.style.fontSize = '50%';
                     congrats.appendChild(document.createElement('br'));
                     congrats.appendChild(scoreSpan);
