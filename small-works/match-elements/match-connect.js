@@ -54,7 +54,7 @@ if (window.innerWidth > window.innerHeight) {
 } else {
     sizeH = sizeW * 2 / 3;
 }
-let imgSize = sizeH / 4;
+let imgSize = sizeW / 6;
 const imageBoxes = [];
 
 // populating each side
