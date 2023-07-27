@@ -98,7 +98,8 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
 });
 
 let windowWidth = window.innerWidth;
-let congrats;
+// Finish message texts
+let congrats, scoreSpan;
 window.addEventListener('resize', function () {
     if (windowWidth !== window.innerWidth) {
         windowWidth = window.innerWidth;
@@ -120,6 +121,7 @@ window.addEventListener('resize', function () {
         });
     }
     congrats.style.fontSize = (document.getElementById('container').clientWidth / 6) + 'px';
+    scoreSpan.style.fontSize = '50%';
 });
 
 /**
@@ -142,10 +144,13 @@ function addImages(image, parent) {
     parent.appendChild(imageElement);
 }
 
-let elementClicked, clickState = false, doneCount = 0;
+let elementClicked, clickState = false, doneCount = 0, score;
 
 for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
     imageBoxes[elementIndex].element.addEventListener('click', function () {
+        if (!score) {
+            score = Date.now();
+        }
         if (imageBoxes[elementIndex].done) {
         } else if (!clickState) {
             imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
@@ -187,6 +192,13 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     congrats.style.transition = '2s';
                     congrats.style.borderRadius = '50%';
                     congrats.style.userSelect = 'none';
+
+                    const scoreSpan = document.createElement('span');
+                    scoreSpan.innerHTML = 'Your score: ' + Math.floor((Date.now() - score) / 100);
+                    scoreSpan.style.fontSize = '50%';
+                    congrats.appendChild(document.createElement('br'));
+                    congrats.appendChild(scoreSpan);
+
                     document.body.appendChild(congrats);
                     setTimeout(function () {
                         congrats.style.opacity = '1';
