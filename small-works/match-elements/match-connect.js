@@ -186,7 +186,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     congrats.style.position = 'fixed';
                     congrats.style.fontSize = (document.getElementById('container').clientWidth / 6) + 'px';
                     congrats.style.color = '#000';
-                    congrats.style.padding = '10px 30px';
+                    congrats.style.padding = '8% 8%';
                     congrats.innerHTML = 'Congrats';
                     congrats.style.left = '50%';
                     congrats.style.top = '50%';
@@ -206,7 +206,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     document.body.appendChild(congrats);
                     setTimeout(function () {
                         congrats.style.opacity = '1';
-                        congrats.style.background = 'radial-gradient(ellipse, #f5ac 0%, #5f50 66%)';
+                        congrats.style.background = 'radial-gradient(ellipse, #f5ac 0%, #5f50 67%)';
                     }, 500);
                     setTimeout(function () {
                         congrats.style.transform = 'translate(-50%, -50%) rotate(360deg)';
