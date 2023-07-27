@@ -3,7 +3,7 @@ let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'f
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
 // number of image groups on each side
-let imgCount = 3;
+let imgCount = 8;
 
 // a few useful randomizing tools
 const random = {
