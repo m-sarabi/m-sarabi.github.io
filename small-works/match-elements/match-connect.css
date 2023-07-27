@@ -31,15 +31,6 @@ body {
     float: right;
 }
 
-div:has(button) {
-    text-align: center;
-}
-#finish {
-    margin-top: 20px;
-    width: 100px;
-    height: 60px;
-}
-
 @media only screen and (max-aspect-ratio: 1/1) {
     .side-container {
         width: 45%;
