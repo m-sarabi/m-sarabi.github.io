@@ -23,6 +23,11 @@ function sizeCalc() {
     return [cod, pad];
 }
 
+function imgSize() {
+    return Math.max(sideDivs[0].clientWidth * (1 - 7 * imgCount / 100) / imgCount,
+        (sizes[0] - 16 * sideDivs[0].clientWidth / 100) / 2) * (Math.random() * 0.35 + 0.75);
+}
+
 
 // a few useful randomizing tools
 const random = {
@@ -80,7 +85,7 @@ if (window.innerWidth > window.innerHeight) {
 } else {
     sizeH = sizeW * 2 / 3;
 }
-let imgSize = sideDivs[0].clientWidth / 6;
+
 const imageBoxes = [];
 
 let sizes = sizeCalc();
@@ -145,7 +150,7 @@ window.addEventListener('resize', function () {
     });
     const imageElements = document.querySelectorAll('.images');
     imageElements.forEach(function (element) {
-        element.style.width = Math.floor((Math.random() / 4 + 0.75) * imgSize) + 'px';
+        element.style.width = imgSize() + 'px';
     });
     congrats.style.fontSize = (document.getElementById('container').clientWidth / 6) + 'px';
     scoreSpan.style.fontSize = '50%';
@@ -153,13 +158,14 @@ window.addEventListener('resize', function () {
 
 /**
  * adding an image to a parent container
- * @param image {string}     name of the image file, should have .webp format
- * @param parent {HTMLDivElement}    the parent container that image is added to
+ * @param image {string}            name of the image file, should have .webp format
+ * @param parent {HTMLDivElement}   the parent container that image is added to
  */
 function addImages(image, parent) {
-    // todo: image sizing based on the container size and images count to be either one or two row
     let imageElement = document.createElement('img');
+    imageElement.setAttribute('src', '/assets/random-images/' + image + '.webp');
     imageElement.setAttribute('class', 'images');
+    imageElement.style.position = 'relative';
     imageElement.style.transition = '0.5s';
     imageElement.style.backgroundColor = '#fffa';
     imageElement.style.borderRadius = '10%';
@@ -167,8 +173,7 @@ function addImages(image, parent) {
     imageElement.style.margin = '1%';
     imageElement.style.boxShadow = '0 0 10px #0007 inset';
     imageElement.setAttribute('draggable', 'false');
-    imageElement.style.width = Math.floor((Math.random() / 4 + 0.75) * imgSize) + 'px';
-    imageElement.setAttribute('src', '/assets/random-images/' + image + '.webp');
+    imageElement.style.width = imgSize() + 'px';
     parent.appendChild(imageElement);
 }
 
