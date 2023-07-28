@@ -185,7 +185,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 imageBoxes[elementIndex].element.style.backgroundColor = '#8f88';
                 elementClicked.element.style.backgroundColor = '#8f88';
                 doneCount += 1;
-                if (doneCount === imgCount) {  // when game is finished
+                if (doneCount === imgCount) {  // when the game is finished
                     document.getElementById('container').style.transition = '2s';
                     document.getElementById('container').style.opacity = '0.5';
                     congrats = document.createElement('div');
@@ -210,6 +210,11 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     congrats.appendChild(document.createElement('br'));
                     congrats.appendChild(scoreSpan);
 
+                    // play clapping sound
+                    let clapSound = new Audio('/assets/sounds/more-claps-104533.mp3')
+                    clapSound.play().then(function () {
+                    })
+
                     document.body.appendChild(congrats);
                     setTimeout(function () {
                         congrats.style.opacity = '1';
@@ -223,6 +228,9 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 elementClicked.element.style.backgroundColor = '#f888';
                 imageBoxes[elementIndex].element.style.backgroundColor = '#f888';
                 clickState = false;
+                let errorSound = new Audio('/assets/sounds/error-126627.mp3')
+                errorSound.play().then(function () {
+                })
                 navigator.vibrate(500);
                 wait = Date.now() + 505;
                 setTimeout(function () {
