@@ -3,8 +3,8 @@ let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'f
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
 // audio files
-const errorSound = new Audio('/assets/sounds/error-126627.mp3')
-const clapSound = new Audio('/assets/sounds/more-claps-104533.mp3')
+const errorSound = new Audio('/assets/sounds/error-126627.mp3');
+const clapSound = new Audio('/assets/sounds/more-claps-104533.mp3');
 
 // number of image groups on each side
 let imgCount, imgCountBefore;
@@ -13,6 +13,14 @@ imgCount = imgCountBefore === '' ? 8 : parseInt(imgCountBefore);
 while (isNaN(imgCount) || imgCount > 8 || imgCount < 2) {
     imgCountBefore = window.prompt('You entered ' + imgCountBefore + '. Enter a number between 2 and 8. Default: 8');
     imgCount = imgCountBefore === '' ? 8 : parseInt(imgCountBefore);
+}
+// let imgCount = 6;
+
+// calculating the size of each container
+function sizeCalc() {
+    let cod = 5 * mainContainer.clientHeight / (6 * imgCount + 1);
+    let pad = mainContainer.clientHeight / (6 * imgCount + 1);
+    return [cod, pad];
 }
 
 
@@ -57,17 +65,25 @@ let sideDivs = [];
 sideDivs[0] = document.querySelector('#left-list');
 sideDivs[1] = document.querySelector('#right-list');
 
+const mainContainer = document.getElementById('container');
+
+sideDivs.forEach(function (sideDiv) {
+    sideDiv.style.width = (mainContainer.clientWidth * 9 / 20).toString() + 'px';
+});
+
 // a random number for each image group
 let randomCount = [random.range(1, imgCount), random.range(1, imgCount)];
-let sizeW = Math.floor(sideDivs[0].clientWidth * 0.75), sizeH;
+let sizeW = Math.floor(sideDivs[0].clientWidth), sizeH;
 
 if (window.innerWidth > window.innerHeight) {
     sizeH = sizeW / 2;
 } else {
     sizeH = sizeW * 2 / 3;
 }
-let imgSize = sizeW / 6;
+let imgSize = sideDivs[0].clientWidth / 6;
 const imageBoxes = [];
+
+let sizes = sizeCalc();
 
 // populating each side
 sideDivs.forEach(function (sideDiv, sideIndex) {
@@ -76,18 +92,22 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
         // outside container of each image group
         const outsideContainer = document.createElement('div');
         outsideContainer.setAttribute('class', 'outside-container');
-        outsideContainer.style.transition = '0.5s';
-        outsideContainer.style.width = sizeW + 'px';
-        outsideContainer.style.height = sizeH + 'px';
+        outsideContainer.style.transition = 'background-color 0.5s';
+        outsideContainer.style.boxSizing = 'border-box';
+        outsideContainer.style.overflow = 'hidden';
+        outsideContainer.style.width = sideDivs[0].clientWidth + 'px';
+        outsideContainer.style.height = sizes[0] + 'px';
+        outsideContainer.style.top = imgIndex * (sizes[0] + sizes[1]) + sizes[1] + 'px';
         outsideContainer.style.textAlign = 'center';
-        outsideContainer.style.position = 'relative';
+        outsideContainer.style.position = 'absolute';
         outsideContainer.style.border = '1px solid';
-        outsideContainer.style.margin = '10px auto';
+        outsideContainer.style.margin = '0 auto';
 
         // tracking the containers
         imageBoxes.push({
             element: outsideContainer,
             side: sideIndex,
+            pos: imgIndex,
             insideImages: randomCount[sideIndex][imgIndex],
             done: false,
         });
@@ -109,29 +129,24 @@ sideDivs.forEach(function (sideDiv, sideIndex) {
     });
 });
 
-let windowWidth = window.innerWidth;
 // Finish message texts
 let congrats, scoreSpan;
 window.addEventListener('resize', function () {
-    if (windowWidth !== window.innerWidth) {
-        windowWidth = window.innerWidth;
-        sizeW = Math.floor(sideDivs[0].clientWidth * 0.75);
-        if (window.innerWidth > window.innerHeight) {
-            sizeH = sizeW / 2;
-        } else {
-            sizeH = sizeW * 2 / 3;
-        }
-        imgSize = sizeW / 6;
-        const outsideElements = document.querySelectorAll('.outside-container');
-        outsideElements.forEach(function (element) {
-            element.style.width = sizeW + 'px';
-            element.style.height = sizeH + 'px';
-        });
-        const imageElements = document.querySelectorAll('.images');
-        imageElements.forEach(function (element) {
-            element.style.width = Math.floor((Math.random() / 4 + 0.75) * imgSize) + 'px';
-        });
-    }
+
+    sideDivs.forEach(function (sideDiv) {
+        sideDiv.style.width = (mainContainer.clientWidth * 9 / 20).toString() + 'px';
+    });
+
+    sizes = sizeCalc();
+    imageBoxes.forEach(function (element) {
+        element.element.style.width = sideDivs[0].clientWidth + 'px';
+        element.element.style.height = sizes[0] + 'px';
+        element.element.style.top = element.pos * (sizes[0] + sizes[1]) + sizes[1] + 'px';
+    });
+    const imageElements = document.querySelectorAll('.images');
+    imageElements.forEach(function (element) {
+        element.style.width = Math.floor((Math.random() / 4 + 0.75) * imgSize) + 'px';
+    });
     congrats.style.fontSize = (document.getElementById('container').clientWidth / 6) + 'px';
     scoreSpan.style.fontSize = '50%';
 });
@@ -142,6 +157,7 @@ window.addEventListener('resize', function () {
  * @param parent {HTMLDivElement}    the parent container that image is added to
  */
 function addImages(image, parent) {
+    // todo: image sizing based on the container size and images count to be either one or two row
     let imageElement = document.createElement('img');
     imageElement.setAttribute('class', 'images');
     imageElement.style.transition = '0.5s';
@@ -217,7 +233,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
 
                     // play clapping sound
                     clapSound.play().then(function () {
-                    })
+                    });
 
                     document.body.appendChild(congrats);
                     setTimeout(function () {
@@ -233,7 +249,7 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 imageBoxes[elementIndex].element.style.backgroundColor = '#f888';
                 clickState = false;
                 errorSound.play().then(function () {
-                })
+                });
                 navigator.vibrate(500);
                 wait = Date.now() + 505;
                 setTimeout(function () {
