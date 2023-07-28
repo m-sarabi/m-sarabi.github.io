@@ -2,6 +2,10 @@
 let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'fork', 'high-heels',
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
+// audio files
+const errorSound = new Audio('/assets/sounds/error-126627.mp3')
+const clapSound = new Audio('/assets/sounds/more-claps-104533.mp3')
+
 // number of image groups on each side
 let imgCount, imgCountBefore;
 imgCountBefore = window.prompt('Enter a number between 2 and 8. Default: 8');
@@ -56,6 +60,7 @@ sideDivs[1] = document.querySelector('#right-list');
 // a random number for each image group
 let randomCount = [random.range(1, imgCount), random.range(1, imgCount)];
 let sizeW = Math.floor(sideDivs[0].clientWidth * 0.75), sizeH;
+
 if (window.innerWidth > window.innerHeight) {
     sizeH = sizeW / 2;
 } else {
@@ -211,7 +216,6 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                     congrats.appendChild(scoreSpan);
 
                     // play clapping sound
-                    let clapSound = new Audio('/assets/sounds/more-claps-104533.mp3')
                     clapSound.play().then(function () {
                     })
 
@@ -228,7 +232,6 @@ for (let elementIndex = 0; elementIndex < imageBoxes.length; elementIndex++) {
                 elementClicked.element.style.backgroundColor = '#f888';
                 imageBoxes[elementIndex].element.style.backgroundColor = '#f888';
                 clickState = false;
-                let errorSound = new Audio('/assets/sounds/error-126627.mp3')
                 errorSound.play().then(function () {
                 })
                 navigator.vibrate(500);
