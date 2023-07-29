@@ -2,6 +2,25 @@
 let imgNames = ['apple', 'balloon', 'baseball-cap', 'coffee', 'donut', 'egg', 'fork', 'high-heels',
     'hot-drink', 'key', 'ladle', 'milk-bottle', 'muffin', 'orange', 'sneakers', 'umbrella'];
 
+// preloading images
+let imgElements = [];
+imgNames.forEach(function (name) {
+    let imgElement = document.createElement('img');
+    imgElement.style.position = 'relative';
+    imgElement.style.transition = (Math.random() * 1.5 + 1) + 's cubic-bezier(.5,0,.75,1.5)';
+    imgElement.style.backgroundColor = '#fffa';
+    imgElement.style.borderRadius = '10%';
+    imgElement.style.padding = '2%';
+    imgElement.style.margin = '1%';
+    imgElement.style.boxShadow = '0 0 10px #0007 inset';
+    imgElement.style.width = '0px';
+    imgElement.style.opacity = '0';
+    imgElement.setAttribute('src', '/assets/random-images/' + name + '.webp');
+    imgElement.setAttribute('class', 'images');
+    imgElement.setAttribute('draggable', 'false');
+    imgElements.push(imgElement);
+});
+
 // audio files
 const errorSound = new Audio('/assets/sounds/error-126627.mp3');
 const clapSound = new Audio('/assets/sounds/more-claps-104533.mp3');
@@ -26,18 +45,6 @@ function sizeCalc() {
 
 // a few useful randomizing tools
 const random = {
-    randomSample: function randomSample(arr, num) {
-        let slice = [];
-        let randomIndex;
-        num = Math.min(num, arr.length);
-        while (slice.length < num) {
-            randomIndex = Math.floor(Math.random() * arr.length);
-            slice.push(arr[randomIndex]);
-            arr.splice(randomIndex, 1);
-        }
-        return slice;
-    },
-
     shuffleArray: function (arr) {
         return arr.sort(function () {
             return 0.5 - Math.random();
@@ -72,7 +79,7 @@ function playGame() {
     }
 
     // randomized image names for both sides
-    let randomImages = random.shuffleArray(imgNames).slice(0, imgCount * 2);
+    let randomImages = random.shuffleArray(imgElements).slice(0, imgCount * 2);
 
 // an array of random images for each side
     let randomImageSide = [randomImages.slice(0, imgCount), randomImages.slice(imgCount)];
@@ -153,32 +160,16 @@ function playGame() {
 
     /**
      * adding an image to a parent container
-     * @param image {string}            name of the image file, should have .webp format
+     * @param image {HTMLImageElement}            name of the image file, should have .webp format
      * @param parent {HTMLDivElement}   the parent container that image is added to
      */
     function addImages(image, parent) {
-        let imageElement = document.createElement('img');
-        imageElement.setAttribute('src', '/assets/random-images/' + image + '.webp');
-        imageElement.setAttribute('class', 'images');
-        imageElement.style.position = 'relative';
-        imageElement.style.transition = '1s cubic-bezier(.5,-0.5,.5,1.5)';
-        imageElement.style.backgroundColor = '#fffa';
-        imageElement.style.borderRadius = '10%';
-        imageElement.style.padding = '2%';
-        imageElement.style.margin = '1%';
-        imageElement.style.boxShadow = '0 0 10px #0007 inset';
-        imageElement.setAttribute('draggable', 'false');
-        imageElement.style.width = imgSize() / 2 + 'px';
-        imageElement.style.opacity = '0';
+        let imgElement = image.cloneNode(true);
         setTimeout(function () {
-            imageElement.style.width = imgSize() / 2 + 'px';
-            imageElement.style.opacity = '0';
-        }, 800);
-        setTimeout(function () {
-            imageElement.style.width = imgSize() + 'px';
-            imageElement.style.opacity = '1';
-        }, 1800);
-        parent.appendChild(imageElement);
+            imgElement.style.width = imgSize() + 'px';
+            imgElement.style.opacity = '1';
+        }, Math.random() * 1000 + 500);
+        parent.appendChild(imgElement);
     }
 
     let elementClicked, clickState = false, doneCount = 0, score, wait = Date.now(), replayButton;
