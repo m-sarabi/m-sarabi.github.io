@@ -78,13 +78,6 @@ sideDivs.forEach(function (sideDiv) {
 
 // a random number for each image group
 let randomCount = [random.range(1, imgCount), random.range(1, imgCount)];
-let sizeW = Math.floor(sideDivs[0].clientWidth), sizeH;
-
-if (window.innerWidth > window.innerHeight) {
-    sizeH = sizeW / 2;
-} else {
-    sizeH = sizeW * 2 / 3;
-}
 
 const imageBoxes = [];
 
