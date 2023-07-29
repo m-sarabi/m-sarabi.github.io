@@ -39,9 +39,33 @@ while (isNaN(imgCount) || imgCount > 8 || imgCount < 2) {
 function sizeCalc() {
     let cod = 5 * mainContainer.clientHeight / (6 * imgCount + 1);
     let pad = mainContainer.clientHeight / (6 * imgCount + 1);
-    return [cod, pad];
+    let wid = mainContainer.clientWidth / 50;
+    return [cod, pad, wid];
 }
 
+function styleContainer(element, mode) {
+    if (mode === 'none') {
+        element.style.opacity = '1';
+        element.style.backgroundColor = '#fff8';
+        element.style.boxShadow = '0 0 4px #0005, 2px 2px 4px #000a, 0 0 2px #0008 inset';
+        element.style.transform = 'translateY(0px)';
+    } else if (mode === 'select') {
+        element.style.opacity = '1';
+        element.style.backgroundColor = '#ff88';
+        element.style.boxShadow = '0 0 4px #0008, 2px 2px 4px #000f, 0 0 2px #000a inset';
+        element.style.transform = 'translateY(2px)';
+    } else if (mode === 'error') {
+        element.style.opacity = '1';
+        element.style.backgroundColor = '#f888';
+        element.style.boxShadow = '0 0 4px #0008, 2px 2px 4px #000f, 0 0 2px #000a inset';
+        element.style.transform = 'translateY(2px)';
+    } else if (mode === 'done') {
+        element.style.opacity = '0.5';
+        element.style.backgroundColor = '#8f88';
+        element.style.boxShadow = '0 0 4px #0005, 2px 2px 4px #000a, 0 0 2px #0008 inset';
+        element.style.transform = 'translateY(0px)';
+    }
+}
 
 // a few useful randomizing tools
 const random = {
@@ -98,16 +122,18 @@ function playGame() {
             // outside container of each image group
             const outsideContainer = document.createElement('div');
             outsideContainer.setAttribute('class', 'outside-container');
-            outsideContainer.style.transition = 'background-color 0.5s';
+            outsideContainer.style.transition = 'background-color 0.5s, box-shadow 0.5s, transform 0.5s';
             outsideContainer.style.boxSizing = 'border-box';
             outsideContainer.style.overflow = 'hidden';
-            outsideContainer.style.width = sideDivs[0].clientWidth + 'px';
+            outsideContainer.style.width = (sideDivs[0].clientWidth - 2 * sizes[2]) + 'px';
             outsideContainer.style.height = sizes[0] + 'px';
             outsideContainer.style.top = imgIndex * (sizes[0] + sizes[1]) + sizes[1] + 'px';
+            outsideContainer.style.left = sizes[2] + 'px';
             outsideContainer.style.textAlign = 'center';
             outsideContainer.style.position = 'absolute';
-            outsideContainer.style.border = '1px solid';
             outsideContainer.style.margin = '0 auto';
+            outsideContainer.style.borderRadius = '10px';
+            styleContainer(outsideContainer, 'none');
 
             // tracking the containers
             imageBoxes.push({
@@ -186,16 +212,16 @@ function playGame() {
             // if the clicked element is completed, do nothing
             if (imageBoxes[elementIndex].done || Date.now() < wait) {
             } else if (!clickState) {  // when it is the first element to click
-                imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
+                styleContainer(imageBoxes[elementIndex].element, 'select');
                 clickState = true;
                 elementClicked = imageBoxes[elementIndex];
             } else if (imageBoxes[elementIndex].side === elementClicked.side) {  // when clicked on another element on the same side
                 if (imageBoxes[elementIndex].insideImages === elementClicked.insideImages) {
-                    imageBoxes[elementIndex].element.style.backgroundColor = 'transparent';
+                    styleContainer(imageBoxes[elementIndex].element, 'none');
                     clickState = false;
                 } else {
-                    elementClicked.element.style.backgroundColor = 'transparent';
-                    imageBoxes[elementIndex].element.style.backgroundColor = '#ff88';
+                    styleContainer(elementClicked.element, 'none');
+                    styleContainer(imageBoxes[elementIndex].element, 'select');
                     clickState = true;
                     elementClicked = imageBoxes[elementIndex];
                 }
@@ -204,8 +230,8 @@ function playGame() {
                     imageBoxes[elementIndex].done = true;
                     elementClicked.done = true;
                     clickState = false;
-                    imageBoxes[elementIndex].element.style.backgroundColor = '#8f88';
-                    elementClicked.element.style.backgroundColor = '#8f88';
+                    styleContainer(imageBoxes[elementIndex].element, 'done');
+                    styleContainer(elementClicked.element, 'done');
                     doneCount += 1;
                     if (doneCount === imgCount) {  // when the game is finished
                         document.getElementById('container').style.transition = '2s';
@@ -245,7 +271,8 @@ function playGame() {
                         replayButton.style.padding = '2%';
                         replayButton.style.transition = 'opacity 1s, background-color 200ms';
                         replayButton.style.backgroundColor = '#73d2f8';
-                        replayButton.style.boxShadow = '-1px -1px 2px #888, 2px 2px 4px #222';
+                        replayButton.style.boxShadow = '0 0 2px #888, 2px 2px 4px #222, 0 0 2px #4448 inset';
+                        replayButton.style.transform = 'translateY(-50px)';
                         finishDiv.appendChild(congrats);
                         finishDiv.appendChild(replayButton);
 
@@ -292,19 +319,19 @@ function playGame() {
                         }, 2000);
                         setTimeout(function () {
                             replayButton.style.opacity = '1';
-                        }, 4000);
+                        }, 3500);
                     }
                 } else {  // when made a mistake
-                    elementClicked.element.style.backgroundColor = '#f888';
-                    imageBoxes[elementIndex].element.style.backgroundColor = '#f888';
+                    styleContainer(elementClicked.element, 'error');
+                    styleContainer(imageBoxes[elementIndex].element, 'error');
                     clickState = false;
                     errorSound.play().then(function () {
                     });
                     navigator.vibrate(500);
                     wait = Date.now() + 505;
                     setTimeout(function () {
-                        elementClicked.element.style.backgroundColor = 'transparent';
-                        imageBoxes[elementIndex].element.style.backgroundColor = 'transparent';
+                        styleContainer(elementClicked.element, 'none');
+                        styleContainer(imageBoxes[elementIndex].element, 'none');
                         elementClicked = imageBoxes[elementIndex];
                     }, 500);
                 }
