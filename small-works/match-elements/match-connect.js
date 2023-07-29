@@ -161,14 +161,23 @@ function playGame() {
         imageElement.setAttribute('src', '/assets/random-images/' + image + '.webp');
         imageElement.setAttribute('class', 'images');
         imageElement.style.position = 'relative';
-        imageElement.style.transition = '0.5s';
+        imageElement.style.transition = '1s cubic-bezier(.5,-0.5,.5,1.5)';
         imageElement.style.backgroundColor = '#fffa';
         imageElement.style.borderRadius = '10%';
         imageElement.style.padding = '2%';
         imageElement.style.margin = '1%';
         imageElement.style.boxShadow = '0 0 10px #0007 inset';
         imageElement.setAttribute('draggable', 'false');
-        imageElement.style.width = imgSize() + 'px';
+        imageElement.style.width = imgSize() / 2 + 'px';
+        imageElement.style.opacity = '0';
+        setTimeout(function () {
+            imageElement.style.width = imgSize() / 2 + 'px';
+            imageElement.style.opacity = '0';
+        }, 800);
+        setTimeout(function () {
+            imageElement.style.width = imgSize() + 'px';
+            imageElement.style.opacity = '1';
+        }, 1800);
         parent.appendChild(imageElement);
     }
 
@@ -267,8 +276,15 @@ function playGame() {
                             document.querySelectorAll('.outside-container').forEach(function (element) {
                                 element.remove();
                             });
-                            finishDiv.remove();
-                            playGame();
+                            finishDiv.style.transition = '1s';
+                            finishDiv.style.opacity = '0';
+                            finishDiv.style.transformOrigin = '0 0';
+                            finishDiv.style.transform = 'scale(0.2)';
+                            setTimeout(function () {
+                                finishDiv.remove();
+                                playGame();
+                            }, 1000);
+
                         });
 
                         // play clapping sound
