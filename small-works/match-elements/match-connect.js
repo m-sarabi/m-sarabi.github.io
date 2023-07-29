@@ -173,9 +173,10 @@ function playGame() {
 
         sizes = sizeCalc();
         imageBoxes.forEach(function (element) {
-            element.element.style.width = sideDivs[0].clientWidth + 'px';
+            element.element.style.width = (sideDivs[0].clientWidth - 2 * sizes[2]) + 'px';
             element.element.style.height = sizes[0] + 'px';
             element.element.style.top = element.pos * (sizes[0] + sizes[1]) + sizes[1] + 'px';
+            element.element.style.left = sizes[2] + 'px';
         });
         const imageElements = document.querySelectorAll('.images');
         imageElements.forEach(function (element) {
