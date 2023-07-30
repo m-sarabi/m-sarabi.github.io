@@ -119,15 +119,6 @@ function setPos(element, x, y) {
 let checkFood = setInterval(eatFood, 50);
 
 function move(obj, direction) {
-    if ((snake[0].lastDir === 'up' && snake[0].partY - 50 < 0) ||
-        (snake[0].lastDir === 'down' && snake[0].partY + 50 > 750) ||
-        (snake[0].lastDir === 'right' && snake[0].partX + 50 > 550) ||
-        (snake[0].lastDir === 'left' && snake[0].partX - 50 < 0)) {
-        console.log('game over');
-        clearInterval(checkFood);
-        clearInterval(headInt);
-    }
-
     if (direction === 'up' && obj.partY - 50 >= 0) {
         obj.partY -= 50;
     } else if (direction === 'down' && obj.partY + 50 <= 750) {
@@ -150,10 +141,19 @@ const headInt = setInterval(function () {
             snake[i].direction = snake[i - 1].lastDir;
         }
     }
-    snake.forEach(function (obj) {
-        move(obj, obj.direction);
-        obj.lastDir = obj.direction;
-    });
+    if ((snake[0].direction === 'up' && snake[0].partY - 50 < 0) ||
+        (snake[0].direction === 'down' && snake[0].partY + 50 > 750) ||
+        (snake[0].direction === 'right' && snake[0].partX + 50 > 550) ||
+        (snake[0].direction === 'left' && snake[0].partX - 50 < 0)) {
+        console.log('game over');
+        clearInterval(checkFood);
+        clearInterval(headInt);
+    } else {
+        snake.forEach(function (obj) {
+            move(obj, obj.direction);
+            obj.lastDir = obj.direction;
+        });
+    }
 }, speed);
 
 document.addEventListener('keydown', function (event) {
