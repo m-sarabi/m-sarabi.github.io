@@ -1,5 +1,9 @@
 let speed = 500;
 
+// touch event variables
+let touching = false;
+let touchStart = 0, touchEnd = 0;
+
 function randomInt(start, end, step = 1) {
     return Math.floor(Math.random() * Math.floor(end / step)) * step;
 }
@@ -173,11 +177,68 @@ const headInt = setInterval(function () {
     }
 }, speed);
 
+function eatFood() {
+    let toRemove;
+    foods.forEach(function (food, index) {
+        if (Math.abs(snake[0].element.offsetTop - food.element.offsetTop) < 50 &&
+            Math.abs(snake[0].element.offsetLeft - food.element.offsetLeft) < 50) {
+            food.element.style.transform = 'scale(0)';
+            food.element.style.opacity = '0';
+            toRemove = index;
+        }
+    });
+    if (toRemove !== undefined) {
+        foods.splice(toRemove, 1);
+        createFood(randomInt(0, 600, 50), randomInt(0, 800, 50));
+        snake.push(createBody(snake.at(-1).partX, snake.at(-1).partY, 'body'));
+        board.appendChild(snake.at(-1).element);
+        setPos(snake.at(-1).element, snake.at(-1).partX, snake.at(-1).partY);
+    }
+}
+
+// key press event
 document.addEventListener('keydown', function (event) {
     if (event.repeat) {
         return;
     }
-    switch (event.key) {
+    keyPressed(event.key);
+});
+
+// touch events
+board.addEventListener('touchstart', function (event) {
+    event.preventDefault();
+    touching = true;
+    touchStart = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
+});
+
+board.addEventListener('touchend', function (event) {
+    if (touching) {
+        touching = false;
+        touchEnd = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
+        touchToKey(touchStart, touchEnd);
+    }
+});
+
+function touchToKey(start, end) {
+    let touchThreshold = 10;
+    if (Math.abs(end[0] - start[0]) > Math.abs(end[1] - start[1])) {
+        if (end[0] - start[0] > touchThreshold) {
+            keyPressed('ArrowRight');
+        } else if (end[0] - start[0] < -touchThreshold) {
+            keyPressed('ArrowLeft');
+        }
+    } else if (Math.abs(end[0] - start[0]) < Math.abs(end[1] - start[1])) {
+        if (end[1] - start[1] > touchThreshold) {
+            keyPressed('ArrowDown');
+        } else if (end[1] - start[1] < -touchThreshold) {
+            keyPressed('ArrowUp');
+        }
+    }
+}
+
+// key press functionality
+function keyPressed(key) {
+    switch (key) {
         case 'ArrowUp':
             if (snake[0].direction !== 'down' && snake[0].lastDir !== 'down') {
                 snake[0].direction = 'up';
@@ -198,24 +259,5 @@ document.addEventListener('keydown', function (event) {
                 snake[0].direction = 'right';
             }
             break;
-    }
-});
-
-function eatFood() {
-    let toRemove;
-    foods.forEach(function (food, index) {
-        if (Math.abs(snake[0].element.offsetTop - food.element.offsetTop) < 50 &&
-            Math.abs(snake[0].element.offsetLeft - food.element.offsetLeft) < 50) {
-            food.element.style.transform = 'scale(0)';
-            food.element.style.opacity = '0';
-            toRemove = index;
-        }
-    });
-    if (toRemove !== undefined) {
-        foods.splice(toRemove, 1);
-        createFood(randomInt(0, 600, 50), randomInt(0, 800, 50));
-        snake.push(createBody(snake.at(-1).partX, snake.at(-1).partY, 'body'));
-        board.appendChild(snake.at(-1).element);
-        setPos(snake.at(-1).element, snake.at(-1).partX, snake.at(-1).partY);
     }
 }
