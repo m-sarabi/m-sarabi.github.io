@@ -1,4 +1,4 @@
-let speed = 500;
+let speed = 250;
 
 // touch event variables
 let touching = false;
@@ -120,7 +120,7 @@ function setPos(element, x, y) {
     element.style.left = x + 'px';
 }
 
-let checkFood = setInterval(eatFood, 50);
+let checkFood = setInterval(eatFood, speed / 10);
 
 function move(obj, direction) {
     if (direction === 'up' && obj.partY - 50 >= 0) {
