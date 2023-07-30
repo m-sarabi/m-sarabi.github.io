@@ -1,4 +1,9 @@
 let speed = 500;
+
+function randomInt(start, end, step = 1) {
+    return Math.floor(Math.random() * Math.floor(end / step)) * step;
+}
+
 let board = document.createElement('div');
 board.style.position = 'relative';
 board.style.width = '600px';
@@ -58,7 +63,7 @@ let part = function (element, partX, partY, type, lastDir) {
 
 let head = part(headDiv, 0, 0, 'head', 'none');
 
-let food = function (element, partX, partY, type) {
+let foodObj = function (element, partX, partY, type) {
     return {
         element,
         partX,
@@ -67,21 +72,30 @@ let food = function (element, partX, partY, type) {
     };
 };
 
-let circleFood = document.createElement('div');
-circleFood.style.position = 'absolute';
-circleFood.style.zIndex = '1';
-circleFood.style.width = '40px';
-circleFood.style.height = '40px';
-circleFood.style.transform = 'translate(5px, 5px)';
-circleFood.style.borderRadius = '50%';
-circleFood.style.backgroundColor = '#800';
-circleFood.style.transition = '500ms linear';
+let foods = [];
 
-circle = food(circleFood, 200, 200, 'circle');
-board.appendChild(circle.element);
+function createFood(posX, posY) {
+    let foodElement = document.createElement('div');
+    foodElement.style.position = 'absolute';
+    foodElement.style.zIndex = '1';
+    foodElement.style.width = '40px';
+    foodElement.style.height = '40px';
+    foodElement.style.transform = 'translate(5px, 5px) scale(0)';
+    foodElement.style.opacity = '0';
+    foodElement.style.borderRadius = '50%';
+    foodElement.style.backgroundColor = '#800';
+    foodElement.style.transition = '500ms linear';
+    foods.push(foodObj(foodElement, posX, posY, 'circle'));
+    board.appendChild(foods.at(-1).element);
+    setPos(foods.at(-1).element, foods.at(-1).partX, foods.at(-1).partY);
+    setTimeout(function () {
+        foods.at(-1).element.style.transform = 'translate(5px, 5px)';
+        foods.at(-1).element.style.opacity = '1';
+    }, 50);
 
-setPos(circle.element, circle.partX, circle.partY);
+}
 
+createFood(randomInt(0, 600, 50), randomInt(0, 800, 50));
 
 setPos(board, head.partX, head.partY);
 
@@ -143,9 +157,17 @@ document.addEventListener('keydown', function (event) {
 });
 
 function eatFood() {
-    if (Math.abs(head.element.offsetTop - circle.element.offsetTop) < 50 &&
-        Math.abs(head.element.offsetLeft - circle.element.offsetLeft) < 50) {
-        circle.element.style.transform = 'translate(5px, 5px) scale(0)';
-        circle.element.style.opacity = '0';
+    let toRemove;
+    foods.forEach(function (food, index) {
+        if (Math.abs(head.element.offsetTop - food.element.offsetTop) < 50 &&
+            Math.abs(head.element.offsetLeft - food.element.offsetLeft) < 50) {
+            food.element.style.transform = 'translate(5px, 5px) scale(0)';
+            food.element.style.opacity = '0';
+            toRemove = index;
+        }
+    });
+    if (toRemove !== undefined) {
+        foods.splice(toRemove, 1);
+        createFood(randomInt(0, 600, 50), randomInt(0, 800, 50));
     }
 }
