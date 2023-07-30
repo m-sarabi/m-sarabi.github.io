@@ -13,16 +13,6 @@ board.style.backgroundColor = 'lightgreen';
 board.style.border = '1px solid';
 document.body.appendChild(board);
 
-let headDiv = document.createElement('div');
-headDiv.style.position = 'relative';
-headDiv.style.width = '50px';
-headDiv.style.zIndex = '2';
-headDiv.style.height = '50px';
-headDiv.style.borderRadius = '33%';
-headDiv.style.backgroundColor = 'black';
-headDiv.style.transition = speed + 'ms linear';
-board.appendChild(headDiv);
-
 //drawing the grid on the board
 let grid = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 grid.style.position = 'absolute';
@@ -58,19 +48,41 @@ let part = function (element, partX, partY, type, lastDir) {
         partY,
         type,
         lastDir,
+        direction: 'none',
+        new: true,
     };
 };
 
-let head = part(headDiv, 0, 0, 'head', 'none');
+let snake = [];
+
+let head = createBody(0, 0, 'head');
+head.new = false;
+snake.push(head);
+board.appendChild(snake[0].element);
 
 let foodObj = function (element, partX, partY, type) {
     return {
         element,
         partX,
         partY,
-        type
+        type,
     };
 };
+
+function createBody(posX, posY, type) {
+    let partElement = document.createElement('div');
+    partElement.style.position = 'absolute';
+    partElement.style.width = '50px';
+    partElement.style.transformOrigin = 'center';
+    partElement.style.scale = type === 'head' ? '1' : '0';
+    partElement.style.opacity = type === 'head' ? '1' : '0';
+    partElement.style.zIndex = '2';
+    partElement.style.height = '50px';
+    partElement.style.borderRadius = type === 'head' ? '33%' : '50%';
+    partElement.style.backgroundColor = 'black';
+    partElement.style.transition = speed + 'ms linear';
+    return part(partElement, posX, posY, type, 'none');
+}
 
 let foods = [];
 
@@ -78,9 +90,10 @@ function createFood(posX, posY) {
     let foodElement = document.createElement('div');
     foodElement.style.position = 'absolute';
     foodElement.style.zIndex = '1';
-    foodElement.style.width = '40px';
-    foodElement.style.height = '40px';
-    foodElement.style.transform = 'translate(5px, 5px) scale(0)';
+    foodElement.style.width = '50px';
+    foodElement.style.height = '50px';
+    foodElement.style.transform = 'scale(0)';
+    foodElement.style.transformOrigin = 'center';
     foodElement.style.opacity = '0';
     foodElement.style.borderRadius = '50%';
     foodElement.style.backgroundColor = '#800';
@@ -89,28 +102,32 @@ function createFood(posX, posY) {
     board.appendChild(foods.at(-1).element);
     setPos(foods.at(-1).element, foods.at(-1).partX, foods.at(-1).partY);
     setTimeout(function () {
-        foods.at(-1).element.style.transform = 'translate(5px, 5px)';
+        foods.at(-1).element.style.transform = 'scale(0.6)';
         foods.at(-1).element.style.opacity = '1';
     }, 50);
-
 }
 
 createFood(randomInt(0, 600, 50), randomInt(0, 800, 50));
 
-setPos(board, head.partX, head.partY);
-
-let direction;
+setPos(board, snake[0].partX, snake[0].partY);
 
 function setPos(element, x, y) {
     element.style.top = y + 'px';
     element.style.left = x + 'px';
-    // console.log([head.element.offsetTop, circle.element.offsetTop]);
-    // console.log([head.element.offsetLeft, circle.element.offsetLeft]);
 }
 
-checkFood = setInterval(eatFood, 50);
+let checkFood = setInterval(eatFood, 50);
 
 function move(obj, direction) {
+    if ((snake[0].lastDir === 'up' && snake[0].partY - 50 < 0) ||
+        (snake[0].lastDir === 'down' && snake[0].partY + 50 > 750) ||
+        (snake[0].lastDir === 'right' && snake[0].partX + 50 > 550) ||
+        (snake[0].lastDir === 'left' && snake[0].partX - 50 < 0)) {
+        console.log('game over');
+        clearInterval(checkFood);
+        clearInterval(headInt);
+    }
+
     if (direction === 'up' && obj.partY - 50 >= 0) {
         obj.partY -= 50;
     } else if (direction === 'down' && obj.partY + 50 <= 750) {
@@ -120,12 +137,23 @@ function move(obj, direction) {
     } else if (direction === 'left' && obj.partX - 50 >= 0) {
         obj.partX -= 50;
     }
-    setPos(head.element, head.partX, head.partY);
+    setPos(obj.element, obj.partX, obj.partY);
 }
 
 const headInt = setInterval(function () {
-    move(head, direction);
-    head.lastDir = direction;
+    for (let i = snake.length - 1; i > 0; i--) {
+        if (snake[i].new === true) {
+            snake[i].new = false;
+            snake[i].element.style.scale = '1';
+            snake[i].element.style.opacity = '1';
+        } else {
+            snake[i].direction = snake[i - 1].lastDir;
+        }
+    }
+    snake.forEach(function (obj) {
+        move(obj, obj.direction);
+        obj.lastDir = obj.direction;
+    });
 }, speed);
 
 document.addEventListener('keydown', function (event) {
@@ -134,23 +162,23 @@ document.addEventListener('keydown', function (event) {
     }
     switch (event.key) {
         case 'ArrowUp':
-            if (direction !== 'down' && head.lastDir !== 'down') {
-                direction = 'up';
+            if (snake[0].direction !== 'down' && snake[0].lastDir !== 'down') {
+                snake[0].direction = 'up';
             }
             break;
         case 'ArrowDown':
-            if (direction !== 'up' && head.lastDir !== 'up') {
-                direction = 'down';
+            if (snake[0].direction !== 'up' && snake[0].lastDir !== 'up') {
+                snake[0].direction = 'down';
             }
             break;
         case 'ArrowLeft':
-            if (direction !== 'right' && head.lastDir !== 'right') {
-                direction = 'left';
+            if (snake[0].direction !== 'right' && snake[0].lastDir !== 'right') {
+                snake[0].direction = 'left';
             }
             break;
         case 'ArrowRight':
-            if (direction !== 'left' && head.lastDir !== 'left') {
-                direction = 'right';
+            if (snake[0].direction !== 'left' && snake[0].lastDir !== 'left') {
+                snake[0].direction = 'right';
             }
             break;
     }
@@ -159,9 +187,9 @@ document.addEventListener('keydown', function (event) {
 function eatFood() {
     let toRemove;
     foods.forEach(function (food, index) {
-        if (Math.abs(head.element.offsetTop - food.element.offsetTop) < 50 &&
-            Math.abs(head.element.offsetLeft - food.element.offsetLeft) < 50) {
-            food.element.style.transform = 'translate(5px, 5px) scale(0)';
+        if (Math.abs(snake[0].element.offsetTop - food.element.offsetTop) < 50 &&
+            Math.abs(snake[0].element.offsetLeft - food.element.offsetLeft) < 50) {
+            food.element.style.transform = 'scale(0)';
             food.element.style.opacity = '0';
             toRemove = index;
         }
@@ -169,5 +197,8 @@ function eatFood() {
     if (toRemove !== undefined) {
         foods.splice(toRemove, 1);
         createFood(randomInt(0, 600, 50), randomInt(0, 800, 50));
+        snake.push(createBody(snake.at(-1).partX, snake.at(-1).partY, 'body'));
+        board.appendChild(snake.at(-1).element);
+        setPos(snake.at(-1).element, snake.at(-1).partX, snake.at(-1).partY);
     }
 }
