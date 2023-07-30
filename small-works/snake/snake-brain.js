@@ -131,7 +131,26 @@ function move(obj, direction) {
     setPos(obj.element, obj.partX, obj.partY);
 }
 
+function isOver() {
+    if ((snake[0].direction === 'up' && snake[0].partY - 50 < 0) ||
+        (snake[0].direction === 'down' && snake[0].partY + 50 > 750) ||
+        (snake[0].direction === 'right' && snake[0].partX + 50 > 550) ||
+        (snake[0].direction === 'left' && snake[0].partX - 50 < 0)) {
+        return true;
+    }
+    for (let i = 1; i < snake.length; i++) {
+        if ((snake[i].new === false && snake[0].direction === 'up' && snake[0].partX === snake[i].partX && snake[0].partY - 50 === snake[i].partY) ||
+            (snake[i].new === false && snake[0].direction === 'down' && snake[0].partX === snake[i].partX && snake[0].partY + 50 === snake[i].partY) ||
+            (snake[i].new === false && snake[0].direction === 'right' && snake[0].partX + 50 === snake[i].partX && snake[0].partY === snake[i].partY) ||
+            (snake[i].new === false && snake[0].direction === 'left' && snake[0].partX - 50 === snake[i].partX && snake[0].partY === snake[i].partY)) {
+            return true;
+        }
+    }
+}
+
 const headInt = setInterval(function () {
+    let over = isOver();
+
     for (let i = snake.length - 1; i > 0; i--) {
         if (snake[i].new === true) {
             snake[i].new = false;
@@ -141,10 +160,8 @@ const headInt = setInterval(function () {
             snake[i].direction = snake[i - 1].lastDir;
         }
     }
-    if ((snake[0].direction === 'up' && snake[0].partY - 50 < 0) ||
-        (snake[0].direction === 'down' && snake[0].partY + 50 > 750) ||
-        (snake[0].direction === 'right' && snake[0].partX + 50 > 550) ||
-        (snake[0].direction === 'left' && snake[0].partX - 50 < 0)) {
+
+    if (over) {
         console.log('game over');
         clearInterval(checkFood);
         clearInterval(headInt);
