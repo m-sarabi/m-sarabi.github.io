@@ -3,6 +3,10 @@ let speed = 250;
 // touch event variables
 let touching = false;
 let touchStart = 0, touchEnd = 0;
+let firstKey = true;
+
+// start interval
+let headInterval;
 
 function randomInt(start, end, step = 1) {
     return Math.floor(Math.random() * Math.floor(end / step)) * step;
@@ -54,6 +58,7 @@ let part = function (element, partX, partY, type, lastDir) {
         lastDir,
         direction: 'none',
         new: true,
+        deg: 0,
     };
 };
 
@@ -78,7 +83,7 @@ function createBody(posX, posY, type) {
     partElement.style.position = 'absolute';
     partElement.style.width = '50px';
     partElement.style.transformOrigin = 'center';
-    partElement.style.scale = type === 'head' ? '1' : '0';
+    partElement.style.transform = type === 'head' ? 'scale(1, 1)' : 'scale(0, 1)';
     partElement.style.opacity = type === 'head' ? '1' : '0';
     partElement.style.zIndex = '2';
     partElement.style.height = '50px';
@@ -122,6 +127,7 @@ function setPos(element, x, y) {
 
 let checkFood = setInterval(eatFood, speed / 10);
 
+// moving an object withing the board based on the direction
 function move(obj, direction) {
     if (direction === 'up' && obj.partY - 50 >= 0) {
         obj.partY -= 50;
@@ -152,30 +158,44 @@ function isOver() {
     }
 }
 
-const headInt = setInterval(function () {
-    let over = isOver();
+function start() {
+    if (!headInterval) {
+        headInterval = setInterval(function () {
+            let over = isOver();
+            for (let i = 0; i < snake.length; i++) {
+                if (snake[i].new === true) {
+                    snake[i].new = false;
+                    snake[i].element.style.opacity = '1';
+                    snake[i].deg = snake[i - 1].deg;
+                } else {
+                    if (i !== 0) {
+                        snake[i].direction = snake[i - 1].lastDir;
+                    }
+                    snake[i].deg = findDirection(snake[i]) * 90 + snake[i].deg;
+                    if (i === 0) {
+                        snake[i].element.style.transform = 'rotate(' + snake[i].deg + 'deg)';
+                    } else {
+                        snake[i].element.style.transform = 'rotate(' + snake[i].deg + 'deg) ' + 'scale(' + (0.5 + (0.5 / (snake.length + 1) * (snake.length - i - 1))) + ', 1)';
+                    }
 
-    for (let i = snake.length - 1; i > 0; i--) {
-        if (snake[i].new === true) {
-            snake[i].new = false;
-            snake[i].element.style.scale = '1';
-            snake[i].element.style.opacity = '1';
-        } else {
-            snake[i].direction = snake[i - 1].lastDir;
-        }
-    }
+                }
+            }
 
-    if (over) {
-        console.log('game over');
-        clearInterval(checkFood);
-        clearInterval(headInt);
-    } else {
-        snake.forEach(function (obj) {
-            move(obj, obj.direction);
-            obj.lastDir = obj.direction;
-        });
+            if (over) {
+                console.log('game over');
+                clearInterval(checkFood);
+                clearInterval(headInterval);
+            } else {
+                snake.forEach(function (obj) {
+                    move(obj, obj.direction);
+                    obj.lastDir = obj.direction;
+                });
+            }
+        }, speed);
     }
-}, speed);
+}
+
+start();
 
 function eatFood() {
     let toRemove;
@@ -259,5 +279,46 @@ function keyPressed(key) {
                 snake[0].direction = 'right';
             }
             break;
+    }
+    if (firstKey) {
+        firstKey = false;
+        switch (snake[0].direction) {
+            case 'right':
+                snake[0].deg = 90;
+                break;
+            case 'down':
+                snake[0].deg = 180;
+                break;
+        }
+    }
+}
+
+function findDirection(obj) {
+    if (obj.lastDir === 'up' && obj.direction !== 'up') {
+        if (obj.direction === 'left') {
+            return -1;
+        } else {
+            return 1;
+        }
+    } else if (obj.lastDir === 'right' && obj.direction !== 'right') {
+        if (obj.direction === 'up') {
+            return -1;
+        } else {
+            return 1;
+        }
+    } else if (obj.lastDir === 'down' && obj.direction !== 'down') {
+        if (obj.direction === 'right') {
+            return -1;
+        } else {
+            return 1;
+        }
+    } else if (obj.lastDir === 'left' && obj.direction !== 'left') {
+        if (obj.direction === 'down') {
+            return -1;
+        } else {
+            return 1;
+        }
+    } else {
+        return 0;
     }
 }
