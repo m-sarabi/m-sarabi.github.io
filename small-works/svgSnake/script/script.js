@@ -104,6 +104,25 @@ headGroup.appendChild(headNose);
 headGroup.appendChild(headEyes);
 headSVG.appendChild(headGroup);
 
+const ApplePathD = ['M 20 11 C 26 10 30 14 30 20 C 30 26 26 30 20 30 C 14 30 10 26 10 20 C 10 14 14 10 20 11',
+    'M 20 11 C 21 7 22 6 25 5 C 25 8 23 9 20 11'];
+// snake tail
+const appleSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+appleSVG.setAttribute('class', 'part');
+appleSVG.style.position = 'absolute';
+appleSVG.style.transition = 'all ' + (speed * 0.9) + 'ms';
+appleSVG.style.transform = 'scale(0)';
+const applePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+applePath.setAttribute('d', ApplePathD[0]);
+applePath.setAttribute('fill', 'red');
+applePath.setAttribute('stroke', 'black');
+const leafPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+leafPath.setAttribute('d', ApplePathD[1]);
+leafPath.setAttribute('fill', 'green');
+leafPath.setAttribute('stroke', 'black');
+appleSVG.appendChild(applePath);
+appleSVG.appendChild(leafPath);
+
 /**
  * rotate a svg path by 90 degrees clockwise or counter-clockwise
  * @param svgPath {string} the svg path that (for now) only consists of 'M' and 'C'
@@ -219,6 +238,26 @@ let newPart = function (type, direction) {
     };
 };
 
+let newFood = function (type, x, y) {
+    let element;
+    switch (type) {
+        case 'apple':
+            element = appleSVG.cloneNode(true);
+    }
+    absoluteMove(element, x, y);
+    return {
+        element: element,
+        type,
+        x,
+        y,
+    };
+};
+
+function absoluteMove(obj, x, y) {
+    obj.style.left = x + 'px';
+    obj.style.top = y + 'px';
+}
+
 /**
  * the function to move the whole snake to the direction that the user is pointing it to
  */
@@ -232,6 +271,9 @@ function moveSnake() {
     }
     movePart(snake.at(0), direction);
     snake.at(0).direction = direction;
+    console.log([snake.at(0).x, snake.at(0).y]);
+    console.log([foods.at(-1).x, foods.at(-1).y]);
+    eatFood();
 
     for (let i = 1; i < snake.length; i++) {
         if (['body', 'bodyC'].includes(snake.at(i).type) && pastDirections[i - 1] !== snake.at(i - 1).direction) {
@@ -246,9 +288,6 @@ function moveSnake() {
             let straightDirection = snake.at(i - 1).direction;
             children[0].setAttribute('d', bodyStraightD[straightDirection][0]);
             children[1].setAttribute('d', bodyStraightD[straightDirection][1]);
-            // if (['up', 'down'].includes(snake.at(i - 1).direction)) {
-            //     rotatePart(snake.at(i), true);
-            // }
         } else {
             if (pastDirections[i - 1] !== snake.at(i - 1).direction) {
                 rotatePart(snake.at(i), isClockwise(pastDirections[i - 1], snake.at(i - 1).direction));
@@ -266,6 +305,23 @@ function selfCollide() {
             start = false;
         }
     }
+}
+
+function eatFood() {
+    foods.forEach(function (food, i) {
+        if (snake.at(0).x === food.x && snake.at(0).y === food.y) {
+            food.element.style.transform = 'scale(0)';
+            foods.push(newFood('apple', Math.floor(Math.random() * 10) * cellSize, Math.floor(Math.random() * 10) * cellSize));
+            document.body.appendChild(foods.at(-1).element);
+            setTimeout(function () {
+                foods.at(-1).element.style.transform = 'scale(1)';
+            }, 1);
+            setTimeout(function () {
+                food.element.remove();
+                foods.splice(i, 1);
+            }, speed * 0.9);
+        }
+    });
 }
 
 /**
@@ -290,45 +346,11 @@ function isClockwise(previous, current) {
     }
 }
 
-let snake = [];
-snake.push(newPart('head', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-snake.at(0).element.style.zIndex = '10';
-snake.push(newPart('body', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-snake.push(newPart('body', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-snake.push(newPart('body', 'right'));
-movePart(snake.at(-1), 'right');
-snake.push(newPart('tail', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'left');
-
-snake.forEach(function (part) {
-    document.body.appendChild(part.element);
-});
-
 let direction = 'right';
 
-let count = 0, start = false;
+let start = false;
 
-function animate() {
-    count++;
-    if (count >= (speed * 30 / 500)) {
-        moveSnake();
-        selfCollide();
-        count = 0;
-    }
-    if (start) {
-        requestAnimationFrame(animate);
-    }
-}
+let startMoving;
 
 document.addEventListener('click', function () {
     moveSnake();
@@ -367,7 +389,15 @@ function keyPressed(key) {
             break;
         case 'Space':
             if (!start) {
-                requestAnimationFrame(animate);
+                startMoving = setInterval(function () {
+                    moveSnake();
+                    selfCollide();
+                    if (start === false) {
+                        clearInterval(startMoving);
+                    }
+                }, speed);
+            } else {
+                clearInterval(startMoving);
             }
             start = !start;
             break;
@@ -378,3 +408,40 @@ let style = document.styleSheets[0];
 let rules = style.cssRules;
 rules[0].style.transition = speed + 'ms linear';
 rules[1].style.transition = speed + 'ms linear';
+
+let snake = [];
+let foods = [];
+
+snake.push(newPart('head', 'right'));
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'right');
+snake.at(0).element.style.zIndex = '10';
+snake.push(newPart('body', 'right'));
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'right');
+snake.push(newPart('body', 'right'));
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'right');
+snake.push(newPart('body', 'right'));
+movePart(snake.at(-1), 'right');
+snake.push(newPart('tail', 'right'));
+movePart(snake.at(-1), 'right');
+movePart(snake.at(-1), 'left');
+
+foods.push(newFood('apple', 120, 80));
+setTimeout(function () {
+    foods.at(-1).element.style.transform = 'scale(1)';
+}, 1);
+
+
+snake.forEach(function (part) {
+    document.body.appendChild(part.element);
+});
+
+foods.forEach(function (food) {
+    document.body.appendChild(food.element);
+});
+
