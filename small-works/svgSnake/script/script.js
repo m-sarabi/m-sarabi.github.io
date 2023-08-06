@@ -212,9 +212,12 @@ function rotatePart(part, clockwise) {
  * the object factory for creating new snake parts
  * @param type {string} head/body/tail
  * @param direction {string} the direction that new part should be facing up/down/left/right
+ * @param x {number}
+ * @param y {number}
+ * @param scale {number}
  * @return {{x: number, y: number, type, element: Node, direction}}
  */
-let newPart = function (type, direction) {
+let newPart = function (type, direction, x = 0, y = 0, scale = 1) {
     let element;
     switch (type) {
         case 'head':
@@ -229,12 +232,15 @@ let newPart = function (type, direction) {
         case 'tail':
             element = tailSVG.cloneNode(true);
     }
+    absoluteMove(element, x, y);
+    element.style.scale = scale.toString();
+    document.body.appendChild(element);
     return {
         element: element,
         type,
         direction,
-        x: 0,
-        y: 0,
+        x,
+        y,
     };
 };
 
@@ -245,6 +251,7 @@ let newFood = function (type, x, y) {
             element = appleSVG.cloneNode(true);
     }
     absoluteMove(element, x, y);
+    document.body.appendChild(element);
     return {
         element: element,
         type,
@@ -263,6 +270,7 @@ function absoluteMove(obj, x, y) {
  */
 function moveSnake() {
     let pastDirections = [];
+    let pastHeadPos = [snake.at(0).x, snake.at(0).y];
     for (const part of snake) {
         pastDirections.push(part.direction);
     }
@@ -271,30 +279,31 @@ function moveSnake() {
     }
     movePart(snake.at(0), direction);
     snake.at(0).direction = direction;
-    console.log([snake.at(0).x, snake.at(0).y]);
-    console.log([foods.at(-1).x, foods.at(-1).y]);
-    eatFood();
 
-    for (let i = 1; i < snake.length; i++) {
-        if (['body', 'bodyC'].includes(snake.at(i).type) && pastDirections[i - 1] !== snake.at(i - 1).direction) {
-            snake.at(i).type = 'bodyC';
-            let children = snake.at(i).element.children;
-            let curveDirection = [pastDirections[i - 1], snake.at(i - 1).direction].join('_');
-            children[0].setAttribute('d', bodyCurvedD[curveDirection][0]);
-            children[1].setAttribute('d', bodyCurvedD[curveDirection][1]);
-        } else if (snake.at(i).type === 'bodyC' && pastDirections[i - 1] === snake.at(i - 1).direction) {
-            snake.at(i).type = 'body';
-            let children = snake.at(i).element.children;
-            let straightDirection = snake.at(i - 1).direction;
-            children[0].setAttribute('d', bodyStraightD[straightDirection][0]);
-            children[1].setAttribute('d', bodyStraightD[straightDirection][1]);
-        } else {
-            if (pastDirections[i - 1] !== snake.at(i - 1).direction) {
-                rotatePart(snake.at(i), isClockwise(pastDirections[i - 1], snake.at(i - 1).direction));
+    if (eatFood()) {
+        growSnake(pastDirections[0], pastHeadPos[0], pastHeadPos[1]);
+    } else {
+        for (let i = 1; i < snake.length; i++) {
+            if (['body', 'bodyC'].includes(snake.at(i).type) && pastDirections[i - 1] !== snake.at(i - 1).direction) {
+                snake.at(i).type = 'bodyC';
+                let children = snake.at(i).element.children;
+                let curveDirection = [pastDirections[i - 1], snake.at(i - 1).direction].join('_');
+                children[0].setAttribute('d', bodyCurvedD[curveDirection][0]);
+                children[1].setAttribute('d', bodyCurvedD[curveDirection][1]);
+            } else if (snake.at(i).type === 'bodyC' && pastDirections[i - 1] === snake.at(i - 1).direction) {
+                snake.at(i).type = 'body';
+                let children = snake.at(i).element.children;
+                let straightDirection = snake.at(i - 1).direction;
+                children[0].setAttribute('d', bodyStraightD[straightDirection][0]);
+                children[1].setAttribute('d', bodyStraightD[straightDirection][1]);
+            } else {
+                if (pastDirections[i - 1] !== snake.at(i - 1).direction) {
+                    rotatePart(snake.at(i), isClockwise(pastDirections[i - 1], snake.at(i - 1).direction));
+                }
             }
+            movePart(snake.at(i), pastDirections[i - 1]);
+            snake.at(i).direction = pastDirections[i - 1];
         }
-        movePart(snake.at(i), pastDirections[i - 1]);
-        snake.at(i).direction = pastDirections[i - 1];
     }
 }
 
@@ -308,20 +317,53 @@ function selfCollide() {
 }
 
 function eatFood() {
+    let ateFood = false;
     foods.forEach(function (food, i) {
         if (snake.at(0).x === food.x && snake.at(0).y === food.y) {
             food.element.style.transform = 'scale(0)';
-            foods.push(newFood('apple', Math.floor(Math.random() * 10) * cellSize, Math.floor(Math.random() * 10) * cellSize));
+            let foodPos, foodPosStr, count = 0, snakePos = [];
+            snake.forEach(function (part) {
+                snakePos.push([part.x, part.y].join('_'));
+            });
+            do {
+                count++;
+                foodPos = [Math.floor(Math.random() * 10) * cellSize, Math.floor(Math.random() * 10) * cellSize];
+                foodPosStr = foodPos.join('_');
+            } while (snakePos.includes(foodPosStr) && count <= 10);
+            foods.push(newFood('apple', foodPos[0], foodPos[1]));
             document.body.appendChild(foods.at(-1).element);
             setTimeout(function () {
                 foods.at(-1).element.style.transform = 'scale(1)';
-            }, 1);
+            }, 10);
             setTimeout(function () {
                 food.element.remove();
                 foods.splice(i, 1);
             }, speed * 0.9);
+            ateFood = true;
         }
     });
+    return ateFood;
+}
+
+function growSnake(pastHeadDir, x, y) {
+    let tempSnake = snake.slice(0, 1);
+    if (snake.at(0).direction === pastHeadDir) {
+        tempSnake.push(newPart('body', pastHeadDir, x, y, 0));
+        tempSnake.at(-1).element.children[0].setAttribute('d', bodyStraightD[snake.at(0).direction][0]);
+        tempSnake.at(-1).element.children[1].setAttribute('d', bodyStraightD[snake.at(0).direction][1]);
+    } else {
+        tempSnake.push(newPart('bodyC', pastHeadDir, x, y, 0));
+        let newPartDir = [pastHeadDir, snake.at(0).direction].join('_');
+        tempSnake.at(-1).element.children[0].setAttribute('d', bodyCurvedD[newPartDir][0]);
+        tempSnake.at(-1).element.children[1].setAttribute('d', bodyCurvedD[newPartDir][1]);
+    }
+    for (let i = 1; i < snake.length; i++) {
+        tempSnake.push(snake[i]);
+    }
+    snake = tempSnake;
+    setTimeout(function () {
+        snake.at(1).element.style.scale = '1';
+    }, 50);
 }
 
 /**
@@ -435,13 +477,3 @@ foods.push(newFood('apple', 120, 80));
 setTimeout(function () {
     foods.at(-1).element.style.transform = 'scale(1)';
 }, 1);
-
-
-snake.forEach(function (part) {
-    document.body.appendChild(part.element);
-});
-
-foods.forEach(function (food) {
-    document.body.appendChild(food.element);
-});
-
