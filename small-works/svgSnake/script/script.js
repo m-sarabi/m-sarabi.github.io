@@ -1,18 +1,23 @@
 const cellSize = 40;
 const speed = 250;
+let boardSize = [10, 15];
+let openBorder = false;
 
-const tailPathD = 'M 40 10 C 35 10 15 10 10 10 C 0 10 0 30 10 30 C 15 30 35 30 40 30';
+// all the svg parts and shapes are built with only cubic bézier curves
+
+// snake parts in svg path
+const tailPathD = rescaleSVG(['M 40 10 C 35 10 15 10 10 10 C 0 10 0 30 10 30 C 15 30 35 30 40 30']);
 // snake tail
 const tailSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 tailSVG.setAttribute('class', 'part');
 tailSVG.style.position = 'absolute';
 const tailPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-tailPath.setAttribute('d', tailPathD);
+tailPath.setAttribute('d', tailPathD[0]);
 tailPath.setAttribute('fill', 'orange');
 tailPath.setAttribute('stroke', 'black');
 tailSVG.appendChild(tailPath);
 
-const bodyCurvedD = {
+const bodyCurvedD = rescaleSVG({
     right_down: ['M 0 30 C 0 25 0 15 0 10 C 15 10 30 25 30 40 C 25 40 15 40 10 40 C 10 35 5 30 0 30',
         'M 0 10 C 15 10 30 25 30 40 M 10 40 C 10 35 5 30 0 30'],
     down_left: ['M 10 0 C 15 0 25 0 30 0 C 30 15 15 30 0 30 C 0 25 0 15 0 10 C 5 10 10 5 10 0',
@@ -30,7 +35,7 @@ const bodyCurvedD = {
         'M 30 0 C 30 5 35 10 40 10 M 40 30 C 25 30 10 15 10 0'],
     left_down: ['M 40 10 C 40 15 40 25 40 30 C 35 30 30 35 30 40 C 25 40 15 40 10 40 C 10 25 25 10 40 10',
         'M 40 30 C 35 30 30 35 30 40 M 10 40 C 10 25 25 10 40 10'],
-};
+});
 // snake body curved
 const bodyCurveSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 bodyCurveSVG.setAttribute('class', 'part');
@@ -45,7 +50,7 @@ bodyCurvePathStroke.setAttribute('stroke', 'black');
 bodyCurveSVG.appendChild(bodyCurvePath);
 bodyCurveSVG.appendChild(bodyCurvePathStroke);
 
-const bodyStraightD = {
+const bodyStraightD = rescaleSVG({
     right: ['M 0 30 C 0 25 0 15 0 10 C 5 10 35 10 40 10 C 40 15 40 25 40 30 C 35 30 5 30 0 30',
         'M 0 10 C 5 10 35 10 40 10 M 40 30 C 35 30 5 30 0 30'],
     down: ['M 10 0 C 15 0 25 0 30 0 C 30 5 30 35 30 40 C 25 40 15 40 10 40 C 10 35 10 5 10 0',
@@ -54,7 +59,7 @@ const bodyStraightD = {
         'M 40 30 C 35 30 5 30 0 30 M 0 10 C 5 10 35 10 40 10'],
     up: ['M 30 40 C 25 40 15 40 10 40 C 10 35 10 5 10 0 C 15 0 25 0 30 0 C 30 5 30 35 30 40',
         'M 10 40 C 10 35 10 5 10 0 M 30 0 C 30 5 30 35 30 40'],
-};
+});
 // snake body straight
 const bodyStraightSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 bodyStraightSVG.setAttribute('class', 'part');
@@ -69,11 +74,11 @@ bodyStraightPathStroke.setAttribute('stroke', 'black');
 bodyStraightSVG.appendChild(bodyStraightPath);
 bodyStraightSVG.appendChild(bodyStraightPathStroke);
 
-const headPathD = [
+const headPathD = rescaleSVG([
     'M 0 30 C 5 30 5 30 10 30 C 15 35 15 35 20 30 C 25 30 25 30 30 30 C 40 30 40 10 30 10 C 25 10 25 10 20 10 C 15 5 15 5 10 10 C 5 10 5 10 0 10',
     'M 33 15 C 34 16 34 17 33 18 M 33 25 C 34 24 34 23 33 22',
     'M 15 10 C 18 10 18 13 15 13 C 13 13 13 10 15 10 M 15 30 C 18 30 18 27 15 27 C 13 27 13 30 15 30',
-    'M 15 10 C 18 10 18 13 15 13 C 18 13 18 10 15 10 M 15 30 C 18 30 18 27 15 27 C 18 27 18 30 15 30'];
+    'M 15 10 C 18 10 18 13 15 13 C 18 13 18 10 15 10 M 15 30 C 18 30 18 27 15 27 C 18 27 18 30 15 30']);
 // snake head
 const headSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 headSVG.setAttribute('class', 'part');
@@ -104,14 +109,14 @@ headGroup.appendChild(headNose);
 headGroup.appendChild(headEyes);
 headSVG.appendChild(headGroup);
 
-const ApplePathD = ['M 20 11 C 26 10 30 14 30 20 C 30 26 26 30 20 30 C 14 30 10 26 10 20 C 10 14 14 10 20 11',
-    'M 20 11 C 21 7 22 6 25 5 C 25 8 23 9 20 11'];
+// foods as svg path
+const ApplePathD = rescaleSVG(['M 20 11 C 26 10 30 14 30 20 C 30 26 26 30 20 30 C 14 30 10 26 10 20 C 10 14 14 10 20 11',
+    'M 20 11 C 21 7 22 6 25 5 C 25 8 23 9 20 11']);
 // snake tail
 const appleSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 appleSVG.setAttribute('class', 'part');
 appleSVG.style.position = 'absolute';
 appleSVG.style.transition = 'all ' + (speed * 0.9) + 'ms';
-appleSVG.style.transform = 'scale(0)';
 const applePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 applePath.setAttribute('d', ApplePathD[0]);
 applePath.setAttribute('fill', 'red');
@@ -122,6 +127,101 @@ leafPath.setAttribute('fill', 'green');
 leafPath.setAttribute('stroke', 'black');
 appleSVG.appendChild(applePath);
 appleSVG.appendChild(leafPath);
+
+
+// obstacle svg elements
+const bladePathD = rescaleSVG(['M 20 5 C 30 10 15 20 35 20 C 30 30 20 15 20 35 C 10 30 25 20 5 20 C 10 10 20 25 20 5',
+    'M 18 20 C 18 19 19 18 20 18 C 21 18 22 19 22 20 C 22 21 21 22 20 22 C 19 22 18 21 18 20']);
+// blade obstacle
+const bladeSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+bladeSVG.style.position = 'absolute';
+const bladePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+bladePath.setAttribute('d', bladePathD[0]);
+bladePath.setAttribute('fill', 'lightgray');
+bladePath.setAttribute('stroke', 'black');
+const bladeCenterPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+bladeCenterPath.setAttribute('d', bladePathD[1]);
+bladeCenterPath.setAttribute('fill', 'darkgray');
+bladeCenterPath.setAttribute('stroke', 'black');
+const bladeAnimate = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
+bladeAnimate.setAttribute('attributeName', 'transform');
+bladeAnimate.setAttribute('attributeType', 'xml');
+bladeAnimate.setAttribute('type', 'rotate');
+bladeAnimate.setAttribute('from', `0 ${cellSize / 2} ${cellSize / 2}`);
+bladeAnimate.setAttribute('to', `360 ${cellSize / 2} ${cellSize / 2}`);
+bladeAnimate.setAttribute('dur', '1s');
+bladeAnimate.setAttribute('repeatCount', 'indefinite');
+bladePath.appendChild(bladeAnimate);
+bladeSVG.appendChild(bladePath);
+bladeSVG.appendChild(bladeCenterPath);
+
+// playing board to hold all snake elements
+let board = document.createElement('div');
+board.style.position = 'relative';
+board.style.margin = '0 auto';
+board.style.width = boardSize[0] * cellSize + 'px';
+board.style.height = boardSize[1] * cellSize + 'px';
+board.style.backgroundColor = 'lightgreen';
+board.style.boxShadow = '0 0 5px black';
+document.body.appendChild(board);
+
+//drawing the grid on the board
+let grid = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+grid.style.position = 'absolute';
+grid.style.top = '0';
+grid.style.left = '0';
+grid.setAttribute('width', board.clientWidth.toString());
+grid.setAttribute('height', board.clientHeight.toString());
+
+function drawLine(x1, y1, x2, y2) {
+    let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('stroke', 'black');
+    line.setAttribute('opacity', '0.15');
+    line.setAttribute('stroke-dasharray', '10, 2');
+    line.setAttribute('x1', x1.toString());
+    line.setAttribute('y1', y1.toString());
+    line.setAttribute('x2', x2.toString());
+    line.setAttribute('y2', y2.toString());
+    grid.appendChild(line);
+}
+
+for (let i = cellSize; i < board.clientHeight; i += cellSize) {
+    drawLine(0, i, board.clientWidth, i);
+}
+for (let i = cellSize; i < board.clientWidth; i += cellSize) {
+    drawLine(i, 0, i, board.clientHeight);
+}
+board.appendChild(grid);
+
+function rescaleSVG(svgPaths) {
+
+    if (cellSize === 40) {
+        return svgPaths;
+    }
+
+    function rescalePath(path) {
+        let newPath = path.split(' ');
+        newPath.forEach(function (value, index) {
+            if (isFinite(value)) {
+                newPath[index] = value * cellSize / 40;
+            }
+        });
+        return newPath.join(' ').trim();
+    }
+
+    if (Array.isArray(svgPaths)) {
+        svgPaths.forEach(function (path, index) {
+            svgPaths[index] = rescalePath(path);
+        });
+    } else {
+        for (let key in svgPaths) {
+            svgPaths[key].forEach(function (path, index) {
+                svgPaths[key][index] = rescalePath(path);
+            });
+        }
+    }
+    return svgPaths;
+}
 
 /**
  * rotate a svg path by 90 degrees clockwise or counter-clockwise
@@ -179,6 +279,39 @@ function movePart(part, direction) {
     }
     part.x += x;
     part.y += y;
+    if (openBorder) {
+        if (part.y < 0) {
+            part.element.classList.toggle('part');
+            part.y = (boardSize[1] - 1) * cellSize;
+            setTimeout(function () {
+                part.element.classList.toggle('part');
+            }, speed / 10);
+        } else if (part.y > (boardSize[1] - 1) * cellSize) {
+            part.element.classList.toggle('part');
+            part.y = 0;
+            setTimeout(function () {
+                part.element.classList.toggle('part');
+            }, 10);
+        } else if (part.x < 0) {
+            part.element.classList.toggle('part');
+            part.x = (boardSize[0] - 1) * cellSize;
+            setTimeout(function () {
+                part.element.classList.toggle('part');
+            }, speed / 10);
+        } else if (part.x > (boardSize[0] - 1) * cellSize) {
+            part.element.classList.toggle('part');
+            part.x = 0;
+            setTimeout(function () {
+                part.element.classList.toggle('part');
+            }, 10);
+        }
+    } else {
+        if (part.type === 'head' && (part.y < 0 || part.y > (boardSize[1] - 1) * cellSize ||
+            part.x < 0 || part.x > (boardSize[0] - 1) * cellSize)) {
+            console.log('game over');
+            start = false;
+        }
+    }
     part.element.style.left = part.x + 'px';
     part.element.style.top = part.y + 'px';
 }
@@ -234,7 +367,7 @@ let newPart = function (type, direction, x = 0, y = 0, scale = 1) {
     }
     absoluteMove(element, x, y);
     element.style.scale = scale.toString();
-    document.body.appendChild(element);
+    board.appendChild(element);
     return {
         element: element,
         type,
@@ -251,7 +384,23 @@ let newFood = function (type, x, y) {
             element = appleSVG.cloneNode(true);
     }
     absoluteMove(element, x, y);
-    document.body.appendChild(element);
+    board.appendChild(element);
+    return {
+        element: element,
+        type,
+        x,
+        y,
+    };
+};
+
+let newObstacle = function (type, x, y) {
+    let element;
+    switch (type) {
+        case 'blade':
+            element = bladeSVG.cloneNode(true);
+    }
+    absoluteMove(element, x, y);
+    board.appendChild(element);
     return {
         element: element,
         type,
@@ -263,6 +412,47 @@ let newFood = function (type, x, y) {
 function absoluteMove(obj, x, y) {
     obj.style.left = x + 'px';
     obj.style.top = y + 'px';
+}
+
+function spawnBlade(type) {
+    let x, y;
+    let snakePos = [];
+    snake.forEach(function (part) {
+        snakePos.push([part.x, part.y].join('_'));
+    });
+    let foodPos = [];
+    foods.forEach(function (part) {
+        foodPos.push([part.x, part.y].join('_'));
+    });
+    let obstaclePos = [];
+    obstacles.forEach(function (part) {
+        obstaclePos.push([part.x, part.y].join('_'));
+    });
+    do {
+        x = Math.floor(Math.random() * boardSize[0]) * cellSize;
+        y = Math.floor(Math.random() * boardSize[1]) * cellSize;
+    } while (snakePos.includes([x, y].join('_')) || foodPos.includes([x, y].join('_')) || obstaclePos.includes([x, y].join('_')));
+    obstacles.push(newObstacle(type, x, y));
+}
+
+function spawnFood() {
+    let foodPos, foodPosStr, count = 0, snakePos = [], obstaclePos = [];
+    snake.forEach(function (part) {
+        snakePos.push([part.x, part.y].join('_'));
+    });
+    obstacles.forEach(function (part) {
+        obstaclePos.push([part.x, part.y].join('_'));
+    });
+    do {
+        count++;
+        foodPos = [Math.floor(Math.random() * boardSize[0]) * cellSize, Math.floor(Math.random() * boardSize[1]) * cellSize];
+        foodPosStr = foodPos.join('_');
+    } while (obstaclePos.includes(foodPosStr) || (snakePos.includes(foodPosStr) && count <= 20));
+    foods.push(newFood('apple', foodPos[0], foodPos[1]));
+    foods.at(-1).element.style.transform = 'scale(0)';
+    setTimeout(function () {
+        foods.at(-1).element.style.transform = 'scale(1)';
+    }, 10);
 }
 
 /**
@@ -307,13 +497,22 @@ function moveSnake() {
     }
 }
 
-function selfCollide() {
+function collision() {
     for (let i = 1; i < snake.length; i++) {
         if (snake.at(0).x === snake.at(i).x && snake.at(0).y === snake.at(i).y) {
             console.log('game over');
             start = false;
+            return true;
         }
     }
+    for (let i = 0; i < obstacles.length; i++) {
+        if (snake.at(0).x === obstacles.at(i).x && snake.at(0).y === obstacles.at(i).y) {
+            console.log('game over');
+            start = false;
+            return true;
+        }
+    }
+    return false;
 }
 
 function eatFood() {
@@ -321,20 +520,7 @@ function eatFood() {
     foods.forEach(function (food, i) {
         if (snake.at(0).x === food.x && snake.at(0).y === food.y) {
             food.element.style.transform = 'scale(0)';
-            let foodPos, foodPosStr, count = 0, snakePos = [];
-            snake.forEach(function (part) {
-                snakePos.push([part.x, part.y].join('_'));
-            });
-            do {
-                count++;
-                foodPos = [Math.floor(Math.random() * 10) * cellSize, Math.floor(Math.random() * 10) * cellSize];
-                foodPosStr = foodPos.join('_');
-            } while (snakePos.includes(foodPosStr) && count <= 10);
-            foods.push(newFood('apple', foodPos[0], foodPos[1]));
-            document.body.appendChild(foods.at(-1).element);
-            setTimeout(function () {
-                foods.at(-1).element.style.transform = 'scale(1)';
-            }, 10);
+            spawnFood();
             setTimeout(function () {
                 food.element.remove();
                 foods.splice(i, 1);
@@ -389,58 +575,94 @@ function isClockwise(previous, current) {
 }
 
 let direction = 'right';
-
 let start = false;
-
-let startMoving;
-
-document.addEventListener('click', function () {
+setInterval(function () {
+    if (start === false) {
+        return;
+    }
     moveSnake();
-});
+    collision();
+}, speed);
 
 document.addEventListener('keydown', function (event) {
     // console.log(event.code);
     keyPressed(event.code);
 });
 
+let touchPos = [[], []];
+board.addEventListener('touchstart', function (event) {
+    event.preventDefault();
+    touchPos[0] = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
+});
+
+document.addEventListener('touchmove', function (event) {
+    touchPos[1] = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
+    touchToKey();
+});
+
+document.addEventListener('touchend', function () {
+    touchPos = [[], []];
+});
+
+function touchToKey() {
+    let touchThreshold = cellSize * 0.75;
+    if (Math.abs(touchPos[1][0] - touchPos[0][0]) > Math.abs(touchPos[1][1] - touchPos[0][1])) {
+        if (touchPos[1][0] - touchPos[0][0] > touchThreshold) {
+            keyPressed('ArrowRight');
+            touchPos[0] = touchPos[1];
+        } else if (touchPos[1][0] - touchPos[0][0] < -touchThreshold) {
+            keyPressed('ArrowLeft');
+            touchPos[0] = touchPos[1];
+        }
+    } else if (Math.abs(touchPos[1][0] - touchPos[0][0]) < Math.abs(touchPos[1][1] - touchPos[0][1])) {
+        if (touchPos[1][1] - touchPos[0][1] > touchThreshold) {
+            keyPressed('ArrowDown');
+            touchPos[0] = touchPos[1];
+        } else if (touchPos[1][1] - touchPos[0][1] < -touchThreshold) {
+            keyPressed('ArrowUp');
+            touchPos[0] = touchPos[1];
+
+        }
+    }
+}
+
 function keyPressed(key) {
+    function startTrue() {
+        if (!start) {
+            start = true;
+        }
+    }
+
     switch (key) {
         case 'ArrowUp':
         case 'KeyW':
             if (snake.at(0).direction !== 'down') {
                 direction = 'up';
+                startTrue();
             }
             break;
         case 'ArrowRight':
         case 'KeyD':
             if (snake.at(0).direction !== 'left') {
                 direction = 'right';
+                startTrue();
             }
             break;
         case 'ArrowDown':
         case 'KeyS':
             if (snake.at(0).direction !== 'up') {
                 direction = 'down';
+                startTrue();
             }
             break;
         case 'ArrowLeft':
         case 'KeyA':
             if (snake.at(0).direction !== 'right') {
                 direction = 'left';
+                startTrue();
             }
             break;
         case 'Space':
-            if (!start) {
-                startMoving = setInterval(function () {
-                    moveSnake();
-                    selfCollide();
-                    if (start === false) {
-                        clearInterval(startMoving);
-                    }
-                }, speed);
-            } else {
-                clearInterval(startMoving);
-            }
             start = !start;
             break;
     }
@@ -450,30 +672,46 @@ let style = document.styleSheets[0];
 let rules = style.cssRules;
 rules[0].style.transition = speed + 'ms linear';
 rules[1].style.transition = speed + 'ms linear';
+rules[2].style.width = cellSize + 'px';
+rules[2].style.height = cellSize + 'px';
 
 let snake = [];
 let foods = [];
+let obstacles = [];
 
-snake.push(newPart('head', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-snake.at(0).element.style.zIndex = '10';
-snake.push(newPart('body', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-snake.push(newPart('body', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'right');
-snake.push(newPart('body', 'right'));
-movePart(snake.at(-1), 'right');
-snake.push(newPart('tail', 'right'));
-movePart(snake.at(-1), 'right');
-movePart(snake.at(-1), 'left');
+function newBoard() {
+    snake = [];
+    foods = [];
+    obstacles = [];
 
-foods.push(newFood('apple', 120, 80));
+    snake.push(newPart('head', 'right'));
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'right');
+    snake.at(0).element.style.zIndex = '10';
+    snake.push(newPart('body', 'right'));
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'right');
+    snake.push(newPart('body', 'right'));
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'right');
+    snake.push(newPart('body', 'right'));
+    movePart(snake.at(-1), 'right');
+    snake.push(newPart('tail', 'right'));
+    movePart(snake.at(-1), 'right');
+    movePart(snake.at(-1), 'left');
+
+    spawnFood();
+
+    for (let i = 0; i < 5; i++) {
+        spawnBlade('blade');
+    }
+}
+
+newBoard();
+
 setTimeout(function () {
     foods.at(-1).element.style.transform = 'scale(1)';
 }, 1);
