@@ -1,5 +1,5 @@
 const cellSize = 40;
-const speed = 250;
+const speed = 400;
 let boardSize = [10, 15];
 let openBorder = false;
 
@@ -10,6 +10,7 @@ const tailPathD = rescaleSVG(['M 40 10 C 35 10 15 10 10 10 C 0 10 0 30 10 30 C 1
 // snake tail
 const tailSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 tailSVG.setAttribute('class', 'part');
+tailSVG.setAttribute('class', 'ends');
 tailSVG.style.position = 'absolute';
 const tailPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 tailPath.setAttribute('d', tailPathD[0]);
@@ -82,6 +83,7 @@ const headPathD = rescaleSVG([
 // snake head
 const headSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 headSVG.setAttribute('class', 'part');
+headSVG.setAttribute('class', 'ends');
 headSVG.style.position = 'absolute';
 const headGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 const headMain = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -202,6 +204,7 @@ function rescaleSVG(svgPaths) {
     function rescalePath(path) {
         let newPath = path.split(' ');
         newPath.forEach(function (value, index) {
+            // noinspection JSCheckFunctionSignatures
             if (isFinite(value)) {
                 newPath[index] = value * cellSize / 40;
             }
@@ -254,6 +257,61 @@ function rotatePath(svgPath, clockwise) {
         }
     }
     return rotatedPath.trim().replace(/  +/, ' ');
+}
+
+/**
+ *
+ * @param path1 {string}
+ * @param path2 {string}
+ * @param t {number}
+ * @return {string}
+ */
+function interpolate(path1, path2, t) {
+    const parts1 = path1.split(' ');
+    const parts2 = path2.split(' ');
+    return parts1.map(function (value1, index) {
+
+        // noinspection JSCheckFunctionSignatures
+        if (isFinite(value1)) {
+            return parseFloat(value1) + (parseFloat(parts2[index]) - parseFloat(value1)) * t;
+        }
+        return value1;
+    }).join(' ');
+}
+
+function morph(path, path1, path2, snakePartI) {
+    let start = null;
+    let t = 0;
+    let progress;
+
+    if (path1 === null) {
+        path1 = path.getAttribute('d');
+    }
+
+    function animateMorph(timestamp) {
+        if (!start) {
+            start = timestamp;
+        }
+        progress = timestamp - start;
+        const duration = speed;
+        let pt = t;
+        t = (progress % duration) / duration;
+
+        if (t >= pt) {
+            const interp = interpolate(path1, path2, t);
+            if (snakePartI === 1) {
+                console.log(path1);
+                console.log(path2);
+            }
+            path.setAttribute('d', interp);
+
+            requestAnimationFrame(animateMorph);
+        } else {
+            path.setAttribute('d', path2);
+        }
+    }
+
+    requestAnimationFrame(animateMorph);
 }
 
 /**
@@ -478,14 +536,18 @@ function moveSnake() {
                 snake.at(i).type = 'bodyC';
                 let children = snake.at(i).element.children;
                 let curveDirection = [pastDirections[i - 1], snake.at(i - 1).direction].join('_');
-                children[0].setAttribute('d', bodyCurvedD[curveDirection][0]);
-                children[1].setAttribute('d', bodyCurvedD[curveDirection][1]);
+                morph(children[0], children[0].getAttribute('d'), bodyCurvedD[curveDirection][0]);
+                morph(children[1], children[1].getAttribute('d'), bodyCurvedD[curveDirection][1]);
+                // children[0].setAttribute('d', bodyCurvedD[curveDirection][0]);
+                // children[1].setAttribute('d', bodyCurvedD[curveDirection][1]);
             } else if (snake.at(i).type === 'bodyC' && pastDirections[i - 1] === snake.at(i - 1).direction) {
                 snake.at(i).type = 'body';
                 let children = snake.at(i).element.children;
                 let straightDirection = snake.at(i - 1).direction;
-                children[0].setAttribute('d', bodyStraightD[straightDirection][0]);
-                children[1].setAttribute('d', bodyStraightD[straightDirection][1]);
+                morph(children[0], children[0].getAttribute('d'), bodyStraightD[straightDirection][0]);
+                morph(children[1], children[1].getAttribute('d'), bodyStraightD[straightDirection][1]);
+                // children[0].setAttribute('d', bodyStraightD[straightDirection][0]);
+                // children[1].setAttribute('d', bodyStraightD[straightDirection][1]);
             } else {
                 if (pastDirections[i - 1] !== snake.at(i - 1).direction) {
                     rotatePart(snake.at(i), isClockwise(pastDirections[i - 1], snake.at(i - 1).direction));
@@ -532,21 +594,18 @@ function eatFood() {
 }
 
 function growSnake(pastHeadDir, x, y) {
-    let tempSnake = snake.slice(0, 1);
+    let part;
     if (snake.at(0).direction === pastHeadDir) {
-        tempSnake.push(newPart('body', pastHeadDir, x, y, 0));
-        tempSnake.at(-1).element.children[0].setAttribute('d', bodyStraightD[snake.at(0).direction][0]);
-        tempSnake.at(-1).element.children[1].setAttribute('d', bodyStraightD[snake.at(0).direction][1]);
+        part = newPart('body', pastHeadDir, x, y, 0);
+        part.element.children[0].setAttribute('d', bodyStraightD[snake.at(0).direction][0]);
+        part.element.children[1].setAttribute('d', bodyStraightD[snake.at(0).direction][1]);
     } else {
-        tempSnake.push(newPart('bodyC', pastHeadDir, x, y, 0));
+        part = newPart('bodyC', pastHeadDir, x, y, 0);
         let newPartDir = [pastHeadDir, snake.at(0).direction].join('_');
-        tempSnake.at(-1).element.children[0].setAttribute('d', bodyCurvedD[newPartDir][0]);
-        tempSnake.at(-1).element.children[1].setAttribute('d', bodyCurvedD[newPartDir][1]);
+        part.element.children[0].setAttribute('d', bodyCurvedD[newPartDir][0]);
+        part.element.children[1].setAttribute('d', bodyCurvedD[newPartDir][1]);
     }
-    for (let i = 1; i < snake.length; i++) {
-        tempSnake.push(snake[i]);
-    }
-    snake = tempSnake;
+    snake.splice(1, 0, part);
     setTimeout(function () {
         snake.at(1).element.style.scale = '1';
     }, 50);
@@ -670,10 +729,12 @@ function keyPressed(key) {
 
 let style = document.styleSheets[0];
 let rules = style.cssRules;
-rules[0].style.transition = speed + 'ms linear';
-rules[1].style.transition = speed + 'ms linear';
-rules[2].style.width = cellSize + 'px';
-rules[2].style.height = cellSize + 'px';
+rules[0]['style']['transition'] = 'top ' + speed + 'ms linear, ' + 'left ' + speed + 'ms linear';
+rules[1]['style']['transition'] = 'top ' + speed + 'ms linear, ' + 'left ' + speed + 'ms linear';
+rules[1]['style']['width'] = cellSize + 'px';
+rules[1]['style']['height'] = cellSize + 'px';
+rules[2]['style']['transition'] = 'all ' + speed + 'ms linear';
+rules[3]['style']['transition'] = 'all ' + speed + 'ms linear';
 
 let snake = [];
 let foods = [];
