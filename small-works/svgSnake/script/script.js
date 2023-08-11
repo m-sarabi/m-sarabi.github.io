@@ -1,4 +1,4 @@
-const cellSize = 40;
+const cellSize = 50;
 const speed = 400;
 let boardSize = [10, 15];
 let openBorder = false;
@@ -19,23 +19,23 @@ tailPath.setAttribute('stroke', 'black');
 tailSVG.appendChild(tailPath);
 
 const bodyCurvedD = rescaleSVG({
-    right_down: ['M 0 30 C 0 25 0 15 0 10 C 15 10 30 25 30 40 C 25 40 15 40 10 40 C 10 35 5 30 0 30',
-        'M 0 10 C 15 10 30 25 30 40 M 10 40 C 10 35 5 30 0 30'],
-    down_left: ['M 10 0 C 15 0 25 0 30 0 C 30 15 15 30 0 30 C 0 25 0 15 0 10 C 5 10 10 5 10 0',
-        'M 30 0 C 30 15 15 30 0 30 M 0 10 C 5 10 10 5 10 0'],
-    left_up: ['M 40 10 C 40 15 40 25 40 30 C 25 30 10 15 10 0 C 15 0 25 0 30 0 C 30 5 35 10 40 10',
-        'M 40 30 C 25 30 10 15 10 0 M 30 0 C 30 5 35 10 40 10'],
-    up_right: ['M 30 40 C 25 40 15 40 10 40 C 10 25 25 10 40 10 C 40 15 40 25 40 30 C 35 30 30 35 30 40',
-        'M 10 40 C 10 25 25 10 40 10 M 40 30 C 35 30 30 35 30 40'],
+    right_down: ['M 0 30 C 0 26.6667 0 23.3333 0 20 C 0 16.6667 0 13.3333 0 10 C 7 10 15 14 20.5 19.5 C 26 25 30 33 30 40 C 26.6667 40 23.3333 40 20 40 C 16.6667 40 13.3333 40 10 40 C 10 37 9 35 7 33 C 5 31 3 30 0 30',
+        'M 0 10 C 7 10 15 14 20.5 19.5 C 26 25 30 33 30 40 M 10 40 C 10 38 9 35 7 33 C 5 31 2 30 0 30'],
+    down_left: ['M 10 0 C 13.3333 0 16.6667 0 20 0 C 23.3333 0 26.6667 0 30 0 C 30 7 26 15 20.565 20.542 C 15 26 7 30 0 30 C 0 26.6667 0 23.3333 0 20 C 0 16.6667 0 13.3333 0 10 C 3 10 5 9 7 7 C 9 5 10 3 10 0',
+        'M 30 0 C 30 7 26 15 20.5 20.5 C 15 26 7 30 0 30 M 0 10 C 3 10 5 9 7 7 C 9 5 10 3 10 0'],
+    left_up: ['M 40 10 C 40 13.3333 40 16.6667 40 20 C 40 23.3333 40 26.6667 40 30 C 33 30 25 26 19.5 20.5 C 14 15 10 7 10 0 C 13.3333 0 16.6667 0 20 0 C 23.3333 0 26.6667 0 30 0 C 30 3 31 5 33 7 C 35 9 37 10 40 10',
+        'M 40 30 C 33 30 25 26 19.5 20.5 C 14 15 10 7 10 0 M 30 0 C 30 3 31 5 33 7 C 35 9 37 10 40 10'],
+    up_right: ['M 30 40 C 26.6667 40 23.3333 40 20 40 C 16.6667 40 13.3333 40 10 40 C 10 33 14 25 19.5 19.5 C 25 14 33 10 40 10 C 40 13.3333 40 16.6667 40 20 C 40 23.3333 40 26.6667 40 30 C 37 30 35 31 33 33 C 31 35 30 37 30 40',
+        'M 10 40 C 10 33 14 25 19.569 19.557 C 25 14 33 10 40 10 M 40 30 C 37 30 35 31 33 33 C 31 35 30 37 30 40'],
 
-    up_left: ['M 30 40 C 25 40 15 40 10 40 C 10 35 5 30 0 30 C 0 25 0 15 0 10 C 15 10 30 25 30 40',
-        'M 10 40 C 10 35 5 30 0 30 M 0 10 C 15 10 30 25 30 40'],
-    right_up: ['M 0 30 C 0 25 0 15 0 10 C 5 10 10 5 10 0 C 15 0 25 0 30 0 C 30 15 15 30 0 30',
-        'M 0 10 C 5 10 10 5 10 0 M 30 0 C 30 15 15 30 0 30'],
-    down_right: ['M 10 0 C 15 0 25 -0 30 -0 C 30 5 35 10 40 10 C 40 15 40 25 40 30 C 25 30 10 15 10 0',
-        'M 30 0 C 30 5 35 10 40 10 M 40 30 C 25 30 10 15 10 0'],
-    left_down: ['M 40 10 C 40 15 40 25 40 30 C 35 30 30 35 30 40 C 25 40 15 40 10 40 C 10 25 25 10 40 10',
-        'M 40 30 C 35 30 30 35 30 40 M 10 40 C 10 25 25 10 40 10'],
+    up_left: ['M 30 40 C 26.6667 40 23.3333 40 20 40 C 16.6667 40 13.3333 40 10 40 C 10 37 9 35 7 33 C 5 31 3 30 0 30 C 0 26.6667 0 23.3333 0 20 C 0 16.6667 0 13.3333 0 10 C 7 10 15 14 20.5 19.5 C 26 25 30 33 30 40',
+        'M 10 40 C 10 37 9 35 7 33 C 5 31 3 30 0 30 M 0 10 C 7 10 15 14 20.5 19.5 C 26 25 30 33 30 40'],
+    right_up: ['M 0 30 C 0 26.6667 0 23.3333 0 20 C 0 16.6667 0 13.3333 0 10 C 3 10 5 9 7 7 C 9 5 10 3 10 0 C 13.3333 0 16.6667 0 20 0 C 23.3333 0 26.6667 0 30 0 C 30 7 26 15 20.5 20.5 C 15 26 7 30 0 30',
+        'M 0 10 C 3 10 5 9 7 7 C 9 5 10 3 10 0 M 30 0 C 30 7 26 15 20.544 20.608 C 15 26 7 30 0 30'],
+    down_right: ['M 10 0 C 13.3333 0 16.6667 0 20 0 C 23.3333 0 26.6667 0 30 0 C 30 3 31 5 33 7 C 35 9 37 10 40 10 C 40 13.3333 40 16.6667 40 20 C 40 23.3333 40 26.6667 40 30 C 33 30 25 26 19.5 20.5 C 14 15 10 7 10 0',
+        'M 30 0 C 30 3 31 5 33 7 C 35 9 37 10 40 10 M 40 30 C 33 30 25 26 19.5 20.5 C 14 15 10 7 10 0'],
+    left_down: ['M 40 10 C 40 13.3333 40 16.6667 40 20 C 40 23.3333 40 26.6667 40 30 C 37 30 35 31 33 33 C 31 35 30 37 30 40 C 26.6667 40 23.3333 40 20 40 C 16.6667 40 13.3333 40 10 40 C 10 33 14 25 19.5 19.5 C 25 14 33 10 40 10',
+        'M 40 30 C 37 30 35 31 33 33 C 31 35 30 37 30 40 M 10 40 C 10 33 14 25 19.5 19.5 C 25 14 33 10 40 10'],
 });
 // snake body curved
 const bodyCurveSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -52,14 +52,14 @@ bodyCurveSVG.appendChild(bodyCurvePath);
 bodyCurveSVG.appendChild(bodyCurvePathStroke);
 
 const bodyStraightD = rescaleSVG({
-    right: ['M 0 30 C 0 25 0 15 0 10 C 5 10 35 10 40 10 C 40 15 40 25 40 30 C 35 30 5 30 0 30',
-        'M 0 10 C 5 10 35 10 40 10 M 40 30 C 35 30 5 30 0 30'],
-    down: ['M 10 0 C 15 0 25 0 30 0 C 30 5 30 35 30 40 C 25 40 15 40 10 40 C 10 35 10 5 10 0',
-        'M 30 0 C 30 5 30 35 30 40 M 10 40 C 10 35 10 5 10 0'],
-    left: ['M 40 10 C 40 15 40 25 40 30 C 35 30 5 30 0 30 C 0 25 0 15 0 10 C 5 10 35 10 40 10',
-        'M 40 30 C 35 30 5 30 0 30 M 0 10 C 5 10 35 10 40 10'],
-    up: ['M 30 40 C 25 40 15 40 10 40 C 10 35 10 5 10 0 C 15 0 25 0 30 0 C 30 5 30 35 30 40',
-        'M 10 40 C 10 35 10 5 10 0 M 30 0 C 30 5 30 35 30 40'],
+    right: ['M 0 30 C 0 26.6667 0 23.3333 0 20 C 0 16.6667 0 13.3333 0 10 C 6.6667 10 13.3333 10 20 10 C 26.6667 10 33.3333 10 40 10 C 40 13.3333 40 16.6667 40 20 C 40 23.3333 40 26.6667 40 30 C 33.3333 30 26.6667 30 20 30 C 13.3333 30 6.6667 30 0 30',
+        'M 0 10 C 6.6667 10 13.3333 10 20 10 C 26.6667 10 33.3333 10 40 10 M 40 30 C 33.3333 30 26.6667 30 20 30 C 13.3333 30 6.6667 30 0 30'],
+    down: ['M 10 0 C 13.3333 0 16.6667 0 20 0 C 23.3333 -0 26.6667 -0 30 -0 C 30 6.6667 30 13.3333 30 20 C 30 26.6667 30 33.3333 30 40 C 26.6667 40 23.3333 40 20 40 C 16.6667 40 13.3333 40 10 40 C 10 33.3333 10 26.6667 10 20 C 10 13.3333 10 6.6667 10 0',
+        'M 30 -0 C 30 6.6667 30 13.3333 30 20 C 30 26.6667 30 33.3333 30 40 M 10 40 C 10 33.3333 10 26.6667 10 20 C 10 13.3333 10 6.6667 10 0'],
+    left: ['M 40 10 C 40 13.3333 40 16.6667 40 20 C 40 23.3333 40 26.6667 40 30 C 33.3333 30 26.6667 30 20 30 C 13.3333 30 6.6667 30 0 30 C 0 26.6667 0 23.3333 0 20 C 0 16.6667 0 13.3333 0 10 C 6.6667 10 13.3333 10 20 10 C 26.6667 10 33.3333 10 40 10',
+        'M 40 30 C 33.3333 30 26.6667 30 20 30 C 13.3333 30 6.6667 30 0 30 M 0 10 C 6.6667 10 13.3333 10 20 10 C 26.6667 10 33.3333 10 40 10'],
+    up: ['M 30 40 C 26.6667 40 23.3333 40 20 40 C 16.6667 40 13.3333 40 10 40 C 10 33.3333 10 26.6667 10 20 C 10 13.3333 10 6.6667 10 0 C 13.3333 0 16.6667 0 20 0 C 23.3333 -0 26.6667 -0 30 -0 C 30 6.6667 30 13.3333 30 20 C 30 26.6667 30 33.3333 30 40',
+        'M 10 40 C 10 33.3333 10 26.6667 10 20 C 10 13.3333 10 6.6667 10 0 M 30 -0 C 30 6.6667 30 13.3333 30 20 C 30 26.6667 30 33.3333 30 40'],
 });
 // snake body straight
 const bodyStraightSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -195,9 +195,9 @@ for (let i = cellSize; i < board.clientWidth; i += cellSize) {
 }
 board.appendChild(grid);
 
-function rescaleSVG(svgPaths) {
+function rescaleSVG(svgPaths, scale = cellSize, center = false) {
 
-    if (cellSize === 40) {
+    if (scale === 40) {
         return svgPaths;
     }
 
@@ -206,7 +206,10 @@ function rescaleSVG(svgPaths) {
         newPath.forEach(function (value, index) {
             // noinspection JSCheckFunctionSignatures
             if (isFinite(value)) {
-                newPath[index] = value * cellSize / 40;
+                newPath[index] = value * scale / 40;
+                if (center) {
+                    newPath[index] += (cellSize - scale) / 2;
+                }
             }
         });
         return newPath.join(' ').trim();
@@ -273,13 +276,13 @@ function interpolate(path1, path2, t) {
 
         // noinspection JSCheckFunctionSignatures
         if (isFinite(value1)) {
-            return parseFloat(value1) + (parseFloat(parts2[index]) - parseFloat(value1)) * t;
+            return parseFloat(value1) + (parseFloat(parts2[index]) - parseFloat(value1)) * Math.min(t, 1);
         }
         return value1;
     }).join(' ');
 }
 
-function morph(path, path1, path2, snakePartI) {
+function morph(path, path1, path2) {
     let start = null;
     let t = 0;
     let progress;
@@ -298,12 +301,7 @@ function morph(path, path1, path2, snakePartI) {
         t = (progress % duration) / duration;
 
         if (t >= pt) {
-            const interp = interpolate(path1, path2, t);
-            if (snakePartI === 1) {
-                console.log(path1);
-                console.log(path2);
-            }
-            path.setAttribute('d', interp);
+            path.setAttribute('d', interpolate(path1, path2, t));
 
             requestAnimationFrame(animateMorph);
         } else {
@@ -522,41 +520,55 @@ function moveSnake() {
     for (const part of snake) {
         pastDirections.push(part.direction);
     }
-    if (direction !== snake.at(0).direction) {
-        rotatePart(snake.at(0), isClockwise(snake.at(0).direction, direction));
+    let newDirections = [];
+    newDirections[0] = direction;
+    for (let i = 1; i < snake.length; i++) {
+        newDirections.push(pastDirections[i - 1]);
     }
-    movePart(snake.at(0), direction);
-    snake.at(0).direction = direction;
 
     if (eatFood()) {
         growSnake(pastDirections[0], pastHeadPos[0], pastHeadPos[1]);
+        let paths;
+        let newPartDir = [pastDirections[0], direction].join('_');
+        if (direction === pastDirections[0]) {
+            paths = [bodyStraightD[snake.at(0).direction][0], bodyStraightD[snake.at(0).direction][1]];
+        } else {
+            paths = [bodyCurvedD[newPartDir][0], bodyCurvedD[newPartDir][1]];
+        }
+        morph(snake.at(1).element.children[0], null, paths[0],);
+        morph(snake.at(1).element.children[1], null, paths[1],);
     } else {
-        for (let i = 1; i < snake.length; i++) {
-            if (['body', 'bodyC'].includes(snake.at(i).type) && pastDirections[i - 1] !== snake.at(i - 1).direction) {
+        for (let i = snake.length - 1; i > 0; i--) {
+            if (['body', 'bodyC'].includes(snake.at(i).type) && pastDirections[i - 1] !== newDirections[i - 1]) {
                 snake.at(i).type = 'bodyC';
                 let children = snake.at(i).element.children;
-                let curveDirection = [pastDirections[i - 1], snake.at(i - 1).direction].join('_');
+                let curveDirection = [pastDirections[i - 1], newDirections[i - 1]].join('_');
                 morph(children[0], children[0].getAttribute('d'), bodyCurvedD[curveDirection][0]);
                 morph(children[1], children[1].getAttribute('d'), bodyCurvedD[curveDirection][1]);
                 // children[0].setAttribute('d', bodyCurvedD[curveDirection][0]);
                 // children[1].setAttribute('d', bodyCurvedD[curveDirection][1]);
-            } else if (snake.at(i).type === 'bodyC' && pastDirections[i - 1] === snake.at(i - 1).direction) {
+            } else if (snake.at(i).type === 'bodyC' && pastDirections[i - 1] === newDirections[i - 1]) {
                 snake.at(i).type = 'body';
                 let children = snake.at(i).element.children;
-                let straightDirection = snake.at(i - 1).direction;
+                let straightDirection = newDirections[i - 1];
                 morph(children[0], children[0].getAttribute('d'), bodyStraightD[straightDirection][0]);
                 morph(children[1], children[1].getAttribute('d'), bodyStraightD[straightDirection][1]);
                 // children[0].setAttribute('d', bodyStraightD[straightDirection][0]);
                 // children[1].setAttribute('d', bodyStraightD[straightDirection][1]);
             } else {
-                if (pastDirections[i - 1] !== snake.at(i - 1).direction) {
-                    rotatePart(snake.at(i), isClockwise(pastDirections[i - 1], snake.at(i - 1).direction));
+                if (pastDirections[i - 1] !== newDirections[i - 1]) {
+                    rotatePart(snake.at(i), isClockwise(pastDirections[i - 1], newDirections[i - 1]));
                 }
             }
             movePart(snake.at(i), pastDirections[i - 1]);
             snake.at(i).direction = pastDirections[i - 1];
         }
     }
+    if (direction !== snake.at(0).direction) {
+        rotatePart(snake.at(0), isClockwise(snake.at(0).direction, direction));
+    }
+    movePart(snake.at(0), direction);
+    snake.at(0).direction = direction;
 }
 
 function collision() {
@@ -594,21 +606,18 @@ function eatFood() {
 }
 
 function growSnake(pastHeadDir, x, y) {
-    let part;
-    if (snake.at(0).direction === pastHeadDir) {
-        part = newPart('body', pastHeadDir, x, y, 0);
-        part.element.children[0].setAttribute('d', bodyStraightD[snake.at(0).direction][0]);
-        part.element.children[1].setAttribute('d', bodyStraightD[snake.at(0).direction][1]);
+    let part, pathsSmall;
+    if (direction === pastHeadDir) {
+        part = newPart('body', pastHeadDir, x, y);
+        pathsSmall = rescaleSVG([bodyStraightD[snake.at(0).direction][0], bodyStraightD[snake.at(0).direction][1]], 1, true);
     } else {
-        part = newPart('bodyC', pastHeadDir, x, y, 0);
-        let newPartDir = [pastHeadDir, snake.at(0).direction].join('_');
-        part.element.children[0].setAttribute('d', bodyCurvedD[newPartDir][0]);
-        part.element.children[1].setAttribute('d', bodyCurvedD[newPartDir][1]);
+        part = newPart('bodyC', pastHeadDir, x, y);
+        let newPartDir = [pastHeadDir, direction].join('_');
+        pathsSmall = rescaleSVG([bodyCurvedD[newPartDir][0], bodyCurvedD[newPartDir][1]], 1, true);
     }
+    part.element.children[0].setAttribute('d', pathsSmall[0]);
+    part.element.children[1].setAttribute('d', pathsSmall[1]);
     snake.splice(1, 0, part);
-    setTimeout(function () {
-        snake.at(1).element.style.scale = '1';
-    }, 50);
 }
 
 /**
