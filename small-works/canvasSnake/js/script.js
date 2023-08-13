@@ -33,56 +33,88 @@ function drawGrid() {
 
 
 let x = 0, y = 0;
-let dx = 0.5, dy = 0.5;
-let ddx = 0, ddy = 0;
-let direction = null;
+let speed = 1;
+let dx = 0, dy = 0;
+let pastX = x, pastY = y;
+let direction = null, changeDirection = false, pastDirection = direction;
+let debug = false;
 
-function drawBall() {
+function drawBall(dt) {
     ctx.beginPath();
     ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
     ctx.fillStyle = 'darkred';
     ctx.fill();
     ctx.closePath();
-
-    if (x % cellSize === 0 && y % cellSize === 0) {
-        switch (direction) {
-            case 'right':
-                ddx = dx;
-                ddy = 0;
-                break;
-            case 'down':
-                ddx = 0;
-                ddy = dy;
-                break;
-            case 'left':
-                ddx = -dx;
-                ddy = 0;
-                break;
-            case 'up':
-                ddx = 0;
-                ddy = -dy;
-                break;
-        }
+    if (pastDirection !== direction) {
+        changeDirection = true;
     }
+
+    if (changeDirection) {
+        updateDirection();
+    }
+
+    pastX = x;
+    pastY = y;
     if (x >= 0 && x <= canvas.width - cellSize) {
-        x += ddx;
+        x += dx * dt;
         x = Math.min(canvas.width - cellSize, Math.max(0, x));
     }
     if (y >= 0 && y <= canvas.height - cellSize) {
-        y += ddy;
+        y += dy * dt;
         y = Math.min(canvas.height - cellSize, Math.max(0, y));
     }
 }
 
-function draw() {
+let lastTimestamp = 0;
+
+function draw(timestamp) {
+    const deltaTime = (timestamp - lastTimestamp) / 10;
+    lastTimestamp = timestamp;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid();
-    drawBall();
+    drawBall(deltaTime);
+
+    requestAnimationFrame(draw);
 }
 
-setInterval(draw, 1);
+requestAnimationFrame(draw);
 
-function directionKey(key) {
+function updateDirection() {
+    let change = false;
+    if (['left', 'right'].includes(direction)) {
+        if (pastY === y) {
+            change = true;
+        } else if (pastY < y && (Math.floor((pastY + cellSize) / cellSize) * cellSize === Math.floor(y / cellSize) * cellSize)) {
+            y = Math.floor(y / cellSize) * cellSize;
+            change = true;
+        } else if (pastY > y && (Math.floor(pastY / cellSize) * cellSize === Math.floor((y + cellSize) / cellSize) * cellSize)) {
+            y = Math.floor(pastY / cellSize) * cellSize;
+            change = true;
+        }
+        if (change) {
+            dx = (direction === 'right') ? speed : -speed;
+            dy = 0;
+        }
+    } else {
+        if (pastX === x) {
+            change = true;
+        } else if (pastX < x && (Math.floor((pastX + cellSize) / cellSize) * cellSize === Math.floor(x / cellSize) * cellSize)) {
+            x = Math.floor(x / cellSize) * cellSize;
+            change = true;
+        } else if (pastY > x && (Math.floor(pastX / cellSize) * cellSize === Math.floor((x + cellSize) / cellSize) * cellSize)) {
+            x = Math.floor(pastX / cellSize) * cellSize;
+            change = true;
+        }
+        if (change) {
+            dx = 0;
+            dy = (direction === 'down') ? speed : -speed;
+        }
+    }
+    changeDirection = !change;
+}
+
+function pressedKey(key) {
     switch (key) {
         case 'ArrowRight':
         case 'KeyD':
@@ -100,12 +132,14 @@ function directionKey(key) {
         case 'KeyW':
             direction = 'up';
             break;
+        case 'Space':
+            debug = !debug;
     }
 }
 
 window.addEventListener('keydown', function (event) {
     let key = event.code;
-    directionKey(key);
+    pressedKey(key);
 });
 
 let touchPos = [[], []];
@@ -127,18 +161,18 @@ function touchToKey() {
     let touchThreshold = cellSize * 0.75;
     if (Math.abs(touchPos[1][0] - touchPos[0][0]) > Math.abs(touchPos[1][1] - touchPos[0][1])) {
         if (touchPos[1][0] - touchPos[0][0] > touchThreshold) {
-            directionKey('ArrowRight');
+            pressedKey('ArrowRight');
             touchPos[0] = touchPos[1];
         } else if (touchPos[1][0] - touchPos[0][0] < -touchThreshold) {
-            directionKey('ArrowLeft');
+            pressedKey('ArrowLeft');
             touchPos[0] = touchPos[1];
         }
     } else if (Math.abs(touchPos[1][0] - touchPos[0][0]) < Math.abs(touchPos[1][1] - touchPos[0][1])) {
         if (touchPos[1][1] - touchPos[0][1] > touchThreshold) {
-            directionKey('ArrowDown');
+            pressedKey('ArrowDown');
             touchPos[0] = touchPos[1];
         } else if (touchPos[1][1] - touchPos[0][1] < -touchThreshold) {
-            directionKey('ArrowUp');
+            pressedKey('ArrowUp');
             touchPos[0] = touchPos[1];
 
         }
