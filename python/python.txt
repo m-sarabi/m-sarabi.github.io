@@ -13,12 +13,8 @@
     </aside>
     <main>
         <article class="language-py line-numbers match-braces">
-
             <div class="code-container">
                 <pre><code>
-                    print("hello world")
-
-                    #>> hello world
                 </code></pre>
             </div>
         </article>
