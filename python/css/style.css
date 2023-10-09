@@ -9,20 +9,22 @@
 }
 
 body {
-    background-color: wheat;
+    background-color: antiquewhite;
 }
 
 #main-page {
-    padding: 10px;
+    padding: 30px;
     margin: 1% 5%;
     display: grid;
     grid: 1fr / 1fr 4fr;
     gap: 20px;
-    border: black 1px solid;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px #000a, 0 0 2px black;
+    background-color: wheat;
 }
 
 nav {
-    background-color: mistyrose;
+    background-color: #faf0e1;
     box-shadow: 0 0 5px 1px #0007;
     font-size: 150%;
     padding: 10px;
@@ -51,7 +53,7 @@ nav li {
     position: relative;
     width: fit-content;
     list-style-type: none;
-    transition: margin-left 500ms;
+    transition: margin-left 300ms;
 }
 
 nav li:hover {
