@@ -1,11 +1,20 @@
-* {
+@font-face {
+    font-family: BKoodak;
+    src: url("/assets/fonts/b-koodak.ttf");
+}
+
+*:not(p,li,ol,ul) {
     padding: 0;
     margin: 0;
 }
 
+body {
+    background-color: wheat;
+}
+
 #main-page {
     padding: 10px;
-    margin: 10px;
+    margin: 1% 5%;
     display: grid;
     grid: 1fr / 1fr 4fr;
     gap: 20px;
@@ -13,9 +22,12 @@
 }
 
 nav {
+    background-color: mistyrose;
     box-shadow: 0 0 5px 1px;
     font-size: 150%;
     padding: 10px;
+    border-radius: 10px;
+    min-width: 160px;
 }
 
 nav a {
@@ -34,13 +46,67 @@ nav li::before {
     color: red;
 }
 
-main article{
+article {
+    background-color: whitesmoke;
+    font-family: BKoodak, Andalus, serif;
     box-shadow: 0 0 5px 1px;
-    padding: 10px;
-    font-size: 18px;
+    padding: 20px;
+    font-size: 20px;
+    direction: rtl;
+    border-radius: 10px;
+}
+
+article li:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+article p {
+    text-align: justify;
+}
+
+article a {
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000000aa;
 }
 
 .code-container {
+    direction: ltr;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+#python-invite {
+    background: radial-gradient(ellipse at 25%, mediumslateblue 0%, whitesmoke 75%);
+    box-shadow: -5px 0 10px mediumslateblue;
+    width: fit-content;
+    margin: 5px auto;
+    padding: 5px 30px 15px;
+    position: relative;
+    text-align: center;
+    border-radius: 30px;
+}
+
+#python-invite a {
+    padding: 0 5px;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 0 5px blue;
+    transition: box-shadow 1s;
+    color: black;
+    font-weight: bold;
+    background-color: cornflowerblue;
+}
+
+#python-invite a:hover {
+    padding: 0 5px;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px darkblue;
+}
+
+#python-invite img {
+    position: relative;
+    top: 10px;
+    left: 10px;
 }
