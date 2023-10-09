@@ -23,22 +23,36 @@ body {
 
 nav {
     background-color: mistyrose;
-    box-shadow: 0 0 5px 1px;
+    box-shadow: 0 0 5px 1px #0007;
     font-size: 150%;
     padding: 10px;
     border-radius: 10px;
     min-width: 160px;
+    transition: box-shadow 500ms;
+    font-weight: bold;
+}
+
+nav:hover {
+    box-shadow: 0 0 5px 1px #000;
 }
 
 nav a {
     text-decoration: none;
     color: black;
-    font-weight: bold;
     line-height: 150%;
+}
+
+nav ul {
+    padding: 5px;
+    margin: 5px;
 }
 
 nav li {
     list-style-type: none;
+    transition: margin-left 500ms;
+}
+nav li:hover {
+    margin-left: 5px;
 }
 
 nav li::before {
@@ -80,29 +94,21 @@ article a {
     background: radial-gradient(ellipse at 25%, mediumslateblue 0%, whitesmoke 75%);
     box-shadow: -5px 0 10px mediumslateblue;
     width: fit-content;
-    margin: 5px auto;
+    margin: 10px auto;
     padding: 5px 30px 15px;
     position: relative;
     text-align: center;
     border-radius: 30px;
+    transition: box-shadow 500ms;
+}
+
+#python-invite:hover {
+    box-shadow: -3px 0 12px darkblue;
 }
 
 #python-invite a {
-    padding: 0 5px;
     text-decoration: none;
-    border-radius: 10px;
-    box-shadow: 0 0 5px blue;
-    transition: box-shadow 1s;
     color: black;
-    font-weight: bold;
-    background-color: cornflowerblue;
-}
-
-#python-invite a:hover {
-    padding: 0 5px;
-    text-decoration: none;
-    border-radius: 10px;
-    box-shadow: 0 0 5px 2px darkblue;
 }
 
 #python-invite img {
