@@ -51,6 +51,7 @@ nav li {
     list-style-type: none;
     transition: margin-left 500ms;
 }
+
 nav li:hover {
     margin-left: 5px;
 }
