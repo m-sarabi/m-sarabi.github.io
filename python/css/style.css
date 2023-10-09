@@ -1,0 +1,50 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#main-page {
+    padding: 10px;
+    margin: 10px;
+    display: grid;
+    grid: 1fr / 1fr 4fr;
+    gap: 20px;
+    border: black 1px solid;
+}
+
+nav {
+    box-shadow: 0 0 5px 1px;
+    font-size: 150%;
+    padding: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    line-height: 150%;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav li::before {
+    content: '▶ ';
+    color: red;
+}
+
+main article{
+    box-shadow: 0 0 5px 1px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+code {
+    font-size: 16px;
+}
+
+.code {
+    max-width: 1200px;
+    margin: 0 auto;
+}
