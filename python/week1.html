@@ -2,9 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Week 1 - M-Sarabi/Python</title>
+    <link rel="icon" type="image/png" href="assets/Python.webp">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/style.css?v1">
 </head>
 <body>
+<header>
+    <a href="index.html">Python Course</a><br>
+</header>
+<section id="main-page">
+    <aside>
+        <script id="nav-bar-script" src="js/nav-replace.js"></script>
+    </aside>
+    <main>
+        <article class="language-py line-numbers match-braces">
+            سلام. هفته‌ی اول با مفاهیم ساده‌ای شروع میشه، چرا پایتون، نحوه‌ی نصب پایتون، انواع داده و غیره.
+            <h2>فهرست مطالب:</h2>
+            <ul id="contents">
+                <li><a href="#python">چرا Python؟</a></li>
+            </ul>
+            <h2 id="python">چرا Python؟</h2>
+            <p>
+                پایتون یک زبان برنامه‌نویسی سطح بالا و همه‌کاره است که به سادگی و خوانایی بالایش معروف است.
+                تاکید پایتون روی خوانایی است.
+                ترجمه‌ی چند جمله‌ی اول ذن پایتون (
+                <a href="https://peps.python.org/pep-0020/" class="english">PEP20</a>
+                با import&nbspthis هم می‌تونید ذن پایتون رو ببینید.):<br>
+            </p>
+            <ul>
+                <li>زیبا بهتر از زشت است.</li>
+                <li>صریح (explicit) بهتر از ضمنی (implicit) است.</li>
+                <li>ساده بهتر از پیچیده است.</li>
+                <li>پیچیده بهتر از مبهم و غیر قابل فهم است.</li>
+                <li>صاف بهتر از تو در تو است.</li>
+                <li>پراکنده بهتر از متراکم است.</li>
+                <li>خوانایی مهم است.</li>
+                <li>موارد خاص آنقدر خاص نیستند که قوانین را زیر پا بگذارید...</li>
+            </ul>
 
+            <h2 id="install">نحوه نصب Python روی ویندوز</h2>
+            برای نصب Python مراحل زیر رو طی کنید:
+            به سایت
+            <a href="https://www.python.org/" class="english">python.org</a>
+            برید و از قسمت Downloads و زیر Download for Windows روی آخرین نسخه‌ی Python کلیک کنید.
+            <img src="assets/week1-01.webp" alt="python.org download page">
+            حالا فایل exe که دانلود کردید رو اجرا کنید.
+            اینجا حتما اول تیک Add python.exe to PATH رو بزنید و بعد روی Install Now کلیک کنید.
+            <img src="assets/week1-02.webp" alt="install python window">
+            در آخر روی close کلیک کنید. به همین راحتی Python نصب شد.
+
+            <h2>کدنویسی در محیط IDLE</h2>
+            پایتون همراه با محیط برنامه‌نویسی خودش که IDLE هست نصب میشه.
+            برای اجرای این نرم‌افزار IDLE رو توی Start ویندوز سرچ کنید.
+            اینجا دو روش برای کد نویسی دارید.
+            یا مستقیم توی ترمینال کدهاتون رو تایپ کنید:
+            <img src="assets/week1-03.webp" alt="IDLE terminal">
+            و یا از منوی File گزینه New File رو انتخاب کنید،
+            یه پنجره جدید باز میشه.
+            توی این پنجره کدهاتون رو بنویسید و ذخیره کنید.
+            بعد از منوی Run گزینه Run Module رو انتخاب کنید.
+            خروجی کدها توی پنجره قبلی IDLE Shell نشون داده میشه:
+            <img src="assets/week1-04.webp" alt="running python file in IDLE">
+
+            <h2 id="operators">عملگرها در پایتون</h2>
+            <p>
+                قبل از عملگرها درباره‌ی کامنت بگم.
+                هرچیزی که بعد از علامت
+                <code>#</code>
+                نوشته بشه توسط پایتون نادیده گرفته میشه.
+                اینطوری می‌تونیم توضیحاتی راجع به کد بدیم و یا قسمتی از کد رو غیر فعال کنیم.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    import math
+
+                    r = 3  # radius
+                    x = 0
+                    # x = 1
+                    # the equation for the upper half of a circle:
+                    y = math.sqrt(r ** 2 - x ** 2)
+                    print(y)
+
+                    #>> 3.0
+                </code></pre>
+            </div>
+            <p>
+                اینجا از کامنت‌ها استفاده کردیم تا توضیح بدیم که متغیر اول شعاعه، معادله مال دایره‌ست،
+                و همچنین مقدار x برابر با صفر می‌مونه،
+                چون اون قسمت از کد که مقدارش رو یک می‌گذاره با کامنت غیر فعال کردیم.
+                نتیجه کدها رو هم با کامنت نشون میدم (مثل
+                <span class="english">3.0</span>
+                بالا).
+            </p>
+            برگردیم به عملگرها (operators).
+            عملگرها علامت‌های خاصی هستند که کاری روی مقادیر یا متغیرها انجام میدن.
+            عملگرهای مهم پایتون:
+            <ul>
+                <li>عملگرهای محاسباتی: عموما عملگرهای ریاضی هستند که روی اعداد استفاده می‌شوند.
+                    این عملگرها عبارت اند از
+                    <code>+ - * / % ** //</code>
+                </li>
+            </ul>
+            <div class="code-container">
+                <pre><code>
+                    2 + 1       # 3
+                    2 - 1       # 1
+                    2 * 1       # 2
+                    5 / 2       # 2.5
+                    2 ** 3      # 8
+                    8 // 3      # 2
+                </code></pre>
+            </div>
+            <ul>
+                <li>
+
+                </li>
+            </ul>
+
+            <div class="code-container">
+                <pre><code>
+                </code></pre>
+            </div>
+        </article>
+    </main>
+</section>
+
+<script src="js/prism.js"></script>
 </body>
 </html>
