@@ -12,9 +12,33 @@ body {
     background-color: antiquewhite;
 }
 
+header {
+    text-align: center;
+    background: radial-gradient(lightskyblue 0%, antiquewhite 150%);
+    display: block;
+    position: relative;
+    width: fit-content;
+    min-width: 450px;
+    margin: 1% auto 5px;
+    padding: 40px 40px;
+    border-radius: 100px;
+    box-shadow: 2px 1px 5px #000a;
+    overflow: visible;
+}
+
+header a {
+    margin: 0 80px;
+    font-size: 40px;
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    text-shadow: 0 0 20px gold;
+    font-family: Harrington, system-ui;
+}
+
 #main-page {
     padding: 30px;
-    margin: 1% 5%;
+    margin: 5px 5% 1%;
     display: grid;
     grid: 1fr / 1fr 4fr;
     gap: 20px;
