@@ -53,7 +53,7 @@ nav {
     font-size: 150%;
     padding: 10px;
     border-radius: 10px;
-    min-width: 160px;
+    min-width: 200px;
     transition: box-shadow 500ms;
     font-weight: bold;
 }
@@ -109,9 +109,9 @@ nav li:hover::after {
 
 article {
     background-color: whitesmoke;
-    font-family: BKoodak, Andalus, serif;
+    font-family: BKoodak, Andalus, system-ui;
     box-shadow: 0 0 5px 1px;
-    padding: 20px;
+    padding: 3%;
     font-size: 20px;
     direction: rtl;
     border-radius: 10px;
@@ -131,10 +131,20 @@ article a {
     text-shadow: 0 0 1px #000000aa;
 }
 
+.english {
+    font-family: Andalus, system-ui;
+}
+
 .code-container {
     direction: ltr;
-    max-width: 1200px;
+    width: 80%;
     margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+}
+
+code {
+    direction: ltr;
 }
 
 #python-invite {
@@ -162,4 +172,13 @@ article a {
     position: relative;
     top: 10px;
     left: 10px;
+}
+
+article img {
+    margin: 5px auto;
+    display: block;
+    max-width: 80%;
+    box-shadow: 0 0 3px 1px black;
+    transition: box-shadow 500ms;
+    border-radius: 20px;
 }
