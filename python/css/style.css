@@ -40,22 +40,28 @@ header a {
     padding: 30px;
     margin: 5px 5% 1%;
     display: grid;
-    grid: 1fr / 1fr 4fr;
-    gap: 20px;
+    grid: 1fr / 200px auto;
+    gap: 0;
     border-radius: 20px;
     box-shadow: 5px 5px 10px #000a, 0 0 2px black;
     background-color: wheat;
 }
 
+main {
+    margin-left: 40px;
+}
+
 nav {
+    position: relative;
     background-color: #faf0e1;
     box-shadow: 0 0 5px 1px #0007;
     font-size: 150%;
     padding: 10px;
+    width: 200px;
     border-radius: 10px;
-    min-width: 200px;
-    transition: box-shadow 500ms;
     font-weight: bold;
+    transition: all 0.5s;
+    overflow: hidden;
 }
 
 nav:hover {
@@ -85,7 +91,7 @@ nav li:hover {
 }
 
 nav li::before {
-    content: '▶ ';
+    content: '▷ ';
     color: darkblue;
 }
 
@@ -105,6 +111,17 @@ nav li::after {
 nav li:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+
+#nav-button {
+    position: absolute;
+    top: 0;
+    padding: 50px 0 50px 10px;
+    background: linear-gradient(to left,crimson 25%, #faf0e1 100%);
+    right: 0;
+    height: 100%;
+    width: 20px;
+    display: none;
 }
 
 article {
@@ -181,4 +198,26 @@ article img {
     box-shadow: 0 0 3px 1px black;
     transition: box-shadow 500ms;
     border-radius: 20px;
+}
+
+@media only screen and (orientation: portrait) , (max-width: 800px) {
+    #main-page {
+        grid: 1fr / 0 100%;
+    }
+
+    main {
+        margin-left: 0;
+    }
+
+    nav {
+        z-index: 10;
+        position: absolute;
+        transform: translate(-125%, 0);
+    }
+    #nav-button {
+        display: block;
+    }
+    nav:hover {
+        transform: translate(-25%, 0)
+    }
 }
