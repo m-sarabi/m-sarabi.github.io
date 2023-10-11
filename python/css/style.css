@@ -1,17 +1,21 @@
+/* included fonts */
 @font-face {
     font-family: BKoodak;
     src: url("/assets/fonts/b-koodak.ttf");
 }
 
+/* resetting margins and paddings */
 *:not(p,li,ol,ul) {
     padding: 0;
     margin: 0;
 }
 
+/* main background color */
 body {
     background-color: antiquewhite;
 }
 
+/* header */
 header {
     text-align: center;
     background: radial-gradient(lightskyblue 0%, antiquewhite 150%);
@@ -36,6 +40,7 @@ header a {
     font-family: Harrington, system-ui;
 }
 
+/* footer */
 footer {
     margin: 20px 2%;
     background-color: whitesmoke;
@@ -56,6 +61,7 @@ footer img {
     top: 5px;
 }
 
+/* whole page style, except header and footer */
 #main-page {
     position: relative;
     padding: 30px;
@@ -66,8 +72,10 @@ footer img {
     border-radius: 20px;
     box-shadow: 5px 5px 10px #000a, 0 0 2px black;
     background-color: wheat;
+    font-family: BKoodak, Andalus, system-ui;
 }
 
+/* side nav container */
 aside {
     position: absolute;
     width: fit-content;
@@ -75,11 +83,7 @@ aside {
     transition: all 0.5s 0s;
 }
 
-main {
-    position: relative;
-    margin-left: 250px;
-}
-
+/* sidebar navigation */
 nav.side {
     position: relative;
     background-color: #faf0e1;
@@ -141,7 +145,7 @@ nav.side li:hover::after {
     transform-origin: bottom left;
 }
 
-#nav-button {
+#nav-button {  /* this button only shows on mobile screens (hopefully!) */
     user-select: none;
     position: absolute;
     top: 0;
@@ -153,9 +157,15 @@ nav.side li:hover::after {
     visibility: hidden;
 }
 
+/* container of the main contents of the page */
+main {
+    position: relative;
+    margin-left: 250px;
+}
+
+/* article contents */
 article {
     background-color: whitesmoke;
-    font-family: BKoodak, Andalus, system-ui;
     box-shadow: 0 0 5px 1px;
     padding: 3%;
     font-size: 20px;
@@ -177,6 +187,16 @@ article a {
     text-shadow: 0 0 1px #000000aa;
 }
 
+article img {
+    margin: 5px auto;
+    display: block;
+    max-width: 80%;
+    box-shadow: 0 0 3px 1px black;
+    transition: box-shadow 500ms;
+    border-radius: 20px;
+}
+
+/* table of contents */
 nav.toc {
     border-radius: 10px;
     padding: 10px 20px;
@@ -208,10 +228,12 @@ nav.toc ol {
     margin-top: 5px;
 }
 
+/* styling those texts that are supposed to be only english */
 .english {
     font-family: Andalus, system-ui;
 }
 
+/* container of the code blocks */
 .code-container {
     direction: ltr;
     width: 80%;
@@ -220,10 +242,13 @@ nav.toc ol {
     box-shadow: 0 0 10px black;
 }
 
+/* forcing all code blocks to be left to right */
 code {
     direction: ltr;
+    unicode-bidi: isolate;
 }
 
+/* invite to python group style */
 #python-invite {
     background: radial-gradient(ellipse at 25%, mediumslateblue 0%, whitesmoke 75%);
     box-shadow: -5px 0 10px mediumslateblue;
@@ -250,18 +275,9 @@ code {
     top: 10px;
     left: 10px;
     display: inline-block;
-!important;
 }
 
-article img {
-    margin: 5px auto;
-    display: block;
-    max-width: 80%;
-    box-shadow: 0 0 3px 1px black;
-    transition: box-shadow 500ms;
-    border-radius: 20px;
-}
-
+/* responsive */
 @media only screen and (orientation: portrait) , (max-width: 800px) {
     #main-page {
         grid: 1fr / 0 100%;
