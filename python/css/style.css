@@ -189,6 +189,7 @@ code {
     position: relative;
     top: 10px;
     left: 10px;
+    display: inline-block; !important;
 }
 
 article img {
