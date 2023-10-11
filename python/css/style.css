@@ -47,9 +47,10 @@ header a {
 
 /* footer */
 footer {
-    margin: 20px 2%;
+    margin: 20px auto;
     background-color: whitesmoke;
     padding: 20px;
+    max-width: 800px;
     border-radius: 20px;
     border: 2px dimgray solid;
     box-shadow: 0 0 10px black inset;
