@@ -275,7 +275,7 @@ article img {
         left: -230px;
     }
 
-    nav {
+    nav.side {
         z-index: 10;
         position: absolute;
     }
