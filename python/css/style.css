@@ -18,7 +18,7 @@ header {
     display: block;
     position: relative;
     width: fit-content;
-    min-width: 450px;
+    min-width: 400px;
     margin: 1% auto 5px;
     padding: 40px 40px;
     border-radius: 100px;
@@ -28,7 +28,7 @@ header {
 
 header a {
     margin: 0 80px;
-    font-size: 40px;
+    font-size: 36px;
     text-decoration: none;
     color: black;
     font-weight: bolder;
@@ -37,9 +37,10 @@ header a {
 }
 
 #main-page {
+    position: relative;
     padding: 30px;
     margin: 5px 5% 1%;
-    display: grid;
+    display: block;
     grid: 1fr / 200px auto;
     gap: 0;
     border-radius: 20px;
@@ -47,8 +48,16 @@ header a {
     background-color: wheat;
 }
 
+aside {
+    position: absolute;
+    width: fit-content;
+    top: 40px;
+    transition: all 0.5s 0s;
+}
+
 main {
-    margin-left: 40px;
+    position: relative;
+    margin-left: 250px;
 }
 
 nav {
@@ -57,10 +66,9 @@ nav {
     box-shadow: 0 0 5px 1px #0007;
     font-size: 150%;
     padding: 10px;
-    width: 200px;
+    width: 220px;
     border-radius: 10px;
     font-weight: bold;
-    transition: all 0.5s;
     overflow: hidden;
 }
 
@@ -210,15 +218,19 @@ article img {
         margin-left: 0;
     }
 
+    aside {
+        left: -230px;
+    }
+
     nav {
         z-index: 10;
         position: absolute;
-        transform: translate(-125%, 0);
     }
     #nav-button {
         display: block;
     }
-    nav:hover {
-        transform: translate(-25%, 0)
+    aside:hover {
+        left: -20px;
+        transition: all 0.5s 0.2s;
     }
 }
