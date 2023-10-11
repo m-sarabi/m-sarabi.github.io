@@ -36,6 +36,30 @@ header a {
     font-family: Harrington, system-ui;
 }
 
+footer {
+    margin: 20px 2%;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px dimgray solid;
+    box-shadow: 0 0 10px black inset;
+}
+
+footer a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+footer a:visited {
+    color: darkblue;
+}
+
+footer img {
+    position: relative;
+    width: 24px;
+    top: 5px;
+}
+
 #main-page {
     position: relative;
     padding: 30px;
