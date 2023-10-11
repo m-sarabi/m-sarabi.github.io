@@ -253,6 +253,25 @@ code {
     unicode-bidi: isolate;
 }
 
+blockquote {
+    position: relative;
+    color: #444;
+    backdrop-filter: brightness(95%);
+    width: 80%;
+    margin: 10px auto 30px;
+    border-radius: 50px;
+    padding: 0 40px 10px 20px;
+}
+
+blockquote::before {
+    content: "\"";
+    font-size: 60px;
+    color: #567;
+    position: absolute;
+    right: 10px;
+    top: -25px;
+}
+
 /* invite to python group style */
 #python-invite {
     background: radial-gradient(ellipse at 25%, mediumslateblue 0%, whitesmoke 75%);
