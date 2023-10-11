@@ -180,8 +180,7 @@ article a {
 nav.toc {
     border-radius: 10px;
     padding: 10px 20px;
-    width: fit-content;
-    min-width: 33%;
+    width: 33%;
     box-shadow: 0 0 10px gray inset;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -282,6 +281,10 @@ article img {
 
     #nav-button {
         visibility: visible;
+    }
+
+    nav.toc {
+        width: 80%;
     }
 
     aside:hover {
