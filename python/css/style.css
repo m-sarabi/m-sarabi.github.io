@@ -130,7 +130,7 @@ nav li:hover::after {
     right: 0;
     height: 100%;
     width: 20px;
-    display: none;
+    visibility: hidden;
 }
 
 article {
@@ -228,7 +228,7 @@ article img {
         position: absolute;
     }
     #nav-button {
-        display: block;
+        visibility: visible;
     }
     aside:hover {
         left: -20px;
