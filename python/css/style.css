@@ -186,6 +186,7 @@ nav.toc {
     margin-bottom: 20px;
     backdrop-filter: brightness(101%);
     transition: all 300ms;
+    font-size: 20px;
 }
 
 nav.toc:hover {
@@ -198,12 +199,12 @@ nav.toc a {
     color: darkblue;
 }
 
-nav > details > summary {
+nav.toc summary {
     font-size: 28px;
     font-weight: bold;
 }
 
-nav ol {
+nav.toc ol {
     margin-top: 5px;
 }
 
