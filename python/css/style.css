@@ -50,10 +50,6 @@ footer a {
     color: darkblue;
 }
 
-footer a:visited {
-    color: darkblue;
-}
-
 footer img {
     position: relative;
     width: 24px;
@@ -84,7 +80,7 @@ main {
     margin-left: 250px;
 }
 
-nav {
+nav.side {
     position: relative;
     background-color: #faf0e1;
     box-shadow: 0 0 5px 1px #0007;
@@ -96,38 +92,38 @@ nav {
     overflow: hidden;
 }
 
-nav:hover {
+nav.side:hover {
     box-shadow: 0 0 5px 1px #000;
 }
 
-nav a {
+nav.side a {
     text-decoration: none;
     color: black;
     line-height: 150%;
 }
 
-nav ul {
+nav.side ul {
     padding: 5px;
     margin: 5px;
 }
 
-nav li {
+nav.side li {
     position: relative;
     width: fit-content;
     list-style-type: none;
     transition: margin-left 300ms;
 }
 
-nav li:hover {
+nav.side li:hover {
     margin-left: 5px;
 }
 
-nav li::before {
+nav.side li::before {
     content: '▷ ';
     color: darkblue;
 }
 
-nav li::after {
+nav.side li::after {
     content: "";
     position: absolute;
     transform: scaleX(0);
@@ -140,7 +136,7 @@ nav li::after {
     transition: transform 300ms ease-out;
 }
 
-nav li:hover::after {
+nav.side li:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
@@ -150,7 +146,7 @@ nav li:hover::after {
     position: absolute;
     top: 0;
     padding: 50px 0 50px 10px;
-    background: linear-gradient(to left,crimson 25%, #faf0e1 100%);
+    background: linear-gradient(to left, crimson 25%, #faf0e1 100%);
     right: 0;
     height: 100%;
     width: 20px;
@@ -179,6 +175,37 @@ article a {
     text-decoration: none;
     font-weight: bold;
     text-shadow: 0 0 1px #000000aa;
+}
+
+nav.toc {
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: fit-content;
+    min-width: 33%;
+    box-shadow: 0 0 10px gray inset;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    backdrop-filter: brightness(101%);
+    transition: all 300ms;
+}
+
+nav.toc:hover {
+    box-shadow: 0 0 15px dimgray inset;
+    backdrop-filter: brightness(102%);
+}
+
+nav.toc a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+nav > details > summary {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+nav ol {
+    margin-top: 5px;
 }
 
 .english {
@@ -222,7 +249,8 @@ code {
     position: relative;
     top: 10px;
     left: 10px;
-    display: inline-block; !important;
+    display: inline-block;
+!important;
 }
 
 article img {
@@ -251,9 +279,11 @@ article img {
         z-index: 10;
         position: absolute;
     }
+
     #nav-button {
         visibility: visible;
     }
+
     aside:hover {
         left: -20px;
         transition: all 0.5s 0.2s;
