@@ -4,6 +4,11 @@
     src: url("/assets/fonts/b-koodak.ttf");
 }
 
+@font-face {
+    font-family: SHarrington;
+    src: url("/assets/fonts/HARNGTON.TTF");
+}
+
 /* resetting margins and paddings */
 *:not(p,li,ol,ul) {
     padding: 0;
@@ -37,7 +42,7 @@ header a {
     color: black;
     font-weight: bolder;
     text-shadow: 0 0 20px gold;
-    font-family: Harrington, system-ui;
+    font-family: Harrington, SHarrington, system-ui;
 }
 
 /* footer */
@@ -72,7 +77,7 @@ footer img {
     border-radius: 20px;
     box-shadow: 5px 5px 10px #000a, 0 0 2px black;
     background-color: wheat;
-    font-family: BKoodak, Andalus, system-ui;
+    font-family: "B Koodak", BKoodak, Andalus, system-ui;
 }
 
 /* side nav container */
