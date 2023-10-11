@@ -2,9 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>M-Sarabi/Python</title>
+    <link rel="icon" type="image/png" href="assets/Python.webp">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/style.css?v4">
 </head>
 <body>
+<header>
+    <a href="index.html">Python Course</a><br>
+</header>
+<section id="main-page">
+    <aside>
+        <script id="nav-bar-script" src="js/nav-replace.js"></script>
+    </aside>
+    <main>
+        <article class="language-py line-numbers match-braces">
+            <p>
+                موضوع این هفته راجع به رشته‌ها و string formatting هست.
+                نوع داده‌ی str رو که دیدیم یکی از انواع داده پایتون هست برای کار با رشته‌های متنی.
+                این هفته یاد می‌گیریم چطور با این رشته‌ها کار بکنیم و formatting (پیکربندی) روی اون‌ها انجام بدیم.
+            </p>
+            <nav class="toc">
+                <details open>
+                    <summary>فهرست مطالب</summary>
+                    <ol>
+                        <li></li>
+                    </ol>
+                </details>
+            </nav>
+            <h2 id="string">نوع داده‌ی str</h2>
+            داده‌ی str رو همونطور که هفته قبل دیدیم باید داخل کوتیشن بگذاریم
+            <code>"double", 'single'</code>
+            البته رشته‌ها رو میشه داخل سه تا کوتیشن پشت سر هم گذاشت که به این طریق میشه چند خط متن رو داخل یک str ذخیره
+            کرد:
+            <div class="code-container">
+                <pre><code>
+                    text = "this is a string"
+                    multiline_text = """This string can have multiple lines.
+                    for that we use 3 quotation marks instead of one!"""
+                </code></pre>
+            </div>
+            <p>
+                از سه تا کوتیشن برای کامنت گذاشتن چند خط و همچنین برای داکیومنت کردن در پایتون هم استفاده میشه.
+            </p>
+            <h2 id="concatenation">وصل کردن رشته‌ها (string concatenation)</h2>
+            <p>
+                برای وصل کردن چند str به هم از عملگر جمع
+                <code>+</code>
+                استفاده می‌کنیم.
+                حواستون باشه که string رشته‌ای از کاراکتر‌هاست،
+                و یک فاصله‌ی خالی (space) هم یک کاراکتره.
+                پس اگر می‌خواید بین رشته‌ها فاصله باشه، باید یک فاصله هم به رشته بچسپونید:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text1 = "sun"
+                    text2 = "flower"
+                    full_text = text1 + text2
+                    print(full_text)
 
+                    #>> sunflower
+                </code></pre>
+            </div>
+
+            <div class="code-container">
+                <pre><code>
+                    forename = "John"
+                    surname = "Doe"
+
+                    # using a whitespace character to separate the two parts
+                    full_name = forename + " " + surname
+                    print(full_name)
+
+                    #>> John Doe
+                </code></pre>
+            </div>
+            <p>
+                همچنین از عملگر
+                <code>*</code>
+                هم می‌تونید روی رشته‌ها استفاده کنید تا رشته رو چند برابر کپی کنید.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "ha"
+                    long_text = text * 5  # making 5 copies of the text variable
+                    print(long_text)
+
+                    #>> hahahahaha
+                </code></pre>
+            </div>
+            <h2 id="formatting">فرمت‌دهی رشته‌ها (string formatting)</h2>
+
+            <div class="code-container">
+                <pre><code>
+                </code></pre>
+            </div>
+        </article>
+    </main>
+</section>
+
+<footer>
+    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
+    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
+    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
+    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
+    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
+    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
+    <hr>
+    <br>
+    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
+</footer>
+
+<script src="js/prism.js"></script>
 </body>
 </html>
