@@ -92,6 +92,98 @@
                 </code></pre>
             </div>
             <h2 id="formatting">فرمت‌دهی رشته‌ها (string formatting)</h2>
+            <p>
+                قبلا دیدیم که میشه با عملگر جمع چند تا Str رو به هم وصل کرد.
+                حالا اگر بخوایم چیزی غیر از str، مثلا یک عدد رو به یک رشته اضافه کرد چی؟
+                اگر بخوایم از علامت جمع استفاده کنیم، خطای TypeError خواهیم داشت:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    country = "Iran"
+                    year = 2023
+                    print(country + year)
+
+                    #>> TypeError: can only concatenate str (not "int") to str
+                </code></pre>
+            </div>
+            <p>
+                اینجا باید عدد تبدیل به رشته بشه تا بتونه به رشته اضافه بشه.
+                برای این کار می‌تونیم راه‌های مختلفی هست که یکی از اون‌ها format string هست.
+            </p>
+            <p>
+                برای استفاده از formatted string قبل از کوتیشن یک f یا F قرار بدید
+                و داخل رشته، عبارت پایتون رو بین علامت‌های
+                <code>{}</code>
+                بگذارید. این عبارت می‌تونه عدد، متغیر، محاسبات یا هر عبارت پایتونی باشه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    country = "Iran"
+                    current_year = 2023
+                    birth_year = 1993
+                    print(f"I live in {country} in {current_year}. I am {current_year - birth_year} years old.")
+
+                    #>> I live in Iran in 2023. I am 30 years old.
+                </code></pre>
+            </div>
+            <h2 id="more-formatting">روش‌های دیگر format string</h2>
+            <p>
+                روش‌ها دیگه‌ای برای فرمت رشته‌ها هست که هرچند استفاده‌شون کمتره،
+                ولی قطعا خواهید دید و بهتره باهاشون آشنا باشید:
+            </p>
+            <p>
+                استفاده از
+                <span class="english">str.format()</span>:
+                مثل f string، از علامت
+                <code>{}</code>
+                استفاده می‌کنیم، ولی مقداری داخلش نمی‌نویسیم.
+                بعد از رشته، عبارتی که می‌خوایم داخل رشته قرار بگیره را به عنوان پارامتر به متد می‌دیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    country = "Iran"
+                    year = 2023
+                    print("I live in {} in {}.".format(country, year))
+
+                    #>> I live in Iran in 2023.
+                </code></pre>
+            </div>
+            <p>
+                روش دیگه استفاده از فانکشن
+                <span class="english">str()</span>
+                هست که سعی می‌کنه عبارت رو به رشته تبدیل کنه.
+                اینطور می‌تونیم از concatenate برای چسپوندن رشته‌ها استفاده کنیم.
+                از این روش معمولا برای نمایش سریع و برای دیباگ کردن استفاده می‌کنن.
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+                    current_year = 2023
+                    print("It is year " + str(current_year))
+
+                    #>> It is year 2023
+                </code></pre>
+            </div>
+            <p>
+                روش دیگه استفاده از عملگر
+                <code>%</code>
+                هست که داره منسوخ میشه و پیشنهاد نمیشه،
+                واسه همین وارد جزییاتش نمی‌شم.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    age = 27
+                    height = 1.94
+                    print("I have a %d years old brother. He is %.1f meters." % (age, height))
+
+                    # >> I have a 27 years old brother. He is 1.9 meters.
+
+                </code></pre>
+            </div>
+            <p>
+                باز هم اگر خطایی داشتم یا چیزی رو جا گذاشتم بهم بگید، و
+                <span class="english">Happy coding!</span>
+            </p>
 
             <div class="code-container">
                 <pre><code>
