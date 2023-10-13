@@ -327,6 +327,7 @@ blockquote::before {
     nav.side {
         z-index: 10;
         position: absolute;
+        font-size: 24px;
     }
 
     #nav-button {
@@ -335,6 +336,7 @@ blockquote::before {
 
     nav.toc {
         width: 80%;
+        font-size: 20px;
     }
 
     aside:hover {
