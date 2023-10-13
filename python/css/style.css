@@ -310,7 +310,7 @@ blockquote::before {
 
 #python-invite img {
     position: relative;
-    top: 10px;
+    top: 15px;
     left: 10px;
     display: inline-block;
 }
