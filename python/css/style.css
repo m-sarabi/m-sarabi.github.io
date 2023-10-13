@@ -23,6 +23,10 @@ h2 {
 /* main background color */
 body {
     background-color: antiquewhite;
+    background-size: 100px 100px;
+    background-image: linear-gradient(45deg, transparent 0%, transparent 48%, #eedfcc 50%, transparent 52%, transparent 100%),
+    linear-gradient(135deg, transparent 0%, transparent 48%, #eedfcc 50%, transparent 52%, transparent 100%),
+    radial-gradient(transparent 0%, transparent 31%, #eedfcc 33%, transparent 35%, transparent 100%);
 }
 
 /* header */
@@ -37,7 +41,7 @@ header {
     padding: 40px 40px;
     border-radius: 100px;
     box-shadow: 2px 1px 5px #000a;
-    overflow: visible;
+    white-space: nowrap;
 }
 
 header a {
@@ -157,7 +161,7 @@ nav.side li:hover::after {
     transform-origin: bottom left;
 }
 
-#nav-button {  /* this button only shows on mobile screens (hopefully!) */
+#nav-button { /* this button only shows on mobile screens (hopefully!) */
     user-select: none;
     position: absolute;
     top: 0;
