@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 3 - M-Sarabi/Python</title>
+    <link rel="icon" type="image/png" href="assets/Python.webp">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/style.css?v6">
+</head>
+<body>
+<header>
+    <a href="index.html">Python Course</a><br>
+</header>
+<section id="main-page">
+    <aside>
+        <script id="nav-bar-script" src="js/nav-replace.js"></script>
+    </aside>
+    <main>
+        <article class="language-py line-numbers match-braces">
+            <nav class="toc">
+                <details open>
+                    <summary>فهرست مطالب</summary>
+                    <ol>
+                        <li><a href="#strings">
+                            مطالب بیشتر در مورد رشته‌ها
+                        </a></li>
+                    </ol>
+                </details>
+            </nav>
+            <h2 id="strings">مطالب بیشتر در مورد رشته‌ها</h2>
+            <h3>تفاوت دابل و سینگل کوتیشن</h3>
+            <p>
+                توی پایتون تقریبا هیچ فرقی نمی‌کنه که از کدوم کوتیشن مارک استفاده می‌کنیم.
+                تنها تفاوتی که استفاده از تک کوتیشن و دابل کوتیشن در پایتون دارن
+                اینه که اگر داخل متن از دابل کوتیشن هم استفاده شده از تک کوتیشن استفاده می‌کنیم و برعکس:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    # Using double quotation mark
+                    some_text = "That is Alice's book!"
+
+                    # Using single quotation mark
+                    another_text = 'He said: "Can you help me with this python code?"'
+                </code></pre>
+            </div>
+            <h3>استفاده از سه تا کوتیشن مارک</h3>
+            <p>
+                اگر از سه تا کوتیشن مارک (چه تک و چه جفت) استفاده کنیم،
+                رشته دقیقا به همون شکل ذخیره میشه، و خط جدید و فاصله‌ها حفظ میشن،
+                از این نوع رشته برای مواقعی که می‌خوایم توی چند خط متن رو بنویسیم استفاده میشه،
+                همچنین برای داکیومنت کردن فانکشن‌ها، کلاس‌ها و ... هم استفاده میشه که بعدا خواهیم دید
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    multiline_text = '''Hello,
+                    Let's learn some python together!
+                    and have Fun.'''
+                </code></pre>
+            </div>
+            <h3>Escape characters یا کاراکترهای فرار</h3>
+            <p>
+                کاراکتر بک‌اسلش
+                <code>\</code>
+                همراه با یک سری کاراکترها بعدش
+                معانی خاصی توی رشته‌ها داره که لیست مهمترین مواردش رو با مثال اینجا می‌گذارم:
+            </p>
+            <p>
+                <code>\&lt;خط جدید&gt;</code>:
+                هم بک‌اسلش و هم خط جدید نادیده گرفته میشه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "Hello,\
+                    World!"
+                    print(text)
+
+                    #>> Hello,World!
+                </code></pre>
+            </div>
+            <p>
+                <code>\\</code>:
+                برای نوشتن خود کاراکتر بک‌اسلش استفاده میشه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "old\\new books!"
+                    print(text)
+
+                    #>> old\new books!
+                </code></pre>
+            </div>
+            <p>
+                <code>\'</code>
+                و
+                <code>\"</code>:
+                برای گذاشتن quotation mark:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = 'Let\'s go to the cinema together!'
+                    print(text)
+
+                    #>> Let's go to the cinema together!
+                </code></pre>
+            </div>
+            <p>
+                <code>\n</code>:
+                برای رفتن به خط جدید (new line):
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "Hi\nBye"
+                    print(text)
+
+                    #>> Hi
+                    #>> Bye
+                </code></pre>
+            </div>
+            <p>
+                <code>\r</code>:
+                به اول همون خطی که هستیم میره (مثل دستگاه چاپ قدیم که کارتریج رو می‌کشیدن اول خط):
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "Hi\rBye"
+                    print(text)
+
+                    #>> Bye
+                </code></pre>
+            </div>
+            <p>
+                <code>\t</code>:
+                به اندازه یک Tab فاصله می‌گذاره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "Alice:\t500\nJoe:\t600"
+                    print(text)
+
+                    #>> Alice:	500
+                    #>> Joe:	600
+                </code></pre>
+            </div>
+            <p>
+                <code>\{Name}</code>:
+                به جای Name اسم کاراکتر رو از
+                <a href="https://unicode.org/charts/charindex.html" target="_blank">دیتابیس unicode</a>
+                بگذارید:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "I \N{HEAVY BLACK HEART} you!"
+                    print(text)
+
+                    #>> I ❤ you!
+                </code></pre>
+            </div>
+            <p>
+                <code>\uxxxx</code>
+                به جای xxxx کد هگزادسیمال کاراکتر unicode رو بگذارید:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "I \u2764 you\u0021"
+                    print(text)
+
+                    #>> I ❤ you!
+                </code></pre>
+            </div>
+            <h3>raw string یا رشته‌ی خام!</h3>
+            <p>
+                اگر توی یک str قبل از علامت کوتیشن یک حرف r بگذاریم
+                اون رشته دیگه فرمت نمشه و به صورت خام می‌مونه،
+                یعنی دیگه کاراکترهای فرار و ... بی‌تاثیر هستن.
+                از این کار معمولا برای آدرس فایل‌ها، جایی که می‌خوایم بک‌اسلش رو تو استرینگ وارد کنیم و ... استفاده
+                میشه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = r"We use \n to go to a new line."
+                    print(text)
+
+                    #>> We use \n to go to a new line.
+                </code></pre>
+            </div>
+
+            <div class="code-container">
+                <pre><code>
+                </code></pre>
+            </div>
+
+            <div class="code-container">
+                <pre><code id="fun">
+                </code></pre>
+            </div>
+        </article>
+    </main>
+</section>
+
+<footer>
+    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
+    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
+    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
+    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
+    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
+    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
+    <hr>
+    <br>
+    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
+</footer>
+
+<script src="js/fun.js"></script>
+<script src="js/prism.js"></script>
+</body>
+</html>
