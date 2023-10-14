@@ -58,11 +58,18 @@ header a {
 footer {
     margin: 20px auto;
     background-color: whitesmoke;
+    font-size: 16px;
     padding: 20px;
     max-width: 800px;
     border-radius: 20px;
     border: 2px dimgray solid;
     box-shadow: 0 0 10px black inset;
+    opacity: 0.5;
+    transition: opacity 300ms;
+}
+
+footer:hover {
+    opacity: 1;
 }
 
 footer a {
