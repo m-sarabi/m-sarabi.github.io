@@ -28,19 +28,22 @@
                         <li><a href="#python">
                             چرا Python؟
                         </a></li>
-                        <li><a href="#python">
+                        <li><a href="#install">
                             نحوه نصب Python روی ویندوز
                         </a></li>
-                        <li><a href="#python">
+                        <li><a href="#idle">
                             کدنویسی در محیط IDLE
                         </a></li>
-                        <li><a href="#python">
+                        <li><a href="#operators">
                             عملگرها در Python (و کامنت‌نویسی)
                         </a></li>
-                        <li><a href="#python">
+                        <li><a href="#variable-assignment">
+                            تعریف متغیر در Python
+                        </a></li>
+                        <li><a href="#data-types">
                             انواع داده در Python
                         </a></li>
-                        <li><a href="#python">
+                        <li><a href="#number-operations">
                             کار با اعداد
                         </a></li>
                     </ol>
@@ -114,7 +117,7 @@
             </p>
             <img src="assets/week1-05.webp" alt="install python window">
 
-            <h2>کدنویسی در محیط IDLE</h2>
+            <h2 id="idle">کدنویسی در محیط IDLE</h2>
             <p>
                 پایتون همراه با محیط برنامه‌نویسی خودش که IDLE هست نصب میشه.
                 برای اجرای این نرم‌افزار IDLE رو توی Start ویندوز سرچ کنید.
@@ -255,6 +258,56 @@
             </div>
             <p>
                 عملگرهای بیشتری توی پایتون وجود دارن که بعدا باهاشون آشنا می‌شیم.
+            </p>
+
+            <h2 id="variable-assignment">تعریف متغیر در Python</h2>
+            <p>
+                برای تعریف متغیر در Python از علامت مساوی که عملگر تخصیص یا assignment هست استفاده می‌کنیم.
+                این عملگر مقدار سمت راست مساوی رو به متغیر سمت چپ اختصاص میده.
+                در ادامه می‌بینید که نیازی نیست مثل زبان‌های سطح پایین‌تر نوع داده رو مشخص کنید
+                و پایتون خودش نوع داده رو تشخیص میده.
+            </p>
+            <p>
+                برای مقداردهی چند متغیر به صورت همزمان مثل مثال زیر می‌تونید از کاما بینشون استفاده کنید.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    # defining a variable named first_name and assigning a string to it:
+                    first_name = "alice"
+                    # defining a float variable:
+                    PI = 3.141593
+
+                    # assigning multiple variables at once
+                    vx, vy, vz, shape = 5, 6, 2.5, "circle"
+                </code></pre>
+            </div>
+
+            <p>
+                اسم متغیر فقط باید از حروف انگلیسی، اعداد و علامت Underscore
+                <code class="english">_</code>
+                تشکیل شده باشه، و حرف اولش نمی‌تونه عدد باشه.
+                همچنین اسم متغیر نمی‌تونه یکی از کلمات کلیدی پایتون باشه.
+                لیست کلمات کلیدی پایتون رو می‌تونید با دستور زیر چاپ کنید:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    import keyword
+
+                    print(", ".join(keyword.kwlist))
+
+                    #>> False, None, True, and, as, assert, async, await, break, class, continue, def,
+                    #>> del, elif, else, except, finally, for, from, global, if, import, in, is, lambda,
+                    #>> nonlocal, not, or, pass, raise, return, try, while, with, yield
+                </code></pre>
+            </div>
+            <p>
+                همچنین تو سایت پایتون پیشنهاد شده که از حروف "l" (ل کوچک انگلیسی)
+                و "O" (او بزرگ انگلیسی)
+                و "I" (آی بزرگ انگلیسی)
+                برای اسم متغیر استفاده نکنید، چون بعضی فونت‌ها این‌ها رو شبیه به هم و شبیه اعداد
+                <span class="english">0</span> و
+                <span class="english">1</span>
+                نشون میدن.
             </p>
 
             <h2 id="data-types">انواع داده در Python</h2>
