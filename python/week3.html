@@ -24,6 +24,9 @@
                         <li><a href="#strings">
                             مطالب بیشتر در مورد رشته‌ها
                         </a></li>
+                        <li><a href="#string-methods">
+                            متدهای رشته‌ها (string methods)
+                        </a></li>
                     </ol>
                 </details>
             </nav>
@@ -177,17 +180,214 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    text = r"We use \n to go to a new line."
+                    text = r"We use \n to go to a new line. {5 + 5} :)"
                     print(text)
 
-                    #>> We use \n to go to a new line.
+                    #>> We use \n to go to a new line. {5 + 5} :)
                 </code></pre>
             </div>
 
+            <h2 id="string-methods">متدهای رشته‌ها (string methods)</h2>
+            <p>
+                اول خیلی مختصر بگم متد فانکشنی (تابعی) هست که داخل یه کلاس تعریف میشه
+                و یا کاری روی اون آبجکت انجام میده یا مقداری رو برمی‌گردونه.
+                مثلا یه متد ممکنه یه متن رو تغییرش بده، و یه متد دیگه ممکنه مقدار رو به ما بده.
+                حالا یه سری متدهایی هست که می‌تونیم ازشون استفاده کنیم تا کاری روی نوع داده‌ی str انجام بدیم.
+                متدهای مهم رشته‌ها رو با مثال اینجا میارم:
+            </p>
+            <p>
+                <code>str.upper()</code>
+                و
+                <code>str.lower()</code>:
+                یه کپی از string رو برمی‌گردونه که تمام کاراکترهاش رو تبدیل به حروف بزرگ/کوچک کرده:
+            </p>
             <div class="code-container">
                 <pre><code>
+                    text = "hello World!"
+
+                    # all characters to uppercase
+                    new_text = text.upper()
+                    print(new_text)
+
+                    # all characters to lower case
+                    new_text = text.lower()
+                    print(new_text)
+
+                    #>> HELLO WORLD!
+                    #>> hello world!
                 </code></pre>
             </div>
+
+            <p>
+                <code>str.title()</code>:
+                یه کپی از رشته رو برمی‌گردونه که اولین حرف هر کلمه حرف بزرگه،
+                و بقیه حروف کوچیک هستن:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "Hello, from PyCharm!"
+
+                    # first word of each character is uppercase, the rest is lower case
+                    new_text = text.title()  # from -> From, PyCharm -> Pycharm
+                    print(new_text)
+
+                    #>> Hello, From Pycharm!
+                </code></pre>
+            </div>
+            <p>
+                <code>str.split(sep, maxsplit)</code>:
+                یک رشته‌ی دیگه (sep) رو به عنوان جداکننده می‌گیره و رشته رو از جاهایی که اون جداکننده هست قطع می‌کنه
+                و یه لیست از این رشته‌های بریده شده برمیگردونه (لیست رو یه کم پایین‌تر گفتم)
+                اگر مقدار maxsplit هم داده بشه فقط به اون تعداد قطع می‌کنه و بقیه رو نادیده می‌گیره.
+                همچنین اگر جداکننده هم وارد نشه، فاصله‌ی خالی رو به عنوان جداکننده در نظر می‌گیره.
+                (امیدوارم خیلی پیچیده نشده باشه!):
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    today = "1402/07/22"
+                    # splitting the date where / appears
+                    split_text = today.split('/')
+                    print(split_text)
+
+                    weird_text = "hello-how-are-you"
+                    # only splitting the first 2 words
+                    split_text = weird_text.split('-', 2)
+                    print(split_text)
+
+                    text = "I like programming"
+                    # if separator is not given:
+                    split_text = text.split()
+                    print(split_text)
+
+                    #>> ['1402', '07', '22']
+                    #>> ['hello', 'how', 'are-you']
+                    #>> ['I', 'like', 'programming']
+                </code></pre>
+            </div>
+            <p>
+                <code>str.strip()</code>:
+                یه کپی از رشته برمی‌گردنه و فاصله‌های اول و آخر متن رو حذف می‌کنه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "      hello, world!"
+                    print(text)
+                    text = text.strip()
+                    print(text)
+
+                    #>>       hello, world!
+                    #>> hello, world!
+                </code></pre>
+            </div>
+            <p>
+                <code>str.replace(old, new)</code>:
+                این متد دو تا رشته می‌گیره، یکی قدیمی و یکی جدید. هر جا مقدار قدیمی تو متنمون بود
+                با مقدار جدید عوض می‌کنه و متن جدید رو برمی‌گردونه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "My plants are growing, I like my plants."
+                    text = text.replace('plants', 'ears')  # replaces plants with ears
+                    print(text)
+
+                    #>> My ears are growing, I like my ears.
+                </code></pre>
+            </div>
+            <p>
+                <code>str.join(iterable)</code>:
+                یه لیست از رشته‌ها می‌گیره و همه رو به هم می‌چسپونه و بینشون متنی که دادیم رو قرار میده.
+                متن جدید رو برمی‌گردونه.
+                مثلا تو کد زیر یه لیست از اسم‌ها رو بهش دادیم و با " and " جوین کردیم.
+                یعنی یه رشته جدید بهمون میده که بین همه‌ی اسم‌ها and گذاشته:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    names = ["Alice", "Alex", "John", "Joe"]
+                    text = " and ".join(names)
+                    print(text)
+
+                    #>> Alice and Alex and John and Joe
+                </code></pre>
+            </div>
+            <p>
+                <code>str.count(sub)</code>:
+                تعداد تکرار sub رو توی رشته برمیگردونه.
+                مثلا تو کد زیر می‌شمره که چند بار "if" تکرار شده:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "if and only if you do your work!"
+                    print(text.count('if'))  # counts the number of "if"s in the string
+
+                    #>> 2
+                </code></pre>
+            </div>
+            <p>
+                <code>str.find(sub)</code>:
+                ایندکس جایی که اولین بار رشته‌ی sub توی متنمون اومده رو برمی‌گردونه.
+                تو مثال زیر Phone تو دوازدهمین کاراکتره (فاصله‌ها هم حسابن):
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "where is my phone?"
+                    print(text.find("phone"))
+
+                    #>> 12
+                </code></pre>
+            </div>
+            <p>
+                حواستون باشه که تو برنامه‌نویسی (تقریبا) همیشه شمارش از صفر شروع میشه.
+            </p>
+            <img src="assets/misc/meme01.webp" alt="meme about indexing in programming languages">
+            <p>
+                رشته‌ها متدهای بیشتری دارن، اینا مهم‌هاشون بودن.
+                اگر متد دیگه‌ای رو خواستید به اینجا اضافه کنم تلگرام پیام بدید.
+                بهترین روش یادگرفتنشون اینه که باهاشون بازی کنید.
+                داکیومنت‌هاش رو بخونید، ببینید چه متدهایی دارن و خودتون امتحانشون کنید.
+            </p>
+            <h3>گرفتن مقدار از لیست‌ها، رشته‌ها و ...</h3>
+            <p>
+                برای گرفتن مقدار از یه لیست، یه رشته، یا هر نوع iterable دیگه‌ای توی پایتون
+                از علامت
+                <code>[]</code>
+                استفاده می‌کنیم.
+                اگر داخل براکت‌ها یک عدد بگذاریم مقدار اون iterable رو تو اون ایندکس بهمون میده.
+                مثلا توی کد زیر چهارمین کاراکتر رشته رو می‌خوایم بگیریم، پس توی براکت 3 رو می‌نویسیم
+                (شمارش از صفر شروع میشه):
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    name = "Stephen Hawking"
+                    print(name[3])
+
+                    #>> p
+                </code></pre>
+            </div>
+            <p>
+                اگر بخوایم از یه مقدار تا یه مقدار دیگه رو بگیریم،
+                بین دو مقدار یه علامت ":" می‌گذاریم.
+                اینطوری از اولین عدد تا آخرین عدد
+                (بجز خود آخری) رو بهمون میده.
+                اگر عدد اولی رو خالی بگذاریم از اول لیست،
+                و اگر عدد دوم رو خالی بگذاریم تا آخر لیست رو برمی‌گردونه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    text = "Welcome"
+                    print(text[1:3])
+                    print(text[:5])
+                    print(text[3:])
+
+                    #>> el
+                    #>> Welco
+                    #>> come
+                </code></pre>
+            </div>
+
+<!--            <div class="code-container">-->
+<!--                <pre><code>-->
+<!--                </code></pre>-->
+<!--            </div>-->
 
             <div class="code-container">
                 <pre><code id="fun">
