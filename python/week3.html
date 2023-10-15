@@ -36,6 +36,9 @@
                         <li><a href="#list-methods">
                             متدهای لیست‌ها (list methods)
                         </a></li>
+                        <li><a href="#for-loop">
+                            حلقه‌ها (loops) و حلقه‌ی for
+                        </a></li>
                     </ol>
                 </details>
             </nav>
@@ -524,7 +527,287 @@
                     #>> ['Evelyn', 'Grace']
                 </code></pre>
             </div>
+            <p>
+                برای تغییر یکی از مقادیر داخل لیست از ایندکس بالا استفاده می‌کنیم و اون رو برابر با مقدار جدید قرار
+                می‌دیم.
+                مثلا تو کد زیر مقدار لیست تو ایندکس 2 رو که Akbar Abad هست
+                تغییر میدیم به Nasim Shahr:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    cities = ["Eslamshahr", "Golestan", "Akbar Abad"]
+                    cities[2] = "Nasim Shahr"  # changing the value at index 2
+                    print(cities)
+
+                    #>> ['Eslamshahr', 'Golestan', 'Nasim Shahr']
+                </code></pre>
+            </div>
+
             <h2 id="list-methods">متدهای لیست‌ها (list methods)</h2>
+            <p>
+                لیست‌ها هم یک سری متدهای کاربردی دارن که بعضی‌ها خود لیست رو تغییر میدن
+                و بعضی‌ها یه لیست جدید یا مقداری رو برمی‌گردونن.
+                به صورت خلاصه متدهای مهم لیست‌ها رو با توضیح و مثال میارم.
+            </p>
+            <p>
+                <code>list.append(x)</code>:
+                مقدار x رو به آخر لیستمون اضافه می‌کنه
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    prime_numbers = [2, 3, 5, 7, 11]
+                    prime_numbers.append(13)
+                    print(prime_numbers)
+
+                    #>> [2, 3, 5, 7, 11, 13]
+                </code></pre>
+            </div>
+
+            <p>
+                <code>list.extend(Iterable)</code>:
+                متد extend یک لیست، تاپل، یا هر Iterable دیگه‌ای رو می‌گیره
+                و همه‌ی آیتم‌های داخل اون رو به آخر لیست اضافه می‌کنه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    prime_numbers = [2, 3, 5, 7, 11]
+                    prime_numbers.extend([13, 17, 19])
+                    print(prime_numbers)
+
+                    #>> [2, 3, 5, 7, 11, 13, 17, 19]
+                </code></pre>
+            </div>
+
+            <p>
+                <code>list.insert(i, x)</code>:
+                این متد عدد i به عنوان ایندکس و مقدار x رو می‌گیره،
+                و اون مقدار رو در ایندکس i قرار میده.
+                مثلا تو کد زیر کاراکتر "c" رو تو ایندکس 2 قرار میدیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    chars = ["a", "b", "d", "e"]
+                    chars.insert(2, "c")
+                    print(chars)
+
+                    #>> ['a', 'b', 'c', 'd', 'e']
+                </code></pre>
+            </div>
+
+            <p>
+                <code>list.remove(x)</code>:
+                اولین مقدار x رو که توی لیست هست حذف می‌کنه.
+                اگر x توی لیست نباشه خطای ValueError میاره.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    names = ["Alice", "Alex", "Jack", "Joe", "Alex"]
+                    names.remove("Alex")
+                    print(names)
+
+                    #>> ['Alice', 'Jack', 'Joe', 'Alex']
+                </code></pre>
+            </div>
+
+            <p>
+                <code>list.pop([i])</code>:
+                آیتمی که تو ایندکس i هست رو از لیست حذف می‌کنه، و این مقدار حذف شده رو بر می‌گردونه.
+                اگر مقدار i داده نشه، آخرین مقدار لیست رو برمی‌گردونه.
+                علامت‌های
+                <code>[]</code>
+                تو تعریف این متد به این معنیه که این پارامتر اختیاریه،
+                به این معنی نیست که باید براکت بگذاریم
+                (توی داکیومنت‌های پایتون معمولا پارامترهای اختیاری رو اینطور نشون میدن)
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    names = ["Alice", "Jack", "Joe", "Alex", "Clara"]
+
+                    # removes the second item from the list
+                    # we can save that removed item in a variable as it is returned by the method
+                    removed_item = names.pop(1)
+                    print(names)
+
+                    # removing the last item which is "Clara"
+                    names.pop()
+                    print(names)
+
+                    #>> ['Alice', 'Joe', 'Alex', 'Clara']
+                    #>> ['Alice', 'Joe', 'Alex']
+                </code></pre>
+            </div>
+
+            <p>
+                <code>list.clear()</code>:
+                لیست رو خالی می‌کنه، یعنی تمام آیتم‌های داخل لیست رو پاک می‌کنه
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    names = ["Alice", "Jack", "Joe", "Alex"]
+
+                    names.clear()  # clears the list
+                    print(names)
+
+                    #>> []
+                </code></pre>
+            </div>
+
+            <p>
+                <code>list.count(x)</code>:
+                تعداد تکرار x توی لیست رو برمی‌گردونه.
+                مثلا توی لیست زیر "ha" سه بار تکرار شده، پس عدد 3 چاپ میشه
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    laugh = ["ha", "he", "ha", "hi", "ha", "ho"]
+
+                    print(laugh.count("ha"))  # counts the "ha"
+
+                    #>> 3
+                </code></pre>
+            </div>
+
+            <h2 id="for-loop">حلقه‌ها (loops) و حلقه‌ی for</h2>
+            <p>
+                حلقه‌ها در پایتون (و در برنامه‌نویسی) برای اینه که
+                یه کار تکراری رو به تعداد مشخص و یا تا وقتی که یه شرطی برقراره انجام بدیم.
+            </p>
+            <p>
+                مثلا فرض کنیم می‌خوایم ظرف بشوریم، می‌گیم به ازای هر کدوم از ظرف‌های داخل ظرفشویی
+                اون ظرف رو بردار، اسکاج بزن، آب بکش و بذار کنار. این میشه حلقه‌ی for
+            </p>
+            <p>
+                نوع دیگه‌ی حلقه بر اساس شرطه.
+                مثلا از خونه اومدم بیرون و می‌خوام برم سر کوچه.
+                میگم تا وقتی که فاصله‌ تا سر کوچه بیشتر از صفره، یک قدم بردار.
+                وقتی به سر کوچه رسیدم دیگه شرط برقرار نیست (فاصله‌م میشه صفر) و حلقه تموم میشه.
+                ایم میشه حلقه‌ی while.
+            </p>
+            <p>
+                حالا اول طرز نوشتن حلقه‌ی for رو توی پایتون می‌گیم (حلقه while برا هفته بعد).
+                سینتکس نوشتن حلقه پایتون اینطوره:
+            </p>
+            <ol>
+                <li>اول کلمه for رو می‌نویسیم (یعنی برای، مثل آهنگ «برای...»!)</li>
+                <li>بعد متغیر حلقه، این متغیر می‌تونه هر اسمی داشته باشه (معمولا i می‌گذارن)</li>
+                <li>بعد عملگر in رو بعد از متغیر حلقه می‌گذاریم</li>
+                <li>بعد Iterable که می‌خوایم شمارش رو روش انجام بدیم می‌گذاریم،
+                    مثل ظرف‌ها تو مثال فرضی بالا، می‌تونه مثلا یه لیست باشه
+                </li>
+                <li>و بعد علامت دو نقطه رو می‌ذاریم که نشون بدیم دستورات داخل حلقه
+                    از اینجا شروع میشن
+                </li>
+                <li>و در آخر دستورهای داخل حلقه رو با یه فاصله (indent) زیر خط بالا می‌نویسیم.
+                    استاندارد پایتون برای indent چهار تا فاصله‌ی space هست که اگه
+                    توی pycharm دکمه‌ی tab رو بزنید خودش چهار تا فاصله می‌گذاره.
+                </li>
+            </ol>
+            <img src="assets/misc/meme02.webp" alt="meme about for loop variable name" style="width: 400px">
+            <p>
+                با یه مثال بهتر مشخصه که چطوریه.
+                تو مثال پایین می‌خوایم مجموع به توان دوی اعداد داخل لیست رو حساب کنیم.
+                پس اول یه متغیر result تعریف می‌کنیم که قراره نتیجه توش باشه و مقدار اولیه صفر بهش می‌دیم.
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+                    numbers = [5, 4, 8, 3, 6]
+                    result = 0
+                </code></pre>
+            </div>
+
+            <p>
+                حالا به ازای هر کدوم از اعداد داخل لیست می‌خوایم یه کاری انجام بدیم،
+                پس یه حلقه‌ی for برای لیستمون می‌نویسیم.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    numbers = [5, 4, 8, 3, 6]
+                    result = 0
+
+                    for i in numbers:
+                </code></pre>
+            </div>
+
+            <p>
+                حالا اون کاری که می‌خوایم به ازای هر کدوم از اعداد داخل لیست انحام بدیم
+                رو داخل حلقه می‌نویسیم.
+                کاری که می‌خوایم بکنیم اینه که هر مقدار رو به توان دو بکنیم و به result اضافه‌ش کنیم.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    numbers = [5, 4, 8, 3, 6]
+                    result = 0
+
+                    for i in numbers:
+                        result += i ** 2
+                </code></pre>
+            </div>
+            <p>
+                متغیر i در هر تکرار حلقه مقدار یکی از اعداد داخل لیست رو می‌گیره.
+                بعد مقدار result بعلاوه‌ی اون مقدار i به توان دو میشه.
+                در آخر می‌تونیم مقدار result رو چاپ کنیم.
+                (دقت کنید که پشت دستور print دیگه فاصله نذاشتیم، یعنی این دستور داخل حلقه نیست).
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    numbers = [5, 4, 8, 3, 6]
+                    result = 0
+
+                    for i in numbers:
+                        result += i ** 2
+                    print(result)
+
+                    #>> 150
+                </code></pre>
+            </div>
+            <p>
+                و نتیجه شده 150 که درسته
+                <code>25 + 16 + 64 + 9 + 36 = 150</code>
+            </p>
+            <h3>nested loops (حلقه‌های تو در تو)</h3>
+            <p>
+                می‌توین یک حلقه رو داخل یه حلقه‌ی دیگه بنویسیم که بهش میگم nested loop
+                یعنی حلقه‌های داخل هم.
+                به عنوان مثال فرض کنید یه ماتریس دو بعدی
+                <span>2 * 2</span>
+                دارید و می‌خواید مجموع تمام آرایه‌های این ماتریس رو به دست بیارید.
+                می‌تونیم این ماتریس رو به صورت یه لیست که هر کدوم از آیتم‌هاش یه لیست دیگه هستن بنویسیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    our_matrix = [[4, 5], [7, 8]]
+                </code></pre>
+            </div>
+            <p>
+                حالا حلقه‌ی بیرونی برای هر کدوم از لیست‌های داخل لیست بیرونی هست،
+                و حلقه‌ی داخلی برای هرکدوم از اعداد لیست داخلی
+                (می‌تونیم لیست‌ها رو زیر هم بنویسیم که شکلش هم شبیه لیست باشه)
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    our_matrix = [[4, 5],
+                                  [7, 8]]
+
+                    result = 0
+                    for i in our_matrix:
+                        # i is a list, we iterate through this list as well
+                        for j in i:
+                            result += j
+                    print(result)
+
+                    #>> 24
+                </code></pre>
+            </div>
+            <p>
+                و نتیجه شد 24 که جمع 4 تا عدده.
+                نکته‌ای که هست اینه که توی حلقه‌ی دوم دوباره از i به عنوان متغیر حلقه استفاده نکنید
+                (خود pycharm هم هشدار میده).
+                ممکنه تو شروع یه کم درکش سخت باشه.
+                تمرینش کنید و بذارید خوب مفهومش براتون هضم بشه.
+            </p>
+
+            <p>باز هم اگه اشتباهی کردم یا چیزی بهم بگید. موفق باشیم :)</p>
 
 
 <!--            <div class="code-container">-->
