@@ -27,6 +27,15 @@
                         <li><a href="#string-methods">
                             متدهای رشته‌ها (string methods)
                         </a></li>
+                        <li><a href="#iterables">
+                            Iterables یا اشیاء قابل شمارش
+                        </a></li>
+                        <li><a href="#lists">
+                            list, لیست
+                        </a></li>
+                        <li><a href="#list-methods">
+                            متدهای لیست‌ها (list methods)
+                        </a></li>
                     </ol>
                 </details>
             </nav>
@@ -297,7 +306,7 @@
                 <code>str.join(iterable)</code>:
                 یه لیست از رشته‌ها می‌گیره و همه رو به هم می‌چسپونه و بینشون متنی که دادیم رو قرار میده.
                 متن جدید رو برمی‌گردونه.
-                مثلا تو کد زیر یه لیست از اسم‌ها رو بهش دادیم و با " and " جوین کردیم.
+                مثلا تو کد زیر یه لیست از اسم‌ها رو بهش دادیم و با and جوین کردیم.
                 یعنی یه رشته جدید بهمون میده که بین همه‌ی اسم‌ها and گذاشته:
             </p>
             <div class="code-container">
@@ -383,6 +392,140 @@
                     #>> come
                 </code></pre>
             </div>
+
+            <h2 id="iterables">Iterables یا اشیاء قابل شمارش</h2>
+            <p>
+                در پایتون اشیایی که قابل شمارش هستن رو Iterable میگن،
+                چیزهایی که تعداد قابل شمارشی از اشیاء دیگه رو تو خودشون نگه می‌دارن
+                و میشه با یه حلقه for روی هرکدوم عملیاتی انجام داد
+                (چیز ترسناکی نیست، کلا یه مجموعه از چیزای دیگه‌ست)
+                مثلا string هم یه Iterable هست که مجموعه‌ای از کاراکترهاست.
+            </p>
+            <p>
+                Iterator های خود پایتون شامل
+                list و tuple و set و dict میشن، که یه مثال از هرکدوم رو میارم:
+            </p>
+            <ul>
+                <li>
+                    list:
+                    لیست‌ها با استفاده از براکت
+                    <code>[]</code>
+                    ساخته میشن.
+                    لیست‌ها هم قابل تغییر هستن (یعنی میشه یکی از مقدارهاشون رو بعدا تغییر داد)
+                    و هم مرتب هستن (یعنی ترتیب توشون مهمه)
+                </li>
+            </ul>
+            <div class="code-container">
+                <pre><code>
+                    example = [1, 5, False, "hi"]  # this is a list
+                </code></pre>
+            </div>
+            <ul>
+                <li>
+                    tuple:
+                    تاپل‌ها با استفاده از پرانتز
+                    <code>()</code>
+                    ساخته میشن.
+                    تاپل‌ها قابل تغییر نیستن، یعنی وقتی ساخته شدن دیگه نمیشه یکی از مقادیرشون رو تغییر داد،
+                    و مرتب هستن (ترتیب توشون مهمه).
+                    اگر یه تاپل فقط با یک عضو بخوایم بسازیم باید یه کاما هم بگذاریم.
+                </li>
+            </ul>
+            <div class="code-container">
+                <pre><code>
+                    example = (1, 8, "hello", 2.5)  # this is a tuple
+                    single_tuple = (4,)  # a tuple with only one object in it
+                </code></pre>
+            </div>
+            <ul>
+                <li>
+                    dict:
+                    دیکشنری‌ها با استفاده از آکلاد
+                    <code>{}</code>
+                    ساخته میشن.
+                    دیکشنری‌ها به صورت کلید و مقدار هستن که کلید و مقدار با استفاده از
+                    یه کالن (دو نقطه :) از هم جدا میشن، بعدا دیکشنری‌ها رو می‌خونیم.
+                    دیکشنری‌ها قابل تغییر هستن، و قبلا مرتب نبودن (یعنی ترتیب توشون مهم نبود)
+                    ولی تو نسخه‌های جدید پایتون مرتب هستن.
+                </li>
+            </ul>
+            <div class="code-container">
+                <pre><code>
+                    # this is a dictionary witch has {key: value} pairs
+                    example = {"color": "red", "shape": "circle", "width": 5, "filled": False}
+                </code></pre>
+            </div>
+            <ul>
+                <li>
+                    set:
+                    ست‌ها مثل دیکشنری با آکلاد
+                    <code>{}</code>
+                    ساخته میشن ول به صورت کلید و مقدار نیستن و مثلا مثل تاپل مقدار می‌گیرن.
+                    ست‌ها نه قابل تغییر هستن و نه ترتیب دارن.
+                    همچنین ست‌ها مقدار تکراری نمی‌تونن داشته باشن و همه‌ی مقدارهای داخلش یکتا هستن.
+                    <br>
+                    مثلا تو کد پایین فقط یکی از مقدارهای "blue" داخل ست می‌مونه،
+                    و چون مرتب نیست، هربار که پرینت کنید یه نتیجه متفاوت چاپ می‌شه:
+                </li>
+            </ul>
+            <div class="code-container">
+                <pre><code>
+                    colors = {"blue", "red", "green", "yellow","blue"}
+                    # only one of the "blue" values will stay in the set:
+                    print(colors)
+
+                    #>> {'yellow', 'blue', 'green', 'red'}
+                </code></pre>
+            </div>
+            <h2 id="lists">list, لیست</h2>
+            <p>
+                لیست‌ها همونطور که گفتیم مجموعه‌ای از چیزهای دیگه هستن (حتی یه لیست دیگه).
+                برای دسترسی به یک آیتم از لیست از ایندکس اون مقدار داخل براکت استفاده می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    example = [5.5, 8, "ali amiri XD", False, [1, 2, "hi"]]
+
+                    # -> third item in the list
+                    print(example[2])
+
+                    # -> fifth item is a list, and we get the third item from that list
+                    print(example[4][2])
+
+                    #>> ali amiri XD
+                    #>> hi
+                </code></pre>
+            </div>
+            <p>
+                می‌تونیم از آخر لیست (یا هر Iterable دیگه‌ای) به اول بشماریم.
+                برای این کار از ایندکس منفی استفاده می‌کنیم.
+                ایندکس
+                <span class="english">-1</span>
+                یعنی آخرین آیتم لیست،
+                <span class="english">-2</span>
+                یعنی یکی به آخر و غیره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    fruits = ["apple", "banana", "peach", "narangi"]
+                    print(fruits[-1])
+
+                    #>> narangi
+                </code></pre>
+            </div>
+            <p>
+                برای اینکه یه قسمت از لیست رو برگردونیم از دونقطه (همونطور که تو رشته‌ها گفتم) استفاده می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    names = ["Aurora", "Evelyn", "Grace", "Henry", "Jade", "Ivy"]
+                    print(names[1:3])  # prints the names at indexes 1 and 2
+
+                    #>> ['Evelyn', 'Grace']
+                </code></pre>
+            </div>
+            <h2 id="list-methods">متدهای لیست‌ها (list methods)</h2>
+
 
 <!--            <div class="code-container">-->
 <!--                <pre><code>-->
