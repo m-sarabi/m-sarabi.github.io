@@ -9,6 +9,11 @@
     src: url("/assets/fonts/HARNGTON.TTF");
 }
 
+@font-face {
+    font-family: SGeorgia;
+    src: local(Georgia), url("/assets/fonts/georgia.ttf");
+}
+
 /* resetting margins and paddings */
 *:not(p,li,ol,ul) {
     padding: 0;
@@ -98,7 +103,7 @@ footer img {
     border-radius: 20px;
     box-shadow: 5px 5px 10px #000a, 0 0 2px black;
     background-color: wheat;
-    font-family: "B Koodak", BKoodak, Andalus, system-ui;
+    font-family: "B Koodak", BKoodak, Georgia, SGeorgia, system-ui;
 }
 
 /* side nav container */
@@ -107,6 +112,7 @@ aside {
     width: fit-content;
     top: 40px;
     transition: all 0.5s 0s;
+    font-size: 24px;
     font-family: Harrington, SHarrington, system-ui;
 }
 
@@ -121,6 +127,7 @@ nav.side {
     border-radius: 10px;
     font-weight: bold;
     overflow: hidden;
+    transition: box-shadow 300ms;
 }
 
 nav.side:hover {
@@ -130,12 +137,14 @@ nav.side:hover {
 nav.side a {
     text-decoration: none;
     color: black;
+    font-size: 24px;
     line-height: 150%;
 }
 
 nav.side ul {
     padding: 5px;
     margin: 5px;
+    font-size: 24px;
 }
 
 nav.side li {
@@ -248,6 +257,14 @@ nav.toc a {
 }
 
 nav.toc summary {
+    cursor: grab;
+}
+
+nav.toc summary:active {
+    cursor: grabbing;
+}
+
+nav.toc summary {
     font-size: 28px;
     font-weight: bold;
 }
@@ -304,6 +321,7 @@ blockquote::before {
     height: 100%;
     border-radius: 20px;
 }
+
 div:has(iframe) {
     position: relative;
     width: 80%;
@@ -312,9 +330,10 @@ div:has(iframe) {
     border-radius: 20px;
     box-shadow: 0 0 10px black;
 }
+
 div:has(iframe)::before {
     position: absolute;
-    top:-50px;
+    top: -50px;
     right: 0;
     content: "شاید فقط با فیلترشکن باز بشه (تقصیر جمهوری اسلامیه😡)";
 }
