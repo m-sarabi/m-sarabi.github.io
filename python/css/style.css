@@ -316,7 +316,7 @@ div:has(iframe)::before {
     position: absolute;
     top:-50px;
     right: 0;
-    content: "فقط با فیلترشکن کار می‌کنه. تقصیر جمهوری اسلامیه 😡";
+    content: "شاید فقط با فیلترشکن باز بشه😡";
 }
 
 /* invite to python group style */
