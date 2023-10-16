@@ -297,6 +297,28 @@ blockquote::before {
     top: -25px;
 }
 
+/* trinket interactive python */
+#trinket {
+    border: 1px solid;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+div:has(iframe) {
+    position: relative;
+    width: 80%;
+    height: 400px;
+    margin: 60px auto 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px black;
+}
+div:has(iframe)::before {
+    position: absolute;
+    top:-50px;
+    right: 0;
+    content: "فقط با فیلترشکن کار می‌کنه. تقصیر جمهوری اسلامیه 😡";
+}
+
 /* invite to python group style */
 #python-invite {
     background: radial-gradient(ellipse at 25%, mediumslateblue 0%, whitesmoke 75%);
