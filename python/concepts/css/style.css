@@ -1,0 +1,89 @@
+html {
+    /*background-color: #001;*/
+    /*color: whitesmoke;*/
+
+}
+
+html {
+    font-family: Arial, serif;
+    font-size: 24px;
+}
+
+input[type="text"], input[type="number"] {
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+button {
+    font-size: 20px;
+}
+
+body {
+    font-family: "JetBrains Mono", serif;
+    font-weight: bold;
+}
+
+input {
+    width: 60px;
+}
+
+#for-variable {
+    text-align: center;
+    background-color: lightgreen;
+}
+
+#list {
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 10px darkblue;
+    width: fit-content;
+    border-radius: 50px;
+    padding: 20px;
+    margin: 20px;
+    transition: all 300ms;
+    text-align: left;
+}
+#list:hover {
+    transform: translate(0, 2px);
+}
+
+#our-list * {
+    border-radius: 5px;
+}
+
+#result {
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 10px red;
+    width: fit-content;
+    border-radius: 50px;
+    padding: 20px;
+    margin: 20px;
+    transition: all 300ms;
+}
+
+#result:hover {
+    transform: translate(0, 2px);
+}
+
+main {
+    border: 1px #555 solid;
+    width: 800px;
+    padding: 50px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: -3px -3px 5px #555 inset, 3px 3px 5px #aaa inset;
+}
+
+button {
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #888;
+}
+
+button:active {
+    box-shadow: 1px 1px 4px #888;
+}
+
+#result-board-value {
+    transition: all 1s;
+}

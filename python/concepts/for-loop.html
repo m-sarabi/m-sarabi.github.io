@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Loop / M-Sarabi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+    <label>
+        <input type="number" value="0" min="-9999" max="9999" id="list-input">
+        <button id="add-to-list">Add</button>
+        تا 10 عدد به لیست اضافه کنید
+    </label><br>
+    <hr>
+    <div id="list">
+        <span style="font-size: 18px; background-color: lightgray; border-radius: 10px; padding: 5px" dir="rtl">
+            اسم متغیر حلقه رو می‌تونید عوض کنید 🤷‍♂️</span><br><br>
+        our_list = <span id="list-values">[]</span><br>
+        <span id="result-init">result = <span id="result-init-value">0</span></span><br><br>
+        for <label for="for-variable"></label><input type="text" value="item" id="for-variable" maxlength="10">
+        in <span id="our-list"></span>:<br>
+        &emsp;result += <span id="for-variable-inside"></span><br>
+    </div>
+    <div id="result">
+        <span id="for-variable-board"></span> → <span id="for-variable-board-value"></span><br>
+        result → <span id="result-board-value"></span>
+    </div>
+    <br>
+    <hr>
+    <button id="start" disabled>Start</button>
+</main>
+<script src="scripts/for-loop.js"></script>
+</body>
+</html>
