@@ -197,6 +197,7 @@ nav.side li:hover::after {
 main {
     position: relative;
     margin-left: 250px;
+    min-height: 60vh;
 }
 
 /* article contents */
