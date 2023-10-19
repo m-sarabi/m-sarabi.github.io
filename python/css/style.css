@@ -98,7 +98,7 @@ footer img {
     padding: 30px;
     margin: 5px 5% 1%;
     display: block;
-    grid: 1fr / 200px auto;
+    grid: 1fr / 260px auto;
     gap: 0;
     border-radius: 20px;
     box-shadow: 5px 5px 10px #000a, 0 0 2px black;
@@ -123,7 +123,7 @@ nav.side {
     box-shadow: 0 0 5px 1px #0007;
     font-size: 24px;
     padding: 10px;
-    width: 220px;
+    width: 260px;
     border-radius: 10px;
     font-weight: bold;
     overflow: hidden;
@@ -196,7 +196,7 @@ nav.side li:hover::after {
 /* container of the main contents of the page */
 main {
     position: relative;
-    margin-left: 250px;
+    margin-left: 290px;
     min-height: 60vh;
 }
 
