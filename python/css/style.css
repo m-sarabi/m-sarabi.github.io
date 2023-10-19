@@ -224,7 +224,7 @@ article a {
     text-shadow: 0 0 1px #000000aa;
 }
 
-article img {
+article img:not(.temp-img) {
     margin: 5px auto;
     display: block;
     max-width: 80%;
