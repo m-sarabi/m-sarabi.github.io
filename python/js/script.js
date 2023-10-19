@@ -5,14 +5,13 @@ let text = fullText;
 if (funElem !== null) {
     funElem.innerHTML = " ";
     let counter = 0;
-    let funInterval = setInterval(function () {
+    setInterval(function () {
         funElem.innerHTML += text.charAt(0);
         text = text.substring(1);
         counter += 1;
         if (text === "") {
             funElem.innerHTML = " ";
             text = fullText;
-            // clearInterval(funInterval)
         }
     }, 600);
 }
