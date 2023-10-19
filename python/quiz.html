@@ -6,25 +6,35 @@
     <link rel="icon" type="image/png" href="assets/Python.webp">
     <link rel="stylesheet" href="css/prism.css">
     <link rel="stylesheet" href="css/style.css?v6">
-
-    <!--Remove this when done-->
+    <link rel="stylesheet" href="css/quiz-style.css">
     <style>
-        h2 {
-            animation-name: pulse;
-            animation-duration: 2s;
-            animation-direction: alternate;
-            animation-iteration-count: infinite;
-            animation-timing-function: ease-in-out;
-            text-align: center;
-            user-select: none;
+        .temp-img {
+            position: relative;
         }
 
-        @keyframes pulse {
+        #bedrock {
+            z-index: 1;
+            width: 100px;
+            transform: translateY(40px);
+        }
+
+        #pick {
+            z-index: 2;
+            width: 100px;
+            transform-origin: 10px 20px;
+            animation-name: hit;
+            animation-duration: 700ms;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in;
+        }
+
+        @keyframes hit {
             0% {
-                transform: scale(1);
+                transform: translateX(60px) rotate(0deg) translateY(-50px);
             }
             100% {
-                transform: scale(1.5);
+                transform: translateX(100px) rotate(60deg) translateY(-50px);
             }
         }
     </style>
@@ -39,22 +49,20 @@
     </aside>
     <main>
         <article class="language-py line-numbers match-braces">
-            <!--<nav class="toc">-->
-            <!--    <details open>-->
-            <!--        <summary>فهرست مطالب</summary>-->
-            <!--        <ol>-->
-            <!--        </ol>-->
-            <!--    </details>-->
-            <!--</nav>-->
-            <!--<div class="code-container">-->
-            <!--    <pre><code>-->
-            <!--    </code></pre>-->
-            <!--</div>-->
-            <h2 dir="ltr">Coming Soon!</h2><br>
-            <div class="code-container">
-                <pre><code id="fun">
-                </code></pre>
+            <div dir="ltr">
+                <img src="assets/misc/Diamond_Pickaxe.webp" class="temp-img" id="pick" alt="pickaxe working">
+                <img src="assets/misc/Bedrock.webp" class="temp-img" id="bedrock" alt="a bedrock block">
+                <span style="font-size: 40px;font-weight: bolder">Work In Progress!</span>
             </div>
+            <button id="startBtn">شروع</button>
+            <!--            <div class="code-container">-->
+            <!--                <pre><code>-->
+            <!--                </code></pre>-->
+            <!--            </div>-->
+            <!--            <div class="code-container">-->
+            <!--                <pre><code id="fun">-->
+            <!--                </code></pre>-->
+            <!--            </div>-->
         </article>
     </main>
 </section>
@@ -72,6 +80,7 @@
 </footer>
 
 <script src="js/script.js"></script>
+<script src="js/quiz.js"></script>
 <script src="js/prism.js"></script>
 </body>
 </html>
