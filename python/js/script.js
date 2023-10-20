@@ -24,3 +24,8 @@ if (document.getElementsByClassName("toc")[0] !== undefined) {
         tocElem.innerHTML += tocItem;
     });
 }
+
+// scroll to the top of the page upon loading the page
+window.addEventListener('load', () => {
+    window.scrollTo(0, 0)
+})
