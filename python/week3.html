@@ -655,6 +655,62 @@
                 </code></pre>
             </div>
 
+            <p>
+                <code>list.sort(x)</code>:
+                مقادیر داخل لیست رو از کوچک به بزرگ مرتب (sort) می‌کنه.
+                اگر از
+                <code>reverse=True</code>
+                استفاده بشه لیست رو از بزرگ به کوچک مرتب می‌کنه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    numbers = [5, 6, 1, 3, 8, 4, 9]
+
+                    numbers.sort()  # sort the list in ascending order
+                    print(numbers)
+
+                    numbers.sort(reverse=True)  # sort the list in descending order
+                    print(numbers)
+
+
+                    #>> [1, 3, 4, 5, 6, 8, 9]
+                    #>> [9, 8, 6, 5, 4, 3, 1]
+                </code></pre>
+            </div>
+
+            <h3>توابع
+                <code>len()</code>
+                و
+                <code>sorted()</code>
+            </h3>
+            <p>
+                تابع len یک iterable می‌گیره (که می‌تونه رشته، لیست، تاپل یا هر چیزی باشه)
+                و طول اون رو (یعنی تعداد اشیاء یا مقادیر داخلش رو) برمی‌گردونه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    my_list = [1, 5, "Alice", False]
+                    print(len(my_list))
+
+                    #>> 4
+                </code></pre>
+            </div>
+
+            <p>
+                تابع sorted هم یک لیست می‌گیره و دقیقا مثل متد sort عمل می‌کنه،
+                با این تفاوت که sorted یک لیست جدید رو برمی‌گردونه و لیست اصلیمون رو تغییر نمیده.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    numbers = [5, 6, 1, 3, 8, 4, 9]
+
+                    sorted_numbers = sorted(numbers)
+                    print(sorted_numbers)
+
+                    #>> [1, 3, 4, 5, 6, 8, 9]
+                </code></pre>
+            </div>
+
             <h2 id="for-loop">حلقه‌ها (loops) و حلقه‌ی for</h2>
             <p>
                 حلقه‌ها در پایتون (و در برنامه‌نویسی) برای اینه که
