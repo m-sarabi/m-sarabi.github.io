@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>M-Sarabi/Python</title>
+    <link rel="icon" type="image/png" href="assets/Python.webp">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/style.css?v6">
+</head>
+<body>
+<header>
+    <a href="index.html">Python Course</a><br>
+</header>
+<section id="main-page">
+    <aside>
+        <script id="nav-bar-script" src="js/nav-replace.js"></script>
+    </aside>
+    <main>
+        <article class="language-py line-numbers match-braces">
+            <nav class="toc">
+                <details open>
+                    <summary>فهرست مطالب</summary>
+                    <ol>
+                    </ol>
+                </details>
+            </nav>
+
+            <h2 id="range">range (بازه)</h2>
+            <p>
+                تابع
+                <code>range()</code>
+                یکی از توابع داخلی (built-in functions) پایتون هست که دنباله‌ای از اعداد رو تولید می‌کنه.
+                این تابع یک، دو یا سه پارامتر رو به صورت عدد صحیح می‌گیره.
+                نوع داده‌ای که این فانکشن برمی‌گردونه از نوع range هست که یک نوع iterable هست،
+                یعنی تعداد قابل شمارشی اعداد داخلش هست که می‌تونیم مثلا تو حلقه for استفاده کنیم.
+                اگر تنها یک پارامتر به range داده بشه،
+                دنباله‌ی اعداد از صفر تا اون عدد (stop) بجز خود اون عدد رو با گام یک تولید می‌کنه.
+                (اگر فقط یک عدد منفی داده بشه، هیچ دنباله‌ای تولید نمیشه، چون از صفر به سمت بالا می‌شمره)
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    nums = range(10)
+
+                    for i in nums:
+                        print(i, end=" ")
+
+                    #>> 0 1 2 3 4 5 6 7 8 9
+                </code></pre>
+            </div>
+            <p>
+                اگر دو تا پارامتر به لیستمون داده بشه،
+                دنباله‌ی اعداد از عدد اول (start) تا عدد دوم (stop) بجز خود عدد دوم رو می‌سازه.
+                اینجا هم چون هر عدد دنباله یکی بهش اضافه شده، اگر عدد دوم کوچکتر یا مساوی عدد اول باشه،
+                یک دنباله‌ی خالی تولید میشه.
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+                    for i in range(5, 10):
+                        print(i, end=" ")
+                    print()
+
+                    # when stop is less than start:
+                    for i in range(10, 5):
+                        print(i, end=" ")  # nothing will be printed
+
+                    #>> 5 6 7 8 9
+                    #>>
+                </code></pre>
+            </div>
+            <p>
+                تو کد بالا حلقه‌ی اول از مقدار 5 تا 10 رو چاپ کرد،
+                ولی حلقه‌ی دوم هیچ مقداری رو چاپ نکرد.
+            </p>
+            <p>
+                اگر سه تا پارامتر به تابع range بدیم،
+                اون موقع دنباله‌ی اعداد از مقدار اول (start) تا مقدار دوم (stop) رو تولید می‌کنه
+                و گامش رو عدد سوم (step) تعیین می‌کنه که پیشفرض مقدارش یک هست.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    for i in range(5, 15, 2):
+                        print(i, end=" ")
+
+                    #>> 5 7 9 11 13
+                </code></pre>
+            </div>
+            <p>
+                اگر مقدار step رو منفی قرار بدیم، دنباله اعدادمون از بزرگ به کوچک میشه،
+                و باید مقدار start از stop بزرگ‌تر باشه،
+                در غیر این صورت یک دنباله خالی بهمون میده.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    for i in range(20, 0, -2):
+                        print(i, end=" ")
+
+                    #>> 20 18 16 14 12 10 8 6 4 2
+                </code></pre>
+            </div>
+            <p>
+                فانکشن range فقط اعداد صحیح (از نوع int) رو به عنوان پارامتر قبول می‌کنه،
+                و اگر عدد اعشاری بهش بدیم خطای TypeError میده.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    for i in range(1, 20, 1.5):
+                        print(i, end=" ")
+
+                    #>> TypeError: 'float' object cannot be interpreted as an integer
+                </code></pre>
+            </div>
+            <p>
+                تو مثال بالا نمی‌تونیم گام 1.5 که عدد اعشاری هست بدیم.
+                راه آقای نوبهار استفاده از کتابخونه numpy هست که
+                برای کسی که می‌خواد برنامه‌نویسی یاد بگیره اصلا روش خوبی نیست.
+                از اونجایی که دارییم برنامه‌نویسی پایتون رو از پایه کار می‌کنیم،
+                نمی‌خوام وارد کار با کتابخونه‌های دیگه پایتون بشم.
+                این سبک تدریس نوبهار رو قبول ندارم،
+                برنامه‌نویس باید روش حل مساله و الگوریتم‌نویسی رو یاد بگیره،
+                نه اینکه مستقیم بره سراغ کتابخونه‌های آماده.
+                اینطوری فقط کدنویسی یاد می‌گیریم نه برنامه‌نویسی.
+            </p>
+            <p>
+                مثلا (چون هنوز به حلقه while و تعریف فانکشن نرسیدیم)
+                یک راه ساده با ابزارهایی که تا الآن دیدیم
+                واسه اینکه اعداد از 1 تا 20 رو با گام 1.5 به دست بیاریم،
+                به جاش اعداد از 10 تا 200 رو با گام 15 به دست میاریم و
+                تقسیم بر 10 می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    for i in range(10, 200, 15):
+                        print(i / 10, end=" ")
+
+                    #>> 1.0 2.5 4.0 5.5 7.0 8.5 10.0 11.5 13.0 14.5 16.0 17.5 19.0
+                </code></pre>
+            </div>
+
+            <p>
+                بعدا می‌تونیم خودمون تابع خودمون رو بنویسیم که با اعداد اعشاری
+                هم کار کنه. این رو سر کلاس نوشتم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    def better_range(start, stop=None, step=1):
+                        result = []
+                        if stop is None:
+                            stop = start
+                            start = 0
+                        while (step > 0 and start < stop) or (step < 0 and start > stop):
+                            result.append(start)
+                            start += step
+                        return result
+
+
+                    for i in better_range(1, 20, 1.5):
+                        print(i, end=" ")
+
+                    #>> 1 2.5 4.0 5.5 7.0 8.5 10.0 11.5 13.0 14.5 16.0 17.5 19.0
+                </code></pre>
+            </div>
+
+            <h2 id="if-statement">دستورهای if در پایتون</h2>
+            <p>
+                از دستورهای if در پایتون وقتی استفاده میشه که می‌خوایم یک سری
+                دستورها فقط وقتی اجرا بشن که یک سری شرایط برقرار باشن.
+                نحوه‌ی نوشتن دستور if به این شکله که:
+                ابتدا کلمه‌ی کلیدی if، بعد شرط، و بعد دو تا نقطه.
+                دستورهایی که مربوط به if هستن زیر if و با indent (فاصله) مثل
+                دستورهای for نوشته میشن.
+                این دستورها وقتی اجرا میشن که شرط if برابر با True باشه
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    if condition:
+                        # Codes to be executed if condition is True
+                </code></pre>
+            </div>
+            <p>
+                به عنوان مثال، تو کد زیر متن داخل if فقط وقتی چاپ میشه
+                که پسورد "easylazypassword" درست وارد بشه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    password = "easylazypassword"
+                    user_input = input("Enter the password: ")
+
+                    if password == user_input:
+                        print("You logged in successfully!")
+                </code></pre>
+            </div>
+            <p>
+                استفاده از
+                <code>else</code> :
+                تو انگلیسی if به معنی «اگر» و else به معنی «در غیر این صورت» هست.
+                توی پایتون اگر بخوایم وقتی شرط if برقرار نشد دستورای دیگه‌ای اجرا بشن از else
+                استفاده می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    if condition:
+                        # Codes to be executed if condition is True
+                    else:
+                        # Codes to be executed if condition is False
+                </code></pre>
+            </div>
+            <p>
+                مثلا تو مثال بالا اگر وقتی کاربر پسورد رو اشتباه وارد کرد،
+                بگیم بهش که پسورد رو اشتباه وارد کردی از else استفاده می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    password = "easylazypassword"
+                    user_input = input("Enter the password: ")
+
+                    if password == user_input:
+                        print("You logged in successfully!")
+                    else:
+                        print("You entered the password incorrectly!")
+                </code></pre>
+            </div>
+            <p>
+                استفاده از
+                <code>elif</code> :
+                اگر بخوایم چند تا شرط مختلف رو بررسی کنیم،
+                از دستور elif استفاده می‌کنیم که مخفف else if هست.
+                می‌تونیم به هر تعداد که بخوایم دستور elif استفاده کنیم بذاریم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    if condition1:
+                        # if expressions
+                    elif condition2:
+                        # elif expressions
+                    elif condition3:
+                        # second elif expression
+                    else:
+                        # if all the conditions above where false
+                </code></pre>
+            </div>
+            <p>
+                عبارت بالا معادل اینه کد پایینه،
+                و توی بعضی زبان‌ها دستور elif وجود نداره و باید به شکل زیر نوشته بشه
+                (البته کامپایلر پایتون دستور بالا رو بهینه‌تر اجرا می‌کنه):
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    if condition1:
+                        # if expressions
+                    else:
+                        if condition2:
+                            # elif expressions
+                        else:
+                            if condition3:
+                                # second elif expression
+                            else:
+                                # if all conditions above where false
+                </code></pre>
+            </div>
+            <p>
+                توی کد زیر کاربر عددی رو وارد می‌کنه،
+                و می‌خوایم چاپ کنیم که عدد مثبته، منفه و یا صفره.
+                برای این کار هم از if، هم از elif و هم از else استفاده می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    x = int(input("Enter a number: "))
+                    if x > 0:
+                        print("That number is positive")
+                    elif x < 0:
+                        print("That number is negative")
+                    else:
+                        print("That number is zero")
+                </code></pre>
+            </div>
+            <h2 id="match-case">دستور match/case</h2>
+            <p>اول یه background از این دستور بگم.</p>
+            <p>
+                دستور match توی نسخه 3.10 که آخرای 2022 release شد به پایتون اضافه شد.
+                تا قبل از اون باید از دستورای if/elif/else به جاش استفاده می‌شد.
+                اون زمان من تو شرکت فیبو کار می‌کردم و
+                چون خودم خیلی پیگیر تکنولوژی و اینا هستم
+                خیلی دلم می‌خواست از این دستور جدید
+                برای پیدا کردن الگوهای کندلی استفاده کنم،
+                ولی نسخه‌ای که روی سرور بود 3.7 بود و جایگزین کردنش یه کم دردسر داشت،
+                واسه همین بی‌خیالش شدیم.
+            </p>
+            <p>
+                نحوه‌ی تعریف دستور match به این شکله:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    match subject:
+                        case pattern1:
+                            # case 1 statements
+                        case pattern2:
+                            # case 2 statements
+                        ...
+                        case _:
+                            #code block for default case
+                </code></pre>
+            </div>
+            <p>
+                به ایندنت‌ها (فرورفتگی‌ها دقت کنید، مثل for و if).
+                اینجا subject مقداریه که می‌خوایم با الگوهای دیگه مقایسه‌ش کنیم.
+                بعد از اون یک سری case داریم که اگر مقدار match با الگو (pattern)
+                هر کدوم از این کیس‌هامون خوند، دستورهای مربوط به اون کیس اجرا میشه.
+                در نهایت یه case پیش‌فرض داریم که اختیاریه و اگر subject
+                با هیچ کدوم از pattern ها نخوند،
+                دستورای این case اجرا میشن.
+                (امیدوارم خیلی پیچیده نشده باشه😅)
+            </p>
+            <p>
+                با یه مثال بهتر طرز عملکرد match رو می‌بینیم.
+                فرض کنید یه برنامه نوشتیم که کاربر باید یک سری دستورهایی
+                وارد کنه تا عملیات مورد نظرش انجام بشه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    command = input("Enter your command (help command for a list of them): ").lower()
+
+                    match command:
+                        case "run":
+                            print("Running the program!")
+                        case "quit":
+                            print("Quitting the application!")
+                        case "open":
+                            print("Opening the file!")
+                        case "help":
+                            print("Commands are: run, quit, open, help.")
+                        case _:
+                            print("Please enter a valid command!")
+                </code></pre>
+            </div>
+            <p>
+                اینجا مقدار command با هر کدوم از مقادیر جلو case ها مقایسه میشه،
+                و با اولین الگوی case که همخوانی داشت توقف می‌کنه،
+                دستورهای مربوط به اون رو اجرا می‌کنه و بقیه‌ی case ها نادیده گرفته میشن (مثل if)
+            </p>
+            <h3>مطالب اضافی در مورد match/case</h3>
+            <p>
+                <strong>Guarded case:</strong>
+                میشه برای هر case یک شرط هم گذاشت که اصطلاحا به این کار میگن guarded case.
+                در این صورت اگر مقدار subject با مقدار case برابر بود،
+                باید حتما این شرط هم برقرار باشه تا دستوراي مربوط به اون case اجرا بشن.
+                مثلا تو کد زیر فقط وقتی رنگ قرمز رو انتخاب می‌کنیم که مقدار price کمتر از 100 باشه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    color = input("Enter the color you are selling: ")
+                    price = 120
+
+                    match color:
+                        case "blue":
+                            print("I love blue, I buy it.")
+                        case "green":
+                            print("Green is not my color! I don't want it!")
+                        case "red" if price < 100:
+                            print("This red is cheap, I buy it.")
+                        case _:
+                            print("I don't want that color!")
+
+                </code></pre>
+            </div>
+            <p>
+                <strong>کلمات کلیدی match و case و _</strong> :
+                کلمات کلیدی پایتون مثل for و while و ... رزرو شدن و نمبشه به عنوان اسم متغیر
+                و ... ازشون استفاده کرد. ولی سه کلمه کلیدی
+                <code>match, case, _</code>
+                بعلاوه type کلمات کلیدی نرم هستن.
+                کلمات کلیدی نرم رو میشه به عنوان اسم متغیر، فانکشن و غیره استفاده کرد و
+                با کاربردشون به عنوان اسم کلیدی تداخلی نداره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+                    case = ["Alice", "Alex", "Ariana", "Anna", "Athena"]
+                    match = "Anna"
+
+                    for _ in range(len(case)):
+                        if case[_] == match:
+                            print("The match is at index {}".format(_))
+
+                    #>> The match is at index 3
+                </code></pre>
+            </div>
+            <p>
+                اگه چیزی رو فراموش کردم بگید.
+            </p>
+
+            <h2 id="trinket-header">Interactive Code Editor</h2>
+            <script id="trinket-script" src="js/trinket-replace.js"></script>
+            <div class="code-container">
+                <pre><code id="fun">
+                </code></pre>
+            </div>
+        </article>
+    </main>
+</section>
+
+<footer>
+    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
+    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
+    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
+    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
+    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
+    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
+    <hr>
+    <br>
+    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
+</footer>
+
+<script src="js/prism.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
