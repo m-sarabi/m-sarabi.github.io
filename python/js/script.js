@@ -38,7 +38,7 @@ scrollElemContainer.style.backgroundColor = 'rgb(255, 255, 255)'
 let scrollColorValue = 0
 let scrollElem = document.createElement("div")
 scrollElem.style.position = "relative"
-scrollElem.style.width = "100%"
+scrollElem.style.width = "0%"
 scrollElem.style.height = "100%"
 scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, 0, 0)`
 scrollElemContainer.appendChild(scrollElem)
