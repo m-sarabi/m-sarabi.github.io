@@ -27,20 +27,20 @@ if (document.getElementsByClassName("toc")[0] !== undefined) {
 
 // add scroll progressbar to the top of the page
 let scrollElemContainer = document.createElement("div")
+scrollElemContainer.classList.add("top-bar")
 scrollElemContainer.style.position = "fixed"
 scrollElemContainer.style.top = "0"
 scrollElemContainer.style.left = "0"
 scrollElemContainer.style.width = "100%"
 scrollElemContainer.style.height = "8px"
-scrollElemContainer.style.opacity = "0.5"
-scrollElemContainer.style.backgroundColor = 'rgb(255, 255, 255)'
+scrollElemContainer.style.backgroundColor = 'rgb(255, 255, 255, 0.5)'
 
 let scrollColorValue = 0
 let scrollElem = document.createElement("div")
 scrollElem.style.position = "relative"
 scrollElem.style.width = "0%"
 scrollElem.style.height = "100%"
-scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, 0, 0)`
+scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, 0, 0, 0.5)`
 scrollElemContainer.appendChild(scrollElem)
 document.body.appendChild(scrollElemContainer)
 
@@ -52,7 +52,7 @@ window.addEventListener("scroll", () => {
 
     scrollElem.style.width = `${scrollPercentage}%`
     scrollColorValue = Math.floor(scrollPercentage * 255 / 100)
-    scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, ${Math.floor(scrollColorValue * 0.8)}, 0)`
+    scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, ${Math.floor(scrollColorValue * 0.8)}, 0, 0.5)`
 })
 
 
