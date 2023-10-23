@@ -369,7 +369,7 @@ div:has(iframe)::before {
 }
 
 /* responsive */
-@media only screen and (orientation: portrait) and (max-width: 800px) {
+@media only screen and (orientation: portrait) {
     #main-page {
         margin: 5px 1% 1%;
         grid: 1fr / 0 100%;
