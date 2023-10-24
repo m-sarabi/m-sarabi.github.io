@@ -1,5 +1,5 @@
 const startBtn = document.getElementById('startBtn');
-const article = document.querySelector("article")
+const article = document.querySelector("article");
 
 const random = {
     randInt: function (start, end) {
@@ -32,22 +32,22 @@ function simpleNumbersPrint() {
             Array(50).fill("/")
         );
         expression = nums.join(` ${random.choice(operator)} `);
-        result = eval(expression)
-        console.log(result)
+        result = eval(expression);
+        console.log(result);
         if (result % 1 === 0 && result <= 80 && result >= -40) {
-            break
+            break;
         }
     }
-    const holderMain = document.createElement("div")
-    holderMain.classList.add("code-container")
-    const holder = document.createElement("pre")
-    const codeBlock = document.createElement("code")
-    codeBlock.innerHTML = `print(${expression})`
-    holderMain.appendChild(holder)
-    holder.appendChild(codeBlock)
-    article.appendChild(holderMain)
+    const holderMain = document.createElement("div");
+    holderMain.classList.add("code-container");
+    const holder = document.createElement("pre");
+    const codeBlock = document.createElement("code");
+    codeBlock.innerHTML = `print(${expression})`;
+    holderMain.appendChild(holder);
+    holder.appendChild(codeBlock);
+    article.appendChild(holderMain);
     console.log(expression);
-    Prism.highlightElement(codeBlock)
+    Prism.highlightElement(codeBlock);
 }
 
 

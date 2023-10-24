@@ -39,12 +39,12 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    nums = range(10)
+nums = range(10)
 
-                    for i in nums:
-                        print(i, end=" ")
+for i in nums:
+    print(i, end=" ")
 
-                    #>> 0 1 2 3 4 5 6 7 8 9
+#>> 0 1 2 3 4 5 6 7 8 9
                 </code></pre>
             </div>
             <p>
@@ -56,16 +56,16 @@
 
             <div class="code-container">
                 <pre><code>
-                    for i in range(5, 10):
-                        print(i, end=" ")
-                    print()
+for i in range(5, 10):
+    print(i, end=" ")
+print()
 
-                    # when stop is less than start:
-                    for i in range(10, 5):
-                        print(i, end=" ")  # nothing will be printed
+# when stop is less than start:
+for i in range(10, 5):
+    print(i, end=" ")  # nothing will be printed
 
-                    #>> 5 6 7 8 9
-                    #>>
+#>> 5 6 7 8 9
+#>>
                 </code></pre>
             </div>
             <p>
@@ -79,10 +79,10 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    for i in range(5, 15, 2):
-                        print(i, end=" ")
+for i in range(5, 15, 2):
+    print(i, end=" ")
 
-                    #>> 5 7 9 11 13
+#>> 5 7 9 11 13
                 </code></pre>
             </div>
             <p>
@@ -92,10 +92,10 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    for i in range(20, 0, -2):
-                        print(i, end=" ")
+for i in range(20, 0, -2):
+    print(i, end=" ")
 
-                    #>> 20 18 16 14 12 10 8 6 4 2
+#>> 20 18 16 14 12 10 8 6 4 2
                 </code></pre>
             </div>
             <p>
@@ -104,10 +104,10 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    for i in range(1, 20, 1.5):
-                        print(i, end=" ")
+for i in range(1, 20, 1.5):
+    print(i, end=" ")
 
-                    #>> TypeError: 'float' object cannot be interpreted as an integer
+#>> TypeError: 'float' object cannot be interpreted as an integer
                 </code></pre>
             </div>
             <p>
@@ -130,10 +130,10 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    for i in range(10, 200, 15):
-                        print(i / 10, end=" ")
+for i in range(10, 200, 15):
+    print(i / 10, end=" ")
 
-                    #>> 1.0 2.5 4.0 5.5 7.0 8.5 10.0 11.5 13.0 14.5 16.0 17.5 19.0
+#>> 1.0 2.5 4.0 5.5 7.0 8.5 10.0 11.5 13.0 14.5 16.0 17.5 19.0
                 </code></pre>
             </div>
 
@@ -143,21 +143,21 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    def better_range(start, stop=None, step=1):
-                        result = []
-                        if stop is None:
-                            stop = start
-                            start = 0
-                        while (step > 0 and start < stop) or (step < 0 and start > stop):
-                            result.append(start)
-                            start += step
-                        return result
+def better_range(start, stop=None, step=1):
+    result = []
+    if stop is None:
+        stop = start
+        start = 0
+    while (step > 0 and start < stop) or (step < 0 and start > stop):
+        result.append(start)
+        start += step
+    return result
 
 
-                    for i in better_range(1, 20, 1.5):
-                        print(i, end=" ")
+for i in better_range(1, 20, 1.5):
+    print(i, end=" ")
 
-                    #>> 1 2.5 4.0 5.5 7.0 8.5 10.0 11.5 13.0 14.5 16.0 17.5 19.0
+#>> 1 2.5 4.0 5.5 7.0 8.5 10.0 11.5 13.0 14.5 16.0 17.5 19.0
                 </code></pre>
             </div>
 
@@ -173,8 +173,8 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    if condition:
-                        # Codes to be executed if condition is True
+if condition:
+    # Codes to be executed if condition is True
                 </code></pre>
             </div>
             <p>
@@ -183,11 +183,11 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    password = "easylazypassword"
-                    user_input = input("Enter the password: ")
+password = "easylazypassword"
+user_input = input("Enter the password: ")
 
-                    if password == user_input:
-                        print("You logged in successfully!")
+if password == user_input:
+    print("You logged in successfully!")
                 </code></pre>
             </div>
             <p>
@@ -199,10 +199,10 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    if condition:
-                        # Codes to be executed if condition is True
-                    else:
-                        # Codes to be executed if condition is False
+if condition:
+    # Codes to be executed if condition is True
+else:
+    # Codes to be executed if condition is False
                 </code></pre>
             </div>
             <p>
@@ -211,13 +211,13 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    password = "easylazypassword"
-                    user_input = input("Enter the password: ")
+password = "easylazypassword"
+user_input = input("Enter the password: ")
 
-                    if password == user_input:
-                        print("You logged in successfully!")
-                    else:
-                        print("You entered the password incorrectly!")
+if password == user_input:
+    print("You logged in successfully!")
+else:
+    print("You entered the password incorrectly!")
                 </code></pre>
             </div>
             <p>
@@ -229,14 +229,14 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    if condition1:
-                        # if expressions
-                    elif condition2:
-                        # elif expressions
-                    elif condition3:
-                        # second elif expression
-                    else:
-                        # if all the conditions above where false
+if condition1:
+    # if expressions
+elif condition2:
+    # elif expressions
+elif condition3:
+    # second elif expression
+else:
+    # if all the conditions above where false
                 </code></pre>
             </div>
             <p>
@@ -246,16 +246,16 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    if condition1:
-                        # if expressions
-                    else:
-                        if condition2:
-                            # elif expressions
-                        else:
-                            if condition3:
-                                # second elif expression
-                            else:
-                                # if all conditions above where false
+if condition1:
+    # if expressions
+else:
+    if condition2:
+        # elif expressions
+    else:
+        if condition3:
+            # second elif expression
+        else:
+            # if all conditions above where false
                 </code></pre>
             </div>
             <p>
@@ -265,13 +265,13 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    x = int(input("Enter a number: "))
-                    if x > 0:
-                        print("That number is positive")
-                    elif x < 0:
-                        print("That number is negative")
-                    else:
-                        print("That number is zero")
+x = int(input("Enter a number: "))
+if x > 0:
+    print("That number is positive")
+elif x < 0:
+    print("That number is negative")
+else:
+    print("That number is zero")
                 </code></pre>
             </div>
             <h2 id="match-case">دستور match/case</h2>
@@ -291,14 +291,14 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    match subject:
-                        case pattern1:
-                            # case 1 statements
-                        case pattern2:
-                            # case 2 statements
-                        ...
-                        case _:
-                            #code block for default case
+match subject:
+    case pattern1:
+        # case 1 statements
+    case pattern2:
+        # case 2 statements
+    ...
+    case _:
+        #code block for default case
                 </code></pre>
             </div>
             <p>
@@ -318,19 +318,19 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    command = input("Enter your command (help for all commands): ").lower()
+command = input("Enter your command (help for all commands): ").lower()
 
-                    match command:
-                        case "run":
-                            print("Running the program!")
-                        case "quit":
-                            print("Quitting the application!")
-                        case "open":
-                            print("Opening the file!")
-                        case "help":
-                            print("Commands are: run, quit, open, help.")
-                        case _:
-                            print("Please enter a valid command!")
+match command:
+    case "run":
+        print("Running the program!")
+    case "quit":
+        print("Quitting the application!")
+    case "open":
+        print("Opening the file!")
+    case "help":
+        print("Commands are: run, quit, open, help.")
+    case _:
+        print("Please enter a valid command!")
                 </code></pre>
             </div>
             <p>
@@ -340,6 +340,29 @@
             </p>
             <h3>مطالب اضافی در مورد match/case</h3>
             <p>
+                <strong>چند case مشترک:</strong>
+                اگر بخوایم برای چند case مختلف یک سری دستور مشترک اجرا بشه،
+                می‌تونیم به جای نوشتن چند تا case بین مقادیر اون case کاما بذاریم.
+                مثلا تو مثال پایین برای روزهای زوج یک case و
+                روزهای فرد یک case داریم
+                و دیگه نیازی نیست برای هر روز جدا بنویسیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+day = input("Enter a day in the week:")
+
+match day:
+    case "saturday", "monday", "wednesday":
+        print("It is an even day!")
+    case "sunday", "tuesday", "thursday":
+        print("It is an odd day!")
+    case "friday":
+        print("It is a weird day!")
+    case _:
+        print("It is an unknown day!")
+                </code></pre>
+            </div>
+            <p>
                 <strong>Guarded case:</strong>
                 میشه برای هر case یک شرط هم گذاشت که اصطلاحا به این کار میگن guarded case.
                 در این صورت اگر مقدار subject با مقدار case برابر بود،
@@ -348,19 +371,18 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    color = input("Enter the color you are selling: ")
-                    price = 120
+color = input("Enter the color you are selling: ")
+price = 120
 
-                    match color:
-                        case "blue":
-                            print("I love blue, I buy it.")
-                        case "green":
-                            print("Green is not my color! I don't want it!")
-                        case "red" if price < 100:
-                            print("This red is cheap, I buy it.")
-                        case _:
-                            print("I don't want that color!")
-
+match color:
+    case "blue":
+        print("I love blue, I buy it.")
+    case "green":
+        print("Green is not my color! I don't want it!")
+    case "red" if price < 100:
+        print("This red is cheap, I buy it.")
+    case _:
+        print("I don't want that color!")
                 </code></pre>
             </div>
             <p>
@@ -374,14 +396,14 @@
             </p>
             <div class="code-container">
                 <pre><code>
-                    case = ["Alice", "Alex", "Ariana", "Anna", "Athena"]
-                    match = "Anna"
+case = ["Alice", "Alex", "Ariana", "Anna", "Athena"]
+match = "Anna"
 
-                    for _ in range(len(case)):
-                        if case[_] == match:
-                            print("The match is at index {}".format(_))
+for _ in range(len(case)):
+    if case[_] == match:
+        print("The match is at index {}".format(_))
 
-                    #>> The match is at index 3
+#>> The match is at index 3
                 </code></pre>
             </div>
             <p>
