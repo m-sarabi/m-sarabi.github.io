@@ -20,12 +20,11 @@ const random = {
         return Math.floor(Math.random() * (end - start) + start);
     },
     choice: function (arr) {
-        return arr.sort(function () {
-            return 0.5 - Math.random();
-        })[0];
+        return arr[Math.floor(Math.random() * arr.length)];
     }
 };
 
+let operators = ["*", "+", "-", "/", "**"];
 let quest = new Quest(1);
 
 const holderMain = document.createElement("div");
@@ -39,7 +38,7 @@ holderMain.style.visibility = "hidden";
 
 // print numbers result quiz:
 function codeBlockUpdate() {
-    let [code, answer] = quest.simple_operator(random.randInt(1, 40), random.randInt(1, 40), "+");
+    let [code, answer] = quest.simple_operator(random.randInt(1, 40), random.randInt(1, 40), random.choice(operators));
     holderMain.style.visibility = "visible";
     codeBlock.innerHTML = `print(${code})`;
     console.log(answer);
