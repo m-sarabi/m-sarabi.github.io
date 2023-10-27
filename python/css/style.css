@@ -447,4 +447,12 @@ div:has(iframe)::before {
     article {
         font-size: 15px;
     }
+
+    .trinket {
+        display: none;
+    }
+
+    #trinket-header {
+        display: none;
+    }
 }
