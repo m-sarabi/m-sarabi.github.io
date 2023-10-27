@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>M-Sarabi/Python</title>
+    <link rel="icon" type="image/png" href="assets/Python.webp">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/style.css?v8">
+</head>
+<body>
+<header>
+    <a href="index.html">Python Course</a><br>
+</header>
+<section id="main-page">
+    <aside>
+        <script id="nav-bar-script" src="js/nav-replace.js"></script>
+    </aside>
+    <main>
+        <article class="language-py line-numbers match-braces">
+            <nav class="toc">
+                <details open>
+                    <summary>فهرست مطالب</summary>
+                    <ol>
+                    </ol>
+                </details>
+            </nav>
+            <h2>مقادیر Truthy و Falsy</h2>
+            <p>
+                در زبان پایتون بجز نوع Boolean که مقادیرش می‌تونه فقط True یا False باشه،
+                هر موقع که لازم باشه بقیه انواع داده نیز می‌تونن True یا False باشن.
+                مواقعی که انواع داده‌ی دیگه به عنوان condition یا شرط استفاده بشن
+                (مثلا به عنوان شرط if/elif).
+                اینجا لیست مهمترین‌هاشون رو با چند تا مثال می‌گذارم:
+            </p>
+            <ul>
+                <li>رشته‌ی خالی: False ، در غیر این صورت True</li>
+                <li>لیست خالی (و غیره، مثل tuple، set و غیره): False ، در غیر این صورت True</li>
+                <li>عدد صفر: False ، بقیه‌ی اعداد True</li>
+                <li>عدد مختلط
+                    <span class="english">0j</span> : ‏False ،
+                    بقیه اعداد مختلط (مثل <span class="english">5 + 3j</span>) True
+                </li>
+                <li>مقدار range خالی مثلا
+                    <code>range(0)</code> یا
+                    <code>range(5, 1)</code> :
+                    False ،
+                    در غیر این صورت True
+                </li>
+                <li>نوع داده‌ی None : همیشه False</li>
+            </ul>
+            <p>تو این مثال از while هم استفاده کردم که یه کم پایین‌تر بهش می‌رسیم</p>
+            <div class="code-container">
+                <pre><code>
+my_list = []
+if my_list:
+    print("Everything fine!")
+else:
+    print("The list is empty!")
+
+number = 2.5
+while number:
+    print(number, end=" ")
+    number -= 0.5
+
+#>> The list is empty!
+#>> 2.5 2.0 1.5 1.0 0.5
+                </code></pre>
+            </div>
+            <p>
+                از
+                <code>bool()</code>
+                هم میشه استفاده کرد که مقدار True یا False اون مقدار رو بهمون برمی‌گردونه
+            </p>
+            <div class="code-container">
+                <pre><code>
+print(1, bool(15))
+print(2, bool(""))
+print(3, bool([4, 5]))
+print(4, bool(None))
+
+#>> 1 True
+#>> 2 False
+#>> 3 True
+#>> 4 False
+                </code></pre>
+            </div>
+
+            <div class="code-container">
+                <pre><code>
+                </code></pre>
+            </div>
+
+            <h2 id="trinket-header">Interactive Code Editor</h2>
+            <script id="trinket-script" src="js/trinket-replace.js"></script>
+            <div class="code-container">
+                <pre><code id="fun">
+                </code></pre>
+            </div>
+        </article>
+    </main>
+</section>
+
+<footer>
+    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
+    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
+    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
+    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
+    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
+    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
+    <hr>
+    <br>
+    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
+</footer>
+
+<script src="js/prism.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
