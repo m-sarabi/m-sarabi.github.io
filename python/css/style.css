@@ -331,6 +331,9 @@ td {
 th {
     padding: 5px;
 }
+tr > td:last-child {
+    color: skyblue;
+}
 
 blockquote::before {
     content: "\"";
