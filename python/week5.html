@@ -24,7 +24,7 @@
                     </ol>
                 </details>
             </nav>
-            <h2>مقادیر Truthy و Falsy</h2>
+            <h2 id="truthy-falsy-values">مقادیر Truthy و Falsy</h2>
             <p>
                 در زبان پایتون بجز نوع Boolean که مقادیرش می‌تونه فقط True یا False باشه،
                 هر موقع که لازم باشه بقیه انواع داده نیز می‌تونن True یا False باشن.
@@ -82,6 +82,268 @@ print(4, bool(None))
 #>> 2 False
 #>> 3 True
 #>> 4 False
+                </code></pre>
+            </div>
+            <h2 id="in-is-operators">عملگرهای in و is</h2>
+            <h3>عملگر in:
+                <code>value in Iterable</code></h3>
+            <p>
+                عملگر in بررسی می‌کنه که آیا مقداری داخل یک مجموعه هست یا نه.
+                اگر اون مقدار داخل اون Iterable (مثل یه لیست، رشته، یا هر مجموعه‌ی دیگه‌ای) باشه
+                مقدار True رو برمی‌گردونه و در غیر این صورت False
+                مثلا
+                <code>1 in [1, 2, 3]</code>
+                مقدارش True هست،
+                ولی
+                <code>"Jack" in ["Alice", "Ana"]</code>
+                مقدار False رو برمی‌گردونه.
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+fruits = ["apple", "orange", "grape", "narangi"]
+
+fruit = "strawberry"
+if fruit in fruits:  # "in" operator here returns False
+    print(f"{fruit} is available")
+else:
+    print(f"{fruit} is out of stock")
+
+fruit = "narangi"
+if fruit in fruits:  # "in" operator here returns True
+    print(f"{fruit} is available")
+else:
+    print(f"{fruit} is out of stock")
+
+#>> strawberry is out of stock
+#>> narangi is available
+                </code></pre>
+            </div>
+
+            <h3>عملگر is در پایتون</h3>
+            <p>
+                عملگر is در پایتون برای بررسی اینه که آبا دو متغیر به یک
+                به یک مکان مشترک از حافظه اشاره می‌کنند یا نه.
+                این عملگر با عملگر
+                <code>==</code>
+                متفاوته که فقط بررسی می‌کنه که آیا مقادیر دو متغیر با هم برابر هستند یا نه،
+                در حالی که ممکنه توی دو قسمت متفاوت حافظه ذخیره شده باشن.
+            </p>
+            <p>
+                کاربرد این عملگر محدوده، ولی درکش مهمه.
+                اینجا با چند تا مثال سعی می‌کنم بهتر نحوه عملکردش رو نشون بدم.
+            </p>
+            <p>
+                توی کدهای زیر دو تا متغیر در حالت‌های مختلف با استفاده از عملگر is با هم مقایسه می‌کنیم.
+                توی کد پایین دو مقدار متفاوت رو توی دو متغیر ذخیره می‌کنیم که مشخصا مقدار False برمی‌گردونه:
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+value1 = 15
+value2 = 10
+
+if value1 is value2:
+    print("Those two values are the same object")
+else:
+    print("Those values are different objects")
+
+#>> Those values are different objects
+                </code></pre>
+            </div>
+            <p>
+                توی کد زیر، دو تا رشته مقادیر برابری دارن (هر دو abcd هستن)
+                ولی توی دو تا مکان مختلف از حافظه ذخیره شدن. برای همین عملگر is
+                مقدار False رو برمی‌گردونه و دستورای else اجرا میشن.
+            </p>
+            <div class="code-container">
+                <pre><code>
+value1 = "abcd"
+value2 = "abcde"[:4]
+
+# checking to see if they have the same value
+print(value1, value2)
+
+# checking if they are the same object:
+if value1 is value2:
+    print("Those two values are the same object")
+else:
+    print("Those values are different objects")
+
+#>> abcd abcd
+#>> Those values are different objects
+                </code></pre>
+            </div>
+
+            <p>
+                اگر دو متغیر به یک آدرس از حافظه اشاره کنن،
+                عملگر is مقدار True رو برمی‌گردونه. مثل کد زیر:
+            </p>
+            <div class="code-container">
+                <pre><code>
+value1 = "Alice"
+value2 = value1
+
+# checking if they are the same object:
+if value1 is value2:
+    print("Those two values are the same object")
+else:
+    print("Those values are different objects")
+
+#>> Those two values are the same object
+                </code></pre>
+            </div>
+            <p>
+                عمده استفاده‌ی این عملگر در شیءگرایی هست که بعدا بهش می‌رسیم.
+            </p>
+
+            <h2 id="and-or-not">عملگرهای and و or و not</h2>
+            <p>
+                عملگرهای منطقی and و or و not روی مقادیر boolean عملیاتی رو انجام میدن که هر کدوم رو پایین میگم
+            </p>
+            <h3>عملگر
+                <code>and</code></h3>
+            <p>
+                این عملگر بین دو تا مقدار boolean قرار می‌گیره،
+                اگر هردو مقدار True باشن مقدار True رو برمی‌گردونه و در غیر این صورت False.
+                یعنی هر دو مقدار باید True باشن که نتیجه هم True بشه.
+                توی جدول پایین حالت‌های مختلفش رو نشون دادم:
+            </p>
+            <table dir="ltr" class="english">
+                <caption><strong>and</strong> Operator</caption>
+                <tr>
+                    <th>Val1</th>
+                    <th>Val2</th>
+                    <th>Val1 and Val2</th>
+                </tr>
+                <tr>
+                    <td>True</td>
+                    <td>True</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>True</td>
+                    <td>False</td>
+                    <td>False</td>
+                </tr>
+                <tr>
+                    <td>False</td>
+                    <td>True</td>
+                    <td>False</td>
+                </tr>
+                <tr>
+                    <td>False</td>
+                    <td>False</td>
+                    <td>False</td>
+                </tr>
+            </table>
+            <p>
+                به عنوان مثال توی کد زیر فقط وقتی شرط برقراره که هر دوی "narangi" و "orange"
+                توی لیستمون باشن:
+            </p>
+            <div class="code-container">
+                <pre><code>
+fruits = ["apple", "orange", "grape", "narangi"]
+
+if "narangi" in fruits and "orange" in fruits:
+    print("you have my favorite fruits!")
+
+#>> you have my favorite fruits!
+                </code></pre>
+            </div>
+
+            <h3>عملگر
+                <code>or</code></h3>
+            <p>
+                این عملگر هم بین دو تا مقدار boolean قرار می‌گیره،
+                و تا وقتی که یکی از دو مقدار True باشه مقدار True برمی‌گردونه،
+                و فقط وقتی False میشه که هر دو مقدار False باشن.
+                جدول پایین حالت‌های مختلف رو نشون میشده:
+            </p>
+            <table dir="ltr" class="english">
+                <caption><strong>or</strong> Operator</caption>
+                <tr>
+                    <th>Val1</th>
+                    <th>Val2</th>
+                    <th>Val1 or Val2</th>
+                </tr>
+                <tr>
+                    <td>True</td>
+                    <td>True</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>True</td>
+                    <td>False</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>False</td>
+                    <td>True</td>
+                    <td>True</td>
+                </tr>
+                <tr>
+                    <td>False</td>
+                    <td>False</td>
+                    <td>False</td>
+                </tr>
+            </table>
+
+            <p>
+                توی کد پایین، اگر نوع داده int یا float باشه، چاپ می‌کنه که این عدده.
+                در غیر این صورت میگه که این عدد نیست.
+            </p>
+            <div class="code-container">
+                <pre><code>
+x = 0.5
+
+if type(x) == int or type(x) == float:
+    print(f"{x} is a number!")
+else:
+    print(f"{x} is not a number!")
+
+#>> 0.5 is a number.
+                </code></pre>
+            </div>
+
+            <h3>عملگر
+                <code>not</code></h3>
+            <p>
+                این عملگر قبل از یک مقدار boolean میاد و اون رو برعکس می‌کنه،
+                یعنی اگر True باشه میشه False و اگر False باشه میشه True :
+            </p>
+            <table dir="ltr" class="english">
+                <caption><strong>or</strong> Operator</caption>
+                <tr>
+                    <th>value</th>
+                    <th>not value</th>
+                </tr>
+                <tr>
+                    <td>True</td>
+                    <td>False</td>
+                </tr>
+                <tr>
+                    <td>False</td>
+                    <td>True</td>
+                </tr>
+            </table>
+            <p>
+                مثلا توی کد زیر از کاربر می‌خوایم که یه اسم وارد کنه.
+                اگر هیچی وارد نکرد و فقط دکمه Enter رو زد یه پیغام نمایش بده که متن خالیه:
+            </p>
+            <div class="code-container">
+                <pre><code>
+text = input("Enter a name: ")
+
+if not text:
+    print("You did not enter any text.")
+else:
+    print(f"You entered {text}")
+                </code></pre>
+            </div>
+
+            <div class="code-container">
+                <pre><code>
                 </code></pre>
             </div>
 
