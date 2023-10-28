@@ -5,7 +5,7 @@
     <title>M-Sarabi/Python</title>
     <link rel="icon" type="image/png" href="assets/Python.webp">
     <link rel="stylesheet" href="css/prism.css">
-    <link rel="stylesheet" href="css/style.css?v8">
+    <link rel="stylesheet" href="css/style.css?v9">
 </head>
 <body>
 <header>
@@ -341,16 +341,161 @@ else:
     print(f"You entered {text}")
                 </code></pre>
             </div>
+            <h2 id="while">حلقه‌ی while</h2>
+            <p>
+                قبلا حلقه‌ی for رو گفتیم، و کارش این بود که به تعداد مشخصی یک سری دستورای تکراری رو انجام می‌داد.
+                نوع دیگه‌ی حلقه در پایتون حلقه‌ی while هست که دستورای داخلش رو تا وقتی که یک شرطی برقرار هست
+                تکرار می‌کنه.
+                نحوه‌ی نوشتن حلقه‌ی while به شکل زیره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+while condition:
+    # while statements
+                </code></pre>
+            </div>
+            <p>
+                یعنی اول کلمه‌ی کلیدی while، بعد شرط حلقه و بعد دو نقطه (:)
+                و دستورای داخل حلقه که قراره تکرار بشن با یه فرورفتگی (indent) زیرش نوشته میشن.
+                دستورای حلقه تا وقتی که شرط حلقه برقراره اجرا میشن، به این صورت که
+                شرط حلقه چک میشه، اگر True بود دستورای داخل حلقه اجرا میشه و دوباره به اول حلقه
+                برمی‌گرده. دوباره شرط حلقه چک میشه و این عمل تکرار میشه تا وقتی که
+                شرط حلقه False باشه.
+            </p>
+            <p>
+                شرط حلقه باید داخل حلقه تغییر بکنه، در غیر این صورت حلقه بی‌نهایت شکل می‌گیره
+                یعنی هیچوقت تموم نمیشه و دستورای داخل حلقه تا وقتی که خودمون به زور برنامه رو
+                متوقف نکنیم هی اجرا میشن.
+                کد پایین یه نمونه از یه حلقه‌ی بی‌نهایته که بی‌نهایت بار کلمه‌ی "Armita" رو چاپ می‌کنه.
+            </p>
+            <div class="code-container">
+                <pre><code>
+x = 5
+
+# infinite loop, because the condition is always True
+while x < 10:
+    print("Armita")
+
+#>> Armita
+#>> Armita
+#>> Armita
+#>> Armita
+...
+                </code></pre>
+            </div>
+            <p>
+                توی کد زیر تا وقتی که کاربر password رو درست وارد نکنه ازش درخواست password می‌کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+password = "123easyPass"
+
+while input("Enter the password: ") != password:
+    print("Password is wrong. try again!")
+
+print("You are logged in")
+                </code></pre>
+            </div>
+            <p>
+                توی کد بالا و توی شرط حلقه،
+                مقداری که توی input از کاربر گرفته میشه با مقدار password مقایسه میشه
+                و اگر برابر نبودن دستورای داخل حلقه اجرا میشن (یعنی چاپ میشه که پسورداشتباهه)
+                اگر password درست وارد شده بود، شرط داخل حلقه False میشه و از حلقه میاد بیرون
+                و چاپ میشه که کاربر لاگین شده.
+            </p>
+
+            <p>
+                حالا فرض کنید یک سیستم ثبت نام درست کردیم و می‌خوایم تا وقتی که
+                کاربر username و password رو درست وارد نکرده ازش درخواست کنیم که
+                اونا رو وارد کنه. این کار رو می‌تونیم به شکل زیر هم انجام بدیم:
+            </p>
 
             <div class="code-container">
                 <pre><code>
+correct_username = "Armita"
+correct_password = "123easyPass"
+
+username = input("Enter the username: ")
+password = input("Enter the password: ")
+while username != correct_username and password != correct_password:
+    print("username or password is wrong. try again!")
+    # here we ask for username and password again
+    username = input("Enter the username: ")
+    password = input("Enter the password: ")
+
+print("You are logged in")
                 </code></pre>
             </div>
+            <h2 id="break-continue">دستورات break و continue</h2>
+            <p>
+                از دستورای break و continue فقط داخل حلقه استفاده میشه.
+            </p>
+            <h3>دستور break</h3>
+            <p>
+                در هر کجای حلقه اگر به دستور break برسیم، مستقیم از حلقه خارج میشیم
+                و دیگه به اول حلقه بر نمی‌گردیم. مثلا اگر لیستی از اعداد داریم و بخوایم تا وقتی که
+                عددها کوچیکتر هستن اونا رو چاپ کنیم و اگر به عدد 10 یا بزرگ‌تر رسیدیم بقیه رو چاپ نکنیم،
+                می‌تونیم از دستور break توی حلقه‌ی for استفاده کنیم:
+            </p>
+            <div class="code-container">
+                <pre><code>
+numbers = [7, 2, 8, 4, 11, 19, 3, 18, 6, 12]
+
+for num in numbers:
+    if num >= 10:
+        break
+    print(num)
+print("break statement finished the loop early!")
+
+#>> 7
+#>> 2
+#>> 8
+#>> 4
+#>> break statement finished the loop early!
+                </code></pre>
+            </div>
+            <p>
+                توی کد بالا اعداد 7 و 2 و 8 و 4 که کوچکتر از 10 هستن چاپ شدن،
+                عدد بعدی 11 هست که باعث شد شرط if برقرار باشه و دستور break اجرا بشه.
+                با اجرا شدن دستور break از حلقه خارج شدیم و دستور بعدی که بیرون حلقه هست اجرا میشه.
+            </p>
+            <h3>دستور continue</h3>
+            <p>
+                توی یک حلقه، اگر به دستور continue برسیم، بقیه دستورای داخل حلقه نادیده گرفته میشن
+                و به اول حلقه برمی‌گردیم.
+                توی حلقه‌ی while وقتی به دستور continue برسیم به اول حلقه برمی‌گرده
+                شرط حلقه دوباره چک میشه.
+                توی حلقه‌ی for هم اگر به دستور continue برسیم،
+                به اول حلقه برمی‌گردیم و مقدار بعدی اون لیست یا ... رو استفاده می‌کنیم.
+            </p>
+            <p>
+                مثلا توی کد بالا، فرض کنید می‌خواستیم تمام اعدادی که کوچیکتر از 10 هستن رو چاپ کنیم
+                به جای اینکه از حلقه خارج شیم. برای اینکار می‌توین از دستور continue به شکل زیر استفاده کنیم:
+            </p>
 
             <div class="code-container">
                 <pre><code>
+numbers = [7, 2, 8, 4, 11, 19, 3, 18, 6, 12]
+
+for num in numbers:
+    if num >= 10:
+        continue
+    print(num)
+print("All the numbers less than 10 are printed")
+
+#>> 7
+#>> 2
+#>> 8
+#>> 4
+#>> 3
+#>> 6
+#>> break statement finished the loop early!
                 </code></pre>
             </div>
+            <p>
+                توی کد بالا، هر موقع متغیر حلقه 10 یا بزرگتر بوده، مستقیم به اول حلقه
+                برگشتیم و عدد رو چاپ نکردیم.
+            </p>
 
             <h2 id="trinket-header">Interactive Code Editor</h2>
             <script id="trinket-script" src="js/trinket-replace.js"></script>
@@ -375,6 +520,6 @@ else:
 </footer>
 
 <script src="js/prism.js"></script>
-<script src="js/script.js"></script>
+<script src="js/script.js?v2"></script>
 </body>
 </html>
