@@ -62,3 +62,20 @@ window.addEventListener('load', () => {
     window.scrollTo(0, 0)
     document.documentElement.style.scrollBehavior = "smooth"
 })
+
+// Rest in peace Armita
+let armita = document.createElement("div")
+armita.style.position = "absolute"
+armita.style.width = "400px"
+armita.style.backgroundColor = "#111"
+armita.style.left = "0"
+armita.style.top = "50px"
+armita.style.transformOrigin = "bottom left"
+armita.style.transform = "rotate(-19deg)"
+armita.style.color = "#fff"
+armita.style.padding = "20px"
+armita.style.textAlign = "center"
+armita.style.fontSize = "130%"
+armita.style.boxShadow = "0 0 20px 5px black"
+armita.innerHTML = "برای آرمیتا&emsp;زنده باد آزادی&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
+document.body.appendChild(armita)
