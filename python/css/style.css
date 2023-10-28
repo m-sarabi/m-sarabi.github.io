@@ -306,6 +306,32 @@ blockquote {
     padding: 0 40px 10px 20px;
 }
 
+/* Styling the table data */
+table {
+    text-align: center;
+    margin: 20px auto;
+    background-color: #272822;
+    color: #F8F8F2;
+    padding: 10px;
+    border-radius: 10px;
+    border-collapse: collapse;
+    box-shadow: 0 0 5px 10px #272822;
+}
+table > caption {
+    /*background-color: #272822;*/
+    padding-bottom: 10px;
+    color: #000;
+    font-size: 120%;
+}
+
+td {
+    border: 2px #F8F8F2 solid;
+    padding: 5px 10px;
+}
+th {
+    padding: 5px;
+}
+
 blockquote::before {
     content: "\"";
     font-size: 60px;
