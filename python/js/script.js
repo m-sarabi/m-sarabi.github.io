@@ -55,14 +55,6 @@ window.addEventListener("scroll", () => {
     scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, ${Math.floor(scrollColorValue * 0.8)}, 0, 0.5)`
 })
 
-
-// scroll to the top of the page upon loading the page
-window.scrollTo(0, 0)
-window.addEventListener('load', () => {
-    window.scrollTo(0, 0)
-    document.documentElement.style.scrollBehavior = "smooth"
-})
-
 // Rest in peace Armita
 let armita = document.createElement("div")
 armita.style.position = "absolute"
@@ -79,3 +71,22 @@ armita.style.fontSize = "130%"
 armita.style.boxShadow = "0 0 20px 5px black"
 armita.innerHTML = "برای آرمیتا&emsp;زنده باد آزادی&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
 document.body.appendChild(armita)
+
+
+// trinket button to show and hide it
+let trinketShow = false
+let trinketContainer = document.getElementsByClassName("trinket")[0]
+let trinketBtn = document.getElementById("trinketBtn")
+trinketBtn.addEventListener("click", () => {
+    if (trinketShow) {
+        trinketContainer.innerHTML = ""
+        trinketShow = false
+        trinketBtn.innerHTML = "Show"
+    } else {
+        fetch("./trinket.html").then(result => result.text()).then(text => {
+            trinketContainer.innerHTML = text
+        })
+        trinketShow = true
+        trinketBtn.innerHTML = "Hide"
+    }
+})

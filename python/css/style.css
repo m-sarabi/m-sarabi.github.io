@@ -352,6 +352,24 @@ blockquote::before {
     border-radius: 20px;
 }
 
+#trinketBtn {
+    width: 200px;
+    font-size: 30px;
+    box-shadow: 0 0 15px darkgoldenrod, 0 0 2px 2px darkgreen inset;
+    border: none;
+    background-color: lightgreen;
+    border-radius: 15px;
+    padding: 5px 0;
+}
+
+#trinketBtn:hover {
+    background-color: #a2f1a2;
+}
+
+#trinketBtn:active {
+    box-shadow: 0 0 15px darkgoldenrod, 0 0 1px 1px darkgreen inset;
+}
+
 div:has(iframe) {
     position: relative;
     width: 80%;
