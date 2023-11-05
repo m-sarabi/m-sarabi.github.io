@@ -16,5 +16,3 @@ $price
 for
 my_variable!
 True
-count
-variable-name
