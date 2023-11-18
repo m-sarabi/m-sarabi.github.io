@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>M-Sarabi/Python</title>
+    <link rel="icon" type="image/png" href="assets/Python.webp">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/style.css?v1">
+</head>
+<body>
+<header>
+    <a href="index.html">Python Course</a><br>
+</header>
+<section id="main-page">
+    <aside>
+        <script id="nav-bar-script" src="js/nav-replace.js"></script>
+    </aside>
+    <main>
+        <article class="language-py line-numbers match-braces">
+            <nav class="toc">
+                <details open>
+                    <summary>فهرست مطالب</summary>
+                    <ol>
+                    </ol>
+                </details>
+            </nav>
+            <h2 id="list-comprehension"></h2>
+            <p>
+                در پایتون list comprehension روشی بهینه، کوتاه و زیبا واسه ساختن یک لیست بر اساس یک Iterable دیگه‌ست.
+                روش نوشتن list comprehension توی پایتون به شکل زیره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+new_list = [expression for item in Iterable if condition]
+                </code></pre>
+            </div>
+            <p>
+                که برابره با عبارت زیر:
+            </p>
+            <div class="code-container">
+                <pre><code>
+new_list = []
+for item in Iterable:
+    if condition:
+        new_list.append(expression)
+                </code></pre>
+            </div>
+            <p>
+                ولی هم کوتاه‌تره و هم بهینه‌تر. توی کد پایین سرعت پردازش list comprehension
+                و روش طولانی‌تر رو با هم مقایسه کردیم:
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+import time
+
+n = 100000
+
+t1 = time.time_ns()
+list1 = [i for i in range(n) if i % 3 == 0]
+print(f"List comprehension: {(time.time_ns() - t1) // 1e6}µs")
+
+t1 = time.time_ns()
+list2 = []
+for i in range(n):
+    if i % 3 == 0:
+        list2.append(i)
+print(f"for loop and if: {(time.time_ns() - t1) // 1e6}µs")
+
+#>> List comprehension: 10.0µs
+#>> for loop and if: 16.0µs
+                </code></pre>
+            </div>
+
+            <p>
+                و می‌بینیم که توی این مورد سرعت list comprehension تقریبا 1.5 برابر بیشتره.
+            </p>
+
+            <p>
+                توی مثال پایین، فرض کنید که یک لیست از انواع میوه رو داریم، و می‌خوایم میوه‌هایی که
+                با حرف "b" شروع شده‌ن رو توی یه لیست دیگه ذخیره کنیم:
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+fruits_list = ["apple", "banana", "tomato", "watermelon", "grape",
+               "orange", "mango", "tangerine", "pineapple", "melon",
+               "peach", "pear", "lemon", "plum", "grapefruit", "date",
+               "strawberry", "avocado", "blueberry", "kiwi"]
+
+b_fruits = [fruit for fruit in fruits_list if fruit.startswith("b")]
+print(b_fruits)
+
+# >> ['banana', 'blueberry']
+
+
+#>> ['banana', 'blueberry']
+                </code></pre>
+            </div>
+            <p>
+                توی list comprehension می‌تونیم قسمت if رو ننویسیم و در این صورت به ازای تمام آیتم‌های
+                داخل لیست یک عملی رو انجام می‌دیم. مثلا توی مثال پایین تمام اعداد 1 تا 10 رو به توان 2 می‌رسونیم
+                و بعلاوه‌ی 2 می‌کنیم و توی یه لیست جدید ذخیره می‌کنیم:
+            </p>
+
+            <div class="code-container">
+                <pre><code>
+result = [i ** 2 + 2 for i in range(1, 11)]
+print(result)
+
+#>> [3, 6, 11, 18, 27, 38, 51, 66, 83, 102]
+                </code></pre>
+            </div>
+            <h2 id="ternary-operator">عملگر سه‌تایی یا ternary operator</h2>
+            <p>
+                عملگر سه‌تایی یا ternary operator به این دلیل نامگذاری شده که روی سه عبارت عمل می‌کنه،
+                برخلاف عملگرهای دیگه که روی دو عبارت (مثل عملگر جمع) یا یک عبارت (مثل عملگر not) عمل می‌کنن.
+                استفاده از این عملگر به شکل زیره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+expression1 if condition else expression2
+                </code></pre>
+            </div>
+            <p>
+                توی کد بالا، اگر شرط جلوی if برقرار باشه، عبارت 1 رو برمی‌گردونه، در غیر این صورت عبارت 2.
+                مثلا توی کد پایین، می‌خوایم ببینیم عددی که کاربر وارد کرده زوجه یا فرد.
+                اگر زوج بود مقدار "even" رو توی متغیر ذخیره کنیم، در غیر اینصورت مقدار "odd" رو:
+            </p>
+            <div class="code-container">
+                <pre><code>
+number = int(input("Enter a number: "))
+
+result = "even" if number % 2 == 0 else "odd"
+                </code></pre>
+            </div>
+            <p>
+                کد بالا برابره با کد پایین، ولی عبارت بالا کوتاه‌تر و بهینه‌تره:
+            </p>
+            <div class="code-container">
+                <pre><code>
+number = int(input("Enter a number: "))
+
+if number % 2 == 0:
+    result = "even"
+else:
+    result = "odd"
+                </code></pre>
+            </div>
+
+            <div class="code-container">
+                <pre><code>
+                </code></pre>
+            </div>
+
+            <h2 id="trinket-header">Interactive Code Editor</h2>
+            <button id="trinketBtn">Show</button>
+            <div class="trinket"></div>
+            <div class="code-container">
+                <pre><code id="fun">
+                </code></pre>
+            </div>
+        </article>
+    </main>
+</section>
+
+<footer>
+    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
+    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
+    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
+    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
+    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
+    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
+    <hr>
+    <br>
+    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
+</footer>
+
+<script src="js/prism.js"></script>
+<script src="js/script.js?v4"></script>
+</body>
+</html>
