@@ -15,6 +15,15 @@ if (funElem !== null) {
         }
     }, 600);
 }
+
+// placing the navbar from the nav.html
+fetch("./nav.html").then(result => result.text()).then(text => {
+    let old_elem = document.querySelector("div#nav-bar-script");
+    let new_elem = document.createElement("div");
+    new_elem.innerHTML = text;
+    old_elem.parentNode.replaceChild(new_elem, old_elem);
+})
+
 // toc generator
 const headElements = document.querySelectorAll("h2");
 if (document.getElementsByClassName("toc")[0] !== undefined) {
@@ -54,23 +63,6 @@ window.addEventListener("scroll", () => {
     scrollColorValue = Math.floor(scrollPercentage * 255 / 100)
     scrollElem.style.backgroundColor = `rgb(${255 - scrollColorValue}, ${Math.floor(scrollColorValue * 0.8)}, 0, 0.5)`
 })
-
-// Rest in peace Armita
-// let armita = document.createElement("div")
-// armita.style.position = "absolute"
-// armita.style.width = "400px"
-// armita.style.backgroundColor = "#111"
-// armita.style.left = "0"
-// armita.style.top = "50px"
-// armita.style.transformOrigin = "bottom left"
-// armita.style.transform = "rotate(-19deg)"
-// armita.style.color = "#fff"
-// armita.style.padding = "20px"
-// armita.style.textAlign = "center"
-// armita.style.fontSize = "130%"
-// armita.style.boxShadow = "0 0 20px 5px black"
-// armita.innerHTML = "برای آرمیتا&emsp;زنده باد آزادی&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
-// document.body.appendChild(armita)
 
 
 // trinket button to show and hide it
