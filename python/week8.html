@@ -1,60 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>M-Sarabi/Python</title>
-    <link rel="icon" type="image/png" href="assets/Python.webp">
-    <link rel="stylesheet" href="css/prism.css">
-    <link rel="stylesheet" href="css/style.css?v1">
-</head>
-<body>
-<header>
-    <a href="index.html">Python Course</a><br>
-</header>
-<section id="main-page">
-    <aside>
-        <div id="nav-bar-script"></div>
-    </aside>
-    <main>
-        <article class="language-py line-numbers match-braces">
-            <nav class="toc">
-                <details open>
-                    <summary>فهرست مطالب</summary>
-                    <ol>
-                    </ol>
-                </details>
-            </nav>
-            <h2 id="sets">نوع داده‌ی ست set</h2>
-            <p>
-                ست‌ها در Python یک نوع داده‌ی Iterable هستن که ویژگی‌های خاصی دارن:
-            </p>
-            <ul>
-                <li>
-                    نحوه ساخت: برای ساخت set از آکلاد باز و بسته استفاده می‌کنیم. به عنوان مثال:
-                    <code>{1, 2, "Alice", "Alex"}</code>
-                </li>
-                <li>
-                    بدون ترتیب: لیست‌ها بدون ترتیب یا نامرتب هستن، به این معنی که آیتم‌ها ایندکس ندارن.
-                    پس نمیشه مثلا با ایندکس آدرس داد، یا آیتم اول، دوم یا آخر ست رو گرفت.
-                </li>
-                <li>
-                    بدون تکرار: هر عضو داخل set باید یکتا (unique) باشه.
-                    اگر عضو تکراری به لیست اضافه بشه نادیده گرفته میشه.
-                </li>
-            </ul>
-            <p>
-                <img src="assets/sets/set1.png" alt="sets">
-                ست‌ها مثل مجموعه‌ها توی ریاضی هستن. عمل‌هایی مثل اجتماع، اشتراک، تفاضل و ...
-                رو روی ست‌ها میشه اعمال کرد. اعمالی که میشه روی set ها انجام داد:
-            </p>
-            <ul>
-                <li>
-                    اجتماع دو set: با متد union یا عملگر
-                    <code>|</code>:
-                </li>
-            </ul>
-            <img src="assets/sets/set2.png" alt="set union">
-            <div class="code-container">
+<h2 id="sets">نوع داده‌ی ست set</h2>
+<p>
+    ست‌ها در Python یک نوع داده‌ی Iterable هستن که ویژگی‌های خاصی دارن:
+</p>
+<ul>
+    <li>
+        نحوه ساخت: برای ساخت set از آکلاد باز و بسته استفاده می‌کنیم. به عنوان مثال:
+        <code>{1, 2, "Alice", "Alex"}</code>
+    </li>
+    <li>
+        بدون ترتیب: لیست‌ها بدون ترتیب یا نامرتب هستن، به این معنی که آیتم‌ها ایندکس ندارن.
+        پس نمیشه مثلا با ایندکس آدرس داد، یا آیتم اول، دوم یا آخر ست رو گرفت.
+    </li>
+    <li>
+        بدون تکرار: هر عضو داخل set باید یکتا (unique) باشه.
+        اگر عضو تکراری به لیست اضافه بشه نادیده گرفته میشه.
+    </li>
+</ul>
+<p>
+    <img src="assets/sets/set1.png" alt="sets">
+    ست‌ها مثل مجموعه‌ها توی ریاضی هستن. عمل‌هایی مثل اجتماع، اشتراک، تفاضل و ...
+    رو روی ست‌ها میشه اعمال کرد. اعمالی که میشه روی set ها انجام داد:
+</p>
+<ul>
+    <li>
+        اجتماع دو set: با متد union یا عملگر
+        <code>|</code>:
+    </li>
+</ul>
+<img src="assets/sets/set2.png" alt="set union">
+<div class="code-container">
                 <pre><code>
 set1 = {'a', 'b', 'c'}
 set2 = {'c', 'd', 'e'}
@@ -63,15 +37,15 @@ print(set1 | set2)  # set1.union(set2)
 
 #>> {'e', 'b', 'a', 'd', 'c'}
                 </code></pre>
-            </div>
-            <ul>
-                <li>
-                    اشتراک دو set: با متد intersection یا عملگر
-                    <code>&amp;</code>:
-                </li>
-            </ul>
-            <img src="assets/sets/set3.png" alt="set intersection">
-            <div class="code-container">
+</div>
+<ul>
+    <li>
+        اشتراک دو set: با متد intersection یا عملگر
+        <code>&amp;</code>:
+    </li>
+</ul>
+<img src="assets/sets/set3.png" alt="set intersection">
+<div class="code-container">
                 <pre><code>
 set1 = {'a', 'b', 'c'}
 set2 = {'c', 'd', 'e'}
@@ -80,17 +54,17 @@ print(set1 & set2)  # set1.intersection(set2)
 
 #>> {'c'}
                 </code></pre>
-            </div>
-            <ul>
-                <li>
-                    تفاضل دو set: یعنی اعضایی از <span class="english">set1</span> که در <span
-                        class="english">set2</span> نیستند.
-                    با متد difference یا عملگر
-                    <code>-</code>
-                </li>
-            </ul>
-            <img src="assets/sets/set4.png" alt="set difference">
-            <div class="code-container">
+</div>
+<ul>
+    <li>
+        تفاضل دو set: یعنی اعضایی از <span class="english">set1</span> که در <span
+            class="english">set2</span> نیستند.
+        با متد difference یا عملگر
+        <code>-</code>
+    </li>
+</ul>
+<img src="assets/sets/set4.png" alt="set difference">
+<div class="code-container">
                 <pre><code>
 set1 = {'a', 'b', 'c'}
 set2 = {'c', 'd', 'e'}
@@ -99,17 +73,17 @@ print(set1 - set2)  # set1.difference(set2)
 
 #>> {'b', 'a'}
                 </code></pre>
-            </div>
+</div>
 
-            <ul>
-                <li>
-                    تفاضل متقارن دو set: یعنی اعضایی که در یکی از دو set هست، ولی در هر دو نیست.
-                    یا میشه گفت اجتماع دو set منهای اشتراکشون. با متد symmetric_difference یا عملگر
-                    <code>^</code>
-                </li>
-            </ul>
-            <img src="assets/sets/set5.png" alt="set symmetric difference">
-            <div class="code-container">
+<ul>
+    <li>
+        تفاضل متقارن دو set: یعنی اعضایی که در یکی از دو set هست، ولی در هر دو نیست.
+        یا میشه گفت اجتماع دو set منهای اشتراکشون. با متد symmetric_difference یا عملگر
+        <code>^</code>
+    </li>
+</ul>
+<img src="assets/sets/set5.png" alt="set symmetric difference">
+<div class="code-container">
                 <pre><code>
 set1 = {'a', 'b', 'c'}
 set2 = {'c', 'd', 'e'}
@@ -118,16 +92,16 @@ print(set1 ^ set2)  # set1.symmetric_difference(set2)
 
 #>> {'b', 'a', 'd', 'e'}
                 </code></pre>
-            </div>
-            <p>
-                متدهای
-                <span>intersection_update, difference_update, symmetric_difference_update</span>
-                یه set جدید برنمی‌گردونن، بلکه
-                <span class="english">set1</span>
-                رو آپدیت می‌کنن.
-                مثلا:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    متدهای
+    <span>intersection_update, difference_update, symmetric_difference_update</span>
+    یه set جدید برنمی‌گردونن، بلکه
+    <span class="english">set1</span>
+    رو آپدیت می‌کنن.
+    مثلا:
+</p>
+<div class="code-container">
                 <pre><code>
 set1 = {'a', 'b', 'c'}
 set2 = {'c', 'd', 'e'}
@@ -138,24 +112,24 @@ print(set1)
 
 #>> {'e', 'a', 'b', 'd'}
                 </code></pre>
-            </div>
+</div>
 
-            <p>
-                متدهای مهم دیگه‌ی set ها این‌ها هستن:
-            </p>
-            <ul>
-                <li>
-                    متد issubset تست می‌کنه که آیا تمام آیتم‌های <span class="english">set1</span> داخل <span
-                        class="english">set2</span> هست یا نه.
-                    یعنی آیا <span class="english">set1</span> زیرمجموعه <span class="english">set2</span> هست.
-                </li>
-                <li>
-                    متد issuperset هم تست می‌کنه که آیا تمام آیتم‌های <span class="english">set2</span> داخل <span
-                        class="english">set1</span> هست یا نه.
-                    یعنی آیا <span class="english">set2</span> زیرمجموعه <span class="english">set1</span> هست.
-                </li>
-            </ul>
-            <div class="code-container">
+<p>
+    متدهای مهم دیگه‌ی set ها این‌ها هستن:
+</p>
+<ul>
+    <li>
+        متد issubset تست می‌کنه که آیا تمام آیتم‌های <span class="english">set1</span> داخل <span
+            class="english">set2</span> هست یا نه.
+        یعنی آیا <span class="english">set1</span> زیرمجموعه <span class="english">set2</span> هست.
+    </li>
+    <li>
+        متد issuperset هم تست می‌کنه که آیا تمام آیتم‌های <span class="english">set2</span> داخل <span
+            class="english">set1</span> هست یا نه.
+        یعنی آیا <span class="english">set2</span> زیرمجموعه <span class="english">set1</span> هست.
+    </li>
+</ul>
+<div class="code-container">
                 <pre><code>
 set1 = {'a', 'b', 'c'}
 set2 = {'a', 'b'}
@@ -166,13 +140,13 @@ print(set1.issuperset(set2))  # set1 >= set2
 #>> False
 #>> True
                 </code></pre>
-            </div>
-            <ul>
-                <li>
-                    متد update یک Iterable دیگه می‌گیره و تمام آیتم‌هاش رو به set اضافه می‌کنه:
-                </li>
-            </ul>
-            <div class="code-container">
+</div>
+<ul>
+    <li>
+        متد update یک Iterable دیگه می‌گیره و تمام آیتم‌هاش رو به set اضافه می‌کنه:
+    </li>
+</ul>
+<div class="code-container">
                 <pre><code>
 names = {"Alice", "Alex", "Morgan"}
 more_names = ["John", "Alex", "Albert"]
@@ -183,53 +157,53 @@ print(names)
 
 #>> {'John', 'Albert', 'Morgan', 'Alex', 'Alice'}
                 </code></pre>
-            </div>
-            <ul>
-                <li>
-                    متد discard یک آیتم رو می‌گیره و اون رو از ست حذف ممی‌کنه.
-                    اگر آیتم داخل ست نباشه هیچ کاری انجام نمیده.
-                </li>
-                <li>
-                    متد remove هم یک آیتم رو می‌گیره و اون رو از ست حذف ممی‌کنه.
-                    ولی اگر آیتم داخل ست نباشه خطا برمی‌گردونه.
-                </li>
-                <li>
-                    متد pop یک مقدار دلخواه (تصادفی) از لیست حذف می‌کنه.
-                    اگر ست خالی باشه خطا برمی‌گردونه.
-                </li>
-                <li>
-                    متد clear تمام آیتم‌های داخل ست رو حذف می‌کنه.
-                </li>
-            </ul>
-            <h2 id="function-definition">تعریف function یا تابع</h2>
-            <p>
-                توابع در پایتون کدهایی هستند که کارهایی انجام میدن و می‌تونیم دوباره از اونها استفاده کنیم
-                بدون اینکه نیاز باشه دوباره اونها رو بنویسیم. function ها به مرتب بودن کد و بهینگی اون هم
-                کمک می‌کنند.
-            </p>
-            <h3>ساختار یک function</h3>
-            <p>
-                برای ساخت یک function از کلمه‌ی کلیدی def استفاده می‌کنیم.
-                بعد از اون اسم function رو می‌نویسیم و جلو اسمش پرانتز باز و بسته می‌گذاریم و با علامت
-                دو نقطه (:) شروع function رو مشخص می‌کنیم.
-                کارهایی که قراره function انجام بده رو داخلش و با یک indent (تو رفتگی) می‌نویسیم.
-            </p>
-            <p>
-                دستور return مقداری رو برمی‌گردونه و هرجا داخل یک function به دستور return رسیدیم همونجا
-                کار function تموم میشه و ازش خارج میشه.
-            </p>
-            <p>
-                توابع ممکنه کاری رو انجام بدن (مثل print که چیزی رو توی خروجی کنسول نشون میده)
-                و یا مقداری رو برگردونه (مثل تابع abs که یک قدر مطلق یک عدد رو برمی‌گردونه)
-                و یا هردو.
-                function ها به خودی خود کاری انجام نمیدن، و باید صدا زده بشن
-                یا call بشن.
-                برای صدا زدن یک تابع اسم تابع رو با پرانتز جلوش می‌نویسیم.
-            </p>
-            <p>
-                برای مثال تابع say_hello زیر پیغام Hello رو توی خروجی چاپ می‌کنه و دوبار این تابع رو صدا زدیم:
-            </p>
-            <div class="code-container">
+</div>
+<ul>
+    <li>
+        متد discard یک آیتم رو می‌گیره و اون رو از ست حذف ممی‌کنه.
+        اگر آیتم داخل ست نباشه هیچ کاری انجام نمیده.
+    </li>
+    <li>
+        متد remove هم یک آیتم رو می‌گیره و اون رو از ست حذف ممی‌کنه.
+        ولی اگر آیتم داخل ست نباشه خطا برمی‌گردونه.
+    </li>
+    <li>
+        متد pop یک مقدار دلخواه (تصادفی) از لیست حذف می‌کنه.
+        اگر ست خالی باشه خطا برمی‌گردونه.
+    </li>
+    <li>
+        متد clear تمام آیتم‌های داخل ست رو حذف می‌کنه.
+    </li>
+</ul>
+<h2 id="function-definition">تعریف function یا تابع</h2>
+<p>
+    توابع در پایتون کدهایی هستند که کارهایی انجام میدن و می‌تونیم دوباره از اونها استفاده کنیم
+    بدون اینکه نیاز باشه دوباره اونها رو بنویسیم. function ها به مرتب بودن کد و بهینگی اون هم
+    کمک می‌کنند.
+</p>
+<h3>ساختار یک function</h3>
+<p>
+    برای ساخت یک function از کلمه‌ی کلیدی def استفاده می‌کنیم.
+    بعد از اون اسم function رو می‌نویسیم و جلو اسمش پرانتز باز و بسته می‌گذاریم و با علامت
+    دو نقطه (:) شروع function رو مشخص می‌کنیم.
+    کارهایی که قراره function انجام بده رو داخلش و با یک indent (تو رفتگی) می‌نویسیم.
+</p>
+<p>
+    دستور return مقداری رو برمی‌گردونه و هرجا داخل یک function به دستور return رسیدیم همونجا
+    کار function تموم میشه و ازش خارج میشه.
+</p>
+<p>
+    توابع ممکنه کاری رو انجام بدن (مثل print که چیزی رو توی خروجی کنسول نشون میده)
+    و یا مقداری رو برگردونه (مثل تابع abs که یک قدر مطلق یک عدد رو برمی‌گردونه)
+    و یا هردو.
+    function ها به خودی خود کاری انجام نمیدن، و باید صدا زده بشن
+    یا call بشن.
+    برای صدا زدن یک تابع اسم تابع رو با پرانتز جلوش می‌نویسیم.
+</p>
+<p>
+    برای مثال تابع say_hello زیر پیغام Hello رو توی خروجی چاپ می‌کنه و دوبار این تابع رو صدا زدیم:
+</p>
+<div class="code-container">
                 <pre><code>
 def say_hello():
     print("Hello")
@@ -241,13 +215,13 @@ say_hello()
 #>> Hello
 #>> Hello
                 </code></pre>
-            </div>
-            <p>
-                و تابع زیر فقط پیغام
-                <span class="english">Hello, how are you?</span>
-                رو برمی‌گردونه:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    و تابع زیر فقط پیغام
+    <span class="english">Hello, how are you?</span>
+    رو برمی‌گردونه:
+</p>
+<div class="code-container">
                 <pre><code>
 def say_hello():
     return 'Hello, how are you?'
@@ -258,15 +232,15 @@ print(message)
 
 #>> Hello, how are you?
                 </code></pre>
-            </div>
+</div>
 
-            <h3>پارامترهای function</h3>
-            <p>
-                میشه به یه تابع یک یا چند تا پارامتر داد.
-                این پارامترها ورودی‌های تابع هستند که می‌تونه ازشون استفاده کنه.
-                مثلا function زیر یه ورودی radius از کاربر می‌گیره و مساحت دایره‌ای به اون شعاع رو برمی‌گردونه:
-            </p>
-            <div class="code-container">
+<h3>پارامترهای function</h3>
+<p>
+    میشه به یه تابع یک یا چند تا پارامتر داد.
+    این پارامترها ورودی‌های تابع هستند که می‌تونه ازشون استفاده کنه.
+    مثلا function زیر یه ورودی radius از کاربر می‌گیره و مساحت دایره‌ای به اون شعاع رو برمی‌گردونه:
+</p>
+<div class="code-container">
                 <pre><code>
 import math
 
@@ -280,24 +254,24 @@ print(circle_area(2))
 
 #>> 12.566370614359172
                 </code></pre>
-            </div>
-            <p>
-                توی کد بالا تابع circle_area یک پارامتر به اسم radius رو گرفته و با استفاده از این پارامتر
-                مساحت دایره رو محاسبه کرده و در آخر برگردونده.
-                پایین‌تر تابع رو call کردیم. مقداری که به موقع صدا زدن تابع بهش می‌دیم رو آرگومان می‌گیم،
-                پس عدد 2 رو به عنوان آرگومان تابع بهش دادیم.
-            </p>
-            <p>
-                پارامترهای یک تابع می‌تونن مقادیر پیشفرض هم داشته باشن.
-                اون پارامترهایی که مقادیر پیشفرض دارن حتما باید بعد از پارامترهای بدون مقدار نوشته بشن.
-                موقع صدا زدن یک تابع میشه پارامتری که مقدار پیشفرض داره به تابع داده نشه، در این صورت
-                تابع مقدار پیشفرض رو استفاده می‌کنه.
-            </p>
-            <p>
-                تابع زیر یک عدد و فرجه‌ی رادیکال رو می‌گیره و رادیکال اون عدد رو محاسبه می‌کنه.
-                به صورت پیضفرض فرجه رادیکال رو 2 می‌ذاریم:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    توی کد بالا تابع circle_area یک پارامتر به اسم radius رو گرفته و با استفاده از این پارامتر
+    مساحت دایره رو محاسبه کرده و در آخر برگردونده.
+    پایین‌تر تابع رو call کردیم. مقداری که به موقع صدا زدن تابع بهش می‌دیم رو آرگومان می‌گیم،
+    پس عدد 2 رو به عنوان آرگومان تابع بهش دادیم.
+</p>
+<p>
+    پارامترهای یک تابع می‌تونن مقادیر پیشفرض هم داشته باشن.
+    اون پارامترهایی که مقادیر پیشفرض دارن حتما باید بعد از پارامترهای بدون مقدار نوشته بشن.
+    موقع صدا زدن یک تابع میشه پارامتری که مقدار پیشفرض داره به تابع داده نشه، در این صورت
+    تابع مقدار پیشفرض رو استفاده می‌کنه.
+</p>
+<p>
+    تابع زیر یک عدد و فرجه‌ی رادیکال رو می‌گیره و رادیکال اون عدد رو محاسبه می‌کنه.
+    به صورت پیضفرض فرجه رادیکال رو 2 می‌ذاریم:
+</p>
+<div class="code-container">
                 <pre><code>
 def root(number, degree=2):
     result = number ** (1 / degree)
@@ -310,14 +284,14 @@ print(root(27, 3))
 #>> 2.0
 #>> 3.0
                 </code></pre>
-            </div>
-            <p>
-                میشه اسم پارامترها رو هم هنگام صدا زدن یک فانکشن نوشت،
-                در این صورت دیگه ترتیب نوشتن اون پارامتر مهم نیست.
-                توی مثال زیر که یک آدرس وبسایت برامون درست می‌کنه، موقع صدا زدن فقط مقدار یکی از پارامترهای
-                پیشفرض (extension) رو وارد کردیم و اسمش رو نوشتیم:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    میشه اسم پارامترها رو هم هنگام صدا زدن یک فانکشن نوشت،
+    در این صورت دیگه ترتیب نوشتن اون پارامتر مهم نیست.
+    توی مثال زیر که یک آدرس وبسایت برامون درست می‌کنه، موقع صدا زدن فقط مقدار یکی از پارامترهای
+    پیشفرض (extension) رو وارد کردیم و اسمش رو نوشتیم:
+</p>
+<div class="code-container">
                 <pre><code>
 def generate_website_address(domain, subdomain="www", extension="com"):
     website = f"{domain}.{extension}" if subdomain in (None, "") \
@@ -329,13 +303,13 @@ print(generate_website_address("m-sarabi", extension="ir"))
 
 #>> www.m-sarabi.ir
                 </code></pre>
-            </div>
+</div>
 
-            <p>
-                یه function می‌تونه یه function دیگه رو هم به عنوان پارامتر بگیره.
-                مثلا توی کد زیر، تابع number_tool یک function و یک لیست از اعداد رو از ورودی می‌گیره.
-            </p>
-            <div class="code-container">
+<p>
+    یه function می‌تونه یه function دیگه رو هم به عنوان پارامتر بگیره.
+    مثلا توی کد زیر، تابع number_tool یک function و یک لیست از اعداد رو از ورودی می‌گیره.
+</p>
+<div class="code-container">
                 <pre><code>
 def sum_numbers(numbers):
     return sum(numbers)
@@ -360,17 +334,17 @@ print(number_tool(multiply_numbers, my_list))
 #>> 10
 #>> 24
                 </code></pre>
-            </div>
+</div>
 
-            <h3>متغیرهای محلی</h3>
-            <p>
-                متغیرهایی که داخل یک function یا class تعریف میشن، فقط توی اون تابع یا کلاس
-                قابل استفاده هستن.
-                این متغیرها رو متغیرهای محلی میگیم.
-                مثلا توی کد زیر متغیر message داخل تابع تعریف شده، و اگر بخوایم بیرون تابع ازش استفاده کنیم
-                خطای NameError دریافت می‌کنیم:
-            </p>
-            <div class="code-container">
+<h3>متغیرهای محلی</h3>
+<p>
+    متغیرهایی که داخل یک function یا class تعریف میشن، فقط توی اون تابع یا کلاس
+    قابل استفاده هستن.
+    این متغیرها رو متغیرهای محلی میگیم.
+    مثلا توی کد زیر متغیر message داخل تابع تعریف شده، و اگر بخوایم بیرون تابع ازش استفاده کنیم
+    خطای NameError دریافت می‌کنیم:
+</p>
+<div class="code-container">
                 <pre><code>
 def say_hello():
     message = "Hello, how are you?"
@@ -381,16 +355,16 @@ print(message)
 
 #>> NameError: name 'message' is not defined
                 </code></pre>
-            </div>
-            <h2 id="args-kwargs">*args و **kwargs</h2>
-            <p>
-                با استفاده از علامت ستاره کنار اسم متغیر میشه تعداد قابل تغییری از آرگومان‌ها رو به تابع داد.
-                بین برنامه‌نویس‌ها قرارداد شده که معمولا اسم این متغیر رو args می‌گذارن.
-                مقداری که تابع می‌گیره یک تاپل هست.
-                به عنوان مثال کد زیر تعدادی عدد می‌گیره و مجموع اعداد داخلش به توان power
-                رو برمی‌گردونه:
-            </p>
-            <div class="code-container">
+</div>
+<h2 id="args-kwargs">*args و **kwargs</h2>
+<p>
+    با استفاده از علامت ستاره کنار اسم متغیر میشه تعداد قابل تغییری از آرگومان‌ها رو به تابع داد.
+    بین برنامه‌نویس‌ها قرارداد شده که معمولا اسم این متغیر رو args می‌گذارن.
+    مقداری که تابع می‌گیره یک تاپل هست.
+    به عنوان مثال کد زیر تعدادی عدد می‌گیره و مجموع اعداد داخلش به توان power
+    رو برمی‌گردونه:
+</p>
+<div class="code-container">
                 <pre><code>
 def sum_square(*args, power=1):
     result = 0
@@ -403,21 +377,21 @@ print(sum_square(2, 3, 4, power=3))  # 2 ** 3 + 3 ** 3 + 4 ** 3
 
 #>> 99
                 </code></pre>
-            </div>
+</div>
 
-            <p>
-                همچنین با استفاده از
-                <span class="english">**kwargs</span>
-                (اینجا هم اسم kwargs می‌تونه هرچی باشه، ولی قرارداده که این باشه)
-                میشه یک تعداد آرگومان‌ها رو به صورت کلید و مقدار به function داد.
-                چیزی که تابع دریافت می‌کنه یک دیکشنری از این کلید و مقدارهاست.
-            </p>
-            <p>
-                توی مثال پایین از
-                <span class="english">**kwargs</span>
-                استفاده کردیم:
-            </p>
-            <div class="code-container">
+<p>
+    همچنین با استفاده از
+    <span class="english">**kwargs</span>
+    (اینجا هم اسم kwargs می‌تونه هرچی باشه، ولی قرارداده که این باشه)
+    میشه یک تعداد آرگومان‌ها رو به صورت کلید و مقدار به function داد.
+    چیزی که تابع دریافت می‌کنه یک دیکشنری از این کلید و مقدارهاست.
+</p>
+<p>
+    توی مثال پایین از
+    <span class="english">**kwargs</span>
+    استفاده کردیم:
+</p>
+<div class="code-container">
                 <pre><code>
 def print_properties(**kwargs):
     # kwargs in this example:
@@ -432,18 +406,18 @@ print_properties(name="Mohammad", surname="Sarabi", hobbies="Programming, Art")
 #>> surname: Sarabi
 #>> hobbies: Programming, Art
                 </code></pre>
-            </div>
-            <h3>unpack کردن آرگومان‌ها با * و **</h3>
-            <p>
-                میشه به جای چند آرگومان برای
-                <span class="english">*args</span>
-                یک لیست به تابع داد، و یا به جای
-                <span class="english">**kwargs</span>
-                یک دیکشنری داد.
-                برای این کار به ترتیب از عملگرهای * و ** قبل از لیست یا دیکشنری استفاده می‌کنیم.
-                به عنوان مثال، جمع اعداد در مثال تابع sum_square رو به این شکل میشه نوشت:
-            </p>
-            <div class="code-container">
+</div>
+<h3>unpack کردن آرگومان‌ها با * و **</h3>
+<p>
+    میشه به جای چند آرگومان برای
+    <span class="english">*args</span>
+    یک لیست به تابع داد، و یا به جای
+    <span class="english">**kwargs</span>
+    یک دیکشنری داد.
+    برای این کار به ترتیب از عملگرهای * و ** قبل از لیست یا دیکشنری استفاده می‌کنیم.
+    به عنوان مثال، جمع اعداد در مثال تابع sum_square رو به این شکل میشه نوشت:
+</p>
+<div class="code-container">
                 <pre><code>
 def sum_square(*args, power=1):
     result = 0
@@ -458,22 +432,22 @@ print(sum_square(*numbers, power=3))  # 2 ** 3 + 3 ** 3 + 4 ** 3
 # >> 99
 
                 </code></pre>
-            </div>
+</div>
 
-            <h2 id="import">import کردن</h2>
-            <p>
-                معمولا کدهای یک پروژه داخل چندین فایل مختلف هستند که در ارتباطند.
-                برای استفاده از کدهای یک فایل داخل یک فایل دیگه از import و بعد اسم اون فایل به شکل زیر استفاده می‌کنیم:
-            </p>
-            <div class="code-container">
+<h2 id="import">import کردن</h2>
+<p>
+    معمولا کدهای یک پروژه داخل چندین فایل مختلف هستند که در ارتباطند.
+    برای استفاده از کدهای یک فایل داخل یک فایل دیگه از import و بعد اسم اون فایل به شکل زیر استفاده می‌کنیم:
+</p>
+<div class="code-container">
                 <pre><code>
                     import filename
                 </code></pre>
-            </div>
-            <p>
-                مثلا فایلی داریم به اسم geometry_stuff که دو تا تابع زیر داخلش هستن:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    مثلا فایلی داریم به اسم geometry_stuff که دو تا تابع زیر داخلش هستن:
+</p>
+<div class="code-container">
                 <pre><code>
 def circle_area(radius):
     pi = 3.1416
@@ -483,12 +457,12 @@ def circle_area(radius):
 def square_area(length):
     return length ** 2
                 </code></pre>
-            </div>
-            <p>
-                داخل یک فایل دیگه می‌خوایم از این دو تابع استفاده کنیم به این شکل اون فایل رو import می‌کنیم
-                و از توابع داخلش استفاده می‌کنیم:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    داخل یک فایل دیگه می‌خوایم از این دو تابع استفاده کنیم به این شکل اون فایل رو import می‌کنیم
+    و از توابع داخلش استفاده می‌کنیم:
+</p>
+<div class="code-container">
                 <pre><code>
 import geometry_stuff
 
@@ -498,13 +472,13 @@ print(temp.square_area(2))
 #>> 12.5664
 #>> 4
                 </code></pre>
-            </div>
-            <p>
-                اگر بخوایم چیزهای داخل یک فایل رو import کنیم.
-                برای اینکار به شکل زیر از from استفاده می‌کنیم.
-                در این صورت دیگه موقع استفاده از اونا اسم فایل رو هم نمی‌نویسیم:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    اگر بخوایم چیزهای داخل یک فایل رو import کنیم.
+    برای اینکار به شکل زیر از from استفاده می‌کنیم.
+    در این صورت دیگه موقع استفاده از اونا اسم فایل رو هم نمی‌نویسیم:
+</p>
+<div class="code-container">
                 <pre><code>
 from geometry_stuff import *
 
@@ -514,12 +488,12 @@ print(square_area(2))
 #>> 12.5664
 #>> 4
                 </code></pre>
-            </div>
-            <p>
-                و اگر بخوایم از چیزای داخل یک فایل فقط بعضی‌ها رو import کنیم به جای ستاره اسم اون‌ها رو می‌نویسیم:
-            </p>
+</div>
+<p>
+    و اگر بخوایم از چیزای داخل یک فایل فقط بعضی‌ها رو import کنیم به جای ستاره اسم اون‌ها رو می‌نویسیم:
+</p>
 
-            <div class="code-container">
+<div class="code-container">
                 <pre><code>
 from geometry_stuff import square_area
 
@@ -527,32 +501,6 @@ print(square_area(2))
 
 #>> 4
                 </code></pre>
-            </div>
+</div>
 
-            <h2 id="trinket-header">Interactive Code Editor</h2>
-            <button id="trinketBtn">Show</button>
-            <div class="trinket"></div>
-            <div class="code-container">
-                <pre><code id="fun">
-                </code></pre>
-            </div>
-        </article>
-    </main>
-</section>
-
-<footer>
-    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
-    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
-    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
-    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
-    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
-    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
-    <hr>
-    <br>
-    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
-</footer>
-
-<script src="js/prism.js"></script>
-<script src="js/script.js?v4"></script>
-</body>
-</html>
+<script src="js/inject.js"></script>

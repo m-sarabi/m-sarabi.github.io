@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>M-Sarabi/Python</title>
+    <title>{{ title }}</title>
     <link rel="icon" type="image/png" href="assets/Python.webp">
     <link rel="stylesheet" href="css/prism.css">
     <link rel="stylesheet" href="css/style.css?v1">
@@ -25,16 +25,17 @@
                 </details>
             </nav>
 
-            {{ Content }}
+            {{ content }}
 
-<!--            <div class="code-container">-->
-<!--                <pre><code>-->
-<!--                </code></pre>-->
-<!--            </div>-->
-
-            <h2 id="trinket-header">Interactive Code Editor</h2>
-            <button id="trinketBtn">Show</button>
-            <div class="trinket"></div>
+            <!--            <div class="code-container">-->
+            <!--                <pre><code>-->
+            <!--                </code></pre>-->
+            <!--            </div>-->
+            <div id="tkinter-container">
+                <h2 id="trinket-header">Interactive Code Editor</h2>
+                <button id="trinketBtn">Show</button>
+                <div class="trinket"></div>
+            </div>
             <div class="code-container">
                 <pre><code id="fun">
                 </code></pre>

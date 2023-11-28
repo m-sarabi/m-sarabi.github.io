@@ -1,58 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>M-Sarabi/Python</title>
-    <link rel="icon" type="image/png" href="assets/Python.webp">
-    <link rel="stylesheet" href="css/prism.css">
-    <link rel="stylesheet" href="css/style.css?v1">
-</head>
-<body>
-<header>
-    <a href="index.html">Python Course</a><br>
-</header>
-<section id="main-page">
-    <aside>
-        <div id="nav-bar-script"></div>
-    </aside>
-    <main>
-        <article class="language-py line-numbers match-braces">
-            <nav class="toc">
-                <details open>
-                    <summary>فهرست مطالب</summary>
-                    <ol>
-                    </ol>
-                </details>
-            </nav>
-
-            <h2 id="tuple">نوع داده‌ی tuple</h2>
-            <p>
-                داده‌ی tuple مثل list یک Iterable هست که می‌تونه انواع داده‌ی دیگه رو
-                در خودش نگهداری کنه. برای ساختن داده‌ی tuple از پرانتز باز و بسته
-                <code>()</code>
-                استفاده می‌کنیم.
-            </p>
-            <p>
-                بزرگترین تفاوت tuple با list اینه که tuple غیرقابل تغییر هست،
-                یعنی وقتی ساخته شد دیگه نمیشه عضوی رو بهش اضافه کرد، ازش کم کرد و یا تغییر داد.
-                پس متدهایی مثل append و remove و pop و غیره دیگه برای tuple وجود ندارن.
-            </p>
-            <div class="code-container">
+<h2 id="tuple">نوع داده‌ی tuple</h2>
+<p>
+    داده‌ی tuple مثل list یک Iterable هست که می‌تونه انواع داده‌ی دیگه رو
+    در خودش نگهداری کنه. برای ساختن داده‌ی tuple از پرانتز باز و بسته
+    <code>()</code>
+    استفاده می‌کنیم.
+</p>
+<p>
+    بزرگترین تفاوت tuple با list اینه که tuple غیرقابل تغییر هست،
+    یعنی وقتی ساخته شد دیگه نمیشه عضوی رو بهش اضافه کرد، ازش کم کرد و یا تغییر داد.
+    پس متدهایی مثل append و remove و pop و غیره دیگه برای tuple وجود ندارن.
+</p>
+<div class="code-container">
                 <pre><code>
 my_tuple = (1, 2, "a", False)
 print(my_tuple[2:])
 
 #>> ('a', False)
                 </code></pre>
-            </div>
-            <p>
-                تفاوت دیگه‌ای که نوع tuple با list اینه که tuple فضای کمتری از حافظه رو اشغال می‌کنه.
-                و همین باعث میشه که تو دیتای زیاد سرعت دسترسی به دیتا هم مقداری بیشتر بشه.
-                مثلا توی کد زیر می‌بینید که لیست 72 بایت از حافظه رو اشغال کرده،
-                ولی همون دیتا از نوع تاپل 48 بایت رو اشغال کرده.
-            </p>
+</div>
+<p>
+    تفاوت دیگه‌ای که نوع tuple با list اینه که tuple فضای کمتری از حافظه رو اشغال می‌کنه.
+    و همین باعث میشه که تو دیتای زیاد سرعت دسترسی به دیتا هم مقداری بیشتر بشه.
+    مثلا توی کد زیر می‌بینید که لیست 72 بایت از حافظه رو اشغال کرده،
+    ولی همون دیتا از نوع تاپل 48 بایت رو اشغال کرده.
+</p>
 
-            <div class="code-container">
+<div class="code-container">
                 <pre><code>
 my_list = ["a", "b", "c"]
 my_tuple = ("a", "b", "c")
@@ -63,26 +36,26 @@ print(my_tuple.__sizeof__())
 #>> 72
 #>> 48
                 </code></pre>
-            </div>
+</div>
 
-            <h2 id="dictionary">نوع داده‌ی dict دیکشنری</h2>
-            <p>
-                نوع داده‌ی dict یا دیکشنری توی پایتون به صورت key و value یا کلید و مقدار هستن.
-                کلید و مقدار رو باید با یک علامت دو نقطه
-                <code>:</code>
-                از هم جدا کرد، و جفت کلید و مقدارها رو هم مثل لیست یا tuple با یک کاما از هم جدا می‌کنیم.
-                مقدار value از هر نوع داده‌ای می‌تونه باشه،
-                ولی key باید قابل هش (hashable) باشه.
-                معمولا انواع داده‌ای که قابل تغییر نیستن hashable هستن (مثل string و عدد و تاپل و غیره)،
-                ولی انواع داده‌ای که قابل تغییر هستن (مثل list و دیکشنری و set) قابل هش نیستن
-                و نمیشه به عنوان key استفاده بشه.
-            </p>
-            <p>
-                البته یک تاپل که که یک آیتم غیر قابل هش (مثلا یک لیست)
-                داخلش باشه هم خودش قابل هش نیست.
-                تو مثال‌های زیر بعضی از انواع key های مختلف رو می‌بینید.
-            </p>
-            <div class="code-container">
+<h2 id="dictionary">نوع داده‌ی dict دیکشنری</h2>
+<p>
+    نوع داده‌ی dict یا دیکشنری توی پایتون به صورت key و value یا کلید و مقدار هستن.
+    کلید و مقدار رو باید با یک علامت دو نقطه
+    <code>:</code>
+    از هم جدا کرد، و جفت کلید و مقدارها رو هم مثل لیست یا tuple با یک کاما از هم جدا می‌کنیم.
+    مقدار value از هر نوع داده‌ای می‌تونه باشه،
+    ولی key باید قابل هش (hashable) باشه.
+    معمولا انواع داده‌ای که قابل تغییر نیستن hashable هستن (مثل string و عدد و تاپل و غیره)،
+    ولی انواع داده‌ای که قابل تغییر هستن (مثل list و دیکشنری و set) قابل هش نیستن
+    و نمیشه به عنوان key استفاده بشه.
+</p>
+<p>
+    البته یک تاپل که که یک آیتم غیر قابل هش (مثلا یک لیست)
+    داخلش باشه هم خودش قابل هش نیست.
+    تو مثال‌های زیر بعضی از انواع key های مختلف رو می‌بینید.
+</p>
+<div class="code-container">
                 <pre><code>
 dictionary = {
     "hello": 1,
@@ -93,12 +66,12 @@ dictionary = {
     range(2, 40, 3): 6
 }
                 </code></pre>
-            </div>
-            <p>
-                برای دسترسی به value یک key داخل دیکشنری، key رو داخل براکت
-                می‌نویسیم (مثل لیست، با این تفاوت که بجای ایندکس از key استفاده می‌کنیم:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    برای دسترسی به value یک key داخل دیکشنری، key رو داخل براکت
+    می‌نویسیم (مثل لیست، با این تفاوت که بجای ایندکس از key استفاده می‌کنیم:
+</p>
+<div class="code-container">
                 <pre><code>
 dictionary = {
     "color": "blue",
@@ -110,24 +83,24 @@ print(dictionary["color"])
 
 #>> blue
                 </code></pre>
-            </div>
+</div>
 
-            <p>
-                بعضی متدهای دیکشنری‌ها به قرار زیر هستند:
-            </p>
-            <p>
-                <code>dict.keys() و dict.values()</code> :
-                تمام key ها یا value های دیکشنری رو به صورت یک Iterable برمی‌گردونه.
-            </p>
-            <p>
-                <code>dict.items()</code> :
-                تمام کلید و مقدارهای دیکشنری رو به صورت یک Iterable برمی‌گردونه (هر کلید و مقدار داخل یک tuple هستن).
-            </p>
-            <p>
-                روی دیکشنری هم مثل بقیه‌ی iterable ها می‌تونیم حلقه بزنیم.
-                اگر بخوایم تنها روی کلیدها حلقه بزنیم به یکی از روش‌های زیر می‌تونیم این کار رو بکنیم:
-            </p>
-            <div class="code-container">
+<p>
+    بعضی متدهای دیکشنری‌ها به قرار زیر هستند:
+</p>
+<p>
+    <code>dict.keys() و dict.values()</code> :
+    تمام key ها یا value های دیکشنری رو به صورت یک Iterable برمی‌گردونه.
+</p>
+<p>
+    <code>dict.items()</code> :
+    تمام کلید و مقدارهای دیکشنری رو به صورت یک Iterable برمی‌گردونه (هر کلید و مقدار داخل یک tuple هستن).
+</p>
+<p>
+    روی دیکشنری هم مثل بقیه‌ی iterable ها می‌تونیم حلقه بزنیم.
+    اگر بخوایم تنها روی کلیدها حلقه بزنیم به یکی از روش‌های زیر می‌تونیم این کار رو بکنیم:
+</p>
+<div class="code-container">
                 <pre><code>
 dictionary = {
     "color": "blue",
@@ -148,14 +121,14 @@ for i in dictionary.keys():
 #>> (color, blue) (age, 98) (weight, 350)
 #>> (color, blue) (age, 98) (weight, 350)
                 </code></pre>
-            </div>
+</div>
 
-            <p>
-                اگر بخوایم تنها روی value های دیکشنری حلقه بزنیم می‌تونیم از متد
-                <span class="english">dict.values()</span>
-                استفاده کنیم:
-            </p>
-            <div class="code-container">
+<p>
+    اگر بخوایم تنها روی value های دیکشنری حلقه بزنیم می‌تونیم از متد
+    <span class="english">dict.values()</span>
+    استفاده کنیم:
+</p>
+<div class="code-container">
                 <pre><code>
 dictionary = {
     "color": "blue",
@@ -171,13 +144,13 @@ for i in dictionary.values():
 #>> 98
 #>> 350
                 </code></pre>
-            </div>
-            <p>
-                و یا اگر بخوایم روی هر دو key و value حلقه بزنیم از متد
-                <span class="english">dict.items()</span>
-                می‌تونیم استفاده کنیم:
-            </p>
-            <div class="code-container">
+</div>
+<p>
+    و یا اگر بخوایم روی هر دو key و value حلقه بزنیم از متد
+    <span class="english">dict.items()</span>
+    می‌تونیم استفاده کنیم:
+</p>
+<div class="code-container">
                 <pre><code>
 dictionary = {
     "color": "blue",
@@ -191,32 +164,6 @@ for i, j in dictionary.items():
 
 #>> (color, blue) (age, 98) (weight, 350)
                 </code></pre>
-            </div>
+</div>
 
-            <h2 id="trinket-header">Interactive Code Editor</h2>
-            <button id="trinketBtn">Show</button>
-            <div class="trinket"></div>
-            <div class="code-container">
-                <pre><code id="fun">
-                </code></pre>
-            </div>
-        </article>
-    </main>
-</section>
-
-<footer>
-    <img src="/assets/gmail-logo-32x32.webp" alt=""> Gmail:
-    <a href="mailto:m.sarabi.jkd@gmail.com" target="_blank">m.sarabi.jkd@gmail.com</a><br>
-    <img src="/assets/telegram-logo-32x32.webp" alt=""> Telegram:
-    <a href="https://t.me/MSarabi" target="_blank">@MSarabi</a><br>
-    <img src="/assets/github-logo-32x32.webp" alt=""> GitHub:
-    <a href="https://github.com/m-sarabi" target="_blank">github.com/m-sarabi</a><br><br>
-    <hr>
-    <br>
-    <img src="/assets/server.webp" alt=""> Hosted on GitHub pages.
-</footer>
-
-<script src="js/prism.js"></script>
-<script src="js/script.js?v4"></script>
-</body>
-</html>
+<script src="js/inject.js"></script>
