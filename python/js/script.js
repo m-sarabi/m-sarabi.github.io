@@ -69,18 +69,20 @@ window.addEventListener("scroll", () => {
 let trinketShow = false
 let trinketContainer = document.getElementsByClassName("trinket")[0]
 let trinketBtn = document.getElementById("trinketBtn")
-trinketBtn.addEventListener("click", () => {
-    if (trinketShow) {
-        console.log("hiding the code editor")
-        trinketContainer.innerHTML = ""
-        trinketShow = false
-        trinketBtn.innerHTML = "Show"
-    } else {
-        fetch("./trinket.html").then(result => result.text()).then(text => {
-            trinketContainer.innerHTML = text
-        })
-        console.log("showing the code editor")
-        trinketShow = true
-        trinketBtn.innerHTML = "Hide"
-    }
-})
+if (trinketBtn !== null) {
+    trinketBtn.addEventListener("click", () => {
+        if (trinketShow) {
+            console.log("hiding the code editor")
+            trinketContainer.innerHTML = ""
+            trinketShow = false
+            trinketBtn.innerHTML = "Show"
+        } else {
+            fetch("./trinket.html").then(result => result.text()).then(text => {
+                trinketContainer.innerHTML = text
+            })
+            console.log("showing the code editor")
+            trinketShow = true
+            trinketBtn.innerHTML = "Hide"
+        }
+    })
+}
