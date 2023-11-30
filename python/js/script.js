@@ -18,11 +18,8 @@ if (funElem !== null) {
 
 // placing the navbar from the nav.html
 fetch("./nav.html").then(result => result.text()).then(text => {
-    // let old_elem = document.querySelector("div#nav-bar-script");
     let new_elem = document.querySelector("nav.top-bar");
-    // console.log(new_elem)
-    new_elem.innerHTML = text;
-    // old_elem.parentNode.replaceChild(new_elem, old_elem);
+    new_elem.innerHTML = new_elem.innerHTML.replace('{{ navbar }}', text);
 })
 
 // toc generator
