@@ -343,7 +343,7 @@ footer img {
 /* whole page style, except header and footer */
 #main-page {
     position: relative;
-    padding: 30px;
+    padding: 5%;
     margin: 5px 5% 1%;
     display: block;
     /*grid: 1fr / 260px auto;*/
@@ -640,10 +640,6 @@ div:has(iframe)::before {
     #main-page {
         margin: 5px 1% 1%;
         padding: 5px;
-    }
-
-    main {
-        margin-left: 0;
     }
 
     nav.toc {
