@@ -114,7 +114,7 @@ canvas.height = window.innerHeight
 const context = canvas.getContext('2d')
 
 const chars = '01'
-const rainCount = 500;
+const rainCount = 80;
 // const fontSize = 16
 // const font = fontSize + 'px Consolas'
 
@@ -145,14 +145,16 @@ function draw() {
 
     for (let i = 0; i < rainArr.length; i++) {
         context.font = rainArr[i][2] + 'vw Consolas'
-        context.fillStyle = 'rgba(0, 0, 0, ' + (1 - (rainArr[i][0] * rainArr[i][2] * canvas.width / 100) / canvas.height) + ')';
+        context.fillStyle = 'rgba(0, 0, 0, ' + (1 - (rainArr[i][0] * rainArr[i][2] * canvas.width / 100) / canvas.height * 0.9) + ')';
         context.fillText(randomChoice(chars), rainArr[i][1], rainArr[i][0] * rainArr[i][2] * canvas.width / 100)
 
-        if (rainArr[i][0] * rainArr[i][2] > canvas.height && Math.random() > 0.9) {
+        // if (rainArr[i][0] * rainArr[i][2] > canvas.height && Math.random() > 0.9) {
+        if (rainArr[i][0] * rainArr[i][2] * canvas.width / 100 > canvas.height) {
             rainArr[i] = [0, Math.random() * canvas.width, Math.random() * 1.5 + 0.5];
         }
         rainArr[i][0]++
     }
+    console.log(rainArr)
 }
 
 window.addEventListener('resize', () => {
@@ -163,8 +165,8 @@ window.addEventListener('resize', () => {
 
 // rain toggle button
 window.addEventListener('load', () => {
-    setTimeout(()=>{
-        let rainInterval = setInterval(draw, 60)
+    setTimeout(() => {
+        let rainInterval = setInterval(draw, 40)
         let rainButton = document.createElement('button')
         let navBar = document.querySelector('.top-bar')
         rainButton.innerHTML = "0/1<br>rain"
@@ -177,7 +179,7 @@ window.addEventListener('load', () => {
                 clearInterval(rainInterval)
             } else {
                 raining = true
-                rainInterval = setInterval(draw, 60)
+                rainInterval = setInterval(draw, 40)
             }
         })
     }, 100)
