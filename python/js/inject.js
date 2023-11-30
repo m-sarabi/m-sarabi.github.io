@@ -16,14 +16,14 @@ function GetUrlRelativePath() {
     return relUrl;
 }
 
-function pageTitle(title) {
-    let name;
-    if (title !== null) {
-        name = title
+function pageTitle(properties) {
+    let title;
+    if (properties !== null) {
+        title = properties["title"]
     } else {
-        name = pageUrl.substring(pageUrl.lastIndexOf('/') + 1, pageUrl.lastIndexOf('.'))
+        title = pageUrl.substring(pageUrl.lastIndexOf('/') + 1, pageUrl.lastIndexOf('.'))
     }
-    return name[0].toUpperCase() + name.substring(1).toLowerCase() + " - Python/MSarabi"
+    return title[0].toUpperCase() + title.substring(1).toLowerCase() + " - Python/MSarabi"
 }
 
 pageUrl = GetUrlRelativePath()
@@ -34,9 +34,9 @@ fetch(pageUrl).then(result => result.text()).then(content => {
     let properties = null, title
     if (content.startsWith("{")) {
         properties = JSON.parse(content.substring(0, content.indexOf('}') + 1))
-        title = pageTitle(properties["title"])
         content = content.substring(content.indexOf("}") + 2)
     }
+    title = pageTitle(properties)
     // URL of the template file
     let templateUrl = pageUrl.substring(0, pageUrl.lastIndexOf('/')) + "/template.html";
 
