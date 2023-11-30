@@ -20,6 +20,13 @@
     margin: 0;
 }
 
+:target:before {
+    content: "";
+    display: block;
+    height: 8vh;
+    margin: -8vh 0 0;
+}
+
 nav.top-bar :is(ul, li) {
     padding: 0;
     margin: 0;
@@ -558,6 +565,13 @@ div:has(iframe)::before {
 @media only screen and (max-width: 962px) {
     header {
         display: block;
+    }
+
+    :target:before {
+        content: "";
+        display: block;
+        height: max(8vh, 8vw);
+        margin: calc(-1 * max(8vh, 8vw)) 0 0;
     }
 
     .title {
