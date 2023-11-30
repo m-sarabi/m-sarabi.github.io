@@ -154,7 +154,6 @@ function draw() {
         }
         rainArr[i][0]++
     }
-    console.log(rainArr)
 }
 
 window.addEventListener('resize', () => {
@@ -167,17 +166,17 @@ window.addEventListener('resize', () => {
 window.addEventListener('load', () => {
     setTimeout(() => {
         let rainInterval = setInterval(draw, 30)
-        let rainButton = document.createElement('button')
+        let rainButton = document.getElementById('rain-btn')
         let navBar = document.querySelector('.top-bar')
-        rainButton.innerHTML = "0/1<br>rain"
-        rainButton.setAttribute('id', 'rain-btn')
         navBar.appendChild(rainButton)
         let raining = true
         rainButton.addEventListener('click', () => {
             if (raining) {
+                rainButton.classList.replace('enabled', 'disabled')
                 raining = false
                 clearInterval(rainInterval)
             } else {
+                rainButton.classList.replace('disabled', 'enabled')
                 raining = true
                 rainInterval = setInterval(draw, 30)
             }

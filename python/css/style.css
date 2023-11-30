@@ -150,20 +150,38 @@ header > div:has(a):hover {
     z-index: 100;
     width: auto;
     aspect-ratio: 1 / 1;
-    background-color: #555;
     border: none;
     cursor: pointer;
-    color: #fffa;
     border-radius: 10%;
     font-size: 40%;
     font-family: Consolas, monospace;
-    transition: all 300ms;
+    transition: all 100ms;
+}
+
+#rain-btn.disabled {
+    background-color: #555;
+    color: #fffa;
     box-shadow: 0 0 5px #fff8 inset;
 }
-#rain-btn:hover {
-    background-color: #999;
+
+#rain-btn.enabled {
+    background-color: #aaa;
     color: #000a;
     box-shadow: 0 0 5px #000 inset;
+}
+
+#rain-btn:hover {
+    filter: contrast(125%);
+}
+
+#rain-btn.enabled:active {
+    box-shadow: 0 0 2px #000 inset;
+    filter: contrast(175%);
+}
+
+#rain-btn.disabled:active {
+    box-shadow: 0 0 2px #fff8 inset;
+    filter: contrast(175%);
 }
 
 /**************/
