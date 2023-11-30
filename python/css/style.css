@@ -134,6 +134,31 @@ header > div:has(a):hover {
     overflow: hidden;
 }
 
+#rain-btn {
+    position: absolute;
+    display: block;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    z-index: 100;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    background-color: #555;
+    border: none;
+    cursor: pointer;
+    color: #fffa;
+    border-radius: 10%;
+    font-size: 40%;
+    font-family: Consolas, monospace;
+    transition: all 300ms;
+    box-shadow: 0 0 5px #fff8 inset;
+}
+#rain-btn:hover {
+    background-color: #999;
+    color: #000a;
+    box-shadow: 0 0 5px #000 inset;
+}
+
 /**************/
 /*          Nav
 /**************/

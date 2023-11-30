@@ -1,5 +1,5 @@
 // animated text at the bottom of the page
-funElem = document.getElementById("fun");
+const funElem = document.getElementById("fun");
 let fullText = "Happy coding, and good luck!       ";
 let text = fullText;
 if (funElem !== null) {
@@ -145,7 +145,7 @@ function draw() {
 
     for (let i = 0; i < rainArr.length; i++) {
         context.font = rainArr[i][2] + 'vw Consolas'
-        context.fillStyle = 'rgb(0, 0, 0, ' + (1 - (rainArr[i][0] * rainArr[i][2]) / canvas.height) + ')';
+        context.fillStyle = 'rgba(0, 0, 0, ' + (1 - (rainArr[i][0] * rainArr[i][2] * canvas.width / 100) / canvas.height) + ')';
         context.fillText(randomChoice(chars), rainArr[i][1], rainArr[i][0] * rainArr[i][2] * canvas.width / 100)
 
         if (rainArr[i][0] * rainArr[i][2] > canvas.height && Math.random() > 0.9) {
@@ -161,4 +161,25 @@ window.addEventListener('resize', () => {
     initRain()
 })
 
-setInterval(draw, 60)
+// rain toggle button
+window.addEventListener('load', () => {
+    setTimeout(()=>{
+        let rainInterval = setInterval(draw, 60)
+        let rainButton = document.createElement('button')
+        let navBar = document.querySelector('.top-bar')
+        rainButton.innerHTML = "0/1<br>rain"
+        rainButton.setAttribute('id', 'rain-btn')
+        navBar.appendChild(rainButton)
+        let raining = true
+        rainButton.addEventListener('click', () => {
+            if (raining) {
+                raining = false
+                clearInterval(rainInterval)
+            } else {
+                raining = true
+                rainInterval = setInterval(draw, 60)
+            }
+        })
+    }, 100)
+
+})
