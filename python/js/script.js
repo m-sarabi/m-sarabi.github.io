@@ -166,7 +166,7 @@ window.addEventListener('resize', () => {
 // rain toggle button
 window.addEventListener('load', () => {
     setTimeout(() => {
-        let rainInterval = setInterval(draw, 40)
+        let rainInterval = setInterval(draw, 30)
         let rainButton = document.createElement('button')
         let navBar = document.querySelector('.top-bar')
         rainButton.innerHTML = "0/1<br>rain"
@@ -179,7 +179,7 @@ window.addEventListener('load', () => {
                 clearInterval(rainInterval)
             } else {
                 raining = true
-                rainInterval = setInterval(draw, 40)
+                rainInterval = setInterval(draw, 30)
             }
         })
     }, 100)
