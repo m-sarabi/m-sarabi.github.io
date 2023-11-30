@@ -543,7 +543,7 @@ div :has(iframe) {
     box-shadow: 0 0 10px black;
 }
 
-div:has(iframe)::before {
+div :has(iframe)::before {
     position: absolute;
     top: -50px;
     right: 0;
