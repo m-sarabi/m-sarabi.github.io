@@ -388,7 +388,7 @@ article img:not(.temp-img) {
     border-radius: 20px;
 }
 
-#article-blur {
+.article-blur {
     position: absolute;
     top:0;
     left:0;

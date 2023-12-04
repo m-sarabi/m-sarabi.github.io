@@ -25,7 +25,7 @@ fetch("./nav.html").then(result => result.text()).then(text => {
 // toc generator
 const headElements = document.querySelectorAll("h2");
 if (document.getElementsByClassName("toc")[0] !== undefined) {
-    const tocElem = document.getElementsByClassName("toc")[0].children[0].children[1];
+    const tocElem = document.getElementsByClassName("toc")[0].children[1].children[1];
     headElements.forEach(function (item) {
         let tocItem = `<li><a href="#${item.id}">${item.innerHTML}</a></li>`;
         tocElem.innerHTML += tocItem;
