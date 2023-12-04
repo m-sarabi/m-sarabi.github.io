@@ -160,25 +160,19 @@ window.addEventListener('resize', () => {
     initRain()
 })
 
-// rain toggle button
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        let rainInterval = setInterval(draw, rainFreq)
-        let rainButton = document.getElementById('rain-btn')
-        let navBar = document.querySelector('.top-bar')
-        navBar.appendChild(rainButton)
-        let raining = true
-        rainButton.addEventListener('click', () => {
-            if (raining) {
-                rainButton.classList.replace('enabled', 'disabled')
-                raining = false
-                clearInterval(rainInterval)
-            } else {
-                rainButton.classList.replace('disabled', 'enabled')
-                raining = true
-                rainInterval = setInterval(draw, rainFreq)
-            }
-        })
-    }, 100)
 
+$(window).on('load', () => {
+    let rainInterval = setInterval(draw, rainFreq)
+    let rainButton = $('#rain-btn')
+    $('header.top-bar').append(rainButton)
+    let raining = true
+    rainButton.click(() => {
+        rainButton.toggleClass('enabled disabled')
+        if (raining) {
+            clearInterval(rainInterval)
+        } else {
+            rainInterval = setInterval(draw, rainFreq)
+        }
+        raining = !raining
+    })
 })
