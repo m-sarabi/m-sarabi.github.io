@@ -353,12 +353,13 @@ main {
 
 /* article contents */
 article {
-    background-color: #f5f5f5;
+    background-color: rgba(245, 245, 245, 0.8);
     box-shadow: 0 0 5px 1px;
     padding: 3%;
     font-size: 20px;
     direction: rtl;
     border-radius: 10px;
+    backdrop-filter: blur(3px);
 }
 
 article li:not(:last-child) {
@@ -450,7 +451,7 @@ code {
 blockquote {
     position: relative;
     color: #444;
-    backdrop-filter: brightness(95%);
+    backdrop-filter: brightness(90%);
     width: 80%;
     margin: 10px auto 30px;
     border-radius: 50px;
