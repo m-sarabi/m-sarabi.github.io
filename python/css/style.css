@@ -404,7 +404,7 @@ nav.toc {
     top: 10%;
     border-radius: 10px;
     padding: 10px 20px;
-    box-shadow: 0 0 10px #808080 inset;
+    box-shadow: 0 0 10px #9a9a9a inset;
     margin-top: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -415,8 +415,8 @@ nav.toc {
 }
 
 nav.toc:hover {
-    box-shadow: 0 0 15px dimgray inset;
-    backdrop-filter: brightness(110%);
+    box-shadow: 0 0 15px 1px #808080 inset;
+    background-color: rgba(232, 232, 232, 0.8);
 }
 
 nav.toc a {
