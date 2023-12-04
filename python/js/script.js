@@ -111,7 +111,8 @@ canvas.height = window.innerHeight
 const context = canvas.getContext('2d')
 
 const chars = '01'
-const rainCount = 80;
+const rainCount = 100;
+let rainFreq = 30;
 // const fontSize = 16
 // const font = fontSize + 'px Consolas'
 
@@ -162,7 +163,7 @@ window.addEventListener('resize', () => {
 // rain toggle button
 window.addEventListener('load', () => {
     setTimeout(() => {
-        let rainInterval = setInterval(draw, 30)
+        let rainInterval = setInterval(draw, rainFreq)
         let rainButton = document.getElementById('rain-btn')
         let navBar = document.querySelector('.top-bar')
         navBar.appendChild(rainButton)
@@ -175,7 +176,7 @@ window.addEventListener('load', () => {
             } else {
                 rainButton.classList.replace('disabled', 'enabled')
                 raining = true
-                rainInterval = setInterval(draw, 30)
+                rainInterval = setInterval(draw, rainFreq)
             }
         })
     }, 100)
