@@ -179,12 +179,23 @@ $(window).on('load', () => {
     })
 
     // ToC fluid
+    let scroll = 0;
+    let height, scrollPercentage, newScroll;
+    let timer = null;
+    const tocElem = $('nav.toc');
     $(window).scroll(() => {
-        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-        let scrollPercentage = document.documentElement.scrollTop / height * 100
-        let newScroll = scrollPercentage * 0.8 + 10
-        const tocElem = $('nav.toc')
-        tocElem.css('top', `calc(${newScroll}% - ${tocElem.height() * scrollPercentage / 100}px)`)
+        scroll += 1;
+        console.log(scroll)
+        if (timer !== null && scroll < 20) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+            height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+            scrollPercentage = document.documentElement.scrollTop / height * 100
+            newScroll = scrollPercentage * 0.8 + 10
+            tocElem.css('top', `calc(${newScroll}% - ${tocElem.height() * scrollPercentage / 100}px)`)
+            scroll = 0;
+        }, 60);
     })
 })
 
