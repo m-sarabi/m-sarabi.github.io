@@ -155,7 +155,6 @@ header > div:has(a):hover {
     font-size: 1.9cqmin;
     font-family: Consolas, monospace;
     font-weight: bold;
-    text-shadow: 0 0 2px #000;
     transition: all 100ms;
 }
 
@@ -163,12 +162,14 @@ header > div:has(a):hover {
     background-color: #555;
     color: #fffa;
     box-shadow: 0 0 5px #fff8 inset;
+    text-shadow: 0 0 1px #fff;
 }
 
 #rain-btn.enabled {
     background-color: #aaa;
     color: #000a;
     box-shadow: 0 0 5px #000 inset;
+    text-shadow: 0 0 1px #000;
 }
 
 #rain-btn:hover {
