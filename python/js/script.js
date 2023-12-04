@@ -111,7 +111,7 @@ canvas.height = window.innerHeight
 const context = canvas.getContext('2d')
 
 const chars = '01'
-const rainCount = 100;
+const rainCount = 80;
 let rainFreq = 30;
 // const fontSize = 16
 // const font = fontSize + 'px Consolas'
