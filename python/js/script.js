@@ -163,6 +163,8 @@ window.addEventListener('resize', () => {
 
 $(window).on('load', () => {
     let rainInterval = setInterval(draw, rainFreq)
+
+    // rain button functionality
     let rainButton = $('#rain-btn')
     $('header.top-bar').append(rainButton)
     let raining = true
@@ -175,4 +177,14 @@ $(window).on('load', () => {
         }
         raining = !raining
     })
+
+    // ToC fluid
+    $(window).scroll(() => {
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+        let scrollPercentage = document.documentElement.scrollTop / height * 100
+        let newScroll = scrollPercentage * 0.8 + 10
+        const tocElem = $('nav.toc')
+        tocElem.css('top', `calc(${newScroll}% - ${tocElem.height() * scrollPercentage / 100}px)`)
+    })
 })
+
