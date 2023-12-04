@@ -649,17 +649,23 @@ div :has(iframe)::before {
 
 @media print {
     main {
+        flex-wrap: wrap;
         margin: 5px 1% 1%;
         padding: 5px;
     }
 
     nav.toc {
         font-size: 15px;
-        min-width: 80%;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     article {
         font-size: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
     }
 
     .code-container {
@@ -681,5 +687,9 @@ div :has(iframe)::before {
 
     #trinket-header {
         display: none;
+    }
+
+    footer {
+        width: 60%;
     }
 }
