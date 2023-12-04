@@ -165,18 +165,20 @@ $(window).on('load', () => {
     let rainInterval = setInterval(draw, rainFreq)
 
     // rain button functionality
-    let rainButton = $('#rain-btn')
-    $('header.top-bar').append(rainButton)
-    let raining = true
-    rainButton.click(() => {
-        rainButton.toggleClass('enabled disabled')
-        if (raining) {
-            clearInterval(rainInterval)
-        } else {
-            rainInterval = setInterval(draw, rainFreq)
-        }
-        raining = !raining
-    })
+    setTimeout(() => {
+        let rainButton = $('#rain-btn')
+        $('header.top-bar').append(rainButton)
+        let raining = true
+        rainButton.click(() => {
+            rainButton.toggleClass('enabled disabled')
+            if (raining) {
+                clearInterval(rainInterval)
+            } else {
+                rainInterval = setInterval(draw, rainFreq)
+            }
+            raining = !raining
+        })
+    }, 100)
 
     // ToC fluid
     let scroll = 0;
