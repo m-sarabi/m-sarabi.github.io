@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="assets/Python.webp">
     <link rel="stylesheet" href="css/prism.css">
     <link rel="stylesheet" href="css/style.css?v20">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Dancing Script|Kalam">
 </head>
@@ -15,7 +16,7 @@
 <header>
     <nav class="top-bar">
         {{ navbar }}
-        <button id="rain-btn" class="enabled">rain<br>Toggle</button>
+        <button id="rain-btn" class="enabled" type="button">rain<br>Toggle</button>
     </nav>
     <div class="title">
         <a href="index.html">Learn Python</a>
@@ -36,14 +37,15 @@
         </details>
     </nav>
     <article class="language-py line-numbers match-braces">
+        <div id="article-blur"></div>
 
 
         {{ content }}
 
-        <!--            <div class="code-container">-->
-        <!--                <pre><code>-->
-        <!--                </code></pre>-->
-        <!--            </div>-->
+<!--        <div class="code-container">-->
+<!--            <pre><code>-->
+<!--            </code></pre>-->
+<!--        </div>-->
         <div id="trinket-container">
             <h2 id="trinket-header">Interactive Code Editor</h2>
             <button id="trinketBtn">Show</button>
