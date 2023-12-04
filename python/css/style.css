@@ -340,24 +340,13 @@ footer img {
     top: 5px;
 }
 
-/* whole page style, except header and footer */
-#main-page {
-    position: relative;
-    padding: 5%;
-    margin: 5px 5% 1%;
-    display: block;
-    /*grid: 1fr / 260px auto;*/
-    /*gap: 0;*/
-    border-radius: 20px;
-    /*box-shadow: 5px 5px 10px #000a, 0 0 2px black;*/
-    /*background-color: wheat;*/
-    font-family: "B Koodak", BKoodak, Georgia, SGeorgia, system-ui;
-}
-
 /* container of the main contents of the page */
 main {
+    font-family: "B Koodak", BKoodak, Georgia, SGeorgia, system-ui;
+    border-radius: 20px;
+    padding: 5%;
     position: relative;
-    margin: 0 5%;
+    margin: 5px 10% 1%;
     min-height: 60vh;
 }
 
@@ -621,7 +610,7 @@ div :has(iframe)::before {
         min-width: 80%;
     }
 
-    #main-page {
+    main {
         padding: 1%;
         margin: 5px 1% 1%;
     }
@@ -637,7 +626,7 @@ div :has(iframe)::before {
 }
 
 @media print {
-    #main-page {
+    main {
         margin: 5px 1% 1%;
         padding: 5px;
     }
