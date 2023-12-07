@@ -556,35 +556,6 @@ div :has(iframe)::before {
     content: "شاید فقط با فیلترشکن باز بشه (تقصیر جمهوری اسلامیه!)";
 }
 
-/* invite to python group style */
-#python-invite {
-    background: radial-gradient(ellipse at 25%, mediumslateblue 0%, whitesmoke 75%);
-    box-shadow: -5px 0 10px mediumslateblue;
-    width: fit-content;
-    margin: 10px auto;
-    padding: 5px 30px 15px;
-    position: relative;
-    text-align: center;
-    border-radius: 30px;
-    transition: box-shadow 500ms;
-}
-
-#python-invite:hover {
-    box-shadow: -3px 0 12px darkblue;
-}
-
-#python-invite a {
-    text-decoration: none;
-    color: black;
-}
-
-#python-invite img {
-    position: relative;
-    top: 15px;
-    left: 10px;
-    display: inline-block;
-}
-
 /* responsive */
 @media only screen and (max-width: 962px) {
     header {
