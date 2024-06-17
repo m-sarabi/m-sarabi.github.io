@@ -9,20 +9,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <div id="container">
-    <label for="title">Title</label>
-    <input id="title" type="text">
-    <label for="goal">Goal</label>
-    <input id="goal" type="number">
-    <label for="progress">Progress</label>
-    <input id="progress" type="number">
+    <label for="title"></label>
+    <input id="title" type="text" placeholder="Title" title="Title">
+    <label for="goal"></label>
+    <input id="goal" type="number" placeholder="Goal" title="Goal">
+    <label for="progress"></label>
+    <input id="progress" type="number" placeholder="Progress" title="Progress">
     <br>
     <button id="add">Add</button>
     <button id="clear">Clear</button>
-    <br>
     <div id="result">
         <div class="card">
             <div class="item-container header">
@@ -32,11 +31,10 @@
             </div>
         </div>
     </div>
-    <br>
     <button id="download">Download</button>
     <div id="preview"></div>
 </div>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

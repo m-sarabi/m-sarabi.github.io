@@ -1,24 +1,31 @@
+:root {
+    --big-font: 1.2em;
+    --medium-font: 1em;
+    --small-font: 0.8em;
+}
+
 #container {
-    max-width: 500px;
+    width: min(500px, 90%);
     margin: 0 auto;
     align-items: center;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     padding: 10px;
+    font-size: var(--medium-font);
 }
 
 #result {
-    background: rgb(255, 250, 240);
-    width: 400px;
+    background: rgb(255, 240, 230);
+    width: 90%;
     border-radius: 10px;
     border: 3px solid rgba(0, 92, 0, 0.8);
-    margin: 10px auto;
+    margin: 2% auto;
     overflow: hidden;
 }
 
 #result > .card {
-    background: rgb(255, 250, 240);
+    background: rgb(255, 240, 230);
 }
 
 /* Change the background of first .card in .result */
@@ -34,12 +41,12 @@
 }
 
 .item-container.header {
-    font-size: 1.2em;
+    font-size: var(--big-font);
 }
 
 .item {
     width: 24%;
-    padding: 5px;
+    padding: 2%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -59,8 +66,8 @@
     background: rgb(200, 200, 200);
     flex-grow: 1;
     width: 70%;
-    height: 20px;
-    margin: 10px 5px;
+    height: 10px;
+    margin: 1% 0.5%;
 }
 
 .progress-bar.filled {
@@ -78,20 +85,40 @@ progress::-webkit-progress-bar {
     align-items: center;
     justify-content: space-evenly;
     height: 100%;
-    width: 80%;
+    width: 88%;
     margin: 0 auto;
+    padding: 2% 6%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+hr {
+    padding: 0;
+    margin: 0;
 }
 
 .progress-label {
     width: 50px;
-    font-size: 0.8em;
+    font-size: var(--small-font);
     text-align: center;
 }
 
 input[type="text"], input[type="number"] {
-    width: 50px;
     padding: 5px;
     margin: 10px 0;
+    border-radius: 10px;
+}
+
+input[type="number"] {
+    width: 15%;
+}
+
+input[type="text"] {
+    width: 25%;
+}
+
+input::placeholder {
+    text-align: center;
+    font-size: var(--medium-font);
 }
 
 label:not(:last-child) {
@@ -102,21 +129,24 @@ button {
     padding: 5px 10px;
     background: rgb(0, 128, 0);
     color: white;
-    border: 0;
+    border: 3px groove rgba(80, 120, 80, 1.0);
     border-radius: 5px;
+    font-size: var(--medium-font);
 }
 
 button:hover {
     background: rgb(0, 128, 0, 0.8);
+    border: 3px groove rgba(80, 120, 80, 0.8);
 }
 
 button:active {
     background: rgb(0, 128, 0, 0.6);
+    border: 3px groove rgba(80, 120, 80, 0.6);
 }
 
 /* Style for button with "Clear" text */
 #clear {
-    background: rgb(128, 128, 128);
+    background: rgb(120, 140, 120);
 }
 
 #clear:hover {
@@ -127,3 +157,10 @@ button:active {
     background: rgb(128, 128, 128, 0.6);
 }
 
+@media (max-width: 500px) {
+    :root {
+        --big-font: 1.1em;
+        --medium-font: 0.9em;
+        --small-font: 0.7em;
+    }
+}
