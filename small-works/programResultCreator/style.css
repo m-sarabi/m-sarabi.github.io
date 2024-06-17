@@ -1,0 +1,125 @@
+#container {
+    max-width: 500px;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#result {
+    background: rgb(255, 250, 240);
+    width: 400px;
+    border-radius: 10px;
+    border: 3px solid rgba(0, 92, 0, 0.8);
+    margin: 10px auto;
+    overflow: hidden;
+}
+
+#result > .card {
+    background: rgb(255, 250, 240);
+}
+
+/* Change the background of first .card in .result */
+#result > .card:first-child {
+    background: rgb(200, 255, 180);
+}
+
+/* Make the 3 .item in .item-container equally spaced in one row, each with with of 30% */
+.item-container {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.item-container.header {
+    font-size: 1.2em;
+}
+
+.item {
+    width: 24%;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+/* make first .item in .item-container have width of 40% */
+.item-container > .item:first-child {
+    width: 50%;
+}
+
+progress {
+    width: 70%;
+    height: 20px;
+    border: 0;
+    margin: 10px 5px;
+    flex-grow: 1;
+}
+
+progress::-webkit-progress-value {
+    background: rgb(0, 128, 0);
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-bar {
+    background: rgb(200, 200, 200);
+    border-radius: 10px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.progress-label {
+    width: 50px;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+input[type="text"], input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+label:not(:last-child) {
+    margin-left: 10px;
+}
+
+button {
+    padding: 5px 10px;
+    background: rgb(0, 128, 0);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: rgb(0, 128, 0, 0.8);
+}
+
+button:active {
+    background: rgb(0, 128, 0, 0.6);
+}
+
+/* Style for button with "Clear" text */
+#clear {
+    background: rgb(128, 128, 128);
+}
+
+#clear:hover {
+    background: rgb(128, 128, 128, 0.8);
+}
+
+#clear:active {
+    background: rgb(128, 128, 128, 0.6);
+}
+
