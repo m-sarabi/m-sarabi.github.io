@@ -38,17 +38,25 @@ addBtn.click(function () {
     valuesDiv.append(`<span class="c-goal item">${goal.val()}</span>`)
     valuesDiv.append(`<span class="c-progress item">${progress.val()}</span>`)
 
+    const progressPercentage = Math.round(Math.max(0, Math.min(progress.val(), goal.val())) / goal.val() * 100)
+
     // add a progress bar
     const progressContainer = $("<div>").addClass("progress-container")
-    const progressBar = $("<progress>")
-    progressBar.attr("max", goal.val())
-    progressBar.attr("value", Math.max(0, Math.min(progress.val(), goal.val())))
-    const progressPercentage = Math.round(Math.max(0, Math.min(progress.val(), goal.val())) / goal.val() * 100)
+    // const progressBar = $("<progress>")
+    // progressBar.attr("max", goal.val())
+    // progressBar.attr("value", Math.max(0, Math.min(progress.val(), goal.val())))
     const progressLabel = $("<span class='progress-label'>").text(progressPercentage + "%")
+
+    // recreate progress bar using divs
+    const progressBarUnfilled = $("<div>").addClass("progress-bar unfilled")
+    const progressBarFilled = $("<div>").addClass("progress-bar filled")
+
+    progressBarFilled.css("width", progressPercentage + "%")
+    progressBarUnfilled.append(progressBarFilled)
 
     cardDiv.append(valuesDiv);
     progressContainer.append(progressLabel)
-    progressContainer.append(progressBar)
+    progressContainer.append(progressBarUnfilled)
 
     if (progressPercentage >= 100) {
         progressContainer.append(svgGold.clone())
