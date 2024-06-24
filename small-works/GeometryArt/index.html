@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Tracker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="buttons">
+    <div class="button">
+        <label for="count">Count:</label>
+        <input type="number" id="count" min="3" max="50">
+    </div>
+    <div class="button">
+        <label for="word-size">Size<sub>(mm)</sub>:</label>
+        <input type="number" id="word-size" min="1" max="100">
+    </div>
+    <div class="button">
+        <label for="radius">Radius<sub>(mm)</sub>:</label>
+        <input type="number" id="radius" min="1" max="100">
+    </div>
+</div>
+
+<div id="main-container">
+    <div id="segments"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
