@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Goal Tracker</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,11 +22,14 @@
         <label for="radius">Radius<sub>(mm)</sub>:</label>
         <input type="number" id="radius" min="1" max="100">
     </div>
+
+    <div class="button">
+        <label for="line">Lines:</label>
+        <div class="switch"><input type="checkbox" id="line"></div>
+    </div>
 </div>
 
-<div id="main-container">
-    <div id="segments"></div>
-</div>
+<canvas id="board"></canvas>
 
 <script src="script.js"></script>
 </body>

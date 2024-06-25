@@ -1,7 +1,30 @@
+:root {
+    --clr-gray-100: #eeeeee;
+    --clr-gray-200: #dddddd;
+    --clr-gray-300: #cccccc;
+    --clr-gray-400: #bbbbbb;
+    --clr-gray-500: #aaaaaa;
+    --clr-primary: #1b84ff;
+    --clr-primary2: #197bee;
+    --clr-primary3: #1772dd;
+    --clr-danger: #f8285a;
+    --clr-danger2: #e72554;
+    --clr-danger3: #d7234e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+canvas {
+    display: block;
+}
+
 body {
     font-family: Inter, Helvetica, sans-serif;
-    margin: 0;
-    background: #f0f2f5;
+    background: var(--clr-gray-200);
     position: relative;
 }
 
@@ -11,14 +34,22 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0 auto;
+    background: var(--clr-gray-200);
 }
 
-.to-rotate {
+.dot {
     position: absolute;
     transform-origin: center;
     width: 2px;
     height: 2px;
     background: #000;
+}
+
+.line {
+    position: absolute;
+    transform-origin: center;
+    height: 0;
+    border-bottom: 1px solid #555;
 }
 
 .buttons {
@@ -33,6 +64,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    background: white;
 }
 
 .button {
@@ -47,13 +79,26 @@ body {
     margin-right: 5px;
 }
 
-.buttons input {
-    width: 50px;
-    height: 25px;
-    padding: 0 5px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+input[type="text"], input[type="number"] {
+    background: var(--clr-gray-100);
+    border: none;
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    margin: 0 0.25rem;
+    height: 40px;
+    width: 100px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    background: var(--clr-gray-200);
     outline: none;
 }
 
@@ -61,4 +106,55 @@ body {
     font-size: 10px;
     margin-left: 3px;
     color: #aaa;
+}
+
+.switch > input {
+    width: 50px;
+    height: 30px;
+    margin: 5px 0;
+    cursor: pointer;
+    position: relative;
+    appearance: none;
+}
+
+.switch > input::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--clr-gray-100);
+    border-radius: 40px;
+}
+
+.switch > input:checked::before {
+    content: "";
+    background: var(--clr-primary);
+    border-radius: 40px;
+}
+
+.switch > input:active::before {
+    background: var(--clr-gray-200);
+}
+
+.switch > input:checked:active::before {
+    background: var(--clr-primary2);
+}
+
+.switch > input::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 40px;
+    transition: transform 0.2s ease;
+}
+
+.switch > input:checked::after {
+    transform: translateX(20px);
+}
+
+.switch > input:active::after {
+    background: var(--clr-gray-100);
 }
