@@ -4,6 +4,14 @@
     padding: 0;
 }
 
+input.correct {
+    background: #2efc2e88 !important;
+}
+
+input.incorrect {
+    background: #fc2e2e88 !important;
+}
+
 body {
     font-family: sans-serif;
     background: #17212b;

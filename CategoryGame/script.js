@@ -112,7 +112,7 @@ $(document).ready(function () {
 
         // show results
         Object.keys(result).forEach(function (category) {
-            $(`#${category}`).css("background", result[category] ? "#2efc2e88" : "#fc2e2e88");
+            $(`#${category}`).addClass(result[category] ? "correct" : "incorrect");
         });
     }
 
@@ -124,7 +124,7 @@ $(document).ready(function () {
         }
         running = true;
         startRound();
-        $("input").val("").css("background", "#25313c");
+        $("input").val("").removeClass("correct").removeClass("incorrect");
     });
 
     startGame();
