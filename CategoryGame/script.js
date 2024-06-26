@@ -12,6 +12,10 @@ $(document).ready(function () {
     //     "Food",
     //     "Job",
     // ];
+    window.Telegram.WebApp.expand();
+    window.Telegram.WebApp.MainButton.hide();
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.enableClosingConfirmation();
     const CATEGORIES = ["Name", "Fruit", "Country"];
     const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let letter, counter, timer;
