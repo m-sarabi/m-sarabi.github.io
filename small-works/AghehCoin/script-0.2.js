@@ -217,10 +217,10 @@ $(document).ready(function () {
         }
     });
 
-    // disable context menu with jquery
-    $(document).bind("contextmenu", function (e) {
-        e.preventDefault();
-    });
+    // // disable context menu with jquery
+    // $(document).bind("contextmenu", function (e) {
+    //     e.preventDefault();
+    // });
 
     startGame();
 });
