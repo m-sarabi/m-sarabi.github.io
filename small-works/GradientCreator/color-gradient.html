@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Gradient</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Color Gradient">
+    <link rel="icon" type="Image/png" href="/small-works/ProgressTracker/assets/icon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+
+<div id="container">
+    <div id="main-colors">
+        <div id="color1">
+            <div id="color1-color" class="select-color">
+                <span>copy</span>
+            </div>
+            <label>
+                <input type="color" value="#000000" id="color1-input">
+            </label>
+        </div>
+        <div id="gradient-size-container">
+            <label id="gradient-size-label">
+                <input type="range" min="2" max="20" value="10" id="gradient-size">
+            </label>
+            <span id="gradient-size-value">10</span>
+        </div>
+        <div id="color2">
+            <div id="color2-color" class="select-color">
+                <span>copy</span>
+            </div>
+            <label>
+                <input type="color" value="#ffffff" id="color2-input">
+            </label>
+        </div>
+    </div>
+    <div id="gradient"></div>
+</div>
+
+<script src="script.js?v=1"></script>
+</body>
+</html>
