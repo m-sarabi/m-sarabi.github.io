@@ -225,7 +225,6 @@ $(document).ready(function () {
 
     coinButton.on('click', function () {
         if (energy > 0) {
-            energy -= 1;
             coins += tapUpgrade;
             CloudStorage.setItem("coins", coins.toString());
             coinsText.text(coins);
