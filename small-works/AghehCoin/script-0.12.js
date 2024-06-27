@@ -89,6 +89,14 @@ $(document).ready(function () {
             CloudStorage.setItem("rechargeUpgrade", "1");
             CloudStorage.setItem("energy", "1000");
 
+            coins = 0;
+            tapUpgrade = 1;
+            limitUpgrade = 1;
+            rechargeUpgrade = 1;
+            energy = 1000;
+            maxEnergy = 1000;
+
+            coinsText.text(coins);
             buyUpgradeAfter(0);
             resolve();
         });
