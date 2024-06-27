@@ -18,7 +18,6 @@ $(document).ready(function () {
 
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
-    WebApp.ready();
 
     function getKeys() {
         return new Promise((resolve, reject) => {
@@ -35,9 +34,9 @@ $(document).ready(function () {
     }
 
     function calculatePrices() {
-        tapPrice = 200 * Math.floor(Math.pow(tapUpgrade, 1.1));
-        limitPrice = 200 * Math.floor(Math.pow(limitUpgrade, 1.1));
-        rechargePrice = 200 * Math.floor(Math.pow(rechargeUpgrade, 1.1));
+        tapPrice = 200 * Math.floor(Math.pow(1.1, tapUpgrade - 1));
+        limitPrice = 200 * Math.floor(Math.pow(1.1, limitUpgrade - 1));
+        rechargePrice = 200 * Math.floor(Math.pow(1.1, rechargeUpgrade - 1));
     }
 
     function updatePrices() {
@@ -73,23 +72,38 @@ $(document).ready(function () {
     function getInfo() {
         CloudStorage.getItem("coins", function (err, res) {
             if (err !== null) console.error(err);
-            else coins = parseInt(res);
+            else {
+                console.log(res);
+                coins = parseInt(res);
+            }
         });
         CloudStorage.getItem("tapUpgrade", function (err, res) {
             if (err !== null) console.error(err);
-            else tapUpgrade = parseInt(res);
+            else {
+                console.log(res);
+                tapUpgrade = parseInt(res);
+            }
         });
         CloudStorage.getItem("limitUpgrade", function (err, res) {
             if (err !== null) console.error(err);
-            else limitUpgrade = parseInt(res);
+            else {
+                console.log(res);
+                limitUpgrade = parseInt(res);
+            }
         });
         CloudStorage.getItem("rechargeUpgrade", function (err, res) {
             if (err !== null) console.error(err);
-            else rechargeUpgrade = parseInt(res);
+            else {
+                console.log(res);
+                rechargeUpgrade = parseInt(res);
+            }
         });
         CloudStorage.getItem("energy", function (err, res) {
             if (err !== null) console.error(err);
-            else energy = parseInt(res);
+            else {
+                console.log(res);
+                energy = parseInt(res);
+            }
         });
     }
 
@@ -114,8 +128,6 @@ $(document).ready(function () {
             keys = await getKeys();
             console.log(keys);
 
-            // !alert: for testing
-            setNewUser();
             WebApp.expand();
             WebApp.enableClosingConfirmation();
             WebApp.BackButton.hide();
@@ -130,11 +142,15 @@ $(document).ready(function () {
             energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
             tapScreen.toggleClass('hidden', false);
 
+            buyUpgradeAfter(0);
             saveTime();
             saveEnergy();
+            WebApp.ready();
+
         } catch (err) {
             console.error(err);
             showFailScreen();
+            WebApp.ready();
         }
     }
 
@@ -218,11 +234,6 @@ $(document).ready(function () {
             // todo: flying text to show that you don't have enough coins
         }
     });
-
-    // // disable context menu with jquery
-    // $(document).bind("contextmenu", function (e) {
-    //     e.preventDefault();
-    // });
 
     startGame().then();
 });
