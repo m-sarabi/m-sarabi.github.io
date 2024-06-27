@@ -137,7 +137,7 @@ $(document).ready(function () {
         setInterval(function () {
             // CloudStorage.setItem("energy", energy);
             CloudStorage.setItem("coins", coins);
-        }, 60000);
+        }, 8000);
     }
 
     // // increase energy periodically every second by recharge speed amount
@@ -222,7 +222,7 @@ $(document).ready(function () {
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", false);
         resetCounter += 1;
-        if (resetCounter >= 10) {
+        if (resetCounter >= 25) {
             setNewUser().then(function () {
                 console.log("new user set");
                 resetCounter = 0;
@@ -233,7 +233,6 @@ $(document).ready(function () {
     coinButton.on('click', function () {
         if (energy > 0) {
             coins += tapUpgrade;
-            CloudStorage.setItem("coins", coins.toString());
             coinsText.text(coins);
             debug.text(coins);
         }
@@ -267,6 +266,11 @@ $(document).ready(function () {
         } else {
             // todo: flying text to show that you don't have enough coins
         }
+    });
+
+    $(document).bind("contextmenu", function (e) {
+        e.preventDefault();
+        return false;
     });
 
     startGame().then();
