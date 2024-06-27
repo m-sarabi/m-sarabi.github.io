@@ -12,14 +12,14 @@
 <header>
     <!--    <span id="debug"></span>-->
     <div class="coins">
-        <img class="small-coin" src="/assets/AghehCoin/coin_icon.png" alt="coin">
+        <img class="small-coin" src="/assets/AghehCoin/coin_icon.png" alt="coin" draggable="false">
         <span id="coins-value">0</span>
     </div>
 </header>
 <main>
     <div id="tap-screen" class="screen hidden">
         <div id="background"></div>
-        <img class="coin tap" src="/assets/AghehCoin/coin.png" alt="tap">
+        <img class="coin tap" src="/assets/AghehCoin/coin.png" alt="tap" draggable="false">
         <div class="energy">
             <div class="energy-value"></div>
             <div class="energy-bar">
@@ -31,34 +31,34 @@
         <div class="buttons upgrade">
             <h2>Mining Upgrades:</h2>
             <div id="touch-upgrade-btn" class="btn">
-                <img src="/assets/AghehCoin/touch_icon.png" alt="touch" class="icon">
+                <img src="/assets/AghehCoin/touch_icon.png" alt="touch" class="icon" draggable="false">
 
                 <div class="upgrade-info">
                     <span class="upgrade-name">Tap Upgrade</span>
                     <div class="price-and-level">
-                        <img src="/assets/AghehCoin/coin_icon.png" alt="coin" class="coin-icon">
+                        <img src="/assets/AghehCoin/coin_icon.png" alt="coin" class="coin-icon" draggable="false">
                         <span id="tap-price" class="price">0</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <span class="level">Level <span id="tap-upgrade">1</span></span>
                     </div>
                 </div>
             </div>
             <div id="limit-upgrade-btn" class="btn">
-                <img src="/assets/AghehCoin/battery_icon.png" alt="limit" class="icon">
+                <img src="/assets/AghehCoin/battery_icon.png" alt="limit" class="icon" draggable="false">
                 <div class="upgrade-info">
                     <span class="upgrade-name">Energy Limit</span>
                     <div class="price-and-level">
-                        <img src="/assets/AghehCoin/coin_icon.png" alt="coin" class="coin-icon">
+                        <img src="/assets/AghehCoin/coin_icon.png" alt="coin" class="coin-icon" draggable="false">
                         <span id="energy-price" class="price">0</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <span class="level">Level <span id="energy-upgrade">1</span></span>
                     </div>
                 </div>
             </div>
             <div id="recharge-upgrade-btn" class="btn">
-                <img src="/assets/AghehCoin/energy_icon.png" alt="recharge" class="icon">
+                <img src="/assets/AghehCoin/energy_icon.png" alt="recharge" class="icon" draggable="false">
                 <div class="upgrade-info">
                     <span class="upgrade-name">Recharge Speed</span>
                     <div class="price-and-level">
-                        <img src="/assets/AghehCoin/coin_icon.png" alt="coin" class="coin-icon">
+                        <img src="/assets/AghehCoin/coin_icon.png" alt="coin" class="coin-icon" draggable="false">
                         <span id="recharge-price" class="price">0</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <span class="level">Level <span id="recharge-upgrade">1</span></span>
                     </div>
@@ -76,13 +76,16 @@
 <footer>
     <div class="buttons">
         <button id="tap" class="active">
-            <img src="/assets/AghehCoin/mine-icon.png" alt="tap" class="icon"><span>Tap</span>
+            <img src="/assets/AghehCoin/mine-icon.png" alt="tap" class="icon" draggable="false">
+            <span>Tap</span>
         </button>
         <button id="upgrade">
-            <img src="/assets/AghehCoin/upgrade-icon.png" alt="upgrade" class="icon"><span>Upgrade</span>
+            <img src="/assets/AghehCoin/upgrade-icon.png" alt="upgrade" class="icon" draggable="false">
+            <span>Upgrade</span>
         </button>
         <button id="league">
-            <img src="/assets/AghehCoin/league-icon.png" alt="league" class="icon"><span>League</span>
+            <img src="/assets/AghehCoin/league-icon.png" alt="league" class="icon" draggable="false">
+            <span>League</span>
         </button>
     </div>
 </footer>
