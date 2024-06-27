@@ -99,7 +99,6 @@ $(document).ready(function () {
         setInterval(function () {
             CloudStorage.setItem("energy", energy);
             CloudStorage.setItem("coins", coins);
-            saveTime();
         }, 5000);
     }
 
@@ -107,13 +106,13 @@ $(document).ready(function () {
     function saveEnergy() {
         setInterval(function () {
             energy = Math.min(energy + rechargeUpgrade, maxEnergy);
-            saveEnergy();
         }, 1000);
     }
 
     async function startGame() {
         try {
             keys = await getKeys();
+            console.log(keys);
 
             // !alert: for testing
             setNewUser();
@@ -225,5 +224,5 @@ $(document).ready(function () {
     //     e.preventDefault();
     // });
 
-    startGame();
+    startGame().then();
 });
