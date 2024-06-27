@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     let keys, coins = 0, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, maxEnergy;
     let tapPrice, limitPrice, rechargePrice;
+    let resetCounter = 0;
 
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
@@ -88,6 +89,7 @@ $(document).ready(function () {
             CloudStorage.setItem("rechargeUpgrade", "1");
             CloudStorage.setItem("energy", "1000");
 
+            buyUpgradeAfter(0);
             resolve();
         });
     }
@@ -95,18 +97,22 @@ $(document).ready(function () {
     async function getInfo() {
         coins = await getItem("coins");
         if (!isNumeric(coins)) await setNewUser();
+        coins = parseInt(coins);
         console.log(coins);
 
         tapUpgrade = await getItem("tapUpgrade");
         if (!isNumeric(tapUpgrade)) await setNewUser();
+        tapUpgrade = parseInt(tapUpgrade);
         console.log(tapUpgrade);
 
         limitUpgrade = await getItem("limitUpgrade");
         if (!isNumeric(limitUpgrade)) await setNewUser();
+        limitUpgrade = parseInt(limitUpgrade);
         console.log(limitUpgrade);
 
         rechargeUpgrade = await getItem("rechargeUpgrade");
         if (!isNumeric(rechargeUpgrade)) await setNewUser();
+        rechargeUpgrade = parseInt(rechargeUpgrade);
         console.log(rechargeUpgrade);
 
         energy = await getItem("energy");
@@ -192,16 +198,25 @@ $(document).ready(function () {
         tapScreen.toggleClass("hidden", false);
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", true);
+        resetCounter = 0;
     });
     upgrade.on('click', function () {
         tapScreen.toggleClass("hidden", true);
         upgradeScreen.toggleClass("hidden", false);
         leagueScreen.toggleClass("hidden", true);
+        resetCounter = 0;
     });
     league.on('click', function () {
         tapScreen.toggleClass("hidden", true);
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", false);
+        resetCounter += 1;
+        if (resetCounter >= 10) {
+            setNewUser().then(function () {
+                console.log("new user set");
+                resetCounter = 0;
+            });
+        }
     });
 
     coinButton.on('click', function () {
