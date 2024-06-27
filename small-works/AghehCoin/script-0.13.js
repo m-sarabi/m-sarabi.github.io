@@ -54,13 +54,13 @@ $(document).ready(function () {
     }
 
     function calculatePrices() {
-        tapPrice = 200 * Math.floor(Math.pow(1.1, tapUpgrade - 1));
-        limitPrice = 200 * Math.floor(Math.pow(1.1, limitUpgrade - 1));
-        rechargePrice = 200 * Math.floor(Math.pow(1.1, rechargeUpgrade - 1));
+        tapPrice = Math.floor(200 * Math.pow(1.1, tapUpgrade - 1));
+        limitPrice = Math.floor(200 * Math.pow(1.1, limitUpgrade - 1));
+        rechargePrice = Math.floor(200 * Math.pow(1.1, rechargeUpgrade - 1));
+        updatePrices();
     }
 
     function updatePrices() {
-        calculatePrices();
         $('#tap-price').text(tapPrice);
         $('#energy-price').text(limitPrice);
         $('#recharge-price').text(rechargePrice);
@@ -135,7 +135,7 @@ $(document).ready(function () {
         setInterval(function () {
             CloudStorage.setItem("energy", energy);
             CloudStorage.setItem("coins", coins);
-        }, 5000);
+        }, 60000);
     }
 
     // increase energy periodically every second by recharge speed amount
@@ -167,7 +167,6 @@ $(document).ready(function () {
             buyUpgradeAfter(0);
             saveTime();
             saveEnergy();
-            calculatePrices();
             WebApp.ready();
 
         } catch (err) {
@@ -201,7 +200,6 @@ $(document).ready(function () {
         coinsText.text(coins);
         calculatePrices();
         updateLevels();
-        updatePrices();
         saveInfo();
         console.log(tapPrice, limitPrice, rechargePrice);
     }
