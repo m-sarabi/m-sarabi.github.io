@@ -13,22 +13,24 @@ $(document).ready(function () {
     const rechargeUpgradeBtn = $('#recharge-upgrade-btn');
     const debug = $('#debug');
 
-    let keys, coins, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, maxEnergy;
+    let keys, coins = 0, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, maxEnergy;
     let tapPrice, limitPrice, rechargePrice;
 
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
-    const Alert = window.Telegram.WebApp.showAlert;
     WebApp.ready();
 
     function getKeys() {
-        CloudStorage.getKeys(function (err, res) {
-            if (err !== null) {
-                console.error(err);
-                Alert(err);
-                debug.text(err);
-                keys = null;
-            } else keys = res;
+        return new Promise((resolve, reject) => {
+            CloudStorage.getKeys(function (err, res) {
+                if (err !== null) {
+                    console.error(err);
+                    debug.text(err);
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
         });
     }
 
@@ -52,15 +54,14 @@ $(document).ready(function () {
     }
 
     function saveInfo() {
-        CloudStorage.setItem("coins", coins);
-        CloudStorage.setItem("tapUpgrade", tapUpgrade);
-        CloudStorage.setItem("limitUpgrade", limitUpgrade);
-        CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade);
-        CloudStorage.setItem("energy", energy);
+        CloudStorage.setItem("coins", coins.toString());
+        CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
+        CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
+        CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade.toString());
+        CloudStorage.setItem("energy", energy.toString());
     }
 
     function setNewUser() {
-        CloudStorage.setItem("newUser", "true");
         CloudStorage.setItem("newUser", "true");
         CloudStorage.setItem("coins", "0");
         CloudStorage.setItem("tapUpgrade", "1");
@@ -110,30 +111,32 @@ $(document).ready(function () {
         }, 1000);
     }
 
-    function startGame() {
-        if (keys === null || !WebApp.isVersionAtLeast("6.1")) {
-            showFailScreen();
-            Alert("failed");
-            return;
-        }
-        getKeys();
-        Alert(keys);
-        WebApp.expand();
-        WebApp.enableClosingConfirmation();
-        WebApp.BackButton.hide();
-        WebApp.MainButton.hide();
-        WebApp.SettingsButton.hide();
-        if (!keys.includes("newUser")) {
+    async function startGame() {
+        try {
+            keys = await getKeys();
+
+            // !alert: for testing
             setNewUser();
+            WebApp.expand();
+            WebApp.enableClosingConfirmation();
+            WebApp.BackButton.hide();
+            WebApp.MainButton.hide();
+            WebApp.SettingsButton.hide();
+            if (!keys.includes("newUser")) {
+                setNewUser();
+            }
+
+            getInfo();
+
+            energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
+            tapScreen.toggleClass('hidden', false);
+
+            saveTime();
+            saveEnergy();
+        } catch (err) {
+            console.error(err);
+            showFailScreen();
         }
-
-        getInfo();
-
-        energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
-        tapScreen.toggleClass('hidden', false);
-
-        saveTime();
-        saveEnergy();
     }
 
     // calculate seconds since last online time
