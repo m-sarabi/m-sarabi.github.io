@@ -19,6 +19,7 @@ $(document).ready(function () {
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
     const Alert = window.Telegram.WebApp.showAlert;
+    WebApp.ready();
 
     function getKeys() {
         CloudStorage.getKeys(function (err, res) {
@@ -71,23 +72,23 @@ $(document).ready(function () {
     function getInfo() {
         CloudStorage.getItem("coins", function (err, res) {
             if (err !== null) console.error(err);
-            else coins = res;
+            else coins = parseInt(res);
         });
         CloudStorage.getItem("tapUpgrade", function (err, res) {
             if (err !== null) console.error(err);
-            else tapUpgrade = res;
+            else tapUpgrade = parseInt(res);
         });
         CloudStorage.getItem("limitUpgrade", function (err, res) {
             if (err !== null) console.error(err);
-            else limitUpgrade = res;
+            else limitUpgrade = parseInt(res);
         });
         CloudStorage.getItem("rechargeUpgrade", function (err, res) {
             if (err !== null) console.error(err);
-            else rechargeUpgrade = res;
+            else rechargeUpgrade = parseInt(res);
         });
         CloudStorage.getItem("energy", function (err, res) {
             if (err !== null) console.error(err);
-            else energy = res;
+            else energy = parseInt(res);
         });
     }
 
@@ -130,7 +131,6 @@ $(document).ready(function () {
 
         energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
         tapScreen.toggleClass('hidden', false);
-        WebApp.ready();
 
         saveTime();
         saveEnergy();
@@ -184,6 +184,7 @@ $(document).ready(function () {
         coins += tapUpgrade;
         CloudStorage.setItem("coins", coins);
         coinsText.text(coins);
+        debug.text(coins);
     });
 
     touchUpgradeBtn.on('click', function () {
