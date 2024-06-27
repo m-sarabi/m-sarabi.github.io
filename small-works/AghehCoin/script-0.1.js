@@ -17,6 +17,7 @@ $(document).ready(function () {
 
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
+    const Alert = window.Telegram.WebApp.showAlert;
 
     function getKeys() {
         CloudStorage.getKeys(function (err, res) {
@@ -108,10 +109,11 @@ $(document).ready(function () {
     function startGame() {
         if (keys === null || !WebApp.isVersionAtLeast("6.1")) {
             showFailScreen();
-            console.log("Failed to load");
+            Alert("failed");
             return;
         }
         getKeys();
+        Alert(keys);
         WebApp.expand();
         WebApp.enableClosingConfirmation();
         WebApp.BackButton.hide();
