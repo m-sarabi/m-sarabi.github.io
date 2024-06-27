@@ -54,9 +54,11 @@ $(document).ready(function () {
     }
 
     function calculatePrices() {
+        console.log(tapPrice, limitPrice, rechargePrice);
         tapPrice = Math.floor(200 * Math.pow(1.1, tapUpgrade - 1));
         limitPrice = Math.floor(200 * Math.pow(1.1, limitUpgrade - 1));
         rechargePrice = Math.floor(200 * Math.pow(1.1, rechargeUpgrade - 1));
+        console.log(tapPrice, limitPrice, rechargePrice);
         updatePrices();
     }
 
@@ -133,17 +135,17 @@ $(document).ready(function () {
     function saveTime() {
         // CloudStorage.setItem("time", Date.now().toString());
         setInterval(function () {
-            CloudStorage.setItem("energy", energy);
+            // CloudStorage.setItem("energy", energy);
             CloudStorage.setItem("coins", coins);
         }, 60000);
     }
 
-    // increase energy periodically every second by recharge speed amount
-    function saveEnergy() {
-        setInterval(function () {
-            energy = Math.min(energy + rechargeUpgrade, maxEnergy);
-        }, 1000);
-    }
+    // // increase energy periodically every second by recharge speed amount
+    // function saveEnergy() {
+    //     setInterval(function () {
+    //         energy = Math.min(energy + rechargeUpgrade, maxEnergy);
+    //     }, 1000);
+    // }
 
     async function startGame() {
         try {
@@ -166,7 +168,7 @@ $(document).ready(function () {
 
             buyUpgradeAfter(0);
             saveTime();
-            saveEnergy();
+            // saveEnergy();
             WebApp.ready();
 
         } catch (err) {
@@ -201,7 +203,6 @@ $(document).ready(function () {
         calculatePrices();
         updateLevels();
         saveInfo();
-        console.log(tapPrice, limitPrice, rechargePrice);
     }
 
     tap.on('click', function () {
