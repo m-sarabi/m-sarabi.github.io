@@ -38,6 +38,20 @@ $(document).ready(function () {
         });
     }
 
+    function getItem(key) {
+        return new Promise((resolve, reject) => {
+            CloudStorage.getItem(key, function (err, res) {
+                if (err !== null) {
+                    console.error(err);
+                    debug.text(err);
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
+        });
+    }
+
     function calculatePrices() {
         tapPrice = 200 * Math.floor(Math.pow(1.1, tapUpgrade - 1));
         limitPrice = 200 * Math.floor(Math.pow(1.1, limitUpgrade - 1));
@@ -66,75 +80,37 @@ $(document).ready(function () {
     }
 
     function setNewUser() {
-        CloudStorage.setItem("newUser", "true");
-        CloudStorage.setItem("coins", "0");
-        CloudStorage.setItem("tapUpgrade", "1");
-        CloudStorage.setItem("limitUpgrade", "1");
-        CloudStorage.setItem("rechargeUpgrade", "1");
-        CloudStorage.setItem("energy", "1000");
+        return new Promise((resolve) => {
+            CloudStorage.setItem("newUser", "true");
+            CloudStorage.setItem("coins", "0");
+            CloudStorage.setItem("tapUpgrade", "1");
+            CloudStorage.setItem("limitUpgrade", "1");
+            CloudStorage.setItem("rechargeUpgrade", "1");
+            CloudStorage.setItem("energy", "1000");
+
+            resolve();
+        });
     }
 
-    function getInfo() {
-        CloudStorage.getItem("coins", function (err, res) {
-            if (err !== null) console.error(err);
-            else {
-                if (!isNumeric(res)) {
-                    CloudStorage.setItem("coins", "0");
-                    getInfo();
-                    return;
-                }
-                console.log(res);
-                coins = parseInt(res);
-            }
-        });
-        CloudStorage.getItem("tapUpgrade", function (err, res) {
-            if (err !== null) console.error(err);
-            else {
-                if (!isNumeric(res)) {
-                    CloudStorage.setItem("tapUpgrade", "1");
-                    getInfo();
-                    return;
-                }
-                console.log(res);
-                tapUpgrade = parseInt(res);
-            }
-        });
-        CloudStorage.getItem("limitUpgrade", function (err, res) {
-            if (err !== null) console.error(err);
-            else {
-                if (!isNumeric(res)) {
-                    CloudStorage.setItem("limitUpgrade", "1");
-                    getInfo();
-                    return;
-                }
-                console.log(res);
-                limitUpgrade = parseInt(res);
-            }
-        });
-        CloudStorage.getItem("rechargeUpgrade", function (err, res) {
-            if (err !== null) console.error(err);
-            else {
-                if (!isNumeric(res)) {
-                    CloudStorage.setItem("rechargeUpgrade", "1");
-                    getInfo();
-                    return;
-                }
-                console.log(res);
-                rechargeUpgrade = parseInt(res);
-            }
-        });
-        CloudStorage.getItem("energy", function (err, res) {
-            if (err !== null) console.error(err);
-            else {
-                if (!isNumeric(res)) {
-                    CloudStorage.setItem("energy", "1000");
-                    getInfo();
-                    return;
-                }
-                console.log(res);
-                energy = parseInt(res);
-            }
-        });
+    async function getInfo() {
+        coins = await getItem("coins");
+        if (!isNumeric(coins)) await setNewUser();
+        console.log(coins);
+
+        tapUpgrade = await getItem("tapUpgrade");
+        if (!isNumeric(tapUpgrade)) await setNewUser();
+        console.log(tapUpgrade);
+
+        limitUpgrade = await getItem("limitUpgrade");
+        if (!isNumeric(limitUpgrade)) await setNewUser();
+        console.log(limitUpgrade);
+
+        rechargeUpgrade = await getItem("rechargeUpgrade");
+        if (!isNumeric(rechargeUpgrade)) await setNewUser();
+        console.log(rechargeUpgrade);
+
+        energy = await getItem("energy");
+        console.log(energy);
     }
 
     // periodically set the current time
@@ -164,10 +140,10 @@ $(document).ready(function () {
             WebApp.MainButton.hide();
             WebApp.SettingsButton.hide();
             if (!keys.includes("newUser")) {
-                setNewUser();
+                await setNewUser();
             }
 
-            getInfo();
+            await getInfo();
 
             energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
             tapScreen.toggleClass('hidden', false);
