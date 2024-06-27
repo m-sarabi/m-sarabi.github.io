@@ -247,3 +247,12 @@ footer button {
     margin: 10px 0 0 50px;
     color: #fff9;
 }
+
+#debug {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    width: 100%;
+    font-size: 12px;
+}

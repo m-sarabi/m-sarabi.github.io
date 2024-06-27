@@ -11,6 +11,7 @@ $(document).ready(function () {
     const touchUpgradeBtn = $('#touch-upgrade-btn');
     const limitUpgradeBtn = $('#limit-upgrade-btn');
     const rechargeUpgradeBtn = $('#recharge-upgrade-btn');
+    const debug = $('#debug');
 
     let keys, coins, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, maxEnergy;
     let tapPrice, limitPrice, rechargePrice;
@@ -23,6 +24,8 @@ $(document).ready(function () {
         CloudStorage.getKeys(function (err, res) {
             if (err !== null) {
                 console.error(err);
+                Alert(err);
+                debug.text(err);
                 keys = null;
             } else keys = res;
         });
