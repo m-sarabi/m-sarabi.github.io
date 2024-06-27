@@ -19,6 +19,11 @@ $(document).ready(function () {
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
 
+    function isNumeric(str) {
+        if (typeof str != "string") return false;
+        return !isNaN(str) && !isNaN(parseFloat(str));
+    }
+
     function getKeys() {
         return new Promise((resolve, reject) => {
             CloudStorage.getKeys(function (err, res) {
@@ -73,6 +78,11 @@ $(document).ready(function () {
         CloudStorage.getItem("coins", function (err, res) {
             if (err !== null) console.error(err);
             else {
+                if (!isNumeric(res)) {
+                    CloudStorage.setItem("coins", "0");
+                    getInfo();
+                    return;
+                }
                 console.log(res);
                 coins = parseInt(res);
             }
@@ -80,6 +90,11 @@ $(document).ready(function () {
         CloudStorage.getItem("tapUpgrade", function (err, res) {
             if (err !== null) console.error(err);
             else {
+                if (!isNumeric(res)) {
+                    CloudStorage.setItem("tapUpgrade", "1");
+                    getInfo();
+                    return;
+                }
                 console.log(res);
                 tapUpgrade = parseInt(res);
             }
@@ -87,6 +102,11 @@ $(document).ready(function () {
         CloudStorage.getItem("limitUpgrade", function (err, res) {
             if (err !== null) console.error(err);
             else {
+                if (!isNumeric(res)) {
+                    CloudStorage.setItem("limitUpgrade", "1");
+                    getInfo();
+                    return;
+                }
                 console.log(res);
                 limitUpgrade = parseInt(res);
             }
@@ -94,6 +114,11 @@ $(document).ready(function () {
         CloudStorage.getItem("rechargeUpgrade", function (err, res) {
             if (err !== null) console.error(err);
             else {
+                if (!isNumeric(res)) {
+                    CloudStorage.setItem("rechargeUpgrade", "1");
+                    getInfo();
+                    return;
+                }
                 console.log(res);
                 rechargeUpgrade = parseInt(res);
             }
@@ -101,6 +126,11 @@ $(document).ready(function () {
         CloudStorage.getItem("energy", function (err, res) {
             if (err !== null) console.error(err);
             else {
+                if (!isNumeric(res)) {
+                    CloudStorage.setItem("energy", "1000");
+                    getInfo();
+                    return;
+                }
                 console.log(res);
                 energy = parseInt(res);
             }

@@ -115,7 +115,7 @@ main {
     position: absolute;
     inset: 0;
     text-align: center;
-
+    z-index: 1;
     background: #150f27;
 }
 
