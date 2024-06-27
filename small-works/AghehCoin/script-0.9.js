@@ -62,7 +62,7 @@ $(document).ready(function () {
     function updatePrices() {
         calculatePrices();
         $('#tap-price').text(tapPrice);
-        $('#limit-price').text(limitPrice);
+        $('#energy-price').text(limitPrice);
         $('#recharge-price').text(rechargePrice);
     }
 
@@ -157,6 +157,7 @@ $(document).ready(function () {
             buyUpgradeAfter(0);
             saveTime();
             saveEnergy();
+            calculatePrices();
             WebApp.ready();
 
         } catch (err) {
@@ -192,6 +193,7 @@ $(document).ready(function () {
         updateLevels();
         updatePrices();
         saveInfo();
+        console.log(tapPrice, limitPrice, rechargePrice);
     }
 
     tap.on('click', function () {
