@@ -13,7 +13,7 @@ $(document).ready(function () {
     const rechargeUpgradeBtn = $('#recharge-upgrade-btn');
     const debug = $('#debug');
 
-    let keys, coins = 0, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, maxEnergy;
+    let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
     let tapPrice, limitPrice, rechargePrice;
     let resetCounter = 0;
 
@@ -116,6 +116,8 @@ $(document).ready(function () {
         console.log(rechargeUpgrade);
 
         energy = await getItem("energy");
+        if (!isNumeric(energy)) await setNewUser();
+        energy = parseInt(energy);
         console.log(energy);
     }
 
@@ -187,7 +189,7 @@ $(document).ready(function () {
 
     function buyUpgradeAfter(price) {
         coins -= price;
-        CloudStorage.setItem("coins", coins);
+        CloudStorage.setItem("coins", coins.toString());
         coinsText.text(coins);
         calculatePrices();
         updateLevels();
@@ -222,17 +224,20 @@ $(document).ready(function () {
     });
 
     coinButton.on('click', function () {
-        coins += tapUpgrade;
-        CloudStorage.setItem("coins", coins);
-        coinsText.text(coins);
-        debug.text(coins);
+        if (energy > 0) {
+            energy -= 1;
+            coins += tapUpgrade;
+            CloudStorage.setItem("coins", coins.toString());
+            coinsText.text(coins);
+            debug.text(coins);
+        }
     });
 
     touchUpgradeBtn.on('click', function () {
         if (coins >= tapPrice) {
-            buyUpgradeAfter(tapPrice);
             tapUpgrade += 1;
-            CloudStorage.setItem("tapUpgrade", tapUpgrade);
+            CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
+            buyUpgradeAfter(tapPrice);
         } else {
             // todo: flying text to show that you don't have enough coins
         }
@@ -240,9 +245,9 @@ $(document).ready(function () {
 
     limitUpgradeBtn.on('click', function () {
         if (coins >= limitPrice) {
-            buyUpgradeAfter(limitPrice);
             limitUpgrade += 1;
-            CloudStorage.setItem("limitUpgrade", limitUpgrade);
+            CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
+            buyUpgradeAfter(limitPrice);
         } else {
             // todo: flying text to show that you don't have enough coins
         }
@@ -250,9 +255,9 @@ $(document).ready(function () {
 
     rechargeUpgradeBtn.on('click', function () {
         if (coins >= rechargePrice) {
-            buyUpgradeAfter(rechargePrice);
             rechargeUpgrade += 1;
-            CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade);
+            CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade.toString());
+            buyUpgradeAfter(rechargePrice);
         } else {
             // todo: flying text to show that you don't have enough coins
         }
