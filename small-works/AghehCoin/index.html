@@ -6,7 +6,7 @@
     <title>Agheh Coin</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <link rel="stylesheet" href="style-0.1.css">
+    <link rel="stylesheet" href="style-0.2.css">
 </head>
 <body>
 <header>
@@ -21,7 +21,9 @@
         <div id="background"></div>
         <img class="coin tap" src="/assets/AghehCoin/coin.png" alt="tap" draggable="false">
         <div class="energy">
-            <div class="energy-value"></div>
+            <div class="energy-value">
+                <span id="energy-value"></span> / <span id="max-energy-value"></span>
+            </div>
             <div class="energy-bar">
                 <div class="energy-progress"></div>
             </div>
@@ -89,6 +91,6 @@
         </button>
     </div>
 </footer>
-<script src="script-0.16.js"></script>
+<script src="script-0.17.js"></script>
 </body>
 </html>

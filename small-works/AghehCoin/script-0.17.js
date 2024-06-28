@@ -11,6 +11,9 @@ $(document).ready(function () {
     const touchUpgradeBtn = $('#touch-upgrade-btn');
     const limitUpgradeBtn = $('#limit-upgrade-btn');
     const rechargeUpgradeBtn = $('#recharge-upgrade-btn');
+    const energyValue = $('#energy-value');
+    const maxEnergyValue = $('#max-energy-value');
+    const energyBar = $('.energy-progress');
     const debug = $('#debug');
 
     let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
@@ -74,6 +77,16 @@ $(document).ready(function () {
         $('#recharge-upgrade').text(rechargeUpgrade);
     }
 
+    function updateEnergy() {
+        energyValue.text(energy);
+        energyBar.width((energy / maxEnergy) * 100 + '%');
+    }
+
+    function updateMaxEnergy() {
+        maxEnergy = limitUpgrade * 1000;
+        maxEnergyValue.text(maxEnergy);
+    }
+
     function saveInfo() {
         CloudStorage.setItem("coins", coins.toString());
         CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
@@ -133,21 +146,31 @@ $(document).ready(function () {
 
     // periodically set the current time
     function saveTime() {
-        // CloudStorage.setItem("time", Date.now().toString());
         setInterval(function () {
-            // CloudStorage.setItem("energy", energy);
+            CloudStorage.setItem("energy", energy);
             CloudStorage.setItem("coins", coins);
+            CloudStorage.setItem("time", Date.now().toString());
         }, 8000);
     }
 
-    // // increase energy periodically every second by recharge speed amount
-    // function saveEnergy() {
-    //     setInterval(function () {
-    //         energy = Math.min(energy + rechargeUpgrade, maxEnergy);
-    //     }, 1000);
-    // }
+    // increase energy periodically every second by recharge speed amount
+    function saveEnergy() {
+        setInterval(function () {
+            energy = Math.min(energy + rechargeUpgrade, maxEnergy);
+            updateEnergy();
+        }, 1000);
+    }
+
+    function init() {
+        buyUpgradeAfter(0);
+        saveTime();
+        saveEnergy();
+        updateEnergy();
+        updateMaxEnergy();
+    }
 
     async function startGame() {
+        saveEnergy();
         try {
             keys = await getKeys();
             console.log(keys);
@@ -163,12 +186,11 @@ $(document).ready(function () {
 
             await getInfo();
 
-            energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
             tapScreen.toggleClass('hidden', false);
 
-            buyUpgradeAfter(0);
-            saveTime();
-            // saveEnergy();
+            energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
+
+            init();
             WebApp.ready();
 
         } catch (err) {
@@ -232,8 +254,10 @@ $(document).ready(function () {
 
     coinButton.on('click', function () {
         if (energy > 0) {
+            energy -= 1;
             coins += tapUpgrade;
             coinsText.text(coins);
+            updateEnergy();
             debug.text(coins);
         }
     });
@@ -253,6 +277,7 @@ $(document).ready(function () {
             limitUpgrade += 1;
             CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
             buyUpgradeAfter(limitPrice);
+            updateMaxEnergy();
         } else {
             // todo: flying text to show that you don't have enough coins
         }
