@@ -14,7 +14,6 @@ $(document).ready(function () {
     const energyValue = $('#energy-value');
     const maxEnergyValue = $('#max-energy-value');
     const energyBar = $('.energy-progress');
-    const debug = $('#debug');
 
     let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
     let tapPrice, limitPrice, rechargePrice;
@@ -33,7 +32,6 @@ $(document).ready(function () {
             CloudStorage.getKeys(function (err, res) {
                 if (err !== null) {
                     console.error(err);
-                    debug.text(err);
                     reject(err);
                 } else {
                     resolve(res);
@@ -47,7 +45,6 @@ $(document).ready(function () {
             CloudStorage.getItem(key, function (err, res) {
                 if (err !== null) {
                     console.error(err);
-                    debug.text(err);
                     reject(err);
                 } else {
                     resolve(res);
@@ -113,6 +110,7 @@ $(document).ready(function () {
 
             coinsText.text(coins);
             buyUpgradeAfter(0);
+            console.log("new user created");
             resolve();
         });
     }
@@ -121,17 +119,17 @@ $(document).ready(function () {
         coins = await getItem("coins");
         if (!isNumeric(coins)) await setNewUser();
         coins = parseInt(coins);
-        console.log(coins);
+        console.log("coins: " + coins);
 
         tapUpgrade = await getItem("tapUpgrade");
         if (!isNumeric(tapUpgrade)) await setNewUser();
         tapUpgrade = parseInt(tapUpgrade);
-        console.log(tapUpgrade);
+        console.log("tapUpgrade: " + tapUpgrade);
 
         limitUpgrade = await getItem("limitUpgrade");
         if (!isNumeric(limitUpgrade)) await setNewUser();
         limitUpgrade = parseInt(limitUpgrade);
-        console.log(limitUpgrade);
+        console.log("limitUpgrade: " + limitUpgrade);
 
         rechargeUpgrade = await getItem("rechargeUpgrade");
         if (!isNumeric(rechargeUpgrade)) await setNewUser();
@@ -141,7 +139,7 @@ $(document).ready(function () {
         energy = await getItem("energy");
         if (!isNumeric(energy)) await setNewUser();
         energy = parseInt(energy);
-        console.log(energy);
+        console.log("energy: " + energy);
     }
 
     // periodically set the current time
@@ -188,10 +186,9 @@ $(document).ready(function () {
 
             tapScreen.toggleClass('hidden', false);
 
-            energy = Math.min(energy + calculateOfflineEnergy(), maxEnergy);
-
             init();
             WebApp.ready();
+            energy = Math.min(energy + await calculateOfflineEnergy(), maxEnergy);
 
         } catch (err) {
             console.error(err);
@@ -202,16 +199,24 @@ $(document).ready(function () {
 
     // calculate seconds since last online time
     function calculateOfflineTime() {
-        let time = 0;
-        CloudStorage.getItems(["time"], function (err, res) {
-            if (err !== null) console.error(err);
-            else time = res["time"];
+        return new Promise((resolve, reject) => {
+            CloudStorage.getItem("time", function (err, res) {
+                if (err !== null) {
+                    reject(err);
+                } else {
+                    resolve(Math.floor((Date.now() - res) / 1000));
+                }
+            });
         });
-        return Math.floor((Date.now() - time) / 1000);
     }
 
-    function calculateOfflineEnergy() {
-        return rechargeUpgrade * calculateOfflineTime();
+    async function calculateOfflineEnergy() {
+        try {
+            return rechargeUpgrade * await calculateOfflineTime();
+        } catch (err) {
+            console.error(err);
+            return 0;
+        }
     }
 
     function showFailScreen() {
@@ -258,7 +263,6 @@ $(document).ready(function () {
             coins += tapUpgrade;
             coinsText.text(coins);
             updateEnergy();
-            debug.text(coins);
         }
     });
 
@@ -293,7 +297,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).bind("contextmenu", function (e) {
+    document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
         return false;
     });

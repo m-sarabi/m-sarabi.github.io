@@ -22,6 +22,7 @@ header {
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid white;
+    position: relative;
 }
 
 .coins {
@@ -271,12 +272,4 @@ footer button {
     width: 2%;
     background: #ffa600;
     border-radius: 5px;
-}
-
-#debug {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: white;
-    font-size: 12px;
 }
