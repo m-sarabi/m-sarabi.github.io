@@ -170,7 +170,7 @@ $(document).ready(function () {
     }
 
     async function startGame() {
-        saveEnergy();
+        // saveEnergy();
         try {
             keys = await getKeys();
             console.log(keys);
