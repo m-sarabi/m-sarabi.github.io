@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
     let tapPrice, limitPrice, rechargePrice;
-    let resetCounter = 0;
+    // let resetCounter = 0;
 
     const WebApp = window.Telegram.WebApp;
     const CloudStorage = window.Telegram.WebApp.CloudStorage;
@@ -209,25 +209,25 @@ $(document).ready(function () {
         tapScreen.toggleClass("hidden", false);
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", true);
-        resetCounter = 0;
+        // resetCounter = 0;
     });
     upgrade.on('click', function () {
         tapScreen.toggleClass("hidden", true);
         upgradeScreen.toggleClass("hidden", false);
         leagueScreen.toggleClass("hidden", true);
-        resetCounter = 0;
+        // resetCounter = 0;
     });
     league.on('click', function () {
         tapScreen.toggleClass("hidden", true);
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", false);
-        resetCounter += 1;
-        if (resetCounter >= 25) {
-            setNewUser().then(function () {
-                console.log("new user set");
-                resetCounter = 0;
-            });
-        }
+        // resetCounter += 1;
+        // if (resetCounter >= 25) {
+        //     setNewUser().then(function () {
+        //         console.log("new user set");
+        //         resetCounter = 0;
+        //     });
+        // }
     });
 
     coinButton.on('click', function () {
