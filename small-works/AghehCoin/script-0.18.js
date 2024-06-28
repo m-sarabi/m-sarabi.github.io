@@ -254,7 +254,7 @@ $(document).ready(function () {
 
     coinButton.on('click', function () {
         if (energy > 0) {
-            energy -= 1;
+            energy -= tapUpgrade;
             coins += tapUpgrade;
             coinsText.text(coins);
             updateEnergy();
