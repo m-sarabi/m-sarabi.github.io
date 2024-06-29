@@ -169,6 +169,7 @@ $(document).ready(function () {
             timerElem.text(mathTimer);
             if (mathTimer <= 0) {
                 stopTimer();
+                errorSound.play();
                 optionButtons.each(function () {
                     if ($(this).text() === mathAnswer.toString()) {
                         $(this).addClass('wrong');
