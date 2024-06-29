@@ -25,6 +25,16 @@ header {
     position: relative;
 }
 
+.dummy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
 .coins {
     color: white;
     font-size: 50px;

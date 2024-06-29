@@ -22,6 +22,14 @@ $(document).ready(function () {
     const timerElem = $(".timer");
     const startMathButton = $("#start-math");
     const mathOverlay = $("#math-overlay");
+    const dingSound = document.getElementById("ding-sound");
+    const errorSound = document.getElementById("error-sound");
+
+    const audioContext = new AudioContext();
+    const dingTrack = audioContext.createMediaElementSource(dingSound);
+    dingTrack.connect(audioContext.destination);
+    const errorTrack = audioContext.createMediaElementSource(errorSound);
+    errorTrack.connect(audioContext.destination);
 
     let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
     let tapPrice, limitPrice, rechargePrice;
@@ -444,9 +452,11 @@ $(document).ready(function () {
         console.log($(this).text());
         console.log(mathAnswer);
         if ($(this).text() === mathAnswer.toString()) {
+            dingSound.play();
             $(this).addClass('correct');
             addPrizeCoins();
         } else {
+            errorSound.play();
             $(this).addClass('wrong');
             optionButtons.each(function () {
                 if ($(this).text() === mathAnswer.toString()) {

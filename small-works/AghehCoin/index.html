@@ -6,7 +6,7 @@
     <title>Agheh Coin</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <link rel="stylesheet" href="style-0.7.css">
+    <link rel="stylesheet" href="style-0.8.css">
 </head>
 <body>
 <header>
@@ -16,6 +16,10 @@
     </div>
 </header>
 <main>
+    <div class="dummy">
+        <audio id="ding-sound" src="/assets/AghehCoin/audio/ding.wav"></audio>
+        <audio id="error-sound" src="/assets/AghehCoin/audio/error.wav"></audio>
+    </div>
     <div id="tap-screen" class="screen hidden">
         <div id="background"></div>
         <img class="coin tap" src="/assets/AghehCoin/coin.png" alt="tap" draggable="false">
@@ -113,6 +117,6 @@
         </button>
     </div>
 </footer>
-<script src="script-0.21.js"></script>
+<script src="script-0.22.js"></script>
 </body>
 </html>
