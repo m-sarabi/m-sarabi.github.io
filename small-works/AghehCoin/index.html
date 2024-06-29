@@ -6,7 +6,7 @@
     <title>Agheh Coin</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <link rel="stylesheet" href="style-0.4.css">
+    <link rel="stylesheet" href="style-0.5.css">
 </head>
 <body>
 <header>
@@ -21,7 +21,7 @@
         <img class="coin tap" src="/assets/AghehCoin/coin.png" alt="tap" draggable="false">
         <div class="energy">
             <div class="energy-value">
-                <span id="energy-value"></span> / <span id="max-energy-value"></span>
+                <span class="energy-value"></span> / <span id="max-energy-value"></span>
             </div>
             <div class="energy-bar">
                 <div class="energy-progress"></div>
@@ -70,6 +70,23 @@
     <div id="league-screen" class="screen hidden">
         <span>Coming Soon...</span>
     </div>
+    <div id="math-screen" class="screen hidden">
+        <div id="math-overlay">
+            <button id="start-math">Start<br></button>
+        </div>
+        <div class="timer"></div>
+        <div id="question"></div>
+        <div id="options">
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div id="mini-energy" class="energy-value"></div>
+        <button id="next-question">Next<br></button>
+    </div>
     <div id="failure-screen" class="screen hidden">
         <span>Failed to load</span>
     </div>
@@ -88,8 +105,12 @@
             <img src="/assets/AghehCoin/league-icon.png" alt="league" class="icon" draggable="false">
             <span>League</span>
         </button>
+        <button id="math">
+            <img src="/assets/AghehCoin/math-icon.png" alt="math" class="icon" draggable="false">
+            <span>Math</span>
+        </button>
     </div>
 </footer>
-<script src="script-0.20.js"></script>
+<script src="script-0.21.js"></script>
 </body>
 </html>

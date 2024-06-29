@@ -148,14 +148,14 @@ footer {
 }
 
 .buttons {
-    width: 100%;
+    width: 80%;
     display: flex;
 }
 
 footer .buttons {
     flex-direction: row;
-    justify-content: space-between;
-    width: 60%;
+    justify-content: space-evenly;
+    /*width: 60%;*/
 }
 
 button, .btn {
@@ -178,6 +178,7 @@ footer button {
     justify-content: center;
     align-items: center;
     padding-bottom: 5px;
+    width: 20%;
 }
 
 #upgrade-screen {
@@ -273,4 +274,149 @@ footer button {
     width: 2%;
     background: #ffa600;
     border-radius: 5px;
+}
+
+#math-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#math-screen #math-overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    z-index: 1;
+    background: #150f27;
+}
+
+#math-overlay button {
+    font-size: 18px;
+}
+
+#math-overlay button::after {
+    content: "⚡1000";
+    font-size: 12px;
+}
+
+#math-screen #question {
+    margin: 20px auto;
+    text-align: center;
+    width: 80%;
+    border: 2px solid #fff5;
+    border-radius: 10px;
+    padding: 10px;
+    background: #aaf2;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-shadow: 0 0 4px #73b3e8, 0 0 10px #ffa600, 0 0 4px #ffa600;
+}
+
+#math-screen #options {
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
+    grid-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#options button {
+    border: 2px solid #fff5;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    background: #aaf2;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-shadow: 0 0 4px #73b3e8, 0 0 10px #ffa600, 0 0 4px #ffa600;
+}
+
+#options button:disabled {
+    opacity: 0.5;
+    color: gray;
+    text-shadow: none !important;
+    cursor: not-allowed;
+}
+
+#options button.correct {
+    background: #0f05;
+}
+
+#options button.wrong {
+    background: #f005;
+}
+
+#math-screen #next-question {
+    display: block;
+    margin: 20px auto 10px;
+    text-align: center;
+    border: 2px solid #fff5;
+    border-radius: 10px;
+    padding: 15px 10px 10px;
+    position: relative;
+    background: #aaf2;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 0 4px #73b3e8, 0 0 10px #e936ff, 0 0 4px #e936ff;
+}
+
+#next-question::after {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    content: "⚡1000";
+    font-size: 12px;
+}
+
+#next-question:disabled {
+    opacity: 0.5;
+    color: gray;
+    text-shadow: none !important;
+    cursor: not-allowed;
+}
+
+#math-screen .timer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 20px;
+    left: 20px;
+    z-index: -1;
+    border-radius: 50%;
+    border: 2px solid #fff5;
+    width: 60px;
+    height: 60px;
+    background: #aaf2;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-shadow: 0 0 4px #73b3e8, 0 0 10px #ffa600, 0 0 4px #ffa600;
+}
+
+#mini-energy {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: -1;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-shadow: 0 0 4px #73b3e8, 0 0 10px #ffa600, 0 0 4px #ffa600;
+}
+
+#mini-energy::before {
+    content: '⚡';
 }

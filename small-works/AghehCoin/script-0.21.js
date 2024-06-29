@@ -2,21 +2,31 @@ $(document).ready(function () {
     const tap = $('#tap');
     const upgrade = $('#upgrade');
     const league = $('#league');
+    const math = $('#math');
     const tapScreen = $('#tap-screen');
     const upgradeScreen = $('#upgrade-screen');
     const leagueScreen = $('#league-screen');
+    const mathScreen = $('#math-screen');
     const failureScreen = $('#failure-screen');
     const coinButton = $('.coin.tap');
     const coinsText = $('#coins-value');
     const touchUpgradeBtn = $('#touch-upgrade-btn');
     const limitUpgradeBtn = $('#limit-upgrade-btn');
     const rechargeUpgradeBtn = $('#recharge-upgrade-btn');
-    const energyValue = $('#energy-value');
+    const energyValue = $('.energy-value');
     const maxEnergyValue = $('#max-energy-value');
     const energyBar = $('.energy-progress');
+    const optionButtons = $("#options button");
+    const questionElement = $("#question");
+    const nextQuestionButton = $("#next-question");
+    const timerElem = $(".timer");
+    const startMathButton = $("#start-math");
+    const mathOverlay = $("#math-overlay");
 
     let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
     let tapPrice, limitPrice, rechargePrice;
+    let mathAnswer = 0, mathTimer = 0, mathEnergy = 1000;
+    let mathTimeInterval;
     // let resetCounter = 0;
 
     const WebApp = window.Telegram.WebApp;
@@ -25,6 +35,19 @@ $(document).ready(function () {
     function isNumeric(str) {
         if (typeof str != "string") return false;
         return !isNaN(str) && !isNaN(parseFloat(str));
+    }
+
+    function shuffle(array) {
+        let currentIndex = array.length;
+
+        while (currentIndex !== 0) {
+
+            let randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
     }
 
     function getKeys() {
@@ -51,6 +74,115 @@ $(document).ready(function () {
                 }
             });
         });
+    }
+
+    function randomMathGenerator(operator) {
+        let num1, num2, answer, options;
+
+        function generateOptions(answer) {
+            let options = [answer];
+            if (Math.random() > 0.7) options.push(answer + 10);
+            if (answer >= 10 && Math.random() > 0.7) options.push(answer - 10);
+            while (options.length < 6) {
+                if (Math.random() > 0.5) {
+                    let tmp = answer + Math.floor(Math.random() * 8);
+                    if (options.includes(tmp)) continue;
+                    options.push(tmp);
+                } else {
+                    let tmp = answer - Math.floor(Math.random() * 8);
+                    if (tmp < 0 || options.includes(tmp)) continue;
+                    options.push(tmp);
+                }
+            }
+            return options;
+        }
+
+        if (operator === "+") {
+            num1 = Math.floor(Math.random() * 50);
+            num2 = Math.floor(Math.random() * 50);
+            answer = num1 + num2;
+            options = generateOptions(answer);
+        } else if (operator === "-") {
+            do {
+                num1 = Math.floor(Math.random() * 75);
+                num2 = Math.floor(Math.random() * 50);
+            } while (num1 < num2);
+            answer = num1 - num2;
+            options = generateOptions(answer);
+        } else if (operator === "*") {
+            num1 = Math.floor(Math.random() * 30);
+            num2 = Math.floor(Math.random() * 20);
+            answer = num1 * num2;
+            options = generateOptions(answer);
+        } else if (operator === "/") {
+            do {
+                num1 = Math.floor(Math.random() * 500);
+                num2 = Math.floor(Math.random() * 50);
+            } while (num1 < num2 || num1 % num2 !== 0);
+            answer = num1 / num2;
+            options = generateOptions(answer);
+            shuffle(options);
+        }
+        return [num1, num2, operator, answer, options];
+    }
+
+    function startQuestion() {
+        energy -= mathEnergy;
+        updateEnergy();
+        let operators = ["+", "-", "*", "/"];
+        let operator = operators[Math.floor(Math.random() * operators.length)];
+        let question = randomMathGenerator(operator);
+        mathAnswer = question[3];
+        addQuestion(question);
+        addOptions(question[4]);
+        nextQuestionButton.prop("disabled", true);
+        optionButtons.prop("disabled", false);
+        startTimer();
+    }
+
+    function addQuestion(question) {
+        questionElement.text(question[0] + " " + question[2] + " " + question[1] + " = ?");
+    }
+
+    function addOptions(options) {
+        optionButtons[0].innerHTML = options[0];
+        optionButtons[1].innerHTML = options[1];
+        optionButtons[2].innerHTML = options[2];
+        optionButtons[3].innerHTML = options[3];
+        optionButtons[4].innerHTML = options[4];
+        optionButtons[5].innerHTML = options[5];
+    }
+
+    function startTimer() {
+        mathTimer = 8;
+        timerElem.text(8);
+        mathTimeInterval = setInterval(function () {
+            mathTimer--;
+            timerElem.text(mathTimer);
+            if (mathTimer <= 0) {
+                stopTimer();
+                optionButtons.each(function () {
+                    if ($(this).text() === mathAnswer.toString()) {
+                        $(this).addClass('wrong');
+                    }
+                });
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(mathTimeInterval);
+        nextQuestionButton.prop("disabled", false);
+        timerElem.text(8);
+        optionButtons.prop("disabled", true);
+    }
+
+    function addPrizeCoins() {
+        // between 0.01 and 0.05
+        const prizeShare = Math.random() * 0.04 + 0.01;
+        const prizeCoins = Math.floor(prizeShare * coins);
+        coins += prizeCoins;
+        coinsText.text(coins);
     }
 
     function calculatePrices() {
@@ -236,18 +368,21 @@ $(document).ready(function () {
         tapScreen.toggleClass("hidden", false);
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", true);
+        mathScreen.toggleClass("hidden", true);
         // resetCounter = 0;
     });
     upgrade.on('click', function () {
         tapScreen.toggleClass("hidden", true);
         upgradeScreen.toggleClass("hidden", false);
         leagueScreen.toggleClass("hidden", true);
+        mathScreen.toggleClass("hidden", true);
         // resetCounter = 0;
     });
     league.on('click', function () {
         tapScreen.toggleClass("hidden", true);
         upgradeScreen.toggleClass("hidden", true);
         leagueScreen.toggleClass("hidden", false);
+        mathScreen.toggleClass("hidden", true);
         // resetCounter += 1;
         // if (resetCounter >= 25) {
         //     setNewUser().then(function () {
@@ -255,6 +390,13 @@ $(document).ready(function () {
         //         resetCounter = 0;
         //     });
         // }
+    });
+
+    math.on('click', function () {
+        tapScreen.toggleClass("hidden", true);
+        upgradeScreen.toggleClass("hidden", true);
+        leagueScreen.toggleClass("hidden", true);
+        mathScreen.toggleClass("hidden", false);
     });
 
     coinButton.on('click', function () {
@@ -294,6 +436,38 @@ $(document).ready(function () {
             buyUpgradeAfter(rechargePrice);
         } else {
             // todo: flying text to show that you don't have enough coins
+        }
+    });
+
+    optionButtons.on('click', function () {
+        stopTimer();
+        console.log($(this).text());
+        console.log(mathAnswer);
+        if ($(this).text() === mathAnswer.toString()) {
+            $(this).addClass('correct');
+            addPrizeCoins();
+        } else {
+            $(this).addClass('wrong');
+            optionButtons.each(function () {
+                if ($(this).text() === mathAnswer.toString()) {
+                    $(this).addClass('correct');
+                }
+            });
+        }
+    });
+
+    startMathButton.on('click', function () {
+        if (energy >= mathEnergy) {
+            mathOverlay.fadeOut("fast", function () {
+                startQuestion();
+            });
+        }
+    });
+
+    nextQuestionButton.on('click', function () {
+        if (energy >= mathEnergy) {
+            optionButtons.removeClass('correct').removeClass('wrong');
+            startQuestion();
         }
     });
 
