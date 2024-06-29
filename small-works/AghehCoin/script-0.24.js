@@ -129,8 +129,8 @@ $(document).ready(function () {
             } while (num1 < num2 || num1 % num2 !== 0);
             answer = num1 / num2;
             options = generateOptions(answer);
-            shuffle(options);
         }
+        shuffle(options);
         return [num1, num2, operator, answer, options];
     }
 
