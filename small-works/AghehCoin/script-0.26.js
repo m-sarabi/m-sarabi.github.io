@@ -228,11 +228,12 @@ $(document).ready(function () {
     }
 
     function saveInfo() {
-        CloudStorage.setItem("coins", coins.toString());
-        CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
-        CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
-        CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade.toString());
-        CloudStorage.setItem("energy", energy.toString());
+        CloudStorage.setItem("data", `${coins}, ${tapUpgrade}, ${limitUpgrade}, ${rechargeUpgrade}, ${energy}, ${plantAge}, ${plantWater}`);
+        // CloudStorage.setItem("coins", coins.toString());
+        // CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
+        // CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
+        // CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade.toString());
+        // CloudStorage.setItem("energy", energy.toString());
     }
 
     function setNewUser() {
