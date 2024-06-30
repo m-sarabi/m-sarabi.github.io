@@ -1,39 +1,42 @@
 $(document).ready(function () {
-    const tap = $('#tap');
-    const upgrade = $('#upgrade');
-    const league = $('#league');
-    const math = $('#math');
-    const tapScreen = $('#tap-screen');
-    const upgradeScreen = $('#upgrade-screen');
-    const leagueScreen = $('#league-screen');
-    const mathScreen = $('#math-screen');
-    const failureScreen = $('#failure-screen');
-    const coinButton = $('.coin.tap');
-    const coinsText = $('#coins-value');
-    const touchUpgradeBtn = $('#touch-upgrade-btn');
-    const limitUpgradeBtn = $('#limit-upgrade-btn');
-    const rechargeUpgradeBtn = $('#recharge-upgrade-btn');
-    const energyValue = $('.energy-value');
-    const maxEnergyValue = $('#max-energy-value');
-    const energyBar = $('.energy-progress');
-    const optionButtons = $("#options button");
-    const questionElement = $("#question");
-    const nextQuestionButton = $("#next-question");
-    const timerElem = $(".timer");
-    const startMathButton = $("#start-math");
-    const mathOverlay = $("#math-overlay");
-    const dingSound = document.getElementById("ding-sound");
-    const errorSound = document.getElementById("error-sound");
+    const elements = {
+        tap: $('#tap'),
+        upgrade: $('#upgrade'),
+        league: $('#league'),
+        math: $('#math'),
+        tapScreen: $('#tap-screen'),
+        upgradeScreen: $('#upgrade-screen'),
+        leagueScreen: $('#league-screen'),
+        mathScreen: $('#math-screen'),
+        failureScreen: $('#failure-screen'),
+        coinButton: $('.coin.tap'),
+        coinsText: $('#coins-value'),
+        touchUpgradeBtn: $('#touch-upgrade-btn'),
+        limitUpgradeBtn: $('#limit-upgrade-btn'),
+        rechargeUpgradeBtn: $('#recharge-upgrade-btn'),
+        energyValue: $('.energy-value'),
+        maxEnergyValue: $('#max-energy-value'),
+        energyBar: $('.energy-progress'),
+        optionButtons: $("#options button"),
+        questionElement: $("#question"),
+        nextQuestionButton: $("#next-question"),
+        timerElem: $(".timer"),
+        startMathButton: $("#start-math"),
+        mathOverlay: $("#math-overlay"),
+        dingSound: document.getElementById("ding-sound"),
+        errorSound: document.getElementById("error-sound"),
+    };
 
     const audioContext = new AudioContext();
-    const dingTrack = audioContext.createMediaElementSource(dingSound);
+    const dingTrack = audioContext.createMediaElementSource(elements.dingSound);
     dingTrack.connect(audioContext.destination);
-    const errorTrack = audioContext.createMediaElementSource(errorSound);
+    const errorTrack = audioContext.createMediaElementSource(elements.errorSound);
     errorTrack.connect(audioContext.destination);
 
-    let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 1000, maxEnergy = 1000;
+    let keys, coins = 0, tapUpgrade = 1, limitUpgrade = 1, rechargeUpgrade = 1, energy = 10000, maxEnergy = 1000;
+    let plantAge = 0, plantWater = 0;
     let tapPrice, limitPrice, rechargePrice;
-    let mathAnswer = 0, mathTimer = 0, mathEnergy = 1000;
+    let mathAnswer = 0, mathTimer = 0, mathEnergy = 1000, combo = 0;
     let mathTimeInterval;
     // let resetCounter = 0;
 
@@ -143,34 +146,34 @@ $(document).ready(function () {
         mathAnswer = question[3];
         addQuestion(question);
         addOptions(question[4]);
-        nextQuestionButton.prop("disabled", true);
-        optionButtons.prop("disabled", false);
+        elements.nextQuestionButton.prop("disabled", true);
+        elements.optionButtons.prop("disabled", false);
         startTimer();
     }
 
     function addQuestion(question) {
-        questionElement.text(question[0] + " " + question[2] + " " + question[1] + " = ?");
+        elements.questionElement.text(question[0] + " " + question[2] + " " + question[1] + " = ?");
     }
 
     function addOptions(options) {
-        optionButtons[0].innerHTML = options[0];
-        optionButtons[1].innerHTML = options[1];
-        optionButtons[2].innerHTML = options[2];
-        optionButtons[3].innerHTML = options[3];
-        optionButtons[4].innerHTML = options[4];
-        optionButtons[5].innerHTML = options[5];
+        elements.optionButtons[0].innerHTML = options[0];
+        elements.optionButtons[1].innerHTML = options[1];
+        elements.optionButtons[2].innerHTML = options[2];
+        elements.optionButtons[3].innerHTML = options[3];
+        elements.optionButtons[4].innerHTML = options[4];
+        elements.optionButtons[5].innerHTML = options[5];
     }
 
     function startTimer() {
         mathTimer = 8;
-        timerElem.text(8);
+        elements.timerElem.text(8);
         mathTimeInterval = setInterval(function () {
             mathTimer--;
-            timerElem.text(mathTimer);
+            elements.timerElem.text(mathTimer);
             if (mathTimer <= 0) {
                 stopTimer();
-                errorSound.play();
-                optionButtons.each(function () {
+                elements.errorSound.play().then();
+                elements.optionButtons.each(function () {
                     if ($(this).text() === mathAnswer.toString()) {
                         $(this).addClass('wrong');
                     }
@@ -181,17 +184,16 @@ $(document).ready(function () {
 
     function stopTimer() {
         clearInterval(mathTimeInterval);
-        nextQuestionButton.prop("disabled", false);
-        timerElem.text(8);
-        optionButtons.prop("disabled", true);
+        elements.nextQuestionButton.prop("disabled", false);
+        elements.timerElem.text(8);
+        elements.optionButtons.prop("disabled", true);
     }
 
     function addPrizeCoins() {
-        // between 0.01 and 0.05
-        const prizeShare = Math.random() * 0.04 + 0.01;
-        const prizeCoins = Math.floor(prizeShare * coins);
-        coins += prizeCoins;
-        coinsText.text(coins);
+        // 10x * combo of current tapUpgrade
+        const prizeShare = 10 * combo * tapUpgrade;
+        coins += prizeShare;
+        elements.coinsText.text(coins);
     }
 
     function calculatePrices() {
@@ -216,13 +218,13 @@ $(document).ready(function () {
     }
 
     function updateEnergy() {
-        energyValue.text(energy);
-        energyBar.width((energy / maxEnergy) * 100 + '%');
+        elements.energyValue.text(energy);
+        elements.energyBar.width((energy / maxEnergy) * 100 + '%');
     }
 
     function updateMaxEnergy() {
         maxEnergy = limitUpgrade * 1000;
-        maxEnergyValue.text(maxEnergy);
+        elements.maxEnergyValue.text(maxEnergy);
     }
 
     function saveInfo() {
@@ -234,13 +236,9 @@ $(document).ready(function () {
     }
 
     function setNewUser() {
+        // coins, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, plantAge, plantWater
         return new Promise((resolve) => {
-            CloudStorage.setItem("newUser", "true");
-            CloudStorage.setItem("coins", "0");
-            CloudStorage.setItem("tapUpgrade", "1");
-            CloudStorage.setItem("limitUpgrade", "1");
-            CloudStorage.setItem("rechargeUpgrade", "1");
-            CloudStorage.setItem("energy", "1000");
+            CloudStorage.setItem("data", "0,1,1,1,1000,0,0");
 
             coins = 0;
             tapUpgrade = 1;
@@ -248,48 +246,45 @@ $(document).ready(function () {
             rechargeUpgrade = 1;
             energy = 1000;
             maxEnergy = 1000;
+            plantAge = 0;
+            plantWater = 0;
 
-            coinsText.text(coins);
+            elements.coinsText.text(coins);
             buyUpgradeAfter(0);
             console.log("new user created");
             resolve();
         });
     }
 
+    function migrateNewSystem() {
+        // coins, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, plantAge, plantWater
+        return new Promise((resolve) => {
+            CloudStorage.setItem("data", `${coins}, ${tapUpgrade}, ${limitUpgrade}, ${rechargeUpgrade}, ${energy}, ${plantAge}, ${plantWater}`);
+            console.log("migrated to new system");
+            resolve();
+        });
+    }
+
     async function getInfo() {
-        coins = await getItem("coins");
-        if (!isNumeric(coins)) await setNewUser();
-        coins = parseInt(coins);
-        console.log("coins: " + coins);
-
-        tapUpgrade = await getItem("tapUpgrade");
-        if (!isNumeric(tapUpgrade)) await setNewUser();
-        tapUpgrade = parseInt(tapUpgrade);
-        console.log("tapUpgrade: " + tapUpgrade);
-
-        limitUpgrade = await getItem("limitUpgrade");
-        if (!isNumeric(limitUpgrade)) await setNewUser();
-        limitUpgrade = parseInt(limitUpgrade);
-        console.log("limitUpgrade: " + limitUpgrade);
-
-        rechargeUpgrade = await getItem("rechargeUpgrade");
-        if (!isNumeric(rechargeUpgrade)) await setNewUser();
-        rechargeUpgrade = parseInt(rechargeUpgrade);
-        console.log(rechargeUpgrade);
-
-        energy = await getItem("energy");
-        if (!isNumeric(energy)) await setNewUser();
-        energy = parseInt(energy);
-        console.log("energy: " + energy);
+        let data = await getItem("data");
+        data = data.split(',');
+        console.log(data);
+        data.forEach((element, index) => {
+            if (index === 0) coins = parseInt(element);
+            if (index === 1) tapUpgrade = parseInt(element);
+            if (index === 2) limitUpgrade = parseInt(element);
+            if (index === 3) rechargeUpgrade = parseInt(element);
+            if (index === 4) energy = parseInt(element);
+            if (index === 5) plantAge = parseInt(element);
+            if (index === 6) plantWater = parseInt(element);
+        });
     }
 
     // periodically set the current time
     function saveTime() {
         setInterval(function () {
-            CloudStorage.setItem("energy", energy);
-            CloudStorage.setItem("coins", coins);
-            CloudStorage.setItem("time", Date.now().toString());
-        }, 8000);
+            CloudStorage.setItem("data", `${coins}, ${tapUpgrade}, ${limitUpgrade}, ${rechargeUpgrade}, ${energy}, ${plantAge}, ${plantWater}`);
+        }, 5000);
     }
 
     // increase energy periodically every second by recharge speed amount
@@ -319,13 +314,17 @@ $(document).ready(function () {
             WebApp.BackButton.hide();
             WebApp.MainButton.hide();
             WebApp.SettingsButton.hide();
-            if (!keys.includes("newUser")) {
-                await setNewUser();
+            if (!keys.includes("data")) {
+                if (keys.includes("newUser")) {
+                    await migrateNewSystem();
+                } else {
+                    await setNewUser();
+                }
             }
 
             await getInfo();
 
-            tapScreen.toggleClass('hidden', false);
+            elements.tapScreen.toggleClass('hidden', false);
 
             init();
             WebApp.ready();
@@ -361,37 +360,37 @@ $(document).ready(function () {
     }
 
     function showFailScreen() {
-        failureScreen.toggleClass("hidden", false);
+        elements.failureScreen.toggleClass("hidden", false);
     }
 
     function buyUpgradeAfter(price) {
         coins -= price;
         CloudStorage.setItem("coins", coins.toString());
-        coinsText.text(coins);
+        elements.coinsText.text(coins);
         calculatePrices();
         updateLevels();
         saveInfo();
     }
 
-    tap.on('click', function () {
-        tapScreen.toggleClass("hidden", false);
-        upgradeScreen.toggleClass("hidden", true);
-        leagueScreen.toggleClass("hidden", true);
-        mathScreen.toggleClass("hidden", true);
+    elements.tap.on('click', function () {
+        elements.tapScreen.toggleClass("hidden", false);
+        elements.upgradeScreen.toggleClass("hidden", true);
+        elements.leagueScreen.toggleClass("hidden", true);
+        elements.mathScreen.toggleClass("hidden", true);
         // resetCounter = 0;
     });
-    upgrade.on('click', function () {
-        tapScreen.toggleClass("hidden", true);
-        upgradeScreen.toggleClass("hidden", false);
-        leagueScreen.toggleClass("hidden", true);
-        mathScreen.toggleClass("hidden", true);
+    elements.upgrade.on('click', function () {
+        elements.tapScreen.toggleClass("hidden", true);
+        elements.upgradeScreen.toggleClass("hidden", false);
+        elements.leagueScreen.toggleClass("hidden", true);
+        elements.mathScreen.toggleClass("hidden", true);
         // resetCounter = 0;
     });
-    league.on('click', function () {
-        tapScreen.toggleClass("hidden", true);
-        upgradeScreen.toggleClass("hidden", true);
-        leagueScreen.toggleClass("hidden", false);
-        mathScreen.toggleClass("hidden", true);
+    elements.league.on('click', function () {
+        elements.tapScreen.toggleClass("hidden", true);
+        elements.upgradeScreen.toggleClass("hidden", true);
+        elements.leagueScreen.toggleClass("hidden", false);
+        elements.mathScreen.toggleClass("hidden", true);
         // resetCounter += 1;
         // if (resetCounter >= 25) {
         //     setNewUser().then(function () {
@@ -401,23 +400,23 @@ $(document).ready(function () {
         // }
     });
 
-    math.on('click', function () {
-        tapScreen.toggleClass("hidden", true);
-        upgradeScreen.toggleClass("hidden", true);
-        leagueScreen.toggleClass("hidden", true);
-        mathScreen.toggleClass("hidden", false);
+    elements.math.on('click', function () {
+        elements.tapScreen.toggleClass("hidden", true);
+        elements.upgradeScreen.toggleClass("hidden", true);
+        elements.leagueScreen.toggleClass("hidden", true);
+        elements.mathScreen.toggleClass("hidden", false);
     });
 
-    coinButton.on('click', function () {
+    elements.coinButton.on('click', function () {
         if (energy >= tapUpgrade) {
             energy -= tapUpgrade;
             coins += tapUpgrade;
-            coinsText.text(coins);
+            elements.coinsText.text(coins);
             updateEnergy();
         }
     });
 
-    touchUpgradeBtn.on('click', function () {
+    elements.touchUpgradeBtn.on('click', function () {
         if (coins >= tapPrice) {
             tapUpgrade += 1;
             CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
@@ -427,7 +426,7 @@ $(document).ready(function () {
         }
     });
 
-    limitUpgradeBtn.on('click', function () {
+    elements.limitUpgradeBtn.on('click', function () {
         if (coins >= limitPrice) {
             limitUpgrade += 1;
             CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
@@ -438,7 +437,7 @@ $(document).ready(function () {
         }
     });
 
-    rechargeUpgradeBtn.on('click', function () {
+    elements.rechargeUpgradeBtn.on('click', function () {
         if (coins >= rechargePrice) {
             rechargeUpgrade += 1;
             CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade.toString());
@@ -448,18 +447,20 @@ $(document).ready(function () {
         }
     });
 
-    optionButtons.on('click', function () {
+    elements.optionButtons.on('click', function () {
         stopTimer();
         console.log($(this).text());
         console.log(mathAnswer);
         if ($(this).text() === mathAnswer.toString()) {
-            dingSound.play();
+            elements.dingSound.play();
             $(this).addClass('correct');
+            combo += 1;
             addPrizeCoins();
         } else {
-            errorSound.play();
+            elements.errorSound.play().then();
             $(this).addClass('wrong');
-            optionButtons.each(function () {
+            combo = 0;
+            elements.optionButtons.each(function () {
                 if ($(this).text() === mathAnswer.toString()) {
                     $(this).addClass('correct');
                 }
@@ -467,17 +468,17 @@ $(document).ready(function () {
         }
     });
 
-    startMathButton.on('click', function () {
+    elements.startMathButton.on('click', function () {
         if (energy >= mathEnergy) {
-            mathOverlay.fadeOut("fast", function () {
+            elements.mathOverlay.fadeOut("fast", function () {
                 startQuestion();
             });
         }
     });
 
-    nextQuestionButton.on('click', function () {
+    elements.nextQuestionButton.on('click', function () {
         if (energy >= mathEnergy) {
-            optionButtons.removeClass('correct').removeClass('wrong');
+            elements.optionButtons.removeClass('correct').removeClass('wrong');
             startQuestion();
         }
     });
