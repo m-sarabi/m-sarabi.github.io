@@ -229,11 +229,6 @@ $(document).ready(function () {
 
     function saveInfo() {
         CloudStorage.setItem("data", `${coins}, ${tapUpgrade}, ${limitUpgrade}, ${rechargeUpgrade}, ${energy}, ${plantAge}, ${plantWater}`);
-        // CloudStorage.setItem("coins", coins.toString());
-        // CloudStorage.setItem("tapUpgrade", tapUpgrade.toString());
-        // CloudStorage.setItem("limitUpgrade", limitUpgrade.toString());
-        // CloudStorage.setItem("rechargeUpgrade", rechargeUpgrade.toString());
-        // CloudStorage.setItem("energy", energy.toString());
     }
 
     function setNewUser() {
@@ -253,15 +248,6 @@ $(document).ready(function () {
             elements.coinsText.text(coins);
             buyUpgradeAfter(0);
             console.log("new user created");
-            resolve();
-        });
-    }
-
-    function migrateNewSystem() {
-        // coins, tapUpgrade, limitUpgrade, rechargeUpgrade, energy, plantAge, plantWater
-        return new Promise((resolve) => {
-            CloudStorage.setItem("data", `${coins}, ${tapUpgrade}, ${limitUpgrade}, ${rechargeUpgrade}, ${energy}, ${plantAge}, ${plantWater}`);
-            console.log("migrated to new system");
             resolve();
         });
     }
@@ -316,11 +302,7 @@ $(document).ready(function () {
             WebApp.MainButton.hide();
             WebApp.SettingsButton.hide();
             if (!keys.includes("data")) {
-                if (keys.includes("newUser")) {
-                    await migrateNewSystem();
-                } else {
-                    await setNewUser();
-                }
+                await setNewUser();
             }
 
             await getInfo();
