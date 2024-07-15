@@ -1,158 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <title>Mohammad Sarabi - Developer</title>
     <meta name="viewport" content="width=device-width">
-    <title>My Homepage</title>
-    <link rel="icon" type="Image/webp" href="/assets/html-5-32x32.webp">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/narangi.css">
-    <link href='https://fonts.googleapis.com/css?family=Varela Round|Caveat|VT323' rel='stylesheet'>
+    <meta name="description" content="Mechanical pencil">
+    <link rel="icon" type="Image/png" href="/assets/ms-favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <link rel="stylesheet" href="/css/personal.css">
 </head>
-
 <body>
-<div class="narangi-container" style="--scale: 0.35">
-    <div class="narangi">
-        <div class="body">
-            <div class="inner">
-                <div class="text"><p>Pure CSS<br>Narangi</p></div>
-            </div>
-            <div class="border-mask"></div>
-            <div class="border-cap-l"></div>
-        </div>
-        <div class="leaf-right">
-            <div class="stem"></div>
-            <div class="leaf-bottom"></div>
-        </div>
-        <div class="leaf-left">
-            <div class="leaf-top"></div>
-            <div class="leaf-bottom"></div>
-        </div>
-    </div>
-</div>
 <header>
-    <h1 id="page-title"><a href="/" id="page-title-link">M-SARABI</a></h1>
-    <hr class="hr-header">
-    <nav>
-        <div class="nav-container active">
-            <a href="/"><img src="/assets/home.webp" alt=""></a><span>Home</span>
-        </div>
-        <div class="nav-container">
-            <a href="/learning.html"><img src="/assets/open-book.webp" alt=""></a><span>Learning</span>
-        </div>
-        <div class="nav-container">
-            <a href="/works.html"><img src="/assets/brochure.webp" alt=""></a><span>Works</span>
-        </div>
-        <div class="nav-container">
-            <a href="/python/index.html"><img src="/assets/python.webp" alt=""></a><span>Python</span>
-        </div>
-    </nav>
+    <div class="header-image" style="background-image: url('../m-sarabi.github.io/assets/personal-header.jpg');"></div>
+    <h2>Mohammad Sarabi</h2>
+    <h3>Developer</h3>
+    <canvas id="network-canvas"></canvas>
+    <img class="personal-image" src="/assets/Tiny.jpg" alt="" draggable="false">
 </header>
 <main>
-    <article>
-        <div class="h2container">
-            <h2 id="introduction">Introduction<a href="#introduction"></a></h2>
-        </div>
-        <p>
-            This is my temporary playground for learning Web Development from the coursera.
-            <a href="https://www.coursera.org/specializations/web-design" target="_blank" rel="noopener">Web Design for
-                Everybody</a>
-            Specialization. The list of courses are as:
-        </p>
-        <ol>
-            <li>
-                <progress value="19" max="19" title="Done"></progress>
-                Introduction to HTML5
-                <ul>
-                    <li><a href="course1/final-project.html">Final Project</a></li>
-                    <li><a href="course1/notes-and-summary.html">Notes and summary</a></li>
-                </ul>
-            </li>
-            <li>
-                <progress value="11" max="11" title="100%"></progress>
-                Introduction to CSS3
-                <ul>
-                    <li>
-                        <details>
-                            <summary>Course projects:</summary>
-                            <ul>
-                                <li><a href="/course2/week1/index.html">Week 1 Assignments</a></li>
-                                <li><a href="/course2/week2/index.html">Week 2 Assignments</a></li>
-                                <li><a href="/course2/week4/index.html">Week 4 Assignments</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a href="course1/notes-and-summary.html">Notes and summary</a></li>
-                </ul>
-            </li>
-            <li>
-                <progress value="0" max="14" title="0%"></progress>
-                Interactivity with JavaScript
-            </li>
-            <li>
-                <progress value="0"></progress>
-                Advanced Styling with Responsive Design
-            </li>
-            <li>
-                <progress value="0"></progress>
-                Web Design for Everybody Capstone
-            </li>
-        </ol>
-    </article>
-    <article>
-        <div class="h2container">
-            <h2 id="what-learned-so-far">Things I have learned<a href="#what-learned-so-far"></a></h2>
-        </div>
-        <br>
-        <details open>
-            <summary>My knowledge about HTML5:</summary>
-            <p>
-                I am now familiar with the general structure of the HTML pages, some of the important tags and semantic
-                tags as well and where to use them.
-                Also, I learned about the history of HTML and how it has gotten
-                here to HTML5.
-                Tags:
-            </p>
-            <dl>
-                <dt>html:</dt>
-                <dd>It is the root of the html document and all other elements are his children :)</dd>
-                <dt>head:</dt>
-                <dd>Contains important tags about like meta, title, style, etc.</dd>
-                <dt>title:</dt>
-                <dd>Defines the title of the document that shows on the browser tab.</dd>
-                <dt>body:</dt>
-                <dd>Contains the content of the html document and there can only be one of it in a document.</dd>
-            </dl>
-            and a lot more tags...
-        </details>
-    </article>
+    <section>
+        <h2>JS Side Projects</h2>
+        <section class="flex-container">
+            <div class="grid-item">
+                <div class="project-image">
+                    <img src="assets/projectPics/dice-pic.png" alt="">
+                </div>
+                <a href="small-works/3D-Dice/dice.html">3D JS Dice</a>
+                <p>A simple 3D dice built with JavaScript and CSS</p>
+            </div>
+            <div class="grid-item">
+                <div class="project-image">
+                    <img src="assets/projectPics/geometry-pic.png" alt="">
+                </div>
+                <a href="small-works/GeometryArt/index.html">Geometry Art</a>
+                <p>A simple tool for drawing geometry regular polygons with specific sizes</p>
+            </div>
+            <div class="grid-item">
+                <div class="project-image">
+                    <img src="small-works/GoalTracker/assets/add.png" alt="">
+                </div>
+                <a href="small-works/GoalTracker/index.html">Goal Tracker</a>
+                <p>A simple concept for a goal tracker app</p>
+            </div>
+            <div class="grid-item">
+                <div class="project-image">
+                    <img src="assets/projectPics/flamechart-pic.png" alt="">
+                </div>
+                <a href="https://github.com/m-sarabi/flameChart">Flame Chart</a>
+                <p>A responsive candlestick chart made in JS using SVG elements.</p>
+            </div>
+        </section>
+    </section>
 </main>
-
-<aside>
-    <blockquote>
-        <p id="quote-txt" class="quote-txt quote-txt-active"></p>
-        <cite id="author" class="author author-active"></cite>
-    </blockquote>
-    <button id="quote-btn" onclick="this.blur();">Random Quote</button>
-</aside>
-
 <footer>
-    <hr class="hr-footer">
-    <p>&copy; 2023 Mohammad Sarabi</p>
-    Contact me:<br>
-
-    <a href="https://t.me/MSarabi" target="_blank" rel="noopener" title="Telegram">
-        <img src="assets/telegram-logo-32x32.webp" alt="Telegram" class="icon"> @MSarabi
-    </a>
-    <br>
-    <a href="mailto:m.sarabi.jkd@gmail.com" title="Gmail">
-        <img src="assets/gmail-logo-32x32.webp" alt="Gmail" class="icon"> m.sarabi.jkd@gmail.com
-    </a>
-    <p id="host"><img src="assets/server.webp" alt="Hosting server" class="icon"> Hosted on
-        <a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages</a></p>
+    <div id="social">
+        <div class="social-row">
+            <a href="https://github.com/m-sarabi"><img src="/assets/github-logo-32x32.webp" alt="GitHub">/m-sarabi</a>
+        </div>
+        <div class="social-row">
+            <a href="https://t.me/MSarabi"><img src="/assets/telegram-logo-32x32.webp" alt="Twitter">@MSarabi</a>
+        </div>
+        <div class="social-row">
+            <a href="mailto:m.sarabi.jkd@gmail.com"><img src="assets/gmail-logo-32x32.webp" alt="Gmail">m.sarabi.jkd@gmail.com</a>
+        </div>
+    </div>
+    <div id="copyright">
+        &copy; 2024 - m-sarabi
+    </div>
 </footer>
-
+<script src="/js/script.js"></script>
 </body>
-<script src="js/random_quote.js"></script>
 </html>
