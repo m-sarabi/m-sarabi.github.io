@@ -5,7 +5,7 @@
     <title>Color Gradient</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Color Gradient">
-    <link rel="icon" type="Image/png" href="/small-works/ProgressTracker/assets/icon.png">
+    <link rel="icon" type="Image/png" href="/small-works/GoalTracker/assets/icon.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <link rel="stylesheet" href="style.css?v=1">
@@ -14,7 +14,7 @@
 
 <div id="container">
     <div id="main-colors">
-        <div id="color1">
+        <div id="color1" class="main-color">
             <div id="color1-color" class="select-color">
                 <span>copy</span>
             </div>
@@ -23,12 +23,12 @@
             </label>
         </div>
         <div id="gradient-size-container">
-            <label id="gradient-size-label">
-                <input type="range" min="2" max="20" value="10" id="gradient-size">
-            </label>
-            <span id="gradient-size-value">10</span>
+            <label for="gradient-size"></label>
+            <input type="range" min="2" max="20" value="10" id="gradient-size">
+            <label for="gradient-size-value"></label>
+            <input type="number" min="2" max="20" value="10" id="gradient-size-value">
         </div>
-        <div id="color2">
+        <div id="color2" class="main-color">
             <div id="color2-color" class="select-color">
                 <span>copy</span>
             </div>

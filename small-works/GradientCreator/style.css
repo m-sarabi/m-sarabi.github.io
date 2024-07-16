@@ -1,5 +1,27 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 body {
     text-align: center;
+}
+
+#container {
+    resize: both;
+    overflow: auto;
+    height: 500px;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.main-color {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
 }
 
 .select-color {
@@ -7,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 50%;
+    height: 100%;
     border-radius: 5px;
     margin-bottom: 10px;
     border: 1px solid black;
@@ -32,7 +54,8 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 50%;
+    width: 100%;
+    height: 60%;
     padding: 10px 10px;
     margin: 0 auto;
     border: 1px solid black;
@@ -41,7 +64,6 @@ body {
 
 #main-colors > * {
     width: 30%;
-    height: 100px;
 }
 
 #gradient-size-container {
@@ -51,38 +73,50 @@ body {
     padding: 10px 10px;
     border: 1px solid black;
     border-radius: 5px;
+    height: 40%;
+    max-height: 60px;
 }
 
 #gradient-size-value {
+    appearance: none;
     font-weight: bold;
-    width: 50px;
+    width: 20%;
+    min-width: 24px;
+    max-width: 50px;
+    height: 100%;
     border: 1px solid #0004;
     border-radius: 5px;
-    padding: 2px 5px;
+    text-align: center;
 }
 
-#gradient-size-label {
-    width: calc(100% - 80px);
+#gradient-size-value::-webkit-outer-spin-button,
+#gradient-size-value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #gradient-size {
-    width: 100%;
+    width: 75%;
 }
 
 #gradient {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 50%;
+    width: 80%;
+    height: 40%;
     padding: 10px 10px;
     margin: 0 auto;
-    border: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
     border-radius: 5px;
 }
 
 .gradient-color {
     flex: 1;
-    height: 100px;
+    height: 80%;
+    min-width: 0;
     border-radius: 5px;
     cursor: pointer;
 }
