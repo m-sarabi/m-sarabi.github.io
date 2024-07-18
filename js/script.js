@@ -17,11 +17,9 @@ $(document).ready(function () {
     draw();
 
     function updateCanvasSize() {
-        size = [
-            canvasElement.parent().innerWidth(),
-            canvasElement.parent().innerHeight()
-        ];
-        count = Math.floor(size[0] * size[1] / 10000);
+        size = [canvasElement.parent().innerWidth(), canvasElement.parent().innerHeight()];
+        count = Math.max(15, Math.min(50, Math.floor(size[0] * size[1] / 10000)));
+        console.log(count);
         canvasElement[0].width = size[0];
         canvasElement[0].height = size[1];
         updatePoints();
@@ -37,8 +35,7 @@ $(document).ready(function () {
 
     function updatePoints() {
         while (points.length < count) {
-            points.push([Math.random() * size[0], Math.random() * size[1],
-                randomSpeed(MIN_SPEED, MAX_SPEED), randomSpeed(MIN_SPEED, MAX_SPEED)]);
+            points.push([Math.random() * size[0], Math.random() * size[1], randomSpeed(MIN_SPEED, MAX_SPEED), randomSpeed(MIN_SPEED, MAX_SPEED)]);
         }
         while (points.length > count) {
             points.shift();
