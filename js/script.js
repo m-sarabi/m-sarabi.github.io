@@ -19,7 +19,6 @@ $(document).ready(function () {
     function updateCanvasSize() {
         size = [canvasElement.parent().innerWidth(), canvasElement.parent().innerHeight()];
         count = Math.max(15, Math.min(50, Math.floor(size[0] * size[1] / 10000)));
-        console.log(count);
         canvasElement[0].width = size[0];
         canvasElement[0].height = size[1];
         updatePoints();
