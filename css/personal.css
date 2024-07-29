@@ -101,6 +101,7 @@ section > h2 {
     justify-content: space-evenly;
     align-items: center;
     gap: 10px;
+    transform: scale(1);
     transition: 0.2s;
 }
 
@@ -124,6 +125,10 @@ section > h2 {
 .grid-item:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 20px #0008;
+}
+
+.grid-item, .grid-item * {
+    will-change: transform;
 }
 
 .project-image {
