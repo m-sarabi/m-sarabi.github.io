@@ -20,6 +20,7 @@ Type 'help' for a list of available commands.`.trim();
             charSpacing: 0.5,
             charChangeFreq: 0.5,
             fg: '#18a824',
+            preRender: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
         }).start();
     } else { // fallback to a plain black overlay
         const matrixPlaceholder = document.createElement('div');
