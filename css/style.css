@@ -292,10 +292,34 @@ input:disabled {
     width: 100%;
     height: calc(100% + 50vh);
     overflow: hidden;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.05) 70%, rgba(0, 0, 0, 0.1) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.03) 70%, rgba(0, 0, 0, 0.06) 100%);
     background-size: 100% 0.5rem;
     transform: translateY(-50vh);
-    animation: scroll 60s linear infinite;
+    animation: scroll 100s linear infinite;
+}
+
+@property --opacity1 {
+    syntax: "<number>";
+    initial-value: 0.2;
+    inherits: false;
+}
+
+@property --opacity2 {
+    syntax: "<number>";
+    initial-value: 0.1;
+    inherits: false;
+}
+
+@property --opacity3 {
+    syntax: "<number>";
+    initial-value: 0.0;
+    inherits: false;
+}
+
+@property --opacity4 {
+    syntax: "<number>";
+    initial-value: 0.1;
+    inherits: false;
 }
 
 #screen-glow {
@@ -307,12 +331,17 @@ input:disabled {
     pointer-events: none;
     overflow: hidden;
     opacity: 0.3;
-    background: radial-gradient(rgba(118, 145, 120, 0.5), rgba(8, 57, 12, 0));
+    background: radial-gradient(
+            rgba(118, 145, 120, var(--opacity1)),
+            rgba(118, 145, 120, var(--opacity2)),
+            rgba(118, 145, 120, var(--opacity3)),
+            rgba(118, 145, 120, var(--opacity4))
+    );
     animation: glow 20s linear infinite;
 }
 
 .marker:has(+#terminal-input:disabled) {
-    color: #f00;
+    color: #aaa;
 }
 
 ::selection {
@@ -335,9 +364,33 @@ input:disabled {
 
 @keyframes glow {
     0% {
-        opacity: 0.3;
+        --opacity1: 0.2;
+        --opacity2: 0.1;
+        --opacity3: 0.0;
+        --opacity4: 0.1;
+    }
+    25% {
+        --opacity1: 0.1;
+        --opacity2: 0.2;
+        --opacity3: 0.1;
+        --opacity4: 0.0;
     }
     50% {
-        opacity: 0;
+        --opacity1: 0.0;
+        --opacity2: 0.1;
+        --opacity3: 0.2;
+        --opacity4: 0.1;
+    }
+    75% {
+        --opacity1: 0.1;
+        --opacity2: 0.0;
+        --opacity3: 0.1;
+        --opacity4: 0.2;
+    }
+    100% {
+        --opacity1: 0.2;
+        --opacity2: 0.1;
+        --opacity3: 0.0;
+        --opacity4: 0.1;
     }
 }
