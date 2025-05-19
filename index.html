@@ -2,97 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mohammad Sarabi - Developer</title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Mechanical pencil">
-    <link rel="icon" type="Image/png" href="/assets/ms-favicon.png">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <link rel="stylesheet" href="/css/personal.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="My portfolio website, showcasing my projects, as a frontend and android developer, as well as a data analyst.">
+    <meta name="author" content="Mohammad Sarabi">
+    <meta name="keywords" content="portfolio, frontend developer, android developer, data analyst">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta property="og:title" content="Mohammad Sarabi | Portfolio">
+    <meta property="og:description"
+          content="My portfolio website, showcasing my projects, as a frontend and android developer, as well as a data analyst.">
+    <meta property="og:image" content="todo: fill it in">
+    <meta property="og:url" content="https://m-sarabi.ir">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@msarabi_">
+    <meta name="twitter:title" content="Mohammad Sarabi | Portfolio">
+    <meta name="twitter:description"
+          content="My portfolio website, showcasing my projects, as a frontend and android developer, as well as a data analyst.">
+    <meta name="twitter:image" content="todo: fill it in">
+    <link rel="canonical" href="https://m-sarabi.ir">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/rain-char"></script>
+    <title>Mohammad Sarabi</title>
 </head>
+<!-- a Hacker Terminal simulation with custom commands and outputs for my portfolio -->
 <body>
-<header>
-    <div class="header-image" style="background-image: url('../m-sarabi.github.io/assets/personal-header.jpg');"></div>
-    <h2>Mohammad Sarabi</h2>
-    <h3>Developer</h3>
-    <canvas id="network-canvas"></canvas>
-    <img class="personal-image" src="/assets/Tiny.jpg" alt="" draggable="false">
-</header>
-<main>
-    <section>
-        <h2>Python Side Projects</h2>
-        <div class="flex-container">
-            <div class="grid-item">
-                <div class="project-image">
-                    <img src="assets/projectPics/youtube-pic.png" alt="">
-                </div>
-                <a href="https://github.com/m-sarabi/easy_youtube_downloader">Easy YouTube Downloader</a>
-                <p>A simple yet powerful program to download YouTube videos, using Tkinter and yt-dlp</p>
-            </div>
-        </div>
-    </section>
-    <section>
-        <h2>JS Side Projects</h2>
-        <div class="flex-container">
-            <div class="grid-item">
-                <div class="project-image">
-                    <img src="assets/projectPics/flamechart-pic.png" alt="">
-                </div>
-                <a href="https://m-sarabi.ir/flameChart/">Flame Chart</a>
-                <p>A responsive candlestick chart made in JS using SVG elements.</p>
-            </div>
-            <div class="grid-item">
-                <div class="project-image">
-                    <img src="assets/projectPics/color-tool-pic.png" alt="">
-                </div>
-                <a href="https://m-sarabi.ir/color-tools/">Color Tools</a>
-                <p>A flexible set of tools for working with colors</p>
-            </div>
-            <div class="grid-item">
-                <div class="project-image">
-                    <img src="assets/projectPics/dice-pic.png" alt="">
-                </div>
-                <a href="https://m-sarabi.ir/dice-3D/">3D JS Dice</a>
-                <p>A 3D dice made in JS and CSS with some cool features.</p>
-            </div>
-            <div class="grid-item">
-                <div class="project-image">
-                    <img src="assets/projectPics/geometry-pic.png" alt="">
-                </div>
-                <a href="small-works/GeometryArt/index.html">Geometry Art</a>
-                <p>A simple tool for drawing geometry regular polygons with specific sizes</p>
-            </div>
-            <div class="grid-item">
-                <div class="project-image">
-                    <img src="small-works/GoalTracker/assets/add.png" alt="">
-                </div>
-                <a href="small-works/GoalTracker/index.html">Goal Tracker</a>
-                <p>A simple concept for a goal tracker app</p>
-            </div>
-        </div>
-    </section>
-</main>
-<footer>
-    <div id="social">
-        <div class="social-row">
-            <a href="https://github.com/m-sarabi" class="tooltip" data-tooltip="GitHub">
-                <img src="/assets/github-logo-32x32.webp" alt="GitHub">
-            </a>
-        </div>
-        <div class="social-row">
-            <a href="https://t.me/MSarabi" class="tooltip" data-tooltip="Telegram">
-                <img src="/assets/telegram-logo-32x32.webp" alt="Telegram">
-            </a>
-        </div>
-        <div class="social-row">
-            <a href="mailto:m.sarabi.jkd@gmail.com" class="tooltip" data-tooltip="Email">
-                <img src="assets/gmail-logo-32x32.webp" alt="Gmail">
-            </a>
-        </div>
+<div id="screen-frame">
+
+    <div id="camera">
+        <div id="camera-lens"></div>
+        <div id="sensor"></div>
     </div>
-    <div id="copyright">
-        &copy; 2024 - m-sarabi
+    <div id="screen">
+        <div id="screen-glow" class="no-click"></div>
+        <div id="terminal">
+            <div id="terminal-output"></div>
+            <div id="terminal-input-line">
+                <span class="marker">&gt;&nbsp;</span>
+                <!--suppress HtmlFormInputWithoutLabel -->
+                <input type="text" id="terminal-input" spellcheck="false" autocapitalize="off" autofocus
+                       autocomplete="off">
+            </div>
+        </div>
+        <div id="screen-lines" class="no-click"></div>
     </div>
-</footer>
-<script src="/js/script.js"></script>
+</div>
+
+<script src="js/TerminalUI.js"></script>
+<script src="js/TypeWriter.js"></script>
+<script src="js/CommandRunner.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

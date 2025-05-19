@@ -1,0 +1,343 @@
+@font-face {
+    font-family: "JetBrainsMono";
+    font-display: swap;
+    src: url("../fonts/JetBrainsMono.woff2") format("woff2");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: JetBrainsMono, "Courier New", monospace;
+    font-size: 18px;
+    box-sizing: border-box;
+    color: #ddd;
+    line-height: 1.5;
+}
+
+@property --bg-color1 {
+    syntax: "<color>";
+    initial-value: #000;
+    inherits: false;
+}
+
+@property --bg-color2 {
+    syntax: "<color>";
+    initial-value: #000;
+    inherits: false;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(var(--angle), var(--bg-color1), var(--bg-color2));
+    overflow: hidden;
+    animation: gradient 20s ease infinite 1s, angle 20s ease infinite 1s;
+}
+
+@keyframes gradient {
+    0% {
+        --bg-color1: #000;
+        --bg-color2: #000;
+    }
+    7.7% {
+        --bg-color1: #000;
+        --bg-color2: #f00;
+    }
+    15.4% {
+        --bg-color1: #f00;
+        --bg-color2: #000;
+    }
+    23.1% {
+        --bg-color1: #000;
+        --bg-color2: #ff0;
+    }
+    30.8% {
+        --bg-color1: #ff0;
+        --bg-color2: #000;
+    }
+    38.5% {
+        --bg-color1: #000;
+        --bg-color2: #0f0;
+    }
+    46.2% {
+        --bg-color1: #0f0;
+        --bg-color2: #000;
+    }
+    53.8% {
+        --bg-color1: #000;
+        --bg-color2: #0ff;
+    }
+    61.5% {
+        --bg-color1: #0ff;
+        --bg-color2: #000;
+    }
+    69.2% {
+        --bg-color1: #000;
+        --bg-color2: #00f;
+    }
+    76.9% {
+        --bg-color1: #00f;
+        --bg-color2: #000;
+    }
+    84.6% {
+        --bg-color1: #000;
+        --bg-color2: #f0f;
+    }
+    92.3% {
+        --bg-color1: #f0f;
+        --bg-color2: #000;
+    }
+    100% {
+        --bg-color1: #000;
+        --bg-color2: #000;
+    }
+}
+
+@keyframes angle {
+    0% {
+        --angle: 0deg;
+    }
+    100% {
+        --angle: 360deg;
+    }
+}
+
+#matrix {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+input {
+    background: none;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+}
+
+input:disabled {
+    pointer-events: none;
+}
+
+.disabled {
+    color: #aaa;
+}
+
+.command-output {
+    white-space: pre-wrap;
+}
+
+#screen-frame {
+    position: relative;
+    width: calc(100% - 10%);
+    height: calc(100% - 10%);
+    margin: 5%;
+    padding: 24px;
+    background: repeating-linear-gradient(
+            -15deg,
+            #000 0,
+            #000 0.1rem,
+            #0d0d0d 0.1rem,
+            #0d0d0d 1rem
+    );
+    /*background-color: #5c5c5c;*/
+    box-shadow: 2px 2px 1px 1px rgba(92, 92, 92, 0.5) inset, -3px -3px 1px 1px rgba(0, 0, 0, 0.5) inset;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#screen-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-30deg, transparent 0%, transparent 60%, rgba(255, 255, 255, 0.1));
+}
+
+#camera {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 16px;
+    background-color: #212121;
+    box-shadow: 0.03em 0.03em 0 0.06em rgba(0, 0, 0, 1) inset;
+    border-radius: 30px;
+}
+
+#camera-lens {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    width: 9px;
+    height: 9px;
+    background-color: #222;
+    box-shadow: 0.03em 0.03em 0 0.03em rgba(80, 80, 80, 0.7), 0.03em 0.03em 0 0.06em rgba(0, 0, 0, 1) inset;
+    border-radius: 50%;
+}
+
+#camera-lens::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5px;
+    height: 5px;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+#sensor {
+    position: absolute;
+    top: 50%;
+    left: 7px;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #000;
+    box-shadow: 0.02em 0.02em 0 0.04em rgba(80, 80, 80, 0.7), 0.02em 0.02em 0 0.04em rgba(0, 0, 0, 1) inset;
+    border-radius: 50%;
+}
+
+#screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background: #08390c;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.3) inset, -2px -2px 1px 1px rgba(160, 160, 160, 0.3) inset;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+#terminal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+#terminal-output {
+    overflow-y: auto;
+}
+
+/* custom green scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #0008;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00ff0088;
+    border-radius: 4px;
+}
+
+.error {
+    color: rgb(255, 26, 26);
+    font-weight: bold;
+}
+
+#terminal-input-line {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-shrink: 0;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+}
+
+#terminal-input-line input {
+    flex-grow: 1;
+}
+
+#screen-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 50vh);
+    overflow: hidden;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.05) 70%, rgba(0, 0, 0, 0.1) 100%);
+    background-size: 100% 0.5rem;
+    transform: translateY(-50vh);
+    animation: scroll 60s linear infinite;
+}
+
+#screen-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.3;
+    background: radial-gradient(rgba(118, 145, 120, 0.5), rgba(8, 57, 12, 0));
+    animation: glow 20s linear infinite;
+}
+
+.marker:has(+#terminal-input:disabled) {
+    color: #f00;
+}
+
+::selection {
+    background: #fff8;
+    color: #000;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(-50vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.no-click {
+    pointer-events: none;
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0;
+    }
+}
