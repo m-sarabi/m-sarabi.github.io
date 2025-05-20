@@ -27,7 +27,7 @@ const assetRegex = /<(script|link)[^>]*(src|href)="([^"]+\.(js|css))"[^>]*>/g;
 
 const processedFiles = new Set();
 
-html.replace(assetRegex, (match, tag, attr, fileRef) => {
+html = html.replace(assetRegex, (match, tag, attr, fileRef) => {
     const ext = path.extname(fileRef);
     const dirName = path.dirname(fileRef);
     const originalName = path.basename(fileRef);
