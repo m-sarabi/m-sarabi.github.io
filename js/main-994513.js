@@ -12,13 +12,18 @@ Type 'help' for a list of available commands.`.trim();
     runner.generateOutput(welcome, false, [false, false]).then(() => terminalUI.disableInput(false));
 
     // start the matrix effect
+    // noinspection JSUnresolvedReference
     if (typeof RainChar !== 'undefined') {
+        // noinspection JSUnresolvedReference
         new RainChar({
             id: 'matrix',
             font: 'Consolas',
             charSize: [5, 30],
-            charSpacing: 0.5,
+            charRange: [[0x3041, 0x3096], [0x30a1, 0x30f6]],
+            charSpacing: 1,
             charChangeFreq: 0.5,
+            densityFactor: 100,
+            fps: 15,
             fg: '#18a824',
             preRender: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
         }).start();
