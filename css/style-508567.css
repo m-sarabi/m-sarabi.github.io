@@ -341,7 +341,7 @@ input:disabled {
 }
 
 .marker:has(+#terminal-input:disabled) {
-    color: #aaa;
+    color: #999;
 }
 
 ::selection {

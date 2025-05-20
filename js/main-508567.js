@@ -22,7 +22,7 @@ Type 'help' for a list of available commands.`.trim();
             fg: '#18a824',
             preRender: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
         }).start();
-    } else { // fallback to a plain black overlay
+    } else { // fallback
         const matrixPlaceholder = document.createElement('div');
         matrixPlaceholder.id = 'matrix';
         matrixPlaceholder.style.backgroundColor = 'black';
