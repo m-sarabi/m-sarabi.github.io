@@ -53,6 +53,7 @@ html = html.replace(assetRegex, (match, tag, attr, fileRef) => {
 
     if (prevHash && prevHash === currentHash) {
         console.log(`No change: ${originalPath}`);
+        return match;
     }
 
     const baseNameWithoutExt = baseName.replace(ext, '');
