@@ -39,20 +39,16 @@ class TerminalUI {
                 this.disableInput(false);
                 this.focusInput();
             } else if (e.key === 'ArrowUp') { // up key to go back in command history
+                e.preventDefault();
                 if (this.commandHistory.length > 0) {
                     this.historyIndex = Math.max(0, this.historyIndex - 1);
                     this.input.value = this.commandHistory[this.historyIndex];
-                    requestAnimationFrame(() => {
-                        this.input.setSelectionRange(-1, -1);
-                    });
                 }
             } else if (e.key === 'ArrowDown') { // down key to go forward in command history
+                e.preventDefault();
                 if (this.commandHistory.length > 0) {
                     this.historyIndex = Math.min(this.commandHistory.length - 1, this.historyIndex + 1);
                     this.input.value = this.commandHistory[this.historyIndex];
-                    requestAnimationFrame(() => {
-                        this.input.setSelectionRange(-1, -1);
-                    });
                 }
             }
         });
