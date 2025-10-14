@@ -15,18 +15,18 @@ Type 'help' for a list of available commands.`.trim();
     // noinspection JSUnresolvedReference
     if (typeof RainChar !== 'undefined') {
         // noinspection JSUnresolvedReference
-        new RainChar({
-            id: 'matrix',
-            font: 'Consolas',
-            charSize: [5, 30],
-            charRange: [[0x3041, 0x3096], [0x30a1, 0x30f6]],
-            charSpacing: 1,
-            charChangeFreq: 0.5,
-            densityFactor: 100,
-            fps: 15,
-            fg: '#18a824',
-            preRender: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-        }).start();
+        new RainChar(
+            document.getElementById('matrix'),
+            {
+                font: 'Consolas',
+                charSize: [5, 30],
+                charRange: [[0x3041, 0x3096], [0x30a1, 0x30f6]],
+                charSpacing: 1,
+                charChangeFreq: 0.5,
+                densityFactor: 0.25,
+                fps: 20,
+                fg: '#18a824',
+            }).start();
     } else { // fallback
         const matrixPlaceholder = document.createElement('div');
         matrixPlaceholder.id = 'matrix';
